@@ -1,7 +1,9 @@
-package cz.vhromada.catalog.web;
+package cz.vhromada.catalog.web.pages;
 
 import java.util.List;
 
+import cz.vhromada.catalog.web.ComponentProvider;
+import cz.vhromada.catalog.web.EmptyAjaxRequestTarget;
 import cz.vhromada.catalog.web.controllers.FlowRunner;
 import cz.vhromada.catalog.web.controllers.FrontController;
 import cz.vhromada.catalog.web.controllers.FrontControllerRequest;
@@ -17,12 +19,17 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.event.Broadcast;
 import org.apache.wicket.event.IEvent;
 import org.apache.wicket.injection.Injector;
+import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.EmptyPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.cycle.RequestCycle;
+import org.apache.wicket.request.resource.CssResourceReference;
+import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 /**
@@ -79,6 +86,14 @@ public class CatalogPage extends WebPage {
         } else if (payload instanceof PanelEvent) {
             onPanelEvent((PanelEvent) payload, getAjaxRequestTarget());
         }
+    }
+
+    @Override
+    public void renderHead(final IHeaderResponse response) {
+        super.renderHead(response);
+
+        response.render(JavaScriptReferenceHeaderItem.forReference(new JavaScriptResourceReference(getClass(), "js/catalog.js")));
+        response.render(CssHeaderItem.forReference(new CssResourceReference(getClass(), "css/catalog.css")));
     }
 
     @Override

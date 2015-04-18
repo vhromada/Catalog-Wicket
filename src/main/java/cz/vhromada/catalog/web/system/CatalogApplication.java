@@ -1,12 +1,13 @@
 package cz.vhromada.catalog.web.system;
 
-import cz.vhromada.catalog.web.CatalogPage;
+import cz.vhromada.catalog.web.pages.CatalogPage;
 
 import org.apache.wicket.Session;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
+import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 
 /**
@@ -58,7 +59,7 @@ public class CatalogApplication extends WebApplication {
 
         getComponentInstantiationListeners().add(new SpringComponentInjector(this));
 
-//        getJavaScriptLibrarySettings().setJQueryReference(new JavaScriptResourceReference(getClass(), "jquery.js"));
+        getJavaScriptLibrarySettings().setJQueryReference(new JavaScriptResourceReference(CatalogPage.class, "js/jquery-2.1.3.js"));
 
 //        if (usesDevelopmentConfig()) {
 //            getDebugSettings().setDevelopmentUtilitiesEnabled(true);
