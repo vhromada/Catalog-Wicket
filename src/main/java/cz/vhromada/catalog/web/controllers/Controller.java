@@ -11,6 +11,7 @@ public abstract class Controller<T> {
     /**
      * Thread local user interface
      */
+    @SuppressWarnings("ThreadLocalNotStaticFinal")
     private final ThreadLocal<UI> uiThreadLocal = new ThreadLocal<>();
 
     /**

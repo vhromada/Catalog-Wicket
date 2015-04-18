@@ -2,7 +2,9 @@ package cz.vhromada.catalog.web.flow;
 
 import cz.vhromada.catalog.web.controllers.Flow;
 import cz.vhromada.catalog.web.controllers.FlowRunner;
+import cz.vhromada.validators.Validators;
 
+import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.ajax.AjaxChannel;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
@@ -35,27 +37,30 @@ public class AjaxFlowLink<T> extends AjaxLink<T> {
     /**
      * Creates a new instance of AjaxFlowLink.
      *
-     * @param id       ID
-     * @param flow     flow
-     * @param markupId markup ID
+     * @param id   ID
+     * @param flow flow
+     * @throws WicketRuntimeException   if ID is null
+     * @throws IllegalArgumentException if flow is null
      */
-    public AjaxFlowLink(final String id, final Flow flow, final String markupId) {
-        this(id, null, flow, markupId);
+    public AjaxFlowLink(final String id, final Flow flow) {
+        this(id, null, flow);
     }
 
     /**
      * Creates a new instance of AjaxFlowLink.
      *
-     * @param id       ID
-     * @param model    model
-     * @param flow     flow
-     * @param markupId markup ID
+     * @param id    ID
+     * @param model model
+     * @param flow  flow
+     * @throws WicketRuntimeException   if ID is null
+     * @throws IllegalArgumentException if flow is null
      */
-    public AjaxFlowLink(final String id, final IModel<T> model, final Flow flow, final String markupId) {
+    public AjaxFlowLink(final String id, final IModel<T> model, final Flow flow) {
         super(id, model);
 
+        Validators.validateArgumentNotNull(flow, "Flow");
+
         this.flow = flow;
-        setMarkupId(markupId);
     }
 
     @Override

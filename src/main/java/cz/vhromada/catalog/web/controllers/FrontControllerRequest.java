@@ -1,5 +1,7 @@
 package cz.vhromada.catalog.web.controllers;
 
+import cz.vhromada.validators.Validators;
+
 /**
  * A class represents front controller's request.
  *
@@ -22,18 +24,12 @@ public class FrontControllerRequest<T> {
      * Creates a new instance of FrontControllerRequest.
      *
      * @param flow flow
-     */
-    public FrontControllerRequest(final Flow flow) {
-        this(flow, null);
-    }
-
-    /**
-     * Creates a new instance of FrontControllerRequest.
-     *
-     * @param flow flow
      * @param data data
+     * @throws IllegalArgumentException if flow is null
      */
     public FrontControllerRequest(final Flow flow, final T data) {
+        Validators.validateArgumentNotNull(flow, "Flow");
+
         this.flow = flow;
         this.data = data;
     }

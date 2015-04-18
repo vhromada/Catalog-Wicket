@@ -24,6 +24,7 @@ public class EmptyAjaxRequestTarget implements AjaxRequestTarget {
     }
 
     @Override
+    @SuppressWarnings("OverloadedVarargsMethod")
     public void add(final Component... components) {
     }
 
@@ -102,11 +103,11 @@ public class EmptyAjaxRequestTarget implements AjaxRequestTarget {
     }
 
     @Override
-    public void respond(final IRequestCycle requestCycle) {
+    public void respond(final IRequestCycle iRequestCycle) {
     }
 
     @Override
-    public void detach(final IRequestCycle requestCycle) {
+    public void detach(final IRequestCycle iRequestCycle) {
     }
 
 }

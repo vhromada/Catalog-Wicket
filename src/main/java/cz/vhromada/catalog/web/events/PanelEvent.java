@@ -1,6 +1,6 @@
 package cz.vhromada.catalog.web.events;
 
-import org.apache.wicket.model.IModel;
+import cz.vhromada.validators.Validators;
 
 /**
  * A class represents event for calling showing panel.
@@ -10,14 +10,9 @@ import org.apache.wicket.model.IModel;
 public class PanelEvent implements PageEvent {
 
     /**
-     * ID
+     * Panel
      */
-    private String id;
-
-    /**
-     * Data
-     */
-    private IModel<?> data;
+    private PanelData panel;
 
     /**
      * Title
@@ -25,52 +20,47 @@ public class PanelEvent implements PageEvent {
     private String title;
 
     /**
-     * Navigation
+     * Menu
      */
-    private Navigation navigation;
+    private PanelData menu;
 
     /**
      * Creates a new instance of PanelEvent.
      *
-     * @param id         ID
-     * @param title      title
-     * @param navigation navigation
+     * @param panel panel
+     * @param title title
+     * @throws IllegalArgumentException if panel is null
+     *                                  or title is null
      */
-    public PanelEvent(final String id, final String title, final Navigation navigation) {
-        this(id, null, title, navigation);
+    public PanelEvent(final PanelData panel, final String title) {
+        this(panel, title, null);
     }
 
     /**
      * Creates a new instance of PanelEvent.
      *
-     * @param id         ID
-     * @param data       data
-     * @param title      title
-     * @param navigation navigation
+     * @param panel panel
+     * @param title title
+     * @param menu  menu
+     * @throws IllegalArgumentException if panel is null
+     *                                  or title is null
      */
-    public PanelEvent(final String id, final IModel<?> data, final String title, final Navigation navigation) {
-        this.id = id;
-        this.data = data;
+    public PanelEvent(final PanelData panel, final String title, final PanelData menu) {
+        Validators.validateArgumentNotNull(panel, "Panel");
+        Validators.validateArgumentNotNull(title, "Title");
+
+        this.panel = panel;
         this.title = title;
-        this.navigation = navigation;
+        this.menu = menu;
     }
 
     /**
-     * Returns ID.
+     * Returns panel.
      *
-     * @return ID
+     * @return panel
      */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Returns data.
-     *
-     * @return data
-     */
-    public IModel<?> getData() {
-        return data;
+    public PanelData getPanel() {
+        return panel;
     }
 
     /**
@@ -83,12 +73,12 @@ public class PanelEvent implements PageEvent {
     }
 
     /**
-     * Returns navigation.
+     * Returns menu.
      *
-     * @return navigation
+     * @return menu
      */
-    public Navigation getNavigation() {
-        return navigation;
+    public PanelData getMenu() {
+        return menu;
     }
 
 }

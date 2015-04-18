@@ -2,7 +2,9 @@ package cz.vhromada.catalog.web.flow;
 
 import cz.vhromada.catalog.web.controllers.Flow;
 import cz.vhromada.catalog.web.controllers.FlowRunner;
+import cz.vhromada.validators.Validators;
 
+import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.ajax.AjaxChannel;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
@@ -34,21 +36,23 @@ public class AjaxFlowSubmitLink extends AjaxSubmitLink {
     /**
      * Creates a new instance of AjaxFlowSubmitLink.
      *
-     * @param id       ID
-     * @param form     form
-     * @param markupId markup ID
-     * @param flow     flow
+     * @param id   ID
+     * @param form form
+     * @param flow flow
+     * @throws WicketRuntimeException   if ID is null
+     * @throws IllegalArgumentException if flow is null
      */
-    public AjaxFlowSubmitLink(final String id, final Form<?> form, final Flow flow, final String markupId) {
+    public AjaxFlowSubmitLink(final String id, final Form<?> form, final Flow flow) {
         super(id, form);
 
         this.flow = flow;
-        setMarkupId(markupId);
     }
 
     @Override
     public void onSubmit(final AjaxRequestTarget target, final Form<?> form) {
         super.onSubmit(target, form);
+
+        Validators.validateArgumentNotNull(flow, "Flow");
 
         new FlowRunner(this, flow, getForm().getModel());
     }

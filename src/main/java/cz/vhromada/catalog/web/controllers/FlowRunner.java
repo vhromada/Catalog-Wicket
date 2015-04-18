@@ -1,5 +1,7 @@
 package cz.vhromada.catalog.web.controllers;
 
+import cz.vhromada.validators.Validators;
+
 import org.apache.wicket.Component;
 import org.apache.wicket.event.Broadcast;
 
@@ -15,31 +17,16 @@ public class FlowRunner {
      *
      * @param source source
      * @param flow   flow
-     */
-    public FlowRunner(final Component source, final Flow flow) {
-        this(source, new FrontControllerRequest(flow));
-    }
-
-    /**
-     * Creates a new instance of FlowRunner.
-     *
-     * @param source source
-     * @param flow   flow
      * @param data   data
      * @param <T>    type of data
+     * @throws IllegalArgumentException if source is null
+     *                                  or flow is null
      */
     public <T> FlowRunner(final Component source, final Flow flow, final T data) {
-        this(source, new FrontControllerRequest<>(flow, data));
-    }
+        Validators.validateArgumentNotNull(source, "Source");
+        Validators.validateArgumentNotNull(flow, "Flow");
 
-    /**
-     * Creates a new instance of FlowRunner.
-     *
-     * @param source  source
-     * @param request front controller request
-     */
-    public FlowRunner(final Component source, final FrontControllerRequest<?> request) {
-        source.send(source.getPage(), Broadcast.EXACT, request);
+        source.send(source.getPage(), Broadcast.EXACT, new FrontControllerRequest<>(flow, data));
     }
 
 }

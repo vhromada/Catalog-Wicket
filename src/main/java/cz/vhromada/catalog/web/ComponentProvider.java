@@ -19,6 +19,7 @@ public class ComponentProvider {
      * Application context
      */
     @Autowired
+    @SuppressWarnings("unused")
     private ApplicationContext applicationContext;
 
     /**
@@ -30,9 +31,7 @@ public class ComponentProvider {
      * @return panel
      */
     public BasePanel getPanel(final String id, final String wicketId, final IModel<?> model) {
-        final BasePanel panel = (BasePanel) applicationContext.getBean(id, wicketId, model);
-        panel.setOutputMarkupId(true);
-        return panel;
+        return (BasePanel) applicationContext.getBean(id, wicketId, model);
     }
 
 }

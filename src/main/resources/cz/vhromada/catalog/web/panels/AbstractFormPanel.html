@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org/" xmlns="http://www.w3.org/1999/xhtml">
+<body>
+<wicket:panel>
+    <span class="help-inline error" wicket:id="feedbackPanel"></span>
+
+    <form method="POST" class="form-horizontal" wicket:id="form">
+        <fieldset>
+            <wicket:child/>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input type="submit" name="create" class="btn btn-primary" wicket:id="submit"/>
+                    <input type="submit" name="cancel" class="btn btn-danger" wicket:id="cancel"/>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</wicket:panel>
+</body>
+</html>

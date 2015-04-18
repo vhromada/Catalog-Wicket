@@ -1,6 +1,7 @@
 package cz.vhromada.catalog.web.events;
 
 import cz.vhromada.catalog.web.controllers.Flow;
+import cz.vhromada.validators.Validators;
 
 /**
  * A class represents event for calling another controller.
@@ -23,18 +24,12 @@ public class ControllerEvent implements PageEvent {
      * Creates a new instance of ControllerEvent.
      *
      * @param flow flow
-     */
-    public ControllerEvent(final Flow flow) {
-        this(flow, null);
-    }
-
-    /**
-     * Creates a new instance of ControllerEvent.
-     *
-     * @param flow flow
      * @param data data
+     * @throws IllegalArgumentException if flow is null
      */
     public ControllerEvent(final Flow flow, final Object data) {
+        Validators.validateArgumentNotNull(flow, "Flow");
+
         this.flow = flow;
         this.data = data;
     }
