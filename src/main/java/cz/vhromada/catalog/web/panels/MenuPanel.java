@@ -35,7 +35,13 @@ public class MenuPanel extends BasePanel<Void> {
         super.onInitialize();
 
         add(new AjaxFlowLink<Void>("home", Flow.HOME));
+//        add(new AjaxFlowLink<Void>("movies", Flow.MOVIES_LIST));
+//        add(new AjaxFlowLink<Void>("shows", Flow.SHOWS_LIST));
         add(new AjaxFlowLink<Void>("games", Flow.GAMES_LIST));
+//        add(new AjaxFlowLink<Void>("music", Flow.MUSIC_LIST));
+        add(new AjaxFlowLink<Void>("programs", Flow.PROGRAMS_LIST));
+//        add(new AjaxFlowLink<Void>("books", Flow.BOOKS_LIST));
+//        add(new AjaxFlowLink<Void>("genres", Flow.GENRES_LIST));
     }
 
 }

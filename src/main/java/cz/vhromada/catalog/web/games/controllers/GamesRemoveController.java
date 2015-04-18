@@ -7,6 +7,7 @@ import cz.vhromada.catalog.web.controllers.Flow;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.validators.Validators;
 
+import org.apache.wicket.model.IModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("gamesRemoveController")
-public class GamesRemoveController extends Controller<GameTO> {
+public class GamesRemoveController extends Controller<IModel<GameTO>> {
 
     /**
      * Facade for games
@@ -37,8 +38,8 @@ public class GamesRemoveController extends Controller<GameTO> {
     }
 
     @Override
-    public void handle(final GameTO data) {
-        gameFacade.remove(data);
+    public void handle(final IModel<GameTO> data) {
+        gameFacade.remove(data.getObject());
 
         getUi().fireEvent(new ControllerEvent(Flow.GAMES_LIST, null));
     }

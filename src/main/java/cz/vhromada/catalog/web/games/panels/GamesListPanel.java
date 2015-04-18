@@ -77,15 +77,11 @@ public class GamesListPanel extends BasePanel<GamesMO> {
 
                 final WikipediaLink wikiEn = new WikipediaLink("wikiEn", game.getWikiEn(), WikipediaLink.Country.EN);
 
-                final WebMarkupContainer moveUpPanel = new WebMarkupContainer("moveUpPanel");
-                moveUpPanel.setVisible(item.getIndex() > 0);
-
                 final AjaxFlowLink<GameTO> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), Flow.GAMES_MOVE_UP);
-
-                final WebMarkupContainer moveDownPanel = new WebMarkupContainer("moveDownPanel");
-                moveDownPanel.setVisible(item.getIndex() < getModelObject().size() - 1);
+                moveUp.setVisible(item.getIndex() > 0);
 
                 final AjaxFlowLink<GameTO> moveDown = new AjaxFlowLink<>("moveDown", item.getModel(), Flow.GAMES_MOVE_DOWN);
+                moveDown.setVisible(item.getIndex() < getModelObject().size() - 1);
 
                 final AjaxFlowLink<GameTO> duplicate = new AjaxFlowLink<>("duplicate", item.getModel(), Flow.GAMES_DUPLICATE);
 
@@ -93,9 +89,7 @@ public class GamesListPanel extends BasePanel<GamesMO> {
 
                 final AjaxFlowLink<GameTO> remove = new AjaxFlowLink<>("remove", item.getModel(), Flow.GAMES_REMOVE);
 
-                moveUpPanel.add(moveUp);
-                moveDownPanel.add(moveDown);
-                item.add(name, mediaCount, additionalData, note, wikiCz, wikiEn, moveUpPanel, moveDownPanel, duplicate, edit, remove);
+                item.add(name, mediaCount, additionalData, note, wikiCz, wikiEn, moveUp, moveDown, duplicate, edit, remove);
             }
 
         };

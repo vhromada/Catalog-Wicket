@@ -2,7 +2,7 @@
 <html xmlns:wicket="http://wicket.apache.org" xmlns="http://www.w3.org/1999/xhtml">
 <body>
 <wicket:panel>
-    <table class="table table-hover" wicket:id="gamesTable">
+    <table class="table table-hover" wicket:id="programsTable">
         <thead>
         <tr>
             <th>Name</th>
@@ -19,7 +19,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr wicket:id="games">
+        <tr wicket:id="programs">
             <td wicket:id="name"></td>
             <td wicket:id="mediaCount"></td>
             <td wicket:id="additionalData"></td>
@@ -38,11 +38,11 @@
         </tr>
         </tbody>
     </table>
-    <div wicket:id="noGames">No records.</div>
+    <div wicket:id="noPrograms">No records.</div>
     <table class="table">
         <thead>
         <tr>
-            <th>Count of games</th>
+            <th>Count of programs</th>
             <th>Count of media</th>
         </tr>
         </thead>

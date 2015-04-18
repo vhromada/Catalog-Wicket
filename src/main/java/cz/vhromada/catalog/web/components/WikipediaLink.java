@@ -41,12 +41,12 @@ public class WikipediaLink extends WebLink<String> {
 
     @Override
     protected String getBaseUrl() {
-        return "http://" + country.getValue() + ".wikipedia.org/wiki/";
+        return "http://" + country.getUrl() + ".wikipedia.org/wiki/";
     }
 
     @Override
     protected String getLabel() {
-        return "Wikipedia";
+        return country.getLabel() + " Wikipedia";
     }
 
     @Override
@@ -59,30 +59,46 @@ public class WikipediaLink extends WebLink<String> {
      */
     public enum Country {
 
-        CZ("cz"),
-        EN("en");
+        CZ("cz", "Czech"),
+        EN("en", "English");
 
         /**
-         * Value
+         * URL
          */
-        private final String value;
+        private final String url;
+
+        /**
+         * Label
+         */
+        private final String label;
 
         /**
          * Creates a new instance of Country.
          *
-         * @param value value
+         * @param url   URL
+         * @param label label
          */
-        Country(final String value) {
-            this.value = value;
+        Country(final String url, final String label) {
+            this.url = url;
+            this.label = label;
         }
 
         /**
-         * Returns value.
+         * Returns URL.
          *
-         * @return value
+         * @return URL
          */
-        public String getValue() {
-            return value;
+        public String getUrl() {
+            return url;
+        }
+
+        /**
+         * Returns label.
+         *
+         * @return label
+         */
+        public String getLabel() {
+            return label;
         }
 
     }
