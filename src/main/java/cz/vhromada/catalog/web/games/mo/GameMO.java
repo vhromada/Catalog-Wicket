@@ -37,7 +37,7 @@ public class GameMO implements Serializable {
     /**
      * Count of media
      */
-    private int mediaCount;
+    private Integer mediaCount;
 
     /**
      * True if there is crack
@@ -167,7 +167,7 @@ public class GameMO implements Serializable {
      *
      * @return count of media
      */
-    public int getMediaCount() {
+    public Integer getMediaCount() {
         return mediaCount;
     }
 
@@ -177,7 +177,7 @@ public class GameMO implements Serializable {
      * @param mediaCount new value
      * @throws IllegalArgumentException if new value isn't positive number
      */
-    public void setMediaCount(final int mediaCount) {
+    public void setMediaCount(final Integer mediaCount) {
         this.mediaCount = mediaCount;
     }
 
