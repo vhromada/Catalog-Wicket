@@ -2,7 +2,6 @@ package cz.vhromada.catalog.web.components;
 
 import cz.vhromada.validators.Validators;
 
-import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.util.string.Strings;
 
 /**
@@ -28,8 +27,8 @@ public class WikipediaLink extends WebLink<String> {
      * @param id      ID
      * @param value   value
      * @param country country
-     * @throws WicketRuntimeException   if ID is null
-     * @throws IllegalArgumentException if country is null
+     * @throws org.apache.wicket.WicketRuntimeException if ID is null
+     * @throws IllegalArgumentException                 if country is null
      */
     public WikipediaLink(final String id, final String value, final Country country) {
         super(id, value);

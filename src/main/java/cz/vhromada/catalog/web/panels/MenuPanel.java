@@ -4,7 +4,6 @@ import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
 import cz.vhromada.web.wicket.panels.BasePanel;
 
-import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.model.IModel;
 
 /**
@@ -24,7 +23,7 @@ public class MenuPanel extends BasePanel<Void> {
      *
      * @param id    ID
      * @param model model
-     * @throws WicketRuntimeException if ID is null
+     * @throws org.apache.wicket.WicketRuntimeException if ID is null
      */
     public MenuPanel(final String id, final IModel<Void> model) {
         super(id, model);

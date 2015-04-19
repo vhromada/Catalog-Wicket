@@ -2,7 +2,6 @@ package cz.vhromada.catalog.web.home.panels;
 
 import cz.vhromada.web.wicket.panels.BasePanel;
 
-import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.model.IModel;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -31,7 +30,7 @@ public class HomePanel extends BasePanel<Void> {
      *
      * @param id    ID
      * @param model model
-     * @throws WicketRuntimeException if ID is null
+     * @throws org.apache.wicket.WicketRuntimeException if ID is null
      */
     public HomePanel(final String id, final IModel<Void> model) {
         super(id, model);

@@ -5,7 +5,6 @@ import cz.vhromada.catalog.web.panels.AbstractFormPanel;
 import cz.vhromada.catalog.web.programs.mo.ProgramMO;
 import cz.vhromada.web.wicket.controllers.Flow;
 
-import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
@@ -37,11 +36,16 @@ public class ProgramFormPanel extends AbstractFormPanel<ProgramMO> {
     private static final long serialVersionUID = 1L;
 
     /**
+     * Maximum count of media
+     */
+    private static final int MAX_MEDIA_COUNT = 100;
+
+    /**
      * Creates a new instance of ProgramPanel.
      *
      * @param id    ID
      * @param model model
-     * @throws WicketRuntimeException if ID is null
+     * @throws org.apache.wicket.WicketRuntimeException if ID is null
      */
     public ProgramFormPanel(final String id, final CompoundPropertyModel<ProgramMO> model) {
         super(id, model);
@@ -60,10 +64,10 @@ public class ProgramFormPanel extends AbstractFormPanel<ProgramMO> {
 
         final NumberTextField<Integer> mediaCount = new NumberTextField<>("mediaCount");
         mediaCount.setMinimum(1)
-                .setMaximum(100)
+                .setMaximum(MAX_MEDIA_COUNT)
                 .setLabel(Model.of("Count of media"))
                 .setRequired(true)
-                .add(RangeValidator.range(1, 100));
+                .add(RangeValidator.range(1, MAX_MEDIA_COUNT));
 
         final CheckBox crack = new CheckBox("crack");
         crack.setLabel(Model.of("Crack"));
@@ -84,8 +88,8 @@ public class ProgramFormPanel extends AbstractFormPanel<ProgramMO> {
     }
 
     @Override
-    protected void onFormSubmit(final Form<ProgramMO> form) {
-        final ProgramMO program = form.getModelObject();
+    protected void onFormSubmit(final Form<ProgramMO> panelForm) {
+        final ProgramMO program = panelForm.getModelObject();
         if (program.getWikiCz() == null) {
             program.setWikiCz("");
         }

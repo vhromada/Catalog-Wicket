@@ -7,7 +7,6 @@ import cz.vhromada.catalog.web.games.mo.GamesMO;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
 import cz.vhromada.web.wicket.panels.BasePanel;
 
-import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -41,7 +40,7 @@ public class GamesListPanel extends BasePanel<GamesMO> {
      *
      * @param id    ID
      * @param model model
-     * @throws WicketRuntimeException if ID is null
+     * @throws org.apache.wicket.WicketRuntimeException if ID is null
      */
     public GamesListPanel(final String id, final IModel<GamesMO> model) {
         super(id, model);

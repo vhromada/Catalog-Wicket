@@ -2,7 +2,6 @@ package cz.vhromada.catalog.web.components;
 
 import java.io.Serializable;
 
-import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.Model;
@@ -25,7 +24,7 @@ public abstract class WebLink<T extends Serializable> extends GenericPanel<T> {
      *
      * @param id    ID
      * @param value value
-     * @throws WicketRuntimeException if ID is null
+     * @throws org.apache.wicket.WicketRuntimeException if ID is null
      */
     public WebLink(final String id, final T value) {
         super(id, Model.of(value));

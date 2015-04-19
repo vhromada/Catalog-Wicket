@@ -1,6 +1,5 @@
 package cz.vhromada.catalog.web.components;
 
-import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.util.string.Strings;
 
 /**
@@ -20,7 +19,7 @@ public class CsfdLink extends WebLink<String> {
      *
      * @param id    ID
      * @param value value
-     * @throws WicketRuntimeException if ID is null
+     * @throws org.apache.wicket.WicketRuntimeException if ID is null
      */
     public CsfdLink(final String id, final String value) {
         super(id, value);

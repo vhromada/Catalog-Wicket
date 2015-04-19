@@ -5,7 +5,6 @@ import cz.vhromada.catalog.web.genres.mo.GenreMO;
 import cz.vhromada.catalog.web.panels.AbstractFormPanel;
 import cz.vhromada.web.wicket.controllers.Flow;
 
-import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -37,7 +36,7 @@ public class GenreFormPanel extends AbstractFormPanel<GenreMO> {
      *
      * @param id    ID
      * @param model model
-     * @throws WicketRuntimeException if ID is null
+     * @throws org.apache.wicket.WicketRuntimeException if ID is null
      */
     public GenreFormPanel(final String id, final CompoundPropertyModel<GenreMO> model) {
         super(id, model);
@@ -59,7 +58,7 @@ public class GenreFormPanel extends AbstractFormPanel<GenreMO> {
     }
 
     @Override
-    protected void onFormSubmit(final Form<GenreMO> form) {
+    protected void onFormSubmit(final Form<GenreMO> panelForm) {
     }
 
 }

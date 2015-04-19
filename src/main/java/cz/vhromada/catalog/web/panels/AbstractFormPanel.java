@@ -7,7 +7,6 @@ import cz.vhromada.web.wicket.flow.AjaxFlowLink;
 import cz.vhromada.web.wicket.flow.AjaxFlowSubmitLink;
 import cz.vhromada.web.wicket.panels.BasePanel;
 
-import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormValidatingBehavior;
 import org.apache.wicket.markup.ComponentTag;
@@ -49,7 +48,7 @@ public abstract class AbstractFormPanel<T> extends BasePanel<T> {
      *
      * @param id    ID
      * @param model model
-     * @throws WicketRuntimeException if ID is null
+     * @throws org.apache.wicket.WicketRuntimeException if ID is null
      */
     public AbstractFormPanel(final String id, final CompoundPropertyModel<T> model) {
         super(id, model);
@@ -72,11 +71,11 @@ public abstract class AbstractFormPanel<T> extends BasePanel<T> {
             private static final long serialVersionUID = 1L;
 
             @Override
-            @SuppressWarnings({ "ParameterHidesMemberVariable", "unchecked" })
-            public void onSubmit(final AjaxRequestTarget target, final Form<?> form) {
-                onFormSubmit((Form<T>) form);
+            @SuppressWarnings({ "unchecked", "ParameterNameDiffersFromOverriddenParameter" })
+            public void onSubmit(final AjaxRequestTarget target, final Form<?> linkForm) {
+                onFormSubmit((Form<T>) linkForm);
 
-                super.onSubmit(target, form);
+                super.onSubmit(target, linkForm);
             }
 
             @Override
@@ -87,9 +86,9 @@ public abstract class AbstractFormPanel<T> extends BasePanel<T> {
             }
 
             @Override
-            @SuppressWarnings("ParameterHidesMemberVariable")
-            protected void onError(final AjaxRequestTarget target, final Form<?> form) {
-                super.onError(target, form);
+            @SuppressWarnings("ParameterNameDiffersFromOverriddenParameter")
+            protected void onError(final AjaxRequestTarget target, final Form<?> linkForm) {
+                super.onError(target, linkForm);
 
                 target.add(feedbackPanel);
             }
@@ -137,9 +136,8 @@ public abstract class AbstractFormPanel<T> extends BasePanel<T> {
     /**
      * Callback for form submit.
      *
-     * @param form form
+     * @param panelForm form
      */
-    @SuppressWarnings("ParameterHidesMemberVariable")
-    protected abstract void onFormSubmit(final Form<T> form);
+    protected abstract void onFormSubmit(final Form<T> panelForm);
 
-} 
+}

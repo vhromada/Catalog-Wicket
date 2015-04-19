@@ -1,7 +1,5 @@
 package cz.vhromada.catalog.web.components;
 
-import org.apache.wicket.WicketRuntimeException;
-
 /**
  * A class represents link for IMDB.
  *
@@ -19,7 +17,7 @@ public class ImdbLink extends WebLink<Integer> {
      *
      * @param id    ID
      * @param value value
-     * @throws WicketRuntimeException if ID is null
+     * @throws org.apache.wicket.WicketRuntimeException if ID is null
      */
     public ImdbLink(final String id, final Integer value) {
         super(id, value);

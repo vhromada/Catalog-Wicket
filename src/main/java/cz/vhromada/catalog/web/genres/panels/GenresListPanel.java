@@ -7,7 +7,6 @@ import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
 import cz.vhromada.web.wicket.panels.BasePanel;
 
-import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -41,7 +40,7 @@ public class GenresListPanel extends BasePanel<List<GenreTO>> {
      *
      * @param id    ID
      * @param model model
-     * @throws WicketRuntimeException if ID is null
+     * @throws org.apache.wicket.WicketRuntimeException if ID is null
      */
     public GenresListPanel(final String id, final IModel<List<GenreTO>> model) {
         super(id, model);

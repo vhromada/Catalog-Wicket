@@ -5,7 +5,6 @@ import cz.vhromada.catalog.web.games.mo.GameMO;
 import cz.vhromada.catalog.web.panels.AbstractFormPanel;
 import cz.vhromada.web.wicket.controllers.Flow;
 
-import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
@@ -37,11 +36,16 @@ public class GameFormPanel extends AbstractFormPanel<GameMO> {
     private static final long serialVersionUID = 1L;
 
     /**
+     * Maximum count of media
+     */
+    private static final int MAX_MEDIA_COUNT = 100;
+
+    /**
      * Creates a new instance of GamePanel.
      *
      * @param id    ID
      * @param model model
-     * @throws WicketRuntimeException if ID is null
+     * @throws org.apache.wicket.WicketRuntimeException if ID is null
      */
     public GameFormPanel(final String id, final CompoundPropertyModel<GameMO> model) {
         super(id, model);
@@ -60,10 +64,10 @@ public class GameFormPanel extends AbstractFormPanel<GameMO> {
 
         final NumberTextField<Integer> mediaCount = new NumberTextField<>("mediaCount");
         mediaCount.setMinimum(1)
-                .setMaximum(100)
+                .setMaximum(MAX_MEDIA_COUNT)
                 .setLabel(Model.of("Count of media"))
                 .setRequired(true)
-                .add(RangeValidator.range(1, 100));
+                .add(RangeValidator.range(1, MAX_MEDIA_COUNT));
 
         final CheckBox crack = new CheckBox("crack");
         crack.setLabel(Model.of("Crack"));
@@ -99,8 +103,8 @@ public class GameFormPanel extends AbstractFormPanel<GameMO> {
     }
 
     @Override
-    protected void onFormSubmit(final Form<GameMO> form) {
-        final GameMO game = form.getModelObject();
+    protected void onFormSubmit(final Form<GameMO> panelForm) {
+        final GameMO game = panelForm.getModelObject();
         if (game.getWikiCz() == null) {
             game.setWikiCz("");
         }
