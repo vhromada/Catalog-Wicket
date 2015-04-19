@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:wicket="http://wicket.apache.org" xmlns="http://www.w3.org/1999/xhtml">
+<body>
+<wicket:panel>
+    <table class="table table-hover" wicket:id="genresTable">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr wicket:id="genres">
+            <td wicket:id="name"></td>
+            <td><a href="#" wicket:id="duplicate">Duplicate</a></td>
+            <td><a href="#" wicket:id="edit">Edit</a></td>
+            <td><a href="#" wicket:id="remove">Remove</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <div wicket:id="noGenres">No records.</div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Count of genres</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td wicket:id="count"></td>
+        </tr>
+        </tbody>
+    </table>
+</wicket:panel>
+</body>
+</html>
