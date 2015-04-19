@@ -57,6 +57,12 @@
             <artifactId>wicket-utils</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <!--Wicket source-->
+        <dependency>
+            <groupId>net.ftlines.wicket-source</groupId>
+            <artifactId>wicket-source</artifactId>
+            <version>6.0.0.8</version>
+        </dependency>
         <!--Spring-->
         <dependency>
             <groupId>org.springframework</groupId>
