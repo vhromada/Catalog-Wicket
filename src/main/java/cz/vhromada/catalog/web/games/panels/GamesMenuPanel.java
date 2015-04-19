@@ -1,8 +1,8 @@
 package cz.vhromada.catalog.web.games.panels;
 
-import cz.vhromada.catalog.web.controllers.Flow;
-import cz.vhromada.catalog.web.flow.AjaxFlowLink;
-import cz.vhromada.catalog.web.panels.BasePanel;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
+import cz.vhromada.web.wicket.flow.AjaxFlowLink;
+import cz.vhromada.web.wicket.panels.BasePanel;
 
 import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.model.IModel;
@@ -43,13 +43,13 @@ public class GamesMenuPanel extends BasePanel<Void> {
     protected void onInitialize() {
         super.onInitialize();
 
-        final AjaxFlowLink<Void> allGames = new AjaxFlowLink<>("allGames", Flow.GAMES_LIST);
+        final AjaxFlowLink<Void> allGames = new AjaxFlowLink<>("allGames", CatalogFlow.GAMES_LIST);
 
-        final AjaxFlowLink<Void> newData = new AjaxFlowLink<>("newData", Flow.GAMES_NEW_DATA);
+        final AjaxFlowLink<Void> newData = new AjaxFlowLink<>("newData", CatalogFlow.GAMES_NEW_DATA);
 
-        final AjaxFlowLink<Void> addGame = new AjaxFlowLink<>("addGame", Flow.GAMES_ADD);
+        final AjaxFlowLink<Void> addGame = new AjaxFlowLink<>("addGame", CatalogFlow.GAMES_ADD);
 
-        final AjaxFlowLink<Void> updatePositions = new AjaxFlowLink<>("updatePositions", Flow.GAMES_UPDATE_POSITION);
+        final AjaxFlowLink<Void> updatePositions = new AjaxFlowLink<>("updatePositions", CatalogFlow.GAMES_UPDATE_POSITION);
 
         add(allGames, newData, addGame, updatePositions);
     }

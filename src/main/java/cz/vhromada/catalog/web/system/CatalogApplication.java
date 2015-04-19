@@ -33,7 +33,7 @@ public class CatalogApplication extends WebApplication {
      * @return session
      */
     public static CatalogSession getSession() {
-        return CatalogSession.get();
+        return CatalogSession.getSession();
     }
 
     /**

@@ -1,8 +1,9 @@
 package cz.vhromada.catalog.web.programs.panels;
 
-import cz.vhromada.catalog.web.controllers.Flow;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.panels.AbstractFormPanel;
 import cz.vhromada.catalog.web.programs.mo.ProgramMO;
+import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.markup.html.form.CheckBox;
@@ -79,7 +80,7 @@ public class ProgramFormPanel extends AbstractFormPanel<ProgramMO> {
 
     @Override
     protected Flow getCancelFlow() {
-        return Flow.PROGRAMS_CANCEL;
+        return CatalogFlow.PROGRAMS_CANCEL;
     }
 
     @Override

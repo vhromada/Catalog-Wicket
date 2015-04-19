@@ -2,10 +2,10 @@ package cz.vhromada.catalog.web.games.panels;
 
 import cz.vhromada.catalog.facade.to.GameTO;
 import cz.vhromada.catalog.web.components.WikipediaLink;
-import cz.vhromada.catalog.web.controllers.Flow;
-import cz.vhromada.catalog.web.flow.AjaxFlowLink;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.games.mo.GamesMO;
-import cz.vhromada.catalog.web.panels.BasePanel;
+import cz.vhromada.web.wicket.flow.AjaxFlowLink;
+import cz.vhromada.web.wicket.panels.BasePanel;
 
 import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -77,17 +77,17 @@ public class GamesListPanel extends BasePanel<GamesMO> {
 
                 final WikipediaLink wikiEn = new WikipediaLink("wikiEn", game.getWikiEn(), WikipediaLink.Country.EN);
 
-                final AjaxFlowLink<GameTO> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), Flow.GAMES_MOVE_UP);
+                final AjaxFlowLink<GameTO> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), CatalogFlow.GAMES_MOVE_UP);
                 moveUp.setVisible(item.getIndex() > 0);
 
-                final AjaxFlowLink<GameTO> moveDown = new AjaxFlowLink<>("moveDown", item.getModel(), Flow.GAMES_MOVE_DOWN);
+                final AjaxFlowLink<GameTO> moveDown = new AjaxFlowLink<>("moveDown", item.getModel(), CatalogFlow.GAMES_MOVE_DOWN);
                 moveDown.setVisible(item.getIndex() < getModelObject().size() - 1);
 
-                final AjaxFlowLink<GameTO> duplicate = new AjaxFlowLink<>("duplicate", item.getModel(), Flow.GAMES_DUPLICATE);
+                final AjaxFlowLink<GameTO> duplicate = new AjaxFlowLink<>("duplicate", item.getModel(), CatalogFlow.GAMES_DUPLICATE);
 
-                final AjaxFlowLink<GameTO> edit = new AjaxFlowLink<>("edit", item.getModel(), Flow.GAMES_UPDATE);
+                final AjaxFlowLink<GameTO> edit = new AjaxFlowLink<>("edit", item.getModel(), CatalogFlow.GAMES_UPDATE);
 
-                final AjaxFlowLink<GameTO> remove = new AjaxFlowLink<>("remove", item.getModel(), Flow.GAMES_REMOVE);
+                final AjaxFlowLink<GameTO> remove = new AjaxFlowLink<>("remove", item.getModel(), CatalogFlow.GAMES_REMOVE);
 
                 item.add(name, mediaCount, additionalData, note, wikiCz, wikiEn, moveUp, moveDown, duplicate, edit, remove);
             }

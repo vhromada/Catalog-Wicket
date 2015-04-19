@@ -30,7 +30,7 @@ public class CatalogSession extends WebSession {
      *
      * @return session
      */
-    public static CatalogSession get() {
+    public static CatalogSession getSession() {
         return (CatalogSession) Session.get();
     }
 

@@ -1,9 +1,10 @@
 package cz.vhromada.catalog.web.games.controllers;
 
-import cz.vhromada.catalog.web.controllers.Controller;
-import cz.vhromada.catalog.web.controllers.Flow;
 import cz.vhromada.catalog.web.events.ControllerEvent;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.games.mo.GameMO;
+import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.stereotype.Component;
@@ -18,12 +19,12 @@ public class GameCancelController extends Controller<IModel<GameMO>> {
 
     @Override
     public void handle(final IModel<GameMO> data) {
-        getUi().fireEvent(new ControllerEvent(Flow.GAMES_LIST, null));
+        getUi().fireEvent(new ControllerEvent(CatalogFlow.GAMES_LIST, null));
     }
 
     @Override
     public Flow getFlow() {
-        return Flow.GAMES_CANCEL;
+        return CatalogFlow.GAMES_CANCEL;
     }
 
 }

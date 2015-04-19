@@ -1,15 +1,16 @@
 package cz.vhromada.catalog.web.games.controllers;
 
 import cz.vhromada.catalog.facade.GameFacade;
-import cz.vhromada.catalog.web.controllers.Controller;
-import cz.vhromada.catalog.web.controllers.Flow;
-import cz.vhromada.catalog.web.events.PageEvent;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.games.mo.GamesMO;
 import cz.vhromada.catalog.web.games.panels.GamesListPanel;
 import cz.vhromada.catalog.web.games.panels.GamesMenuPanel;
 import cz.vhromada.validators.Validators;
+import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.web.wicket.controllers.Flow;
+import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,7 @@ public class GamesListController extends Controller<Void> {
 
     @Override
     public Flow getFlow() {
-        return Flow.GAMES_LIST;
+        return CatalogFlow.GAMES_LIST;
     }
 
 }

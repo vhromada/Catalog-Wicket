@@ -53,9 +53,9 @@
         </dependency>
         <!--Wicket-->
         <dependency>
-            <groupId>org.apache.wicket</groupId>
-            <artifactId>wicket-spring</artifactId>
-            <version>6.19.0</version>
+            <groupId>cz.vhromada.web.wicket</groupId>
+            <artifactId>wicket-utils</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <!--Spring-->
         <dependency>

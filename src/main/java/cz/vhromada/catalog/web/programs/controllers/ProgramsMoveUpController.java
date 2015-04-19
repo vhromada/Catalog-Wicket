@@ -2,10 +2,11 @@ package cz.vhromada.catalog.web.programs.controllers;
 
 import cz.vhromada.catalog.facade.ProgramFacade;
 import cz.vhromada.catalog.facade.to.ProgramTO;
-import cz.vhromada.catalog.web.controllers.Controller;
-import cz.vhromada.catalog.web.controllers.Flow;
 import cz.vhromada.catalog.web.events.ControllerEvent;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.validators.Validators;
+import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +42,12 @@ public class ProgramsMoveUpController extends Controller<IModel<ProgramTO>> {
     public void handle(final IModel<ProgramTO> data) {
         programFacade.moveUp(data.getObject());
 
-        getUi().fireEvent(new ControllerEvent(Flow.PROGRAMS_LIST, null));
+        getUi().fireEvent(new ControllerEvent(CatalogFlow.PROGRAMS_LIST, null));
     }
 
     @Override
     public Flow getFlow() {
-        return Flow.PROGRAMS_MOVE_UP;
+        return CatalogFlow.PROGRAMS_MOVE_UP;
     }
 
 }

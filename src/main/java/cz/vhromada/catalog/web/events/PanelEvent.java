@@ -1,6 +1,7 @@
 package cz.vhromada.catalog.web.events;
 
 import cz.vhromada.validators.Validators;
+import cz.vhromada.web.wicket.events.PageEvent;
 
 /**
  * A class represents event for calling showing panel.

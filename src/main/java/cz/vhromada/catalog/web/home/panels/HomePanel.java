@@ -1,6 +1,6 @@
 package cz.vhromada.catalog.web.home.panels;
 
-import cz.vhromada.catalog.web.panels.BasePanel;
+import cz.vhromada.web.wicket.panels.BasePanel;
 
 import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.model.IModel;

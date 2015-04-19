@@ -1,11 +1,12 @@
 package cz.vhromada.catalog.web.home.controllers;
 
-import cz.vhromada.catalog.web.controllers.Controller;
-import cz.vhromada.catalog.web.controllers.Flow;
-import cz.vhromada.catalog.web.events.PageEvent;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.home.panels.HomePanel;
+import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.web.wicket.controllers.Flow;
+import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.springframework.stereotype.Component;
 
@@ -28,7 +29,7 @@ public class HomeController extends Controller<Void> {
 
     @Override
     public Flow getFlow() {
-        return Flow.HOME;
+        return CatalogFlow.HOME;
     }
 
 }

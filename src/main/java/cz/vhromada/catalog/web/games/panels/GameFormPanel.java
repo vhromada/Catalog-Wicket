@@ -1,8 +1,9 @@
 package cz.vhromada.catalog.web.games.panels;
 
-import cz.vhromada.catalog.web.controllers.Flow;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.games.mo.GameMO;
 import cz.vhromada.catalog.web.panels.AbstractFormPanel;
+import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.markup.html.form.CheckBox;
@@ -94,7 +95,7 @@ public class GameFormPanel extends AbstractFormPanel<GameMO> {
 
     @Override
     protected Flow getCancelFlow() {
-        return Flow.GAMES_CANCEL;
+        return CatalogFlow.GAMES_CANCEL;
     }
 
     @Override

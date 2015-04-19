@@ -2,10 +2,10 @@ package cz.vhromada.catalog.web.programs.panels;
 
 import cz.vhromada.catalog.facade.to.ProgramTO;
 import cz.vhromada.catalog.web.components.WikipediaLink;
-import cz.vhromada.catalog.web.controllers.Flow;
-import cz.vhromada.catalog.web.flow.AjaxFlowLink;
-import cz.vhromada.catalog.web.panels.BasePanel;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.programs.mo.ProgramsMO;
+import cz.vhromada.web.wicket.flow.AjaxFlowLink;
+import cz.vhromada.web.wicket.panels.BasePanel;
 
 import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -77,17 +77,17 @@ public class ProgramsListPanel extends BasePanel<ProgramsMO> {
 
                 final WikipediaLink wikiEn = new WikipediaLink("wikiEn", program.getWikiEn(), WikipediaLink.Country.EN);
 
-                final AjaxFlowLink<ProgramTO> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), Flow.PROGRAMS_MOVE_UP);
+                final AjaxFlowLink<ProgramTO> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), CatalogFlow.PROGRAMS_MOVE_UP);
                 moveUp.setVisible(item.getIndex() > 0);
 
-                final AjaxFlowLink<ProgramTO> moveDown = new AjaxFlowLink<>("moveDown", item.getModel(), Flow.PROGRAMS_MOVE_DOWN);
+                final AjaxFlowLink<ProgramTO> moveDown = new AjaxFlowLink<>("moveDown", item.getModel(), CatalogFlow.PROGRAMS_MOVE_DOWN);
                 moveDown.setVisible(item.getIndex() < getModelObject().size() - 1);
 
-                final AjaxFlowLink<ProgramTO> duplicate = new AjaxFlowLink<>("duplicate", item.getModel(), Flow.PROGRAMS_DUPLICATE);
+                final AjaxFlowLink<ProgramTO> duplicate = new AjaxFlowLink<>("duplicate", item.getModel(), CatalogFlow.PROGRAMS_DUPLICATE);
 
-                final AjaxFlowLink<ProgramTO> edit = new AjaxFlowLink<>("edit", item.getModel(), Flow.PROGRAMS_UPDATE);
+                final AjaxFlowLink<ProgramTO> edit = new AjaxFlowLink<>("edit", item.getModel(), CatalogFlow.PROGRAMS_UPDATE);
 
-                final AjaxFlowLink<ProgramTO> remove = new AjaxFlowLink<>("remove", item.getModel(), Flow.PROGRAMS_REMOVE);
+                final AjaxFlowLink<ProgramTO> remove = new AjaxFlowLink<>("remove", item.getModel(), CatalogFlow.PROGRAMS_REMOVE);
 
                 item.add(name, mediaCount, additionalData, note, wikiCz, wikiEn, moveUp, moveDown, duplicate, edit, remove);
             }

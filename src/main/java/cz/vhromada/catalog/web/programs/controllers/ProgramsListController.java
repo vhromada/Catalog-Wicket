@@ -1,15 +1,16 @@
 package cz.vhromada.catalog.web.programs.controllers;
 
 import cz.vhromada.catalog.facade.ProgramFacade;
-import cz.vhromada.catalog.web.controllers.Controller;
-import cz.vhromada.catalog.web.controllers.Flow;
-import cz.vhromada.catalog.web.events.PageEvent;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.programs.mo.ProgramsMO;
 import cz.vhromada.catalog.web.programs.panels.ProgramsListPanel;
 import cz.vhromada.catalog.web.programs.panels.ProgramsMenuPanel;
 import cz.vhromada.validators.Validators;
+import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.web.wicket.controllers.Flow;
+import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,7 @@ public class ProgramsListController extends Controller<Void> {
 
     @Override
     public Flow getFlow() {
-        return Flow.PROGRAMS_LIST;
+        return CatalogFlow.PROGRAMS_LIST;
     }
 
 }

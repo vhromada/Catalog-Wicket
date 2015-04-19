@@ -1,7 +1,8 @@
 package cz.vhromada.catalog.web.events;
 
-import cz.vhromada.catalog.web.controllers.Flow;
 import cz.vhromada.validators.Validators;
+import cz.vhromada.web.wicket.controllers.Flow;
+import cz.vhromada.web.wicket.events.PageEvent;
 
 /**
  * A class represents event for calling another controller.

@@ -1,11 +1,9 @@
 package cz.vhromada.catalog.web.games.controllers;
 
 import cz.vhromada.catalog.facade.to.GameTO;
-import cz.vhromada.catalog.web.controllers.Controller;
-import cz.vhromada.catalog.web.controllers.Flow;
-import cz.vhromada.catalog.web.events.PageEvent;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.games.mo.GameMO;
 import cz.vhromada.catalog.web.games.panels.GameFormPanel;
 import cz.vhromada.catalog.web.games.panels.GamesMenuPanel;
@@ -14,6 +12,9 @@ import cz.vhromada.catalog.web.system.CatalogApplication;
 import cz.vhromada.catalog.web.system.CatalogSession;
 import cz.vhromada.converters.Converter;
 import cz.vhromada.validators.Validators;
+import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.web.wicket.controllers.Flow;
+import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
@@ -50,7 +51,7 @@ public class UpdateGameController extends Controller<IModel<GameTO>> {
     @Override
     public void handle(final IModel<GameTO> data) {
         final CatalogSession session = CatalogApplication.getSession();
-        session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, Flow.GAMES_UPDATE_CONFIRM);
+        session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.GAMES_UPDATE_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
         final PanelData panelData = new PanelData(GameFormPanel.ID, new CompoundPropertyModel<>(converter.convert(data.getObject(), GameMO.class)));
         final PanelData menuData = new PanelData(GamesMenuPanel.ID, null);
@@ -62,7 +63,7 @@ public class UpdateGameController extends Controller<IModel<GameTO>> {
 
     @Override
     public Flow getFlow() {
-        return Flow.GAMES_UPDATE;
+        return CatalogFlow.GAMES_UPDATE;
     }
 
 }

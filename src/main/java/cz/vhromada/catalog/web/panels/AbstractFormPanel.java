@@ -1,9 +1,11 @@
 package cz.vhromada.catalog.web.panels;
 
-import cz.vhromada.catalog.web.controllers.Flow;
-import cz.vhromada.catalog.web.flow.AjaxFlowLink;
-import cz.vhromada.catalog.web.flow.AjaxFlowSubmitLink;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.system.CatalogApplication;
+import cz.vhromada.web.wicket.controllers.Flow;
+import cz.vhromada.web.wicket.flow.AjaxFlowLink;
+import cz.vhromada.web.wicket.flow.AjaxFlowSubmitLink;
+import cz.vhromada.web.wicket.panels.BasePanel;
 
 import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -62,7 +64,7 @@ public abstract class AbstractFormPanel<T> extends BasePanel<T> {
         final FeedbackPanel feedbackPanel = new FeedbackPanel("feedbackPanel");
         feedbackPanel.setOutputMarkupId(true);
 
-        final AjaxFlowSubmitLink submit = new AjaxFlowSubmitLink("submit", form, CatalogApplication.<Flow>getSessionAttribute(SUBMIT_FLOW)) {
+        final AjaxFlowSubmitLink submit = new AjaxFlowSubmitLink("submit", form, CatalogApplication.<CatalogFlow>getSessionAttribute(SUBMIT_FLOW)) {
 
             /**
              * SerialVersionUID

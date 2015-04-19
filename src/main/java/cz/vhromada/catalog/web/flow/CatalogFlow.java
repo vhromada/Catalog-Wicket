@@ -1,11 +1,13 @@
-package cz.vhromada.catalog.web.controllers;
+package cz.vhromada.catalog.web.flow;
+
+import cz.vhromada.web.wicket.controllers.Flow;
 
 /**
  * An enumeration represents flow.
  *
  * @author Vladimir Hromada
  */
-public enum Flow {
+public enum CatalogFlow implements Flow {
 
     /**
      * Flow for home
@@ -355,6 +357,12 @@ public enum Flow {
     /**
      * Flow for cancel updating genre
      */
-    GENRES_CANCEL
+    GENRES_CANCEL;
+
+
+    @Override
+    public String getFlow() {
+        return name();
+    }
 
 }

@@ -1,10 +1,11 @@
 package cz.vhromada.catalog.web.programs.controllers;
 
 import cz.vhromada.catalog.facade.ProgramFacade;
-import cz.vhromada.catalog.web.controllers.Controller;
-import cz.vhromada.catalog.web.controllers.Flow;
 import cz.vhromada.catalog.web.events.ControllerEvent;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.validators.Validators;
+import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,12 +40,12 @@ public class ProgramsNewDataController extends Controller<Void> {
     public void handle(final Void data) {
         programFacade.newData();
 
-        getUi().fireEvent(new ControllerEvent(Flow.PROGRAMS_LIST, null));
+        getUi().fireEvent(new ControllerEvent(CatalogFlow.PROGRAMS_LIST, null));
     }
 
     @Override
     public Flow getFlow() {
-        return Flow.PROGRAMS_NEW_DATA;
+        return CatalogFlow.PROGRAMS_NEW_DATA;
     }
 
 }

@@ -1,9 +1,10 @@
 package cz.vhromada.catalog.web.programs.controllers;
 
-import cz.vhromada.catalog.web.controllers.Controller;
-import cz.vhromada.catalog.web.controllers.Flow;
 import cz.vhromada.catalog.web.events.ControllerEvent;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.programs.mo.ProgramMO;
+import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.stereotype.Component;
@@ -18,12 +19,12 @@ public class ProgramCancelController extends Controller<IModel<ProgramMO>> {
 
     @Override
     public void handle(final IModel<ProgramMO> data) {
-        getUi().fireEvent(new ControllerEvent(Flow.PROGRAMS_LIST, null));
+        getUi().fireEvent(new ControllerEvent(CatalogFlow.PROGRAMS_LIST, null));
     }
 
     @Override
     public Flow getFlow() {
-        return Flow.PROGRAMS_CANCEL;
+        return CatalogFlow.PROGRAMS_CANCEL;
     }
 
 }

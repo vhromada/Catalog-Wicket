@@ -1,8 +1,8 @@
 package cz.vhromada.catalog.web.programs.panels;
 
-import cz.vhromada.catalog.web.controllers.Flow;
-import cz.vhromada.catalog.web.flow.AjaxFlowLink;
-import cz.vhromada.catalog.web.panels.BasePanel;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
+import cz.vhromada.web.wicket.flow.AjaxFlowLink;
+import cz.vhromada.web.wicket.panels.BasePanel;
 
 import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.model.IModel;
@@ -43,13 +43,13 @@ public class ProgramsMenuPanel extends BasePanel<Void> {
     protected void onInitialize() {
         super.onInitialize();
 
-        final AjaxFlowLink<Void> allPrograms = new AjaxFlowLink<>("allPrograms", Flow.PROGRAMS_LIST);
+        final AjaxFlowLink<Void> allPrograms = new AjaxFlowLink<>("allPrograms", CatalogFlow.PROGRAMS_LIST);
 
-        final AjaxFlowLink<Void> newData = new AjaxFlowLink<>("newData", Flow.PROGRAMS_NEW_DATA);
+        final AjaxFlowLink<Void> newData = new AjaxFlowLink<>("newData", CatalogFlow.PROGRAMS_NEW_DATA);
 
-        final AjaxFlowLink<Void> addProgram = new AjaxFlowLink<>("addProgram", Flow.PROGRAMS_ADD);
+        final AjaxFlowLink<Void> addProgram = new AjaxFlowLink<>("addProgram", CatalogFlow.PROGRAMS_ADD);
 
-        final AjaxFlowLink<Void> updatePositions = new AjaxFlowLink<>("updatePositions", Flow.PROGRAMS_UPDATE_POSITION);
+        final AjaxFlowLink<Void> updatePositions = new AjaxFlowLink<>("updatePositions", CatalogFlow.PROGRAMS_UPDATE_POSITION);
 
         add(allPrograms, newData, addProgram, updatePositions);
     }

@@ -1,11 +1,9 @@
 package cz.vhromada.catalog.web.programs.controllers;
 
 import cz.vhromada.catalog.facade.to.ProgramTO;
-import cz.vhromada.catalog.web.controllers.Controller;
-import cz.vhromada.catalog.web.controllers.Flow;
-import cz.vhromada.catalog.web.events.PageEvent;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
+import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.panels.AbstractFormPanel;
 import cz.vhromada.catalog.web.programs.mo.ProgramMO;
 import cz.vhromada.catalog.web.programs.panels.ProgramFormPanel;
@@ -14,6 +12,9 @@ import cz.vhromada.catalog.web.system.CatalogApplication;
 import cz.vhromada.catalog.web.system.CatalogSession;
 import cz.vhromada.converters.Converter;
 import cz.vhromada.validators.Validators;
+import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.web.wicket.controllers.Flow;
+import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
@@ -50,7 +51,7 @@ public class UpdateProgramController extends Controller<IModel<ProgramTO>> {
     @Override
     public void handle(final IModel<ProgramTO> data) {
         final CatalogSession session = CatalogApplication.getSession();
-        session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, Flow.PROGRAMS_UPDATE_CONFIRM);
+        session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.PROGRAMS_UPDATE_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
         final PanelData panelData = new PanelData(ProgramFormPanel.ID, new CompoundPropertyModel<>(converter.convert(data.getObject(), ProgramMO.class)));
         final PanelData menuData = new PanelData(ProgramsMenuPanel.ID, null);
@@ -62,7 +63,7 @@ public class UpdateProgramController extends Controller<IModel<ProgramTO>> {
 
     @Override
     public Flow getFlow() {
-        return Flow.PROGRAMS_UPDATE;
+        return CatalogFlow.PROGRAMS_UPDATE;
     }
 
 }
