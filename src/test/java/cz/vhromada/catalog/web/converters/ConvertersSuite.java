@@ -9,7 +9,8 @@ import org.junit.runners.Suite;
  * @author Vladimir Hromada
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ GameTOToGameMOConverterTest.class, GameMOToGameTOConverterTest.class, ProgramTOToProgramMOConverterTest.class,
-        ProgramMOToProgramTOConverterTest.class, GenreTOToGenreMOConverterTest.class, GenreMOToGenreTOConverterTest.class })
+@Suite.SuiteClasses({ GameTOToGameMOConverterTest.class, GameMOToGameTOConverterTest.class, MusicTOToMusicMOConverterTest.class,
+        MusicMOToMusicTOConverterTest.class, ProgramTOToProgramMOConverterTest.class, ProgramMOToProgramTOConverterTest.class,
+        GenreTOToGenreMOConverterTest.class, GenreMOToGenreTOConverterTest.class })
 public class ConvertersSuite {
 }
