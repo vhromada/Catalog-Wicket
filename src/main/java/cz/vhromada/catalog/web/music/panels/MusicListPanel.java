@@ -8,8 +8,6 @@ import cz.vhromada.catalog.web.music.mo.MusicInfoMO;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
 import cz.vhromada.web.wicket.panels.BasePanel;
 
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
@@ -82,15 +80,7 @@ public class MusicListPanel extends BasePanel<MusicInfoMO> {
 
                 final WikipediaLink wikiEn = new WikipediaLink("wikiEn", musicTO.getWikiEn(), WikipediaLink.Country.EN);
 
-                //TODO vhromada 20.04.2015: songs
-                final AjaxLink songs = new AjaxLink("songs") {
-                    private static final long serialVersionUID = 7558089009117211382L;
-
-                    @Override
-                    public void onClick(final AjaxRequestTarget target) {
-                        target.appendJavaScript("alert('Not implemented');");
-                    }
-                };
+                final AjaxFlowLink<MusicTO> songs = new AjaxFlowLink<>("songs", Model.of(musicTO), CatalogFlow.MUSIC_SONGS);
 
                 final AjaxFlowLink<MusicTO> moveUp = new AjaxFlowLink<>("moveUp", Model.of(musicTO), CatalogFlow.MUSIC_MOVE_UP);
                 moveUp.setVisible(item.getIndex() > 0);

@@ -255,6 +255,61 @@ public enum CatalogFlow implements Flow {
     MUSIC_CANCEL,
 
     /**
+     * Flow for showing music songs
+     */
+    MUSIC_SONGS,
+
+    /**
+     * Flow for list of songs
+     */
+    SONGS_LIST,
+
+    /**
+     * Flow for form for add song
+     */
+    SONGS_ADD,
+
+    /**
+     * Flow for adding song
+     */
+    SONGS_ADD_CONFIRM,
+
+    /**
+     * Flow for form for update song
+     */
+    SONGS_UPDATE,
+
+    /**
+     * Flow for updating song
+     */
+    SONGS_UPDATE_CONFIRM,
+
+    /**
+     * Flow for removing song
+     */
+    SONGS_REMOVE,
+
+    /**
+     * Flow for duplicating song
+     */
+    SONGS_DUPLICATE,
+
+    /**
+     * Flow for moving song up
+     */
+    SONGS_MOVE_UP,
+
+    /**
+     * Flow for moving song down
+     */
+    SONGS_MOVE_DOWN,
+
+    /**
+     * Flow for cancel updating song
+     */
+    SONGS_CANCEL,
+
+    /**
      * Flow for new programs
      */
     PROGRAMS_NEW_DATA,
