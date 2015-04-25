@@ -1,5 +1,7 @@
 package cz.vhromada.catalog.web.panels;
 
+import cz.vhromada.catalog.web.errors.EqualityFeedbackMessage;
+import cz.vhromada.catalog.web.errors.FeedbackMessageFilter;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.system.CatalogApplication;
 import cz.vhromada.web.wicket.controllers.Flow;
@@ -77,7 +79,8 @@ public abstract class AbstractFormPanel<T> extends BasePanel<T> {
                 onFormValidation(panelForm);
 
                 if (linkForm.hasError()) {
-                    onError(target, linkForm);
+                    super.onError(target, linkForm);
+                    target.add(feedbackPanel);
                 } else {
                     onFormSubmit(panelForm);
                     super.onSubmit(target, linkForm);
@@ -154,5 +157,25 @@ public abstract class AbstractFormPanel<T> extends BasePanel<T> {
      * @param panelForm form
      */
     protected abstract void onFormSubmit(final Form<T> panelForm);
+
+    /**
+     * Adds error.
+     *
+     * @param id      ID of feedback message
+     * @param message message
+     * @throws IllegalArgumentException if message is null
+     */
+    protected void addError(final int id, final String message) {
+        form.getFeedbackMessages().add(new EqualityFeedbackMessage(id, form, message));
+    }
+
+    /**
+     * Clears error.
+     *
+     * @param id ID of feedback message
+     */
+    protected void clearError(final int id) {
+        form.getFeedbackMessages().clear(new FeedbackMessageFilter(id));
+    }
 
 }
