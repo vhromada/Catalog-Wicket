@@ -55,7 +55,7 @@ public class YearsValidator extends AbstractFormValidator {
         final Integer startingYear = startYear.getConvertedInput();
         final Integer endingYear = endYear.getConvertedInput();
         if (startingYear != null && endingYear != null && startingYear > endingYear) {
-            form.error("Starting year must not be after ending year");
+            form.error("Starting year must not be after ending year.");
         }
     }
 
