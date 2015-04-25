@@ -1,5 +1,8 @@
 package cz.vhromada.catalog.web.books.controllers;
 
+import java.util.ArrayList;
+
+import cz.vhromada.catalog.commons.Language;
 import cz.vhromada.catalog.facade.to.BookTO;
 import cz.vhromada.catalog.web.books.mo.BookMO;
 import cz.vhromada.catalog.web.books.panels.BookFormPanel;
@@ -53,7 +56,11 @@ public class UpdateBookController extends Controller<IModel<BookTO>> {
         final CatalogSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.BOOKS_UPDATE_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
-        final PanelData panelData = new PanelData(BookFormPanel.ID, new CompoundPropertyModel<>(converter.convert(data.getObject(), BookMO.class)));
+        final BookMO book = converter.convert(data.getObject(), BookMO.class);
+        if (book.getLanguages() == null) {
+            book.setLanguages(new ArrayList<Language>());
+        }
+        final PanelData panelData = new PanelData(BookFormPanel.ID, new CompoundPropertyModel<>(book));
         final PanelData menuData = new PanelData(BooksMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Edit book", menuData);

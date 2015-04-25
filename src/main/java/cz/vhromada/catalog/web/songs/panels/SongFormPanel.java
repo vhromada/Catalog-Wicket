@@ -99,10 +99,6 @@ public class SongFormPanel extends AbstractFormPanel<SongMO> {
     }
 
     @Override
-    protected void onFormValidation(final Form<SongMO> panelForm) {
-    }
-
-    @Override
     protected void onFormSubmit(final Form<SongMO> panelForm) {
         final SongMO song = panelForm.getModelObject();
         if (song.getNote() == null) {

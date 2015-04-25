@@ -58,10 +58,6 @@ public class GenreFormPanel extends AbstractFormPanel<GenreMO> {
     }
 
     @Override
-    protected void onFormValidation(final Form<GenreMO> panelForm) {
-    }
-
-    @Override
     protected void onFormSubmit(final Form<GenreMO> panelForm) {
     }
 

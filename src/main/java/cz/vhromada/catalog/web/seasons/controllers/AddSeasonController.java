@@ -1,5 +1,8 @@
 package cz.vhromada.catalog.web.seasons.controllers;
 
+import java.util.ArrayList;
+
+import cz.vhromada.catalog.commons.Language;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -29,7 +32,9 @@ public class AddSeasonController extends Controller<Void> {
         final CatalogSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.SEASONS_ADD_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Create");
-        final PanelData panelData = new PanelData(SeasonFormPanel.ID, new CompoundPropertyModel<>(new SeasonMO()));
+        final SeasonMO season = new SeasonMO();
+        season.setSubtitles(new ArrayList<Language>());
+        final PanelData panelData = new PanelData(SeasonFormPanel.ID, new CompoundPropertyModel<>(season));
         final PanelData menuData = new PanelData(SeasonsMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Add season", menuData);

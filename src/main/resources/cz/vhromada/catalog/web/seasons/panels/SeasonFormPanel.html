@@ -40,10 +40,12 @@
         <label class="col-sm-2 control-label">Subtitles</label>
 
         <div class="col-sm-10">
-            <label class="checkbox custom" wicket:id="subtitles">
-                <input type="checkbox" wicket:id="subtitlesItem">
-                <wicket:container wicket:id="subtitlesItemLabel"/>
-            </label>
+            <wicket:container wicket:id="subtitles">
+                <label class="checkbox custom" wicket:id="subtitlesList">
+                    <input type="checkbox" wicket:id="subtitlesItem">
+                    <wicket:container wicket:id="subtitlesItemLabel"/>
+                </label>
+            </wicket:container>
         </div>
     </div>
     <div class="form-group">

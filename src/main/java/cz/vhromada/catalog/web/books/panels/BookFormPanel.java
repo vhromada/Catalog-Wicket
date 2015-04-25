@@ -1,6 +1,5 @@
 package cz.vhromada.catalog.web.books.panels;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import cz.vhromada.catalog.commons.Language;
@@ -9,20 +8,18 @@ import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.panels.AbstractFormPanel;
 import cz.vhromada.web.wicket.controllers.Flow;
 
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.form.AjaxCheckBox;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Check;
+import org.apache.wicket.markup.html.form.CheckGroup;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 /**
  * A class represents panel with form for book.
@@ -42,11 +39,6 @@ public class BookFormPanel extends AbstractFormPanel<BookMO> {
      * SerialVersionUID
      */
     private static final long serialVersionUID = 1L;
-
-    /**
-     * ID of feedback message for languages
-     */
-    private static final int LANGUAGES_FEEDBACK_MESSAGE_ID = 1;
 
     /**
      * Creates a new instance of BookFormPanel.
@@ -69,7 +61,11 @@ public class BookFormPanel extends AbstractFormPanel<BookMO> {
         final RequiredTextField<String> title = new RequiredTextField<>("title");
         title.setLabel(Model.of("Title"));
 
-        final ListView<Language> languages = new ListView<Language>("languages", Arrays.asList(Language.CZ, Language.EN)) {
+        final CheckGroup<Language> languages = new CheckGroup<>("languages");
+        languages.setLabel(Model.of("Languages"))
+                .setRequired(true);
+
+        final ListView<Language> languagesList = new ListView<Language>("languagesList", Arrays.asList(Language.CZ, Language.EN)) {
 
             /**
              * SerialVersionUID
@@ -78,33 +74,7 @@ public class BookFormPanel extends AbstractFormPanel<BookMO> {
 
             @Override
             protected void populateItem(final ListItem<Language> item) {
-                final BookMO book = BookFormPanel.this.getModelObject();
-                if (book.getLanguages() == null) {
-                    book.setLanguages(new ArrayList<Language>());
-                }
-
-                final Language languageValue = item.getModelObject();
-
-                final IModel<Boolean> languageModel = new Model<>();
-                languageModel.setObject(book.getLanguages().contains(languageValue));
-
-                final AjaxCheckBox language = new AjaxCheckBox("language", languageModel) {
-
-                    /**
-                     * SerialVersionUID
-                     */
-                    private static final long serialVersionUID = 1L;
-
-                    @Override
-                    protected void onUpdate(final AjaxRequestTarget target) {
-                        if (getModelObject()) {
-                            book.getLanguages().add(languageValue);
-                        } else {
-                            book.getLanguages().remove(languageValue);
-                        }
-                    }
-
-                };
+                final Check<Language> language = new Check<>("language", item.getModel());
                 language.setMarkupId("language" + (item.getIndex() + 1));
 
                 final Label languageLabel = new Label("languageLabel", item.getModel());
@@ -116,22 +86,13 @@ public class BookFormPanel extends AbstractFormPanel<BookMO> {
 
         final TextField<String> note = new TextField<>("note");
 
+        languages.add(languagesList);
         getForm().add(author, title, languages, note);
     }
 
     @Override
     protected Flow getCancelFlow() {
         return CatalogFlow.BOOKS_CANCEL;
-    }
-
-    @Override
-    protected void onFormValidation(final Form<BookMO> panelForm) {
-        final BookMO book = panelForm.getModelObject();
-        if (CollectionUtils.isEmpty(book.getLanguages())) {
-            addError(LANGUAGES_FEEDBACK_MESSAGE_ID, "Czech or english language must be selected.");
-        } else {
-            clearError(LANGUAGES_FEEDBACK_MESSAGE_ID);
-        }
     }
 
     @Override

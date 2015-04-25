@@ -79,10 +79,6 @@ public class MusicFormPanel extends AbstractFormPanel<MusicMO> {
     }
 
     @Override
-    protected void onFormValidation(final Form<MusicMO> panelForm) {
-    }
-
-    @Override
     protected void onFormSubmit(final Form<MusicMO> panelForm) {
         final MusicMO music = panelForm.getModelObject();
         if (music.getWikiCz() == null) {

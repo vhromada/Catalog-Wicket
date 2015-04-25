@@ -115,10 +115,6 @@ public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
     }
 
     @Override
-    protected void onFormValidation(final Form<ShowMO> panelForm) {
-    }
-
-    @Override
     protected void onFormSubmit(final Form<ShowMO> panelForm) {
         final ShowMO show = panelForm.getModelObject();
         if (show.getCsfd() == null) {

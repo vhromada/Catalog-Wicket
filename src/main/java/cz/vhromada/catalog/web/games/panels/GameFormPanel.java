@@ -103,10 +103,6 @@ public class GameFormPanel extends AbstractFormPanel<GameMO> {
     }
 
     @Override
-    protected void onFormValidation(final Form<GameMO> panelForm) {
-    }
-
-    @Override
     protected void onFormSubmit(final Form<GameMO> panelForm) {
         final GameMO game = panelForm.getModelObject();
         if (game.getWikiCz() == null) {

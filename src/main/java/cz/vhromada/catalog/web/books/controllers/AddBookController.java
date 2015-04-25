@@ -1,5 +1,8 @@
 package cz.vhromada.catalog.web.books.controllers;
 
+import java.util.ArrayList;
+
+import cz.vhromada.catalog.commons.Language;
 import cz.vhromada.catalog.web.books.mo.BookMO;
 import cz.vhromada.catalog.web.books.panels.BookFormPanel;
 import cz.vhromada.catalog.web.books.panels.BooksMenuPanel;
@@ -29,7 +32,9 @@ public class AddBookController extends Controller<Void> {
         final CatalogSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.BOOKS_ADD_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Create");
-        final PanelData panelData = new PanelData(BookFormPanel.ID, new CompoundPropertyModel<>(new BookMO()));
+        final BookMO book = new BookMO();
+        book.setLanguages(new ArrayList<Language>());
+        final PanelData panelData = new PanelData(BookFormPanel.ID, new CompoundPropertyModel<>(book));
         final PanelData menuData = new PanelData(BooksMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Add book", menuData);

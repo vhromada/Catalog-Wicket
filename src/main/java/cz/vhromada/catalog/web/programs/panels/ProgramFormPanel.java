@@ -88,10 +88,6 @@ public class ProgramFormPanel extends AbstractFormPanel<ProgramMO> {
     }
 
     @Override
-    protected void onFormValidation(final Form<ProgramMO> panelForm) {
-    }
-
-    @Override
     protected void onFormSubmit(final Form<ProgramMO> panelForm) {
         final ProgramMO program = panelForm.getModelObject();
         if (program.getWikiCz() == null) {

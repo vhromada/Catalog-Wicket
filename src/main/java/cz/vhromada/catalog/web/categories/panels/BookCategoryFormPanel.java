@@ -61,10 +61,6 @@ public class BookCategoryFormPanel extends AbstractFormPanel<BookCategoryMO> {
     }
 
     @Override
-    protected void onFormValidation(final Form<BookCategoryMO> panelForm) {
-    }
-
-    @Override
     protected void onFormSubmit(final Form<BookCategoryMO> panelForm) {
         final BookCategoryMO bookCategory = panelForm.getModelObject();
         if (bookCategory.getNote() == null) {

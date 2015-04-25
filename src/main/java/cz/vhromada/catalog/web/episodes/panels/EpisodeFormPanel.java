@@ -111,10 +111,6 @@ public class EpisodeFormPanel extends AbstractFormPanel<EpisodeMO> {
     }
 
     @Override
-    protected void onFormValidation(final Form<EpisodeMO> panelForm) {
-    }
-
-    @Override
     protected void onFormSubmit(final Form<EpisodeMO> panelForm) {
         final EpisodeMO episode = panelForm.getModelObject();
         if (episode.getNote() == null) {
