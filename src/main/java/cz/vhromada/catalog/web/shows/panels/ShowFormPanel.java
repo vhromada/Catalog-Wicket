@@ -1,22 +1,17 @@
 package cz.vhromada.catalog.web.shows.panels;
 
-import cz.vhromada.catalog.commons.Constants;
 import cz.vhromada.catalog.web.components.GenresChoice;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.panels.AbstractFormPanel;
+import cz.vhromada.catalog.web.panels.ImdbPanel;
 import cz.vhromada.catalog.web.shows.mo.ShowMO;
 import cz.vhromada.web.wicket.controllers.Flow;
 
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.form.AjaxCheckBox;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.validation.validator.RangeValidator;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -62,18 +57,7 @@ public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
 
         final TextField<String> csfd = new TextField<>("csfd");
 
-        final IModel<Boolean> imdbModel = new Model<>(getModelObject().getImdbCode() != null && getModelObject().getImdbCode() > 0);
-
-        final NumberTextField<Integer> imdbCode = new NumberTextField<>("imdbCode");
-        imdbCode.setMinimum(1)
-                .setMaximum(Constants.MAX_IMDB_CODE)
-                .setLabel(Model.of("IMDB code"))
-                .add(RangeValidator.range(1, Constants.MAX_IMDB_CODE))
-                .setVisible(imdbModel.getObject())
-                .setOutputMarkupPlaceholderTag(true);
-
-
-        final AjaxCheckBox imdb = new AjaxCheckBox("imdb", imdbModel) {
+        final ImdbPanel imdb = new ImdbPanel("imdb", getModelObject().getImdbCode()) {
 
             /**
              * SerialVersionUID
@@ -81,17 +65,8 @@ public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
             private static final long serialVersionUID = 1L;
 
             @Override
-            protected void onUpdate(final AjaxRequestTarget target) {
-                imdbCode.setVisible(getModelObject());
-                imdbCode.setRequired(getModelObject());
-                final ShowMO show = ShowFormPanel.this.getModelObject();
-                if (getModelObject()) {
-                    show.setImdbCode(null);
-                } else {
-                    show.setImdbCode(-1);
-                }
-
-                target.add(imdbCode);
+            protected void onImdbChange(final Integer imdbCodeValue) {
+                ShowFormPanel.this.getModelObject().setImdbCode(imdbCodeValue);
             }
 
         };
@@ -106,7 +81,7 @@ public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
 
         final GenresChoice genres = new GenresChoice("genres", getModelObject().getAllGenres());
 
-        getForm().add(czechName, originalName, csfd, imdb, imdbCode, wikiEn, wikiCz, picture, note, genres);
+        getForm().add(czechName, originalName, csfd, imdb, wikiEn, wikiCz, picture, note, genres);
     }
 
     @Override

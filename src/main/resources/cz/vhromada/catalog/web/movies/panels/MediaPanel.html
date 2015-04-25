@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:wicket="http://wicket.apache.org" xmlns="http://www.w3.org/1999/xhtml">
+<body>
+<wicket:panel>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Media</label>
+    </div>
+    <div wicket:id="mediaContainer">
+        <wicket:container wicket:id="media">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" wicket:id="mediumLabel"></label>
+                <input type="button" class="btn btn-danger col-sm-1" wicket:id="remove">
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" wicket:for="mediumHours">
+                    <wicket:container wicket:id="mediumHoursLabel"/>
+                </label>
+
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" wicket:id="mediumHours"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" wicket:for="mediumMinutes">
+                    <wicket:container wicket:id="mediumMinutesLabel"/>
+                </label>
+
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" wicket:id="mediumMinutes"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label" wicket:for="mediumSeconds">
+                    <wicket:container wicket:id="mediumSecondsLabel"/>
+                </label>
+
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" wicket:id="mediumSeconds"/>
+                </div>
+            </div>
+        </wicket:container>
+    </div>
+    <div class="form-group">
+        <input type="button" name="add" class="btn btn-success col-sm-offset-2 col-sm-1" value="Add" wicket:id="addMedium">
+    </div>
+</wicket:panel>
+</body>
+</html>
