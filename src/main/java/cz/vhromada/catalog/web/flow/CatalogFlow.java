@@ -130,14 +130,119 @@ public enum CatalogFlow implements Flow {
     SHOWS_UPDATE_POSITION,
 
     /**
+     * Flow for cancel updating show
+     */
+    SHOWS_CANCEL,
+
+    /**
      * Flow for showing show seasons
      */
     SHOWS_SEASONS,
 
     /**
-     * Flow for cancel updating show
+     * Flow for list of seasons
      */
-    SHOWS_CANCEL,
+    SEASONS_LIST,
+
+    /**
+     * Flow for form for add season
+     */
+    SEASONS_ADD,
+
+    /**
+     * Flow for adding season
+     */
+    SEASONS_ADD_CONFIRM,
+
+    /**
+     * Flow for form for update season
+     */
+    SEASONS_UPDATE,
+
+    /**
+     * Flow for updating season
+     */
+    SEASONS_UPDATE_CONFIRM,
+
+    /**
+     * Flow for removing season
+     */
+    SEASONS_REMOVE,
+
+    /**
+     * Flow for duplicating season
+     */
+    SEASONS_DUPLICATE,
+
+    /**
+     * Flow for moving season up
+     */
+    SEASONS_MOVE_UP,
+
+    /**
+     * Flow for moving season down
+     */
+    SEASONS_MOVE_DOWN,
+
+    /**
+     * Flow for cancel updating season
+     */
+    SEASONS_CANCEL,
+
+    /**
+     * Flow for showing seasons episodes
+     */
+    SEASONS_EPISODES,
+
+    /**
+     * Flow for list of episodes
+     */
+    EPISODES_LIST,
+
+    /**
+     * Flow for form for add episode
+     */
+    EPISODES_ADD,
+
+    /**
+     * Flow for adding episode
+     */
+    EPISODES_ADD_CONFIRM,
+
+    /**
+     * Flow for form for update episode
+     */
+    EPISODES_UPDATE,
+
+    /**
+     * Flow for updating episode
+     */
+    EPISODES_UPDATE_CONFIRM,
+
+    /**
+     * Flow for removing episode
+     */
+    EPISODES_REMOVE,
+
+    /**
+     * Flow for duplicating episode
+     */
+    EPISODES_DUPLICATE,
+
+    /**
+     * Flow for moving episode up
+     */
+    EPISODES_MOVE_UP,
+
+    /**
+     * Flow for moving episode down
+     */
+    EPISODES_MOVE_DOWN,
+
+    /**
+     * Flow for cancel updating episode
+     */
+    EPISODES_CANCEL,
 
     /**
      * Flow for new games

@@ -1,5 +1,6 @@
 package cz.vhromada.catalog.web.shows.panels;
 
+import cz.vhromada.catalog.commons.Constants;
 import cz.vhromada.catalog.web.components.GenresChoice;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.panels.AbstractFormPanel;
@@ -39,11 +40,6 @@ public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Maximum IMDB code
-     */
-    private static final int MAX_IMDB_CODE = 9999999;
-
-    /**
      * Creates a new instance of ShowFormPanel.
      *
      * @param id    ID
@@ -71,9 +67,9 @@ public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
 
         final NumberTextField<Integer> imdbCode = new NumberTextField<>("imdbCode");
         imdbCode.setMinimum(1)
-                .setMaximum(MAX_IMDB_CODE)
+                .setMaximum(Constants.MAX_IMDB_CODE)
                 .setLabel(Model.of("IMDB code"))
-                .add(RangeValidator.range(1, MAX_IMDB_CODE))
+                .add(RangeValidator.range(1, Constants.MAX_IMDB_CODE))
                 .setVisible(imdbModel.getObject())
                 .setOutputMarkupPlaceholderTag(true);
 

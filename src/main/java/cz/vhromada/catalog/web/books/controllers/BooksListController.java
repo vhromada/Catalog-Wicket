@@ -46,7 +46,7 @@ public class BooksListController extends Controller<Void> {
 
     @Override
     public void handle(final Void data) {
-        final BookCategoryTO bookCategory = CatalogApplication.getSessionAttribute(BookCategoryBooksController.BOOK_CATEGORIES_ATTRIBUTE);
+        final BookCategoryTO bookCategory = CatalogApplication.getSessionAttribute(BookCategoryBooksController.BOOK_CATEGORY_ATTRIBUTE);
         final PanelData panelData = new PanelData(BooksListPanel.ID, Model.ofList(bookFacade.findBooksByBookCategory(bookCategory)));
         final PanelData menuData = new PanelData(BooksMenuPanel.ID, null);
 

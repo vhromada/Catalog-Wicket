@@ -56,7 +56,7 @@ public class UpdateBookConfirmController extends Controller<IModel<BookMO>> {
 
     @Override
     public void handle(final IModel<BookMO> data) {
-        final BookCategoryTO bookCategory = CatalogApplication.getSessionAttribute(BookCategoryBooksController.BOOK_CATEGORIES_ATTRIBUTE);
+        final BookCategoryTO bookCategory = CatalogApplication.getSessionAttribute(BookCategoryBooksController.BOOK_CATEGORY_ATTRIBUTE);
         final BookTO book = converter.convert(data.getObject(), BookTO.class);
         book.setBookCategory(bookCategory);
         bookFacade.update(book);

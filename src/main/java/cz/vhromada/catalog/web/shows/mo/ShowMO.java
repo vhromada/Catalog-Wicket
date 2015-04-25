@@ -316,5 +316,4 @@ public class ShowMO implements Serializable {
                 + "genres=%s, allGenres=%s]", id, czechName, originalName, csfd, imdbCode, wikiEn, wikiCz, picture, note, position, genres, allGenres);
     }
 
-
 }

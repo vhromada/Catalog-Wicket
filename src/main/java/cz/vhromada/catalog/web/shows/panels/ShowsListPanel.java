@@ -131,7 +131,7 @@ public class ShowsListPanel extends BasePanel<ShowsMO> {
     }
 
     /**
-     * Returns genres
+     * Returns genres.
      *
      * @param show TO for show
      * @return genres

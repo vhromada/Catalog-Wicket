@@ -21,12 +21,12 @@ public class BookCategoryBooksController extends Controller<IModel<BookCategoryT
     /**
      * Name of book category attribute in session
      */
-    public static final String BOOK_CATEGORIES_ATTRIBUTE = "bookCategory";
+    public static final String BOOK_CATEGORY_ATTRIBUTE = "bookCategory";
 
     @Override
     public void handle(final IModel<BookCategoryTO> data) {
         final CatalogSession session = CatalogSession.getSession();
-        session.setAttribute(BOOK_CATEGORIES_ATTRIBUTE, data.getObject());
+        session.setAttribute(BOOK_CATEGORY_ATTRIBUTE, data.getObject());
 
         getUi().fireEvent(new ControllerEvent(CatalogFlow.BOOKS_LIST, null));
     }
