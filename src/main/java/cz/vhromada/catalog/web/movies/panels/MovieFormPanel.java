@@ -1,7 +1,6 @@
 package cz.vhromada.catalog.web.movies.panels;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import cz.vhromada.catalog.commons.Constants;
 import cz.vhromada.catalog.commons.Language;
@@ -13,7 +12,10 @@ import cz.vhromada.catalog.web.panels.AbstractFormPanel;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxCheckBox;
+import org.apache.wicket.markup.ComponentTag;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Check;
 import org.apache.wicket.markup.html.form.CheckGroup;
@@ -28,6 +30,7 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.RangeValidator;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -50,6 +53,21 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
      * SerialVersionUID
      */
     private static final long serialVersionUID = 1L;
+
+    /**
+     * Maximum hours
+     */
+    private static final int MAX_HOURS = 23;
+
+    /**
+     * Maximum minutes
+     */
+    private static final int MAX_MINUTES = 59;
+
+    /**
+     * Maximum seconds
+     */
+    private static final int MAX_SECONDS = 59;
 
     /**
      * Creates a new instance of MovieFormPanel.
@@ -123,6 +141,101 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
 
         };
 
+        final WebMarkupContainer mediaContainer = new WebMarkupContainer("mediaContainer");
+        mediaContainer.setOutputMarkupId(true);
+
+        final ListView<TimeMO> media = new ListView<TimeMO>("media") {
+
+            /**
+             * SerialVersionUID
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected void populateItem(final ListItem<TimeMO> item) {
+                final int index = item.getIndex();
+                final int mediumIndex = index + 1;
+
+                final Label mediumLabel = new Label("mediumLabel", "Medium " + mediumIndex);
+
+                final AjaxLink<Void> remove = new AjaxLink<Void>("remove") {
+
+                    /**
+                     * SerialVersionUID
+                     */
+                    private static final long serialVersionUID = 1L;
+
+                    @Override
+                    public void onClick(final AjaxRequestTarget target) {
+                        MovieFormPanel.this.getModelObject().getMedia().remove(index);
+
+                        target.add(mediaContainer);
+                    }
+
+                    @Override
+                    protected void onComponentTag(final ComponentTag tag) {
+                        super.onComponentTag(tag);
+
+                        tag.put("value", "Remove");
+                    }
+
+                };
+                remove.setMarkupId("remove" + mediumIndex)
+                        .setVisible(index > 0);
+
+                final Label mediumHoursLabel = new Label("mediumHoursLabel", "Medium " + mediumIndex + " hours");
+
+                final NumberTextField<Integer> mediumHours = new NumberTextField<>("mediumHours", new PropertyModel<Integer>(item.getModelObject(), "hours"));
+                mediumHours.setMinimum(0)
+                        .setMaximum(MAX_HOURS)
+                        .setLabel(Model.of("Medium " + mediumIndex + " hours"))
+                        .setRequired(true)
+                        .add(RangeValidator.range(0, MAX_HOURS))
+                        .setMarkupId("medium" + mediumIndex + "Hours");
+
+                final Label mediumMinutesLabel = new Label("mediumMinutesLabel", "Medium " + mediumIndex + " minutes");
+
+                final NumberTextField<Integer> mediumMinutes = new NumberTextField<>("mediumMinutes",
+                        new PropertyModel<Integer>(item.getModelObject(), "minutes"));
+                mediumMinutes.setMinimum(0)
+                        .setMaximum(MAX_MINUTES)
+                        .setLabel(Model.of("Medium " + mediumIndex + " minutes"))
+                        .setRequired(true)
+                        .add(RangeValidator.range(0, MAX_MINUTES))
+                        .setMarkupId("medium" + mediumIndex + "Minutes");
+
+                final Label mediumSecondsLabel = new Label("mediumSecondsLabel", "Medium " + mediumIndex + " seconds");
+
+                final NumberTextField<Integer> mediumSeconds = new NumberTextField<>("mediumSeconds",
+                        new PropertyModel<Integer>(item.getModelObject(), "seconds"));
+                mediumSeconds.setMinimum(0)
+                        .setMaximum(MAX_SECONDS)
+                        .setLabel(Model.of("Medium " + mediumIndex + " seconds"))
+                        .setRequired(true)
+                        .add(RangeValidator.range(0, MAX_SECONDS))
+                        .setMarkupId("medium" + mediumIndex + "Seconds");
+
+                item.add(mediumLabel, remove, mediumHoursLabel, mediumHours, mediumMinutesLabel, mediumMinutes, mediumSecondsLabel, mediumSeconds);
+            }
+
+        };
+
+        final AjaxLink<Void> addMedium = new AjaxLink<Void>("addMedium") {
+
+            /**
+             * SerialVersionUID
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void onClick(final AjaxRequestTarget target) {
+                MovieFormPanel.this.getModelObject().getMedia().add(new TimeMO());
+
+                target.add(mediaContainer);
+            }
+
+        };
+
         final TextField<String> csfd = new TextField<>("csfd");
 
         final IModel<Boolean> imdbModel = new Model<>();
@@ -154,6 +267,7 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
                 } else {
                     movie.setImdbCode(-1);
                 }
+
                 target.add(imdbCode);
             }
 
@@ -171,7 +285,9 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
 
         language.add(languages);
         subtitles.add(subtitlesList);
-        getForm().add(czechName, originalName, year, language, subtitles, csfd, imdb, imdbCode, wikiEn, wikiCz, picture, note, genres);
+        mediaContainer.add(media);
+        getForm().add(czechName, originalName, year, language, subtitles, mediaContainer, addMedium, csfd, imdb, imdbCode, wikiEn, wikiCz, picture, note,
+                genres);
     }
 
     @Override
@@ -199,14 +315,6 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
         }
         if (movie.getNote() == null) {
             movie.setNote("");
-        }
-        //TODO vhromada 25.04.2015: media
-        if (movie.getMedia() == null) {
-            TimeMO t = new TimeMO();
-            t.setHours(0);
-            t.setMinutes(0);
-            t.setSeconds(0);
-            movie.setMedia(Collections.singletonList(t));
         }
     }
 

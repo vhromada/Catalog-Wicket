@@ -91,6 +91,7 @@ public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
                 } else {
                     show.setImdbCode(-1);
                 }
+
                 target.add(imdbCode);
             }
 
