@@ -1,21 +1,14 @@
 package cz.vhromada.catalog.web.books.panels;
 
-import java.util.Arrays;
-
-import cz.vhromada.catalog.commons.Language;
 import cz.vhromada.catalog.web.books.mo.BookMO;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.panels.AbstractFormPanel;
+import cz.vhromada.catalog.web.panels.MultipleLanguagesPanel;
 import cz.vhromada.web.wicket.controllers.Flow;
 
-import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Check;
-import org.apache.wicket.markup.html.form.CheckGroup;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.list.ListItem;
-import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
 import org.springframework.context.annotation.Scope;
@@ -61,32 +54,10 @@ public class BookFormPanel extends AbstractFormPanel<BookMO> {
         final RequiredTextField<String> title = new RequiredTextField<>("title");
         title.setLabel(Model.of("Title"));
 
-        final CheckGroup<Language> languages = new CheckGroup<>("languages");
-        languages.setLabel(Model.of("Languages"))
-                .setRequired(true);
-
-        final ListView<Language> languagesList = new ListView<Language>("languagesList", Arrays.asList(Language.CZ, Language.EN)) {
-
-            /**
-             * SerialVersionUID
-             */
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            protected void populateItem(final ListItem<Language> item) {
-                final Check<Language> language = new Check<>("language", item.getModel());
-                language.setMarkupId("language" + (item.getIndex() + 1));
-
-                final Label languageLabel = new Label("languageLabel", item.getModel());
-
-                item.add(language, languageLabel);
-            }
-
-        };
+        final MultipleLanguagesPanel languages = new MultipleLanguagesPanel("languages");
 
         final TextField<String> note = new TextField<>("note");
 
-        languages.add(languagesList);
         getForm().add(author, title, languages, note);
     }
 

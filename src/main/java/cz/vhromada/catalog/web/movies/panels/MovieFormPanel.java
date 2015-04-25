@@ -1,6 +1,6 @@
 package cz.vhromada.catalog.web.movies.panels;
 
-import java.util.Arrays;
+import java.util.List;
 
 import cz.vhromada.catalog.commons.Constants;
 import cz.vhromada.catalog.commons.Language;
@@ -10,22 +10,18 @@ import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.movies.mo.MovieMO;
 import cz.vhromada.catalog.web.panels.AbstractFormPanel;
 import cz.vhromada.catalog.web.panels.ImdbPanel;
+import cz.vhromada.catalog.web.panels.MultipleLanguagesPanel;
+import cz.vhromada.catalog.web.panels.SingleLanguagePanel;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Check;
-import org.apache.wicket.markup.html.form.CheckGroup;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
-import org.apache.wicket.markup.html.form.Radio;
-import org.apache.wicket.markup.html.form.RadioGroup;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.list.ListItem;
-import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.RangeValidator;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -77,49 +73,10 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
                 .setRequired(true)
                 .add(RangeValidator.range(Constants.MIN_YEAR, Constants.CURRENT_YEAR));
 
-        final RadioGroup<Language> language = new RadioGroup<>("language");
-        language.setLabel(Model.of("Language"))
-                .setRequired(true);
+        final SingleLanguagePanel language = new SingleLanguagePanel("language");
 
-        final ListView<Language> languages = new ListView<Language>("languages", Arrays.asList(Language.values())) {
-
-            /**
-             * SerialVersionUID
-             */
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            protected void populateItem(final ListItem<Language> item) {
-                final Radio<Language> languageItem = new Radio<>("languageItem", item.getModel());
-                languageItem.setMarkupId("language" + (item.getIndex() + 1));
-
-                final Label languageItemLabel = new Label("languageItemLabel", item.getModel());
-
-                item.add(languageItem, languageItemLabel);
-            }
-
-        };
-
-        final CheckGroup<Language> subtitles = new CheckGroup<>("subtitles");
-
-        final ListView<Language> subtitlesList = new ListView<Language>("subtitlesList", Arrays.asList(Language.CZ, Language.EN)) {
-
-            /**
-             * SerialVersionUID
-             */
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            protected void populateItem(final ListItem<Language> item) {
-                final Check<Language> subtitlesItem = new Check<>("subtitlesItem", item.getModel());
-                subtitlesItem.setMarkupId("subtitlesItem" + (item.getIndex() + 1));
-
-                final Label subtitlesItemLabel = new Label("subtitlesItemLabel", item.getModel());
-
-                item.add(subtitlesItem, subtitlesItemLabel);
-            }
-
-        };
+        final MultipleLanguagesPanel subtitles = new MultipleLanguagesPanel("subtitles", new PropertyModel<List<Language>>(getModelObject(), "subtitles"),
+                "Subtitles", "subtitlesItem");
 
         final MediaPanel media = new MediaPanel("media") {
 
@@ -161,8 +118,6 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
 
         final GenresChoice genres = new GenresChoice("genres", getModelObject().getAllGenres());
 
-        language.add(languages);
-        subtitles.add(subtitlesList);
         getForm().add(czechName, originalName, year, language, subtitles, media, csfd, imdb, wikiEn, wikiCz, picture, note, genres);
     }
 
