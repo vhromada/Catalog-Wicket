@@ -71,11 +71,17 @@ public abstract class AbstractFormPanel<T> extends BasePanel<T> {
             private static final long serialVersionUID = 1L;
 
             @Override
-            @SuppressWarnings({ "unchecked", "ParameterNameDiffersFromOverriddenParameter" })
+            @SuppressWarnings("unchecked")
             public void onSubmit(final AjaxRequestTarget target, final Form<?> linkForm) {
-                onFormSubmit((Form<T>) linkForm);
+                final Form<T> panelForm = (Form<T>) linkForm;
+                onFormValidation(panelForm);
 
-                super.onSubmit(target, linkForm);
+                if (linkForm.hasError()) {
+                    onError(target, linkForm);
+                } else {
+                    onFormSubmit(panelForm);
+                    super.onSubmit(target, linkForm);
+                }
             }
 
             @Override
@@ -86,8 +92,10 @@ public abstract class AbstractFormPanel<T> extends BasePanel<T> {
             }
 
             @Override
-            @SuppressWarnings("ParameterNameDiffersFromOverriddenParameter")
+            @SuppressWarnings("unchecked")
             protected void onError(final AjaxRequestTarget target, final Form<?> linkForm) {
+                onFormValidation((Form<T>) linkForm);
+
                 super.onError(target, linkForm);
 
                 target.add(feedbackPanel);
@@ -132,6 +140,13 @@ public abstract class AbstractFormPanel<T> extends BasePanel<T> {
     protected Form<T> getForm() {
         return form;
     }
+
+    /**
+     * Callback for form validation.
+     *
+     * @param panelForm form
+     */
+    protected abstract void onFormValidation(final Form<T> panelForm);
 
     /**
      * Callback for form submit.
