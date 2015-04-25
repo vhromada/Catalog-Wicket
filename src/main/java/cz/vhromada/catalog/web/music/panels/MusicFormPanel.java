@@ -40,7 +40,7 @@ public class MusicFormPanel extends AbstractFormPanel<MusicMO> {
     private static final int MAX_MEDIA_COUNT = 100;
 
     /**
-     * Creates a new instance of musicPanel.
+     * Creates a new instance of MusicFormPanel.
      *
      * @param id    ID
      * @param model model

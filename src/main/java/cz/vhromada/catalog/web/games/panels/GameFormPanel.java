@@ -41,7 +41,7 @@ public class GameFormPanel extends AbstractFormPanel<GameMO> {
     private static final int MAX_MEDIA_COUNT = 100;
 
     /**
-     * Creates a new instance of GamePanel.
+     * Creates a new instance of GameFormPanel.
      *
      * @param id    ID
      * @param model model

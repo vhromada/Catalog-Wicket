@@ -50,7 +50,7 @@ public class SongFormPanel extends AbstractFormPanel<SongMO> {
     private static final int MAX_SECONDS = 59;
 
     /**
-     * Creates a new instance of SongPanel.
+     * Creates a new instance of SongFormPanel.
      *
      * @param id    ID
      * @param model model

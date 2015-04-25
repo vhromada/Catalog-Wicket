@@ -28,7 +28,7 @@ public class MenuPanel extends BasePanel<Void> {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Creates a new instance of BasePanel.
+     * Creates a new instance of MenuPanel.
      *
      * @param id    ID
      * @param model model
@@ -37,7 +37,6 @@ public class MenuPanel extends BasePanel<Void> {
     public MenuPanel(final String id, final IModel<Void> model) {
         super(id, model);
     }
-
 
     @Override
     protected void onInitialize() {

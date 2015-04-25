@@ -41,7 +41,7 @@ public class ProgramFormPanel extends AbstractFormPanel<ProgramMO> {
     private static final int MAX_MEDIA_COUNT = 100;
 
     /**
-     * Creates a new instance of ProgramPanel.
+     * Creates a new instance of ProgramFormPanel.
      *
      * @param id    ID
      * @param model model
