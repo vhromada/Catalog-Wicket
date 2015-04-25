@@ -130,6 +130,11 @@ public enum CatalogFlow implements Flow {
     SHOWS_UPDATE_POSITION,
 
     /**
+     * Flow for showing show seasons
+     */
+    SHOWS_SEASONS,
+
+    /**
      * Flow for cancel updating show
      */
     SHOWS_CANCEL,
@@ -528,7 +533,6 @@ public enum CatalogFlow implements Flow {
      * Flow for cancel updating genre
      */
     GENRES_CANCEL;
-
 
     @Override
     public String getFlow() {

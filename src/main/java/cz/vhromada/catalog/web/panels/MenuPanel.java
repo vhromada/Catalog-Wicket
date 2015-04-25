@@ -44,7 +44,7 @@ public class MenuPanel extends BasePanel<Void> {
 
         add(new AjaxFlowLink<Void>("home", CatalogFlow.HOME));
 //        add(new AjaxFlowLink<Void>("movies", CatalogFlow.MOVIES_LIST));
-//        add(new AjaxFlowLink<Void>("shows", CatalogFlow.SHOWS_LIST));
+        add(new AjaxFlowLink<Void>("shows", CatalogFlow.SHOWS_LIST));
         add(new AjaxFlowLink<Void>("games", CatalogFlow.GAMES_LIST));
         add(new AjaxFlowLink<Void>("music", CatalogFlow.MUSIC_LIST));
         add(new AjaxFlowLink<Void>("programs", CatalogFlow.PROGRAMS_LIST));

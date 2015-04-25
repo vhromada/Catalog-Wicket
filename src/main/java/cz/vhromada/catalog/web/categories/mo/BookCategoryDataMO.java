@@ -77,7 +77,7 @@ public class BookCategoryDataMO implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookCategory);
+        return bookCategory.hashCode();
     }
 
     @Override

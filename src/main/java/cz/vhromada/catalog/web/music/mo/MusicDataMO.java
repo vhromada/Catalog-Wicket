@@ -101,7 +101,7 @@ public class MusicDataMO implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(music);
+        return music.hashCode();
     }
 
     @Override
