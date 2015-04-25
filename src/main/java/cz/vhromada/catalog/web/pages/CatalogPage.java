@@ -14,7 +14,6 @@ import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.panel.EmptyPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
@@ -30,6 +29,16 @@ public class CatalogPage extends WicketPage {
      * SerialVersionUID
      */
     private static final long serialVersionUID = 1L;
+
+    /**
+     * ID of content panel
+     */
+    private static final String CONTENT_ID = "content";
+
+    /**
+     * ID of inner menu
+     */
+    private static final String INNER_MENU_ID = "innerMenu";
 
     /**
      * Label for title
@@ -48,14 +57,14 @@ public class CatalogPage extends WicketPage {
     protected void onInitialize() {
         super.onInitialize();
 
-        add(new MenuPanel("menu", null));
+        add(getPanel(MenuPanel.ID, "menu", null));
 
         title = new Label("title", "Catalog");
         title.setOutputMarkupId(true);
         add(title);
 
-        add(getPanel(HomePanel.ID, "content", null).setOutputMarkupId(true));
-        add(new EmptyPanel("innerMenu").setOutputMarkupId(true));
+        add(getPanel(HomePanel.ID, CONTENT_ID, null).setOutputMarkupId(true));
+        add(getEmptyPanel(INNER_MENU_ID).setOutputMarkupId(true));
     }
 
     @Override
@@ -86,16 +95,16 @@ public class CatalogPage extends WicketPage {
         title.setDefaultModelObject(event.getTitle());
 
         final PanelData contentPanelData = event.getPanel();
-        final Panel contentPanel = getPanel(contentPanelData.getId(), "content", contentPanelData.getData());
+        final Panel contentPanel = getPanel(contentPanelData.getId(), CONTENT_ID, contentPanelData.getData());
         contentPanel.setOutputMarkupId(true);
         addOrReplace(contentPanel);
 
         final PanelData innerMenuPanelData = event.getMenu();
         final Panel innerMenuPanel;
         if (innerMenuPanelData != null) {
-            innerMenuPanel = getPanel(innerMenuPanelData.getId(), "innerMenu", innerMenuPanelData.getData());
+            innerMenuPanel = getPanel(innerMenuPanelData.getId(), INNER_MENU_ID, innerMenuPanelData.getData());
         } else {
-            innerMenuPanel = new EmptyPanel("innerMenu");
+            innerMenuPanel = getEmptyPanel(INNER_MENU_ID);
         }
         innerMenuPanel.setOutputMarkupId(true);
         addOrReplace(innerMenuPanel);

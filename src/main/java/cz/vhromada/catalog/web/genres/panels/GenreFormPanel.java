@@ -24,7 +24,7 @@ public class GenreFormPanel extends AbstractFormPanel<GenreMO> {
     /**
      * ID
      */
-    public static final String ID = "genrePanel";
+    public static final String ID = "genreFormPanel";
 
     /**
      * SerialVersionUID

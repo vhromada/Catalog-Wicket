@@ -5,13 +5,22 @@ import cz.vhromada.web.wicket.flow.AjaxFlowLink;
 import cz.vhromada.web.wicket.panels.BasePanel;
 
 import org.apache.wicket.model.IModel;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  * A class represents menu panel.
  *
  * @author Vladimir Hromada
  */
+@Component(MenuPanel.ID)
+@Scope("prototype")
 public class MenuPanel extends BasePanel<Void> {
+
+    /**
+     * ID
+     */
+    public static final String ID = "menuPanel";
 
     /**
      * SerialVersionUID

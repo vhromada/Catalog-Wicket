@@ -28,7 +28,7 @@ public class GameFormPanel extends AbstractFormPanel<GameMO> {
     /**
      * ID
      */
-    public static final String ID = "gamePanel";
+    public static final String ID = "gameFormPanel";
 
     /**
      * SerialVersionUID

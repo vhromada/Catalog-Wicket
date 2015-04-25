@@ -27,7 +27,7 @@ public class SongFormPanel extends AbstractFormPanel<SongMO> {
     /**
      * ID
      */
-    public static final String ID = "songPanel";
+    public static final String ID = "songFormPanel";
 
     /**
      * SerialVersionUID

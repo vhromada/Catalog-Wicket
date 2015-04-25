@@ -28,7 +28,7 @@ public class ProgramFormPanel extends AbstractFormPanel<ProgramMO> {
     /**
      * ID
      */
-    public static final String ID = "programPanel";
+    public static final String ID = "programFormPanel";
 
     /**
      * SerialVersionUID
