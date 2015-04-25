@@ -62,8 +62,7 @@ public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
 
         final TextField<String> csfd = new TextField<>("csfd");
 
-        final IModel<Boolean> imdbModel = new Model<>();
-        imdbModel.setObject(getModelObject().getImdbCode() != null && getModelObject().getImdbCode() > 0);
+        final IModel<Boolean> imdbModel = new Model<>(getModelObject().getImdbCode() != null && getModelObject().getImdbCode() > 0);
 
         final NumberTextField<Integer> imdbCode = new NumberTextField<>("imdbCode");
         imdbCode.setMinimum(1)

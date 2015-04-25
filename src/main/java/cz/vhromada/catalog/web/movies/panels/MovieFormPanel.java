@@ -144,7 +144,7 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
         final WebMarkupContainer mediaContainer = new WebMarkupContainer("mediaContainer");
         mediaContainer.setOutputMarkupId(true);
 
-        final ListView<TimeMO> media = new ListView<TimeMO>("media") {
+        final MediaListView media = new MediaListView("media") {
 
             /**
              * SerialVersionUID
@@ -152,70 +152,8 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
             private static final long serialVersionUID = 1L;
 
             @Override
-            protected void populateItem(final ListItem<TimeMO> item) {
-                final int index = item.getIndex();
-                final int mediumIndex = index + 1;
-
-                final Label mediumLabel = new Label("mediumLabel", "Medium " + mediumIndex);
-
-                final AjaxLink<Void> remove = new AjaxLink<Void>("remove") {
-
-                    /**
-                     * SerialVersionUID
-                     */
-                    private static final long serialVersionUID = 1L;
-
-                    @Override
-                    public void onClick(final AjaxRequestTarget target) {
-                        MovieFormPanel.this.getModelObject().getMedia().remove(index);
-
-                        target.add(mediaContainer);
-                    }
-
-                    @Override
-                    protected void onComponentTag(final ComponentTag tag) {
-                        super.onComponentTag(tag);
-
-                        tag.put("value", "Remove");
-                    }
-
-                };
-                remove.setMarkupId("remove" + mediumIndex)
-                        .setVisible(index > 0);
-
-                final Label mediumHoursLabel = new Label("mediumHoursLabel", "Medium " + mediumIndex + " hours");
-
-                final NumberTextField<Integer> mediumHours = new NumberTextField<>("mediumHours", new PropertyModel<Integer>(item.getModelObject(), "hours"));
-                mediumHours.setMinimum(0)
-                        .setMaximum(MAX_HOURS)
-                        .setLabel(Model.of("Medium " + mediumIndex + " hours"))
-                        .setRequired(true)
-                        .add(RangeValidator.range(0, MAX_HOURS))
-                        .setMarkupId("medium" + mediumIndex + "Hours");
-
-                final Label mediumMinutesLabel = new Label("mediumMinutesLabel", "Medium " + mediumIndex + " minutes");
-
-                final NumberTextField<Integer> mediumMinutes = new NumberTextField<>("mediumMinutes",
-                        new PropertyModel<Integer>(item.getModelObject(), "minutes"));
-                mediumMinutes.setMinimum(0)
-                        .setMaximum(MAX_MINUTES)
-                        .setLabel(Model.of("Medium " + mediumIndex + " minutes"))
-                        .setRequired(true)
-                        .add(RangeValidator.range(0, MAX_MINUTES))
-                        .setMarkupId("medium" + mediumIndex + "Minutes");
-
-                final Label mediumSecondsLabel = new Label("mediumSecondsLabel", "Medium " + mediumIndex + " seconds");
-
-                final NumberTextField<Integer> mediumSeconds = new NumberTextField<>("mediumSeconds",
-                        new PropertyModel<Integer>(item.getModelObject(), "seconds"));
-                mediumSeconds.setMinimum(0)
-                        .setMaximum(MAX_SECONDS)
-                        .setLabel(Model.of("Medium " + mediumIndex + " seconds"))
-                        .setRequired(true)
-                        .add(RangeValidator.range(0, MAX_SECONDS))
-                        .setMarkupId("medium" + mediumIndex + "Seconds");
-
-                item.add(mediumLabel, remove, mediumHoursLabel, mediumHours, mediumMinutesLabel, mediumMinutes, mediumSecondsLabel, mediumSeconds);
+            protected void onMediumRemove(final AjaxRequestTarget target) {
+                target.add(mediaContainer);
             }
 
         };
@@ -238,8 +176,7 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
 
         final TextField<String> csfd = new TextField<>("csfd");
 
-        final IModel<Boolean> imdbModel = new Model<>();
-        imdbModel.setObject(getModelObject().getImdbCode() != null && getModelObject().getImdbCode() > 0);
+        final IModel<Boolean> imdbModel = new Model<>(getModelObject().getImdbCode() != null && getModelObject().getImdbCode() > 0);
 
         final NumberTextField<Integer> imdbCode = new NumberTextField<>("imdbCode");
         imdbCode.setMinimum(1)
@@ -316,6 +253,101 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
         if (movie.getNote() == null) {
             movie.setNote("");
         }
+    }
+
+    private abstract static class MediaListView extends ListView<TimeMO> {
+
+        /**
+         * SerialVersionUID
+         */
+        private static final long serialVersionUID = 1L;
+
+        /**
+         * Creates a new instance of MediaListView.
+         *
+         * @param id ID
+         * @throws org.apache.wicket.WicketRuntimeException if ID is null
+         */
+        private MediaListView(final String id) {
+            super(id);
+        }
+
+        @Override
+        protected void populateItem(final ListItem<TimeMO> item) {
+            final int index = item.getIndex();
+            final int mediumIndex = index + 1;
+            final String baseName = "Medium " + mediumIndex;
+            final String baseId = "medium" + mediumIndex;
+
+            final Label mediumLabel = new Label("mediumLabel", baseName);
+
+            final AjaxLink<Void> remove = new AjaxLink<Void>("remove") {
+
+                /**
+                 * SerialVersionUID
+                 */
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public void onClick(final AjaxRequestTarget target) {
+                    MediaListView.this.getModelObject().remove(index);
+
+                    onMediumRemove(target);
+                }
+
+                @Override
+                protected void onComponentTag(final ComponentTag tag) {
+                    super.onComponentTag(tag);
+
+                    tag.put("value", "Remove");
+                }
+
+            };
+            remove.setMarkupId("remove" + mediumIndex)
+                    .setVisible(index > 0);
+
+            final Label mediumHoursLabel = new Label("mediumHoursLabel", baseName + " hours");
+
+            final NumberTextField<Integer> mediumHours = new NumberTextField<>("mediumHours", new PropertyModel<Integer>(item.getModelObject(), "hours"));
+            mediumHours.setMinimum(0)
+                    .setMaximum(MAX_HOURS)
+                    .setLabel(Model.of(baseName + " hours"))
+                    .setRequired(true)
+                    .add(RangeValidator.range(0, MAX_HOURS))
+                    .setMarkupId(baseId + "Hours");
+
+            final Label mediumMinutesLabel = new Label("mediumMinutesLabel", baseName + " minutes");
+
+            final NumberTextField<Integer> mediumMinutes = new NumberTextField<>("mediumMinutes",
+                    new PropertyModel<Integer>(item.getModelObject(), "minutes"));
+            mediumMinutes.setMinimum(0)
+                    .setMaximum(MAX_MINUTES)
+                    .setLabel(Model.of(baseName + " minutes"))
+                    .setRequired(true)
+                    .add(RangeValidator.range(0, MAX_MINUTES))
+                    .setMarkupId(baseId + "Minutes");
+
+            final Label mediumSecondsLabel = new Label("mediumSecondsLabel", baseName + " seconds");
+
+            final NumberTextField<Integer> mediumSeconds = new NumberTextField<>("mediumSeconds",
+                    new PropertyModel<Integer>(item.getModelObject(), "seconds"));
+            mediumSeconds.setMinimum(0)
+                    .setMaximum(MAX_SECONDS)
+                    .setLabel(Model.of(baseName + " seconds"))
+                    .setRequired(true)
+                    .add(RangeValidator.range(0, MAX_SECONDS))
+                    .setMarkupId(baseId + "Seconds");
+
+            item.add(mediumLabel, remove, mediumHoursLabel, mediumHours, mediumMinutesLabel, mediumMinutes, mediumSecondsLabel, mediumSeconds);
+        }
+
+        /**
+         * Callback for removing medium.
+         *
+         * @param target AJAX request target
+         */
+        protected abstract void onMediumRemove(final AjaxRequestTarget target);
+
     }
 
 }
