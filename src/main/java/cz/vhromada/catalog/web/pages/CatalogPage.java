@@ -12,11 +12,9 @@ import cz.vhromada.web.wicket.pages.WicketPage;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.resource.CssResourceReference;
-import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 /**
  * A class represents catalog page.
@@ -49,7 +47,6 @@ public class CatalogPage extends WicketPage {
     public void renderHead(final IHeaderResponse response) {
         super.renderHead(response);
 
-        response.render(JavaScriptReferenceHeaderItem.forReference(new JavaScriptResourceReference(getClass(), "js/catalog.js")));
         response.render(CssHeaderItem.forReference(new CssResourceReference(getClass(), "css/catalog.css")));
     }
 
