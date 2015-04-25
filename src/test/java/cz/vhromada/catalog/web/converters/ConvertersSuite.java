@@ -9,12 +9,12 @@ import org.junit.runners.Suite;
  * @author Vladimir Hromada
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ ShowTOToShowMOConverterTest.class, ShowMOToShowTOConverterTest.class, SeasonTOToSeasonMOConverterTest.class,
-        ShowMOToShowTOConverterTest.class, EpisodeTOToEpisodeMOConverterTest.class, EpisodeMOToEpisodeTOConverterTest.class, GameTOToGameMOConverterTest.class,
-        GameMOToGameTOConverterTest.class, MusicTOToMusicMOConverterTest.class, MusicMOToMusicTOConverterTest.class, SongTOToSongMOConverterTest.class,
-        SongMOToSongTOConverterTest.class, ProgramTOToProgramMOConverterTest.class, ProgramMOToProgramTOConverterTest.class,
-        BookCategoryTOToBookCategoryMOConverterTest.class, BookCategoryMOToBookCategoryTOConverterTest.class, BookTOToBookMOConverterTest.class,
-        BookMOToBookTOConverterTest.class, GenreTOToGenreMOConverterTest.class, GenreMOToGenreTOConverterTest.class, IntegerToTimeMOConverterTest.class,
-        TimeMOToIntegerConverterTest.class })
+@Suite.SuiteClasses({ MovieTOToMovieMOConverterTest.class, MovieMOToMovieTOConverterTest.class, ShowTOToShowMOConverterTest.class,
+        ShowMOToShowTOConverterTest.class, SeasonTOToSeasonMOConverterTest.class, SeasonMOToSeasonTOConverterTest.class,
+        EpisodeTOToEpisodeMOConverterTest.class, EpisodeMOToEpisodeTOConverterTest.class, GameTOToGameMOConverterTest.class, GameMOToGameTOConverterTest.class,
+        MusicTOToMusicMOConverterTest.class, MusicMOToMusicTOConverterTest.class, SongTOToSongMOConverterTest.class, SongMOToSongTOConverterTest.class,
+        ProgramTOToProgramMOConverterTest.class, ProgramMOToProgramTOConverterTest.class, BookCategoryTOToBookCategoryMOConverterTest.class,
+        BookCategoryMOToBookCategoryTOConverterTest.class, BookTOToBookMOConverterTest.class, BookMOToBookTOConverterTest.class,
+        GenreTOToGenreMOConverterTest.class, GenreMOToGenreTOConverterTest.class, IntegerToTimeMOConverterTest.class, TimeMOToIntegerConverterTest.class })
 public class ConvertersSuite {
 }

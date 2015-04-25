@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns:wicket="http://wicket.apache.org" xmlns="http://www.w3.org/1999/xhtml">
+<body>
+<wicket:panel>
+    <table class="table table-hover" wicket:id="moviesTable">
+        <thead>
+        <tr>
+            <th>Czech name</th>
+            <th>Original name</th>
+            <th>Genres</th>
+            <th>Year</th>
+            <th>Language</th>
+            <th>Subtitles</th>
+            <th>Media</th>
+            <th>Total length</th>
+            <th>Picture</th>
+            <th>Note</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr wicket:id="movies">
+            <td wicket:id="czechName"></td>
+            <td wicket:id="originalName"></td>
+            <td wicket:id="genres"></td>
+            <td wicket:id="year"></td>
+            <td wicket:id="language"></td>
+            <td wicket:id="subtitles"></td>
+            <td wicket:id="media"></td>
+            <td wicket:id="totalLength"></td>
+            <td wicket:id="picture"></td>
+            <td wicket:id="note"></td>
+            <td wicket:id="csfd"></td>
+            <td wicket:id="imdb"></td>
+            <td wicket:id="wikiCz"></td>
+            <td wicket:id="wikiEn"></td>
+            <td>
+                <a href="#" wicket:id="moveUp">Move up</a>
+            </td>
+            <td>
+                <a href="#" wicket:id="moveDown">Move down</a>
+            </td>
+            <td><a href="#" wicket:id="duplicate">Duplicate</a></td>
+            <td><a href="#" wicket:id="edit">Edit</a></td>
+            <td><a href="#" wicket:id="remove">Remove</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <div wicket:id="noMovies">No records.</div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Count of movies</th>
+            <th>Total length</th>
+            <th>Count of media</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td wicket:id="count"></td>
+            <td wicket:id="totalLength"></td>
+            <td wicket:id="mediaCount"></td>
+        </tr>
+        </tbody>
+    </table>
+</wicket:panel>
+</body>
+</html>
