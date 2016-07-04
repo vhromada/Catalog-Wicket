@@ -8,12 +8,12 @@ import cz.vhromada.catalog.web.genres.panels.GenreFormPanel;
 import cz.vhromada.catalog.web.genres.panels.GenresMenuPanel;
 import cz.vhromada.catalog.web.panels.AbstractFormPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.catalog.web.system.CatalogSession;
 import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.protocol.http.WebSession;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,7 +26,7 @@ public class AddGenreController extends Controller<Void> {
 
     @Override
     public void handle(final Void data) {
-        final CatalogSession session = CatalogApplication.getSession();
+        final WebSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.GENRES_ADD_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Create");
         final PanelData panelData = new PanelData(GenreFormPanel.ID, new CompoundPropertyModel<>(new GenreMO()));

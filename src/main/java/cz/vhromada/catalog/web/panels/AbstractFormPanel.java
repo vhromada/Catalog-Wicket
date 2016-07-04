@@ -7,11 +7,13 @@ import cz.vhromada.web.wicket.flow.AjaxFlowLink;
 import cz.vhromada.web.wicket.flow.AjaxFlowSubmitLink;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormValidatingBehavior;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.util.time.Duration;
 
 /**
  * An abstract class represents form.
@@ -84,7 +86,6 @@ public abstract class AbstractFormPanel<T> extends GenericPanel<T> {
             }
 
             @Override
-            @SuppressWarnings("unchecked")
             protected void onError(final AjaxRequestTarget target, final Form<?> linkForm) {
                 super.onError(target, linkForm);
 
@@ -109,7 +110,8 @@ public abstract class AbstractFormPanel<T> extends GenericPanel<T> {
 
         };
 
-        //TODO vhromada 04.07.2016:AjaxFormValidatingBehavior.addToAllFormComponents(form, "onchange", Duration.ONE_SECOND);
+
+        form.add(new AjaxFormValidatingBehavior("onchange", Duration.ONE_SECOND));
 
         form.add(submit, cancel);
         add(feedbackPanel, form);

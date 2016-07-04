@@ -1,7 +1,5 @@
 package cz.vhromada.catalog.web.events;
 
-import java.io.Serializable;
-
 import cz.vhromada.validators.Validators;
 
 import org.apache.wicket.model.IModel;
@@ -12,7 +10,7 @@ import org.apache.wicket.model.IModel;
  * @param <T> type of data
  * @author Vladimir Hromada
  */
-public class PanelData<T extends Serializable> {
+public class PanelData<T> {
 
     /**
      * ID

@@ -54,7 +54,6 @@ public abstract class ImdbPanel extends Panel {
                 .setVisible(imdbModel.getObject())
                 .setOutputMarkupPlaceholderTag(true);
 
-
         final AjaxCheckBox imdb = new AjaxCheckBox("imdb", imdbModel) {
 
             /**

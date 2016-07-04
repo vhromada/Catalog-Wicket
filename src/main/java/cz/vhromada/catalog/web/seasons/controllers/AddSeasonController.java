@@ -11,12 +11,12 @@ import cz.vhromada.catalog.web.seasons.mo.SeasonMO;
 import cz.vhromada.catalog.web.seasons.panels.SeasonFormPanel;
 import cz.vhromada.catalog.web.seasons.panels.SeasonsMenuPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.catalog.web.system.CatalogSession;
 import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.protocol.http.WebSession;
 import org.springframework.stereotype.Component;
 
 /**
@@ -29,7 +29,7 @@ public class AddSeasonController extends Controller<Void> {
 
     @Override
     public void handle(final Void data) {
-        final CatalogSession session = CatalogApplication.getSession();
+        final WebSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.SEASONS_ADD_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Create");
         final SeasonMO season = new SeasonMO();

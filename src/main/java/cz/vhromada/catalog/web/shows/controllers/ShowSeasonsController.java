@@ -3,11 +3,11 @@ package cz.vhromada.catalog.web.shows.controllers;
 import cz.vhromada.catalog.facade.to.ShowTO;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.catalog.web.system.CatalogSession;
 import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.protocol.http.WebSession;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,7 +25,7 @@ public class ShowSeasonsController extends Controller<IModel<ShowTO>> {
 
     @Override
     public void handle(final IModel<ShowTO> data) {
-        final CatalogSession session = CatalogSession.getSession();
+        final WebSession session = WebSession.get();
         session.setAttribute(SHOW_ATTRIBUTE, data.getObject());
 
         getUi().fireEvent(new ControllerEvent(CatalogFlow.SEASONS_LIST, null));

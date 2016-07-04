@@ -20,7 +20,7 @@ public class HomeController extends Controller<Void> {
 
     @Override
     public void handle(final Void data) {
-        final PanelData panelData = new PanelData(HomePanel.ID, null);
+        final PanelData<Void> panelData = new PanelData<>(HomePanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Catalog");
 

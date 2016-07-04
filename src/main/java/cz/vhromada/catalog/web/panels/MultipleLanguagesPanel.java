@@ -45,19 +45,6 @@ public class MultipleLanguagesPanel extends Panel {
     /**
      * Creates a new instance of MultipleLanguagesPanel.
      *
-     * @param id ID
-     * @throws org.apache.wicket.WicketRuntimeException if ID is null
-     */
-    public MultipleLanguagesPanel(final String id) {
-        super(id);
-
-        this.label = "Languages";
-        this.itemId = "language";
-    }
-
-    /**
-     * Creates a new instance of MultipleLanguagesPanel.
-     *
      * @param id     ID
      * @param model  model with languages
      * @param label  label

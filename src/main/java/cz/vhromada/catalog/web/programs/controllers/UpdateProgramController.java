@@ -9,7 +9,6 @@ import cz.vhromada.catalog.web.programs.mo.ProgramMO;
 import cz.vhromada.catalog.web.programs.panels.ProgramFormPanel;
 import cz.vhromada.catalog.web.programs.panels.ProgramsMenuPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.catalog.web.system.CatalogSession;
 import cz.vhromada.converters.Converter;
 import cz.vhromada.validators.Validators;
 import cz.vhromada.web.wicket.controllers.Controller;
@@ -18,6 +17,7 @@ import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.protocol.http.WebSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -50,7 +50,7 @@ public class UpdateProgramController extends Controller<IModel<ProgramTO>> {
 
     @Override
     public void handle(final IModel<ProgramTO> data) {
-        final CatalogSession session = CatalogApplication.getSession();
+        final WebSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.PROGRAMS_UPDATE_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
         final PanelData panelData = new PanelData(ProgramFormPanel.ID, new CompoundPropertyModel<>(converter.convert(data.getObject(), ProgramMO.class)));

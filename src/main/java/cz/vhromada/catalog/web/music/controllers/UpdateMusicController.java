@@ -9,7 +9,6 @@ import cz.vhromada.catalog.web.music.panels.MusicFormPanel;
 import cz.vhromada.catalog.web.music.panels.MusicMenuPanel;
 import cz.vhromada.catalog.web.panels.AbstractFormPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.catalog.web.system.CatalogSession;
 import cz.vhromada.converters.Converter;
 import cz.vhromada.validators.Validators;
 import cz.vhromada.web.wicket.controllers.Controller;
@@ -18,6 +17,7 @@ import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.protocol.http.WebSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -50,7 +50,7 @@ public class UpdateMusicController extends Controller<IModel<MusicTO>> {
 
     @Override
     public void handle(final IModel<MusicTO> data) {
-        final CatalogSession session = CatalogApplication.getSession();
+        final WebSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.MUSIC_UPDATE_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
         final PanelData panelData = new PanelData(MusicFormPanel.ID, new CompoundPropertyModel<>(converter.convert(data.getObject(), MusicMO.class)));
