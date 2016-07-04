@@ -3,8 +3,8 @@ package cz.vhromada.catalog.web.episodes.panels;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.seasons.panels.SeasonsMenuPanel;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
-import cz.vhromada.web.wicket.panels.BasePanel;
 
+import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.springframework.context.annotation.Scope;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(EpisodesMenuPanel.ID)
 @Scope("prototype")
-public class EpisodesMenuPanel extends BasePanel<Void> {
+public class EpisodesMenuPanel extends GenericPanel<Void> {
 
     /**
      * ID
@@ -44,7 +44,7 @@ public class EpisodesMenuPanel extends BasePanel<Void> {
     protected void onInitialize() {
         super.onInitialize();
 
-        final Panel seasonsMenu = getPanel(SeasonsMenuPanel.ID, "seasonsMenu", null);
+        final Panel seasonsMenu = new SeasonsMenuPanel("seasonsMenu", null);
 
         final AjaxFlowLink<Void> allEpisodes = new AjaxFlowLink<>("allEpisodes", CatalogFlow.EPISODES_LIST);
 

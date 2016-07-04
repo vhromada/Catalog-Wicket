@@ -58,7 +58,6 @@ public class UpdateSongConfirmController extends Controller<IModel<SongMO>> {
     public void handle(final IModel<SongMO> data) {
         final MusicTO music = CatalogApplication.getSessionAttribute(MusicSongsController.MUSIC_ATTRIBUTE);
         final SongTO song = converter.convert(data.getObject(), SongTO.class);
-        song.setMusic(music);
         songFacade.update(song);
 
         getUi().fireEvent(new ControllerEvent(CatalogFlow.SONGS_LIST, null));

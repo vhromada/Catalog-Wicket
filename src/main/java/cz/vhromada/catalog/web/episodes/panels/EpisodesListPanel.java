@@ -6,12 +6,12 @@ import cz.vhromada.catalog.commons.Time;
 import cz.vhromada.catalog.facade.to.EpisodeTO;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
-import cz.vhromada.web.wicket.panels.BasePanel;
 
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(EpisodesListPanel.ID)
 @Scope("prototype")
-public class EpisodesListPanel extends BasePanel<List<EpisodeTO>> {
+public class EpisodesListPanel extends GenericPanel<List<EpisodeTO>> {
 
     /**
      * ID

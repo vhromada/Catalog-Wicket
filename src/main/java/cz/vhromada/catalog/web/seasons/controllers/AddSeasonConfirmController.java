@@ -58,8 +58,7 @@ public class AddSeasonConfirmController extends Controller<IModel<SeasonMO>> {
     public void handle(final IModel<SeasonMO> data) {
         final ShowTO show = CatalogApplication.getSessionAttribute(ShowSeasonsController.SHOW_ATTRIBUTE);
         final SeasonTO season = converter.convert(data.getObject(), SeasonTO.class);
-        season.setShow(show);
-        seasonFacade.add(season);
+        seasonFacade.add(show, season);
 
         getUi().fireEvent(new ControllerEvent(CatalogFlow.SEASONS_LIST, null));
     }

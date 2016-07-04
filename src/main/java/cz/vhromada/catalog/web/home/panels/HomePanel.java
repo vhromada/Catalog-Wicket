@@ -1,7 +1,6 @@
 package cz.vhromada.catalog.web.home.panels;
 
-import cz.vhromada.web.wicket.panels.BasePanel;
-
+import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(HomePanel.ID)
 @Scope("prototype")
-public class HomePanel extends BasePanel<Void> {
+public class HomePanel extends GenericPanel<Void> {
 
     /**
      * ID

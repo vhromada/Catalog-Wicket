@@ -6,12 +6,12 @@ import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.music.mo.MusicDataMO;
 import cz.vhromada.catalog.web.music.mo.MusicInfoMO;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
-import cz.vhromada.web.wicket.panels.BasePanel;
 
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.springframework.context.annotation.Scope;
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(MusicListPanel.ID)
 @Scope("prototype")
-public class MusicListPanel extends BasePanel<MusicInfoMO> {
+public class MusicListPanel extends GenericPanel<MusicInfoMO> {
 
     /**
      * ID

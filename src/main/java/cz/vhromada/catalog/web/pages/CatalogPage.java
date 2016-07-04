@@ -13,6 +13,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.panel.EmptyPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.resource.CssResourceReference;
 
@@ -61,7 +62,7 @@ public class CatalogPage extends WicketPage {
         add(title);
 
         add(getPanel(HomePanel.ID, CONTENT_ID, null).setOutputMarkupId(true));
-        add(getEmptyPanel(INNER_MENU_ID).setOutputMarkupId(true));
+        add(new EmptyPanel(INNER_MENU_ID).setOutputMarkupId(true));
     }
 
     @Override
@@ -101,7 +102,7 @@ public class CatalogPage extends WicketPage {
         if (innerMenuPanelData != null) {
             innerMenuPanel = getPanel(innerMenuPanelData.getId(), INNER_MENU_ID, innerMenuPanelData.getData());
         } else {
-            innerMenuPanel = getEmptyPanel(INNER_MENU_ID);
+            innerMenuPanel = new EmptyPanel(INNER_MENU_ID);
         }
         innerMenuPanel.setOutputMarkupId(true);
         addOrReplace(innerMenuPanel);

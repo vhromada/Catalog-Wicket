@@ -5,6 +5,7 @@ import java.util.List;
 import cz.vhromada.catalog.commons.Language;
 import cz.vhromada.catalog.commons.Time;
 import cz.vhromada.catalog.facade.to.GenreTO;
+import cz.vhromada.catalog.facade.to.MediumTO;
 import cz.vhromada.catalog.facade.to.MovieTO;
 import cz.vhromada.catalog.web.components.CsfdLink;
 import cz.vhromada.catalog.web.components.ImdbLink;
@@ -12,12 +13,12 @@ import cz.vhromada.catalog.web.components.WikipediaLink;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.movies.mo.MoviesMO;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
-import cz.vhromada.web.wicket.panels.BasePanel;
 
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.springframework.context.annotation.Scope;
@@ -30,7 +31,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(MoviesListPanel.ID)
 @Scope("prototype")
-public class MoviesListPanel extends BasePanel<MoviesMO> {
+public class MoviesListPanel extends GenericPanel<MoviesMO> {
 
     /**
      * ID
@@ -181,15 +182,15 @@ public class MoviesListPanel extends BasePanel<MoviesMO> {
      * @return media
      */
     private static String getMedia(final MovieTO movie) {
-        final List<Integer> media = movie.getMedia();
+        final List<MediumTO> media = movie.getMedia();
 
         if (media == null || media.isEmpty()) {
             return "";
         }
 
         final StringBuilder result = new StringBuilder();
-        for (final Integer medium : media) {
-            result.append(new Time(medium));
+        for (final MediumTO medium : media) {
+            result.append(new Time(medium.getLength()));
             result.append(", ");
         }
 
@@ -203,15 +204,15 @@ public class MoviesListPanel extends BasePanel<MoviesMO> {
      * @return total length
      */
     private static Time getTotalLength(final MovieTO movie) {
-        final List<Integer> media = movie.getMedia();
+        final List<MediumTO> media = movie.getMedia();
 
         if (media == null || media.isEmpty()) {
             return new Time(0);
         }
 
         int totalLength = 0;
-        for (final Integer medium : media) {
-            totalLength += medium;
+        for (final MediumTO medium : media) {
+            totalLength += medium.getLength();
         }
 
         return new Time(totalLength);

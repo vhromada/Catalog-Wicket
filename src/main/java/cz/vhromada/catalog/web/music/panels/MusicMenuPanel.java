@@ -2,8 +2,8 @@ package cz.vhromada.catalog.web.music.panels;
 
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
-import cz.vhromada.web.wicket.panels.BasePanel;
 
+import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(MusicMenuPanel.ID)
 @Scope("prototype")
-public class MusicMenuPanel extends BasePanel<Void> {
+public class MusicMenuPanel extends GenericPanel<Void> {
 
     /**
      * ID

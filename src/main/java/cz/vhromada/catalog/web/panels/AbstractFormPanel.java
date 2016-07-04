@@ -5,15 +5,13 @@ import cz.vhromada.catalog.web.system.CatalogApplication;
 import cz.vhromada.web.wicket.controllers.Flow;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
 import cz.vhromada.web.wicket.flow.AjaxFlowSubmitLink;
-import cz.vhromada.web.wicket.panels.BasePanel;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.form.AjaxFormValidatingBehavior;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.util.time.Duration;
 
 /**
  * An abstract class represents form.
@@ -21,7 +19,7 @@ import org.apache.wicket.util.time.Duration;
  * @param <T> type of model data
  * @author Vladimir Hromada
  */
-public abstract class AbstractFormPanel<T> extends BasePanel<T> {
+public abstract class AbstractFormPanel<T> extends GenericPanel<T> {
 
     /**
      * Name for session attribute with flow on form submit
@@ -111,7 +109,7 @@ public abstract class AbstractFormPanel<T> extends BasePanel<T> {
 
         };
 
-        AjaxFormValidatingBehavior.addToAllFormComponents(form, "onchange", Duration.ONE_SECOND);
+        //TODO vhromada 04.07.2016:AjaxFormValidatingBehavior.addToAllFormComponents(form, "onchange", Duration.ONE_SECOND);
 
         form.add(submit, cancel);
         add(feedbackPanel, form);

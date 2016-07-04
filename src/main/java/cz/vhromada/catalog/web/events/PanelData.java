@@ -1,13 +1,18 @@
 package cz.vhromada.catalog.web.events;
 
+import java.io.Serializable;
+
 import cz.vhromada.validators.Validators;
 
 import org.apache.wicket.model.IModel;
 
 /**
  * A class represents panel data.
+ *
+ * @param <T> type of data
+ * @author Vladimir Hromada
  */
-public class PanelData {
+public class PanelData<T extends Serializable> {
 
     /**
      * ID
@@ -17,7 +22,7 @@ public class PanelData {
     /**
      * Data
      */
-    private IModel<?> data;
+    private IModel<T> data;
 
     /**
      * Creates a new instance of PanelData.
@@ -26,7 +31,7 @@ public class PanelData {
      * @param data data
      * @throws IllegalArgumentException if ID is null
      */
-    public PanelData(final String id, final IModel<?> data) {
+    public PanelData(final String id, final IModel<T> data) {
         Validators.validateArgumentNotNull(id, "ID");
 
         this.id = id;
@@ -47,9 +52,8 @@ public class PanelData {
      *
      * @return data
      */
-    public IModel<?> getData() {
+    public IModel<T> getData() {
         return data;
     }
-
 
 }

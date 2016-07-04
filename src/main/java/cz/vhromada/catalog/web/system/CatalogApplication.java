@@ -2,7 +2,6 @@ package cz.vhromada.catalog.web.system;
 
 import cz.vhromada.catalog.web.pages.CatalogPage;
 
-import net.ftlines.wicketsource.WicketSource;
 import org.apache.wicket.Session;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -64,7 +63,6 @@ public class CatalogApplication extends WebApplication {
 
         if (usesDevelopmentConfig()) {
             getDebugSettings().setDevelopmentUtilitiesEnabled(true);
-            WicketSource.configure(this);
         }
     }
 

@@ -7,12 +7,12 @@ import cz.vhromada.catalog.facade.to.SeasonTO;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.seasons.mo.SeasonDataMO;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
-import cz.vhromada.web.wicket.panels.BasePanel;
 
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
+import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.springframework.context.annotation.Scope;
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(SeasonsListPanel.ID)
 @Scope("prototype")
-public class SeasonsListPanel extends BasePanel<List<SeasonDataMO>> {
+public class SeasonsListPanel extends GenericPanel<List<SeasonDataMO>> {
 
     /**
      * ID

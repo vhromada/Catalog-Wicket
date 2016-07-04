@@ -58,7 +58,6 @@ public class UpdateEpisodeConfirmController extends Controller<IModel<EpisodeMO>
     public void handle(final IModel<EpisodeMO> data) {
         final SeasonTO season = CatalogApplication.getSessionAttribute(SeasonEpisodesController.SEASON_ATTRIBUTE);
         final EpisodeTO episode = converter.convert(data.getObject(), EpisodeTO.class);
-        episode.setSeason(season);
         episodeFacade.update(episode);
 
         getUi().fireEvent(new ControllerEvent(CatalogFlow.EPISODES_LIST, null));
