@@ -29,8 +29,8 @@ public class AddGameController extends Controller<Void> {
         final WebSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.GAMES_ADD_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Create");
-        final PanelData panelData = new PanelData(GameFormPanel.ID, new CompoundPropertyModel<>(new GameMO()));
-        final PanelData menuData = new PanelData(GamesMenuPanel.ID, null);
+        final PanelData<GameMO> panelData = new PanelData<>(GameFormPanel.ID, new CompoundPropertyModel<>(new GameMO()));
+        final PanelData<Void> menuData = new PanelData<>(GamesMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Add game", menuData);
 

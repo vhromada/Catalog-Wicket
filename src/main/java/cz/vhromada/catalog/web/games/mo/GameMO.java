@@ -368,8 +368,8 @@ public class GameMO implements Serializable {
         if (obj == null || !(obj instanceof GameMO) || id == null) {
             return false;
         }
-        final GameMO game = (GameMO) obj;
-        return id.equals(game.id);
+
+        return id.equals(((GameMO) obj).id);
     }
 
     @Override

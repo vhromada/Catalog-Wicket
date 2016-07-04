@@ -89,9 +89,10 @@ public class TimeMO implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof TimeMO)) {
+        if (!(obj instanceof TimeMO)) {
             return false;
         }
+
         final TimeMO time = (TimeMO) obj;
         return Objects.equals(hours, time.hours) && Objects.equals(minutes, time.minutes) && Objects.equals(seconds, time.seconds);
     }

@@ -47,8 +47,8 @@ public class GamesListController extends Controller<Void> {
         final GamesMO games = new GamesMO();
         games.setGames(gameFacade.getGames());
         games.setMediaCount(gameFacade.getTotalMediaCount());
-        final PanelData panelData = new PanelData(GamesListPanel.ID, Model.of(games));
-        final PanelData menuData = new PanelData(GamesMenuPanel.ID, null);
+        final PanelData<GamesMO> panelData = new PanelData<>(GamesListPanel.ID, Model.of(games));
+        final PanelData<Void> menuData = new PanelData<>(GamesMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Games", menuData);
 
