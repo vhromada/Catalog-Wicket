@@ -29,8 +29,8 @@ public class AddProgramController extends Controller<Void> {
         final WebSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.PROGRAMS_ADD_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Create");
-        final PanelData panelData = new PanelData(ProgramFormPanel.ID, new CompoundPropertyModel<>(new ProgramMO()));
-        final PanelData menuData = new PanelData(ProgramsMenuPanel.ID, null);
+        final PanelData<ProgramMO> panelData = new PanelData<>(ProgramFormPanel.ID, new CompoundPropertyModel<>(new ProgramMO()));
+        final PanelData<Void> menuData = new PanelData<>(ProgramsMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Add program", menuData);
 

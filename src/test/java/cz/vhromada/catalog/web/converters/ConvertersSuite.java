@@ -15,7 +15,7 @@ import org.junit.runners.Suite;
         //EpisodeTOToEpisodeMOConverterTest.class, EpisodeMOToEpisodeTOConverterTest.class,
         GameConverterTest.class,
         //MusicTOToMusicMOConverterTest.class, MusicMOToMusicTOConverterTest.class, SongTOToSongMOConverterTest.class, SongMOToSongTOConverterTest.class,
-        //ProgramTOToProgramMOConverterTest.class, ProgramMOToProgramTOConverterTest.class, BookCategoryTOToBookCategoryMOConverterTest.class,
+        ProgramConverterTest.class,
         //BookCategoryMOToBookCategoryTOConverterTest.class, BookTOToBookMOConverterTest.class, BookMOToBookTOConverterTest.class,
         //GenreTOToGenreMOConverterTest.class, GenreMOToGenreTOConverterTest.class, IntegerToTimeMOConverterTest.class, TimeMOToIntegerConverterTest.class
 })

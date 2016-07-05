@@ -47,7 +47,7 @@ public class MenuPanel extends GenericPanel<Void> {
         add(new AjaxFlowLink<Void>("shows", CatalogFlow.SHOWS_LIST).setVisible(false));
         add(new AjaxFlowLink<Void>("games", CatalogFlow.GAMES_LIST));
         add(new AjaxFlowLink<Void>("music", CatalogFlow.MUSIC_LIST).setVisible(false));
-        add(new AjaxFlowLink<Void>("programs", CatalogFlow.PROGRAMS_LIST).setVisible(false));
+        add(new AjaxFlowLink<Void>("programs", CatalogFlow.PROGRAMS_LIST));
         add(new AjaxFlowLink<Void>("genres", CatalogFlow.GENRES_LIST).setVisible(false));
     }
 

@@ -47,8 +47,8 @@ public class ProgramsListController extends Controller<Void> {
         final ProgramsMO programs = new ProgramsMO();
         programs.setPrograms(programFacade.getPrograms());
         programs.setMediaCount(programFacade.getTotalMediaCount());
-        final PanelData panelData = new PanelData(ProgramsListPanel.ID, Model.of(programs));
-        final PanelData menuData = new PanelData(ProgramsMenuPanel.ID, null);
+        final PanelData<ProgramsMO> panelData = new PanelData<>(ProgramsListPanel.ID, Model.of(programs));
+        final PanelData<Void> menuData = new PanelData<>(ProgramsMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Programs", menuData);
 

@@ -253,8 +253,8 @@ public class ProgramMO implements Serializable {
         if (obj == null || !(obj instanceof ProgramMO) || id == null) {
             return false;
         }
-        final ProgramMO program = (ProgramMO) obj;
-        return id.equals(program.id);
+
+        return id.equals(((ProgramMO) obj).id);
     }
 
     @Override

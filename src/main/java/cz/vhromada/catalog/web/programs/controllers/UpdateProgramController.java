@@ -53,8 +53,9 @@ public class UpdateProgramController extends Controller<IModel<ProgramTO>> {
         final WebSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.PROGRAMS_UPDATE_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
-        final PanelData panelData = new PanelData(ProgramFormPanel.ID, new CompoundPropertyModel<>(converter.convert(data.getObject(), ProgramMO.class)));
-        final PanelData menuData = new PanelData(ProgramsMenuPanel.ID, null);
+        final PanelData<ProgramMO> panelData = new PanelData<>(ProgramFormPanel.ID,
+                new CompoundPropertyModel<>(converter.convert(data.getObject(), ProgramMO.class)));
+        final PanelData<Void> menuData = new PanelData<>(ProgramsMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Edit program", menuData);
 
