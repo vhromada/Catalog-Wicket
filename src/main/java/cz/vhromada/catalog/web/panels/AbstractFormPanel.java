@@ -110,8 +110,8 @@ public abstract class AbstractFormPanel<T> extends GenericPanel<T> {
 
         };
 
-
-        form.add(new AjaxFormValidatingBehavior("onchange", Duration.ONE_SECOND));
+        //TODO vhromada 05.07.2016: change behavior
+        form.add(new AjaxFormValidatingBehavior("change", Duration.ONE_SECOND));
 
         form.add(submit, cancel);
         add(feedbackPanel, form);
