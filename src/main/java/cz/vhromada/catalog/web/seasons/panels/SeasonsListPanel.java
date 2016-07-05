@@ -2,8 +2,8 @@ package cz.vhromada.catalog.web.seasons.panels;
 
 import java.util.List;
 
-import cz.vhromada.catalog.commons.Language;
 import cz.vhromada.catalog.facade.to.SeasonTO;
+import cz.vhromada.catalog.web.commons.FormatUtils;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.seasons.mo.SeasonDataMO;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
@@ -73,7 +73,7 @@ public class SeasonsListPanel extends GenericPanel<List<SeasonDataMO>> {
 
                 final Label language = new Label("language", season.getLanguage());
 
-                final Label subtitles = new Label("subtitles", getSubtitles(season));
+                final Label subtitles = new Label("subtitles", FormatUtils.getSubtitles(season.getSubtitles()));
 
                 final Label episodesCount = new Label("episodesCount", seasonData.getEpisodesCount());
 
@@ -118,28 +118,6 @@ public class SeasonsListPanel extends GenericPanel<List<SeasonDataMO>> {
         final int endYear = season.getEndYear();
 
         return startYear == endYear ? Integer.toString(startYear) : startYear + " - " + endYear;
-    }
-
-    /**
-     * Returns subtitles.
-     *
-     * @param season TO for season
-     * @return subtitles
-     */
-    private static String getSubtitles(final SeasonTO season) {
-        final List<Language> subtitles = season.getSubtitles();
-
-        if (subtitles == null || subtitles.isEmpty()) {
-            return "";
-        }
-
-        final StringBuilder result = new StringBuilder();
-        for (final Language subtitlesItem : subtitles) {
-            result.append(subtitlesItem);
-            result.append(" / ");
-        }
-
-        return result.substring(0, result.length() - 3);
     }
 
 }

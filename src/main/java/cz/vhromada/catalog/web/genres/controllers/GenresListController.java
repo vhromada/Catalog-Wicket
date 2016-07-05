@@ -1,6 +1,9 @@
 package cz.vhromada.catalog.web.genres.controllers;
 
+import java.util.List;
+
 import cz.vhromada.catalog.facade.GenreFacade;
+import cz.vhromada.catalog.facade.to.GenreTO;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -43,8 +46,8 @@ public class GenresListController extends Controller<Void> {
 
     @Override
     public void handle(final Void data) {
-        final PanelData panelData = new PanelData(GenresListPanel.ID, Model.ofList(genreFacade.getGenres()));
-        final PanelData menuData = new PanelData(GenresMenuPanel.ID, null);
+        final PanelData<List<GenreTO>> panelData = new PanelData<>(GenresListPanel.ID, Model.ofList(genreFacade.getGenres()));
+        final PanelData<Void> menuData = new PanelData<>(GenresMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Genres", menuData);
 

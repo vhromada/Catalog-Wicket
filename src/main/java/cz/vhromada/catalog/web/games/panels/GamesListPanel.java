@@ -1,6 +1,7 @@
 package cz.vhromada.catalog.web.games.panels;
 
 import cz.vhromada.catalog.facade.to.GameTO;
+import cz.vhromada.catalog.web.commons.FormatUtils;
 import cz.vhromada.catalog.web.components.WikipediaLink;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.games.mo.GamesMO;
@@ -115,12 +116,12 @@ public class GamesListPanel extends GenericPanel<GamesMO> {
         if (game.getCrack()) {
             result.append("Crack");
         }
-        addToResult(result, game.getSerialKey(), "serial key");
-        addToResult(result, game.getPatch(), "patch");
-        addToResult(result, game.getTrainer(), "trainer");
-        addToResult(result, game.getTrainerData(), "data for trainer");
-        addToResult(result, game.getEditor(), "editor");
-        addToResult(result, game.getSaves(), "saves");
+        FormatUtils.addToResult(result, game.getSerialKey(), "serial key");
+        FormatUtils.addToResult(result, game.getPatch(), "patch");
+        FormatUtils.addToResult(result, game.getTrainer(), "trainer");
+        FormatUtils.addToResult(result, game.getTrainerData(), "data for trainer");
+        FormatUtils.addToResult(result, game.getEditor(), "editor");
+        FormatUtils.addToResult(result, game.getSaves(), "saves");
         if (game.getOtherData() != null && !game.getOtherData().isEmpty()) {
             if (result.length() != 0) {
                 result.append(", ");
@@ -129,25 +130,6 @@ public class GamesListPanel extends GenericPanel<GamesMO> {
         }
 
         return result.toString();
-    }
-
-    /**
-     * Adds data to result.
-     *
-     * @param result result
-     * @param value  value
-     * @param data   data
-     */
-    private static void addToResult(final StringBuilder result, final boolean value, final String data) {
-        if (value) {
-            if (result.length() == 0) {
-                result.append(data.substring(0, 1).toUpperCase());
-                result.append(data.substring(1));
-            } else {
-                result.append(", ");
-                result.append(data);
-            }
-        }
     }
 
 }

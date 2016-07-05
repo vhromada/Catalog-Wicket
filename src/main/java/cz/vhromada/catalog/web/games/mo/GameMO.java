@@ -1,6 +1,7 @@
 package cz.vhromada.catalog.web.games.mo;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * A class represents MO for game.
@@ -374,7 +375,7 @@ public class GameMO implements Serializable {
 
     @Override
     public int hashCode() {
-        return id == null ? 0 : id.hashCode();
+        return Objects.hashCode(id);
     }
 
     @Override

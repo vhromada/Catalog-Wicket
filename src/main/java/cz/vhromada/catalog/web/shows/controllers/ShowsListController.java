@@ -99,8 +99,8 @@ public class ShowsListController extends Controller<Void> {
         shows.setSeasonsCount(showFacade.getSeasonsCount());
         shows.setEpisodesCount(showFacade.getEpisodesCount());
         shows.setTotalLength(showFacade.getTotalLength());
-        final PanelData panelData = new PanelData(ShowsListPanel.ID, Model.of(shows));
-        final PanelData menuData = new PanelData(ShowsMenuPanel.ID, null);
+        final PanelData<ShowsMO> panelData = new PanelData<>(ShowsListPanel.ID, Model.of(shows));
+        final PanelData<Void> menuData = new PanelData<>(ShowsMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Shows", menuData);
 

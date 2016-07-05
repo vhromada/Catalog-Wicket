@@ -115,16 +115,16 @@ public class ShowDataMO implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof ShowDataMO)) {
+        if (!(obj instanceof ShowDataMO)) {
             return false;
         }
-        final ShowDataMO showData = (ShowDataMO) obj;
-        return Objects.equals(show, showData.show);
+
+        return Objects.equals(show, ((ShowDataMO) obj).show);
     }
 
     @Override
     public int hashCode() {
-        return show.hashCode();
+        return Objects.hashCode(show);
     }
 
     @Override

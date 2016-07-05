@@ -1,9 +1,6 @@
 package cz.vhromada.catalog.web.seasons.panels;
 
-import java.util.List;
-
 import cz.vhromada.catalog.commons.Constants;
-import cz.vhromada.catalog.commons.Language;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.panels.AbstractFormPanel;
 import cz.vhromada.catalog.web.panels.MultipleLanguagesPanel;
@@ -84,8 +81,8 @@ public class SeasonFormPanel extends AbstractFormPanel<SeasonMO> {
 
         final SingleLanguagePanel language = new SingleLanguagePanel("language");
 
-        final MultipleLanguagesPanel subtitles = new MultipleLanguagesPanel("subtitles", new PropertyModel<List<Language>>(getModelObject(), "subtitles"),
-                "Subtitles", "subtitlesItem");
+        final MultipleLanguagesPanel subtitles = new MultipleLanguagesPanel("subtitles", new PropertyModel<>(getModelObject(), "subtitles"), "Subtitles",
+                "subtitlesItem");
 
         final TextField<String> note = new TextField<>("note");
 

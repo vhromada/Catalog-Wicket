@@ -53,8 +53,9 @@ public class UpdateMusicController extends Controller<IModel<MusicTO>> {
         final WebSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.MUSIC_UPDATE_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
-        final PanelData panelData = new PanelData(MusicFormPanel.ID, new CompoundPropertyModel<>(converter.convert(data.getObject(), MusicMO.class)));
-        final PanelData menuData = new PanelData(MusicMenuPanel.ID, null);
+        final PanelData<MusicMO> panelData = new PanelData<>(MusicFormPanel.ID,
+                new CompoundPropertyModel<>(converter.convert(data.getObject(), MusicMO.class)));
+        final PanelData<Void> menuData = new PanelData<>(MusicMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Edit music", menuData);
 

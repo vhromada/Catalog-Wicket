@@ -66,13 +66,19 @@ public class GenresListPanel extends GenericPanel<List<GenreTO>> {
 
                 final Label name = new Label("name", genre.getName());
 
+                final AjaxFlowLink<GenreTO> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), CatalogFlow.GENRES_MOVE_UP);
+                moveUp.setVisible(item.getIndex() > 0);
+
+                final AjaxFlowLink<GenreTO> moveDown = new AjaxFlowLink<>("moveDown", item.getModel(), CatalogFlow.GENRES_MOVE_DOWN);
+                moveDown.setVisible(item.getIndex() < getModelObject().size() - 1);
+
                 final AjaxFlowLink<GenreTO> duplicate = new AjaxFlowLink<>("duplicate", item.getModel(), CatalogFlow.GENRES_DUPLICATE);
 
                 final AjaxFlowLink<GenreTO> edit = new AjaxFlowLink<>("edit", item.getModel(), CatalogFlow.GENRES_UPDATE);
 
                 final AjaxFlowLink<GenreTO> remove = new AjaxFlowLink<>("remove", item.getModel(), CatalogFlow.GENRES_REMOVE);
 
-                item.add(name, duplicate, edit, remove);
+                item.add(name, moveUp, moveDown, duplicate, edit, remove);
             }
 
         };

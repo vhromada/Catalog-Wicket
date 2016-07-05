@@ -63,36 +63,4 @@ public final class CatalogUtils {
     private CatalogUtils() {
     }
 
-//    /**
-//     * Asserts IMDB code deep equals.
-//     *
-//     * @param expectedImdb     expected IMDB selection
-//     * @param expectedImdbCode expected IMDB code
-//     * @param actualImdbCode   actual IMDB code
-//     */
-//    public static void assertImdbCodeDeepEquals(final boolean expectedImdb, final String expectedImdbCode, final int actualImdbCode) {
-//        if (expectedImdb) {
-//            assertEquals(expectedImdbCode, Integer.toString(actualImdbCode));
-//        } else {
-//            assertEquals(-1, actualImdbCode);
-//        }
-//    }
-//
-//    /**
-//     * Asserts IMDB code deep equals.
-//     *
-//     * @param expectedImdbCode expected IMDB code
-//     * @param actualImdb       actual IMDB selection
-//     * @param actualImdbCode   actual IMDB code
-//     */
-//    public static void assertImdbDeepEquals(final int expectedImdbCode, final boolean actualImdb, final String actualImdbCode) {
-//        if (expectedImdbCode < 1) {
-//            assertFalse(actualImdb);
-//            assertNull(actualImdbCode);
-//        } else {
-//            assertTrue(actualImdb);
-//            assertEquals(Integer.toString(expectedImdbCode), actualImdbCode);
-//        }
-//    }
-
 }

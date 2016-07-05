@@ -80,8 +80,8 @@ public class SeasonsListController extends Controller<Void> {
             seasons.add(seasonData);
         }
 
-        final PanelData panelData = new PanelData(SeasonsListPanel.ID, Model.of(seasons));
-        final PanelData menuData = new PanelData(SeasonsMenuPanel.ID, null);
+        final PanelData<List<SeasonDataMO>> panelData = new PanelData<>(SeasonsListPanel.ID, Model.ofList(seasons));
+        final PanelData<Void> menuData = new PanelData<>(SeasonsMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Seasons", menuData);
 

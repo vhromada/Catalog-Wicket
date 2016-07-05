@@ -48,8 +48,8 @@ public class MoviesListController extends Controller<Void> {
         movies.setMovies(movieFacade.getMovies());
         movies.setMediaCount(movieFacade.getTotalMediaCount());
         movies.setTotalLength(movieFacade.getTotalLength());
-        final PanelData panelData = new PanelData(MoviesListPanel.ID, Model.of(movies));
-        final PanelData menuData = new PanelData(MoviesMenuPanel.ID, null);
+        final PanelData<MoviesMO> panelData = new PanelData<>(MoviesListPanel.ID, Model.of(movies));
+        final PanelData<Void> menuData = new PanelData<>(MoviesMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Movies", menuData);
 

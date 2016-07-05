@@ -65,8 +65,8 @@ public class AddShowController extends Controller<Void> {
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Create");
         final ShowMO show = new ShowMO();
         show.setAllGenres(converter.convertCollection(genreFacade.getGenres(), GenreMO.class));
-        final PanelData panelData = new PanelData(ShowFormPanel.ID, new CompoundPropertyModel<>(show));
-        final PanelData menuData = new PanelData(ShowsMenuPanel.ID, null);
+        final PanelData<ShowMO> panelData = new PanelData<>(ShowFormPanel.ID, new CompoundPropertyModel<>(show));
+        final PanelData<Void> menuData = new PanelData<>(ShowsMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Add show", menuData);
 

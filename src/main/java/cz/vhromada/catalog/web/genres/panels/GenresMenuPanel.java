@@ -48,7 +48,9 @@ public class GenresMenuPanel extends GenericPanel<Void> {
 
         final AjaxFlowLink<Void> addGenre = new AjaxFlowLink<>("addGenre", CatalogFlow.GENRES_ADD);
 
-        add(allGenres, newData, addGenre);
+        final AjaxFlowLink<Void> updatePositions = new AjaxFlowLink<>("updatePositions", CatalogFlow.GENRES_UPDATE_POSITION);
+
+        add(allGenres, newData, addGenre, updatePositions);
     }
 
 }

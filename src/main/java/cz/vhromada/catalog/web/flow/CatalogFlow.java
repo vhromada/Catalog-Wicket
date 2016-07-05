@@ -520,6 +520,21 @@ public enum CatalogFlow implements Flow {
     GENRES_DUPLICATE,
 
     /**
+     * Flow for moving genre up
+     */
+    GENRES_MOVE_UP,
+
+    /**
+     * Flow for moving genre down
+     */
+    GENRES_MOVE_DOWN,
+
+    /**
+     * Flow for updating position for genres
+     */
+    GENRES_UPDATE_POSITION,
+
+    /**
      * Flow for cancel updating genre
      */
     GENRES_CANCEL;

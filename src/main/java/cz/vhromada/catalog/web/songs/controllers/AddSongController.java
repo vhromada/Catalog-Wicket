@@ -29,8 +29,8 @@ public class AddSongController extends Controller<Void> {
         final WebSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.SONGS_ADD_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Create");
-        final PanelData panelData = new PanelData(SongFormPanel.ID, new CompoundPropertyModel<>(new SongMO()));
-        final PanelData menuData = new PanelData(SongsMenuPanel.ID, null);
+        final PanelData<SongMO> panelData = new PanelData<>(SongFormPanel.ID, new CompoundPropertyModel<>(new SongMO()));
+        final PanelData<Void> menuData = new PanelData<>(SongsMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Add song", menuData);
 

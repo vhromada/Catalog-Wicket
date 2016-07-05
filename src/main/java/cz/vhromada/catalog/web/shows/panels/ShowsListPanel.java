@@ -1,9 +1,7 @@
 package cz.vhromada.catalog.web.shows.panels;
 
-import java.util.List;
-
-import cz.vhromada.catalog.facade.to.GenreTO;
 import cz.vhromada.catalog.facade.to.ShowTO;
+import cz.vhromada.catalog.web.commons.FormatUtils;
 import cz.vhromada.catalog.web.components.CsfdLink;
 import cz.vhromada.catalog.web.components.ImdbLink;
 import cz.vhromada.catalog.web.components.WikipediaLink;
@@ -75,7 +73,7 @@ public class ShowsListPanel extends GenericPanel<ShowsMO> {
 
                 final Label originalName = new Label("originalName", show.getOriginalName());
 
-                final Label genres = new Label("genres", getGenres(show));
+                final Label genres = new Label("genres", FormatUtils.getGenres(show.getGenres()));
 
                 final Label seasonsCount = new Label("seasonsCount", showData.getSeasonsCount());
 
@@ -128,28 +126,6 @@ public class ShowsListPanel extends GenericPanel<ShowsMO> {
 
         showsTable.add(shows);
         add(showsTable, noShows, count, seasonsCount, episodesCount, totalLength);
-    }
-
-    /**
-     * Returns genres.
-     *
-     * @param show TO for show
-     * @return genres
-     */
-    private static String getGenres(final ShowTO show) {
-        final List<GenreTO> genres = show.getGenres();
-
-        if (genres == null || genres.isEmpty()) {
-            return "";
-        }
-
-        final StringBuilder result = new StringBuilder();
-        for (final GenreTO genre : genres) {
-            result.append(genre.getName());
-            result.append(", ");
-        }
-
-        return result.substring(0, result.length() - 2);
     }
 
 }

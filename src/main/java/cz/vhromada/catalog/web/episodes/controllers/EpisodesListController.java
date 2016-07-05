@@ -1,6 +1,9 @@
 package cz.vhromada.catalog.web.episodes.controllers;
 
+import java.util.List;
+
 import cz.vhromada.catalog.facade.EpisodeFacade;
+import cz.vhromada.catalog.facade.to.EpisodeTO;
 import cz.vhromada.catalog.facade.to.SeasonTO;
 import cz.vhromada.catalog.web.episodes.panels.EpisodesListPanel;
 import cz.vhromada.catalog.web.episodes.panels.EpisodesMenuPanel;
@@ -47,8 +50,8 @@ public class EpisodesListController extends Controller<Void> {
     @Override
     public void handle(final Void data) {
         final SeasonTO season = CatalogApplication.getSessionAttribute(SeasonEpisodesController.SEASON_ATTRIBUTE);
-        final PanelData panelData = new PanelData(EpisodesListPanel.ID, Model.ofList(episodeFacade.findEpisodesBySeason(season)));
-        final PanelData menuData = new PanelData(EpisodesMenuPanel.ID, null);
+        final PanelData<List<EpisodeTO>> panelData = new PanelData<>(EpisodesListPanel.ID, Model.ofList(episodeFacade.findEpisodesBySeason(season)));
+        final PanelData<Void> menuData = new PanelData<>(EpisodesMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Episodes", menuData);
 

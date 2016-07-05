@@ -67,8 +67,8 @@ public class UpdateShowController extends Controller<IModel<ShowTO>> {
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
         final ShowMO show = converter.convert(data.getObject(), ShowMO.class);
         show.setAllGenres(converter.convertCollection(genreFacade.getGenres(), GenreMO.class));
-        final PanelData panelData = new PanelData(ShowFormPanel.ID, new CompoundPropertyModel<>(show));
-        final PanelData menuData = new PanelData(ShowsMenuPanel.ID, null);
+        final PanelData<ShowMO> panelData = new PanelData<>(ShowFormPanel.ID, new CompoundPropertyModel<>(show));
+        final PanelData<Void> menuData = new PanelData<>(ShowsMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Edit show", menuData);
 

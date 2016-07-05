@@ -199,5 +199,4 @@ public abstract class MediaPanel extends Panel {
 
     }
 
-
 }

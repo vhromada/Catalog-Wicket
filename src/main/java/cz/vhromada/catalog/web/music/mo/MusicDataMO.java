@@ -92,16 +92,16 @@ public class MusicDataMO implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof MusicDataMO)) {
+        if (!(obj instanceof MusicDataMO)) {
             return false;
         }
-        final MusicDataMO musicData = (MusicDataMO) obj;
-        return Objects.equals(music, musicData.music);
+
+        return Objects.equals(music, ((MusicDataMO) obj).music);
     }
 
     @Override
     public int hashCode() {
-        return music.hashCode();
+        return Objects.hashCode(music);
     }
 
     @Override

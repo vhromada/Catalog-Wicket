@@ -29,8 +29,8 @@ public class AddGenreController extends Controller<Void> {
         final WebSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.GENRES_ADD_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Create");
-        final PanelData panelData = new PanelData(GenreFormPanel.ID, new CompoundPropertyModel<>(new GenreMO()));
-        final PanelData menuData = new PanelData(GenresMenuPanel.ID, null);
+        final PanelData<GenreMO> panelData = new PanelData<>(GenreFormPanel.ID, new CompoundPropertyModel<>(new GenreMO()));
+        final PanelData<Void> menuData = new PanelData<>(GenresMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Add genre", menuData);
 

@@ -1,6 +1,7 @@
 package cz.vhromada.catalog.web.programs.panels;
 
 import cz.vhromada.catalog.facade.to.ProgramTO;
+import cz.vhromada.catalog.web.commons.FormatUtils;
 import cz.vhromada.catalog.web.components.WikipediaLink;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.programs.mo.ProgramsMO;
@@ -115,7 +116,7 @@ public class ProgramsListPanel extends GenericPanel<ProgramsMO> {
         if (program.getCrack()) {
             result.append("Crack");
         }
-        addToResult(result, program.getSerialKey(), "serial key");
+        FormatUtils.addToResult(result, program.getSerialKey(), "serial key");
         if (program.getOtherData() != null && !program.getOtherData().isEmpty()) {
             if (result.length() != 0) {
                 result.append(", ");
@@ -124,25 +125,6 @@ public class ProgramsListPanel extends GenericPanel<ProgramsMO> {
         }
 
         return result.toString();
-    }
-
-    /**
-     * Adds data to result.
-     *
-     * @param result result
-     * @param value  value
-     * @param data   data
-     */
-    private static void addToResult(final StringBuilder result, final boolean value, final String data) {
-        if (value) {
-            if (result.length() == 0) {
-                result.append(data.substring(0, 1).toUpperCase());
-                result.append(data.substring(1));
-            } else {
-                result.append(", ");
-                result.append(data);
-            }
-        }
     }
 
 }

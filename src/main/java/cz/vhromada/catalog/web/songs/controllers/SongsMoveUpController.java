@@ -26,7 +26,7 @@ public class SongsMoveUpController extends Controller<IModel<SongTO>> {
     private SongFacade songFacade;
 
     /**
-     * Creates a new instance of SongsMoveUpController.
+     * Creates a new instance of GenresMoveUpController.
      *
      * @param songFacade facade for songs
      * @throws IllegalArgumentException if facade for songs is null

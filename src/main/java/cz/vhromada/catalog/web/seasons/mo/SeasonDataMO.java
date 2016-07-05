@@ -92,16 +92,16 @@ public class SeasonDataMO implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof SeasonDataMO)) {
+        if (!(obj instanceof SeasonDataMO)) {
             return false;
         }
-        final SeasonDataMO seasonData = (SeasonDataMO) obj;
-        return Objects.equals(season, seasonData.season);
+
+        return Objects.equals(season, ((SeasonDataMO) obj).season);
     }
 
     @Override
     public int hashCode() {
-        return season.hashCode();
+        return Objects.hashCode(season);
     }
 
     @Override

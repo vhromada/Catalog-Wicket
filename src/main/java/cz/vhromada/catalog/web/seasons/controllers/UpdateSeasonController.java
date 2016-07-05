@@ -2,7 +2,6 @@ package cz.vhromada.catalog.web.seasons.controllers;
 
 import java.util.ArrayList;
 
-import cz.vhromada.catalog.commons.Language;
 import cz.vhromada.catalog.facade.to.SeasonTO;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
@@ -58,10 +57,10 @@ public class UpdateSeasonController extends Controller<IModel<SeasonTO>> {
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
         final SeasonMO season = converter.convert(data.getObject(), SeasonMO.class);
         if (season.getSubtitles() == null) {
-            season.setSubtitles(new ArrayList<Language>());
+            season.setSubtitles(new ArrayList<>());
         }
-        final PanelData panelData = new PanelData(SeasonFormPanel.ID, new CompoundPropertyModel<>(season));
-        final PanelData menuData = new PanelData(SeasonsMenuPanel.ID, null);
+        final PanelData<SeasonMO> panelData = new PanelData<>(SeasonFormPanel.ID, new CompoundPropertyModel<>(season));
+        final PanelData<Void> menuData = new PanelData<>(SeasonsMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Edit season", menuData);
 

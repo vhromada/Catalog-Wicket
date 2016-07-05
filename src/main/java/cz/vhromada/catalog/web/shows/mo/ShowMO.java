@@ -2,6 +2,7 @@ package cz.vhromada.catalog.web.shows.mo;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import cz.vhromada.catalog.web.genres.mo.GenreMO;
 
@@ -307,7 +308,7 @@ public class ShowMO implements Serializable {
 
     @Override
     public int hashCode() {
-        return id == null ? 0 : id.hashCode();
+        return Objects.hashCode(id);
     }
 
     @Override

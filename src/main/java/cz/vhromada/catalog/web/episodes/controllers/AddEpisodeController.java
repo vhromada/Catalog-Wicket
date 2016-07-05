@@ -29,8 +29,8 @@ public class AddEpisodeController extends Controller<Void> {
         final WebSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.EPISODES_ADD_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Create");
-        final PanelData panelData = new PanelData(EpisodeFormPanel.ID, new CompoundPropertyModel<>(new EpisodeMO()));
-        final PanelData menuData = new PanelData(EpisodesMenuPanel.ID, null);
+        final PanelData<EpisodeMO> panelData = new PanelData<>(EpisodeFormPanel.ID, new CompoundPropertyModel<>(new EpisodeMO()));
+        final PanelData<Void> menuData = new PanelData<>(EpisodesMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Add episode", menuData);
 

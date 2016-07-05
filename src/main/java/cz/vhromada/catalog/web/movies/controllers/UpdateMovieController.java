@@ -3,7 +3,6 @@ package cz.vhromada.catalog.web.movies.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.vhromada.catalog.commons.Language;
 import cz.vhromada.catalog.facade.GenreFacade;
 import cz.vhromada.catalog.facade.to.MovieTO;
 import cz.vhromada.catalog.web.TimeMO;
@@ -72,7 +71,7 @@ public class UpdateMovieController extends Controller<IModel<MovieTO>> {
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
         final MovieMO movie = converter.convert(data.getObject(), MovieMO.class);
         if (movie.getSubtitles() == null) {
-            movie.setSubtitles(new ArrayList<Language>());
+            movie.setSubtitles(new ArrayList<>());
         }
         if (movie.getMedia() == null) {
             final TimeMO time = new TimeMO();
@@ -81,8 +80,8 @@ public class UpdateMovieController extends Controller<IModel<MovieTO>> {
             movie.setMedia(media);
         }
         movie.setAllGenres(converter.convertCollection(genreFacade.getGenres(), GenreMO.class));
-        final PanelData panelData = new PanelData(MovieFormPanel.ID, new CompoundPropertyModel<>(movie));
-        final PanelData menuData = new PanelData(MoviesMenuPanel.ID, null);
+        final PanelData<MovieMO> panelData = new PanelData<>(MovieFormPanel.ID, new CompoundPropertyModel<>(movie));
+        final PanelData<Void> menuData = new PanelData<>(MoviesMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Edit movie", menuData);
 

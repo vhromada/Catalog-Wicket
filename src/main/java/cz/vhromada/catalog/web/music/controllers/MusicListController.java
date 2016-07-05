@@ -82,8 +82,8 @@ public class MusicListController extends Controller<Void> {
         musicInfo.setMediaCount(musicFacade.getTotalMediaCount());
         musicInfo.setSongsCount(musicFacade.getSongsCount());
         musicInfo.setTotalLength(musicFacade.getTotalLength());
-        final PanelData panelData = new PanelData(MusicListPanel.ID, Model.of(musicInfo));
-        final PanelData menuData = new PanelData(MusicMenuPanel.ID, null);
+        final PanelData<MusicInfoMO> panelData = new PanelData<>(MusicListPanel.ID, Model.of(musicInfo));
+        final PanelData<Void> menuData = new PanelData<>(MusicMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Music", menuData);
 

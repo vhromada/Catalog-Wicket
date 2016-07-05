@@ -3,7 +3,6 @@ package cz.vhromada.catalog.web.movies.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.vhromada.catalog.commons.Language;
 import cz.vhromada.catalog.facade.GenreFacade;
 import cz.vhromada.catalog.web.TimeMO;
 import cz.vhromada.catalog.web.events.PanelData;
@@ -72,11 +71,11 @@ public class AddMovieController extends Controller<Void> {
         final List<TimeMO> media = new ArrayList<>();
         media.add(time);
         final MovieMO movie = new MovieMO();
-        movie.setSubtitles(new ArrayList<Language>());
+        movie.setSubtitles(new ArrayList<>());
         movie.setMedia(media);
         movie.setAllGenres(converter.convertCollection(genreFacade.getGenres(), GenreMO.class));
-        final PanelData panelData = new PanelData(MovieFormPanel.ID, new CompoundPropertyModel<>(movie));
-        final PanelData menuData = new PanelData(MoviesMenuPanel.ID, null);
+        final PanelData<MovieMO> panelData = new PanelData<>(MovieFormPanel.ID, new CompoundPropertyModel<>(movie));
+        final PanelData<Void> menuData = new PanelData<>(MoviesMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Add movie", menuData);
 

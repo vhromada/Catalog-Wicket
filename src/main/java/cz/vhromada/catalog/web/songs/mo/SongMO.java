@@ -1,6 +1,7 @@
 package cz.vhromada.catalog.web.songs.mo;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import cz.vhromada.catalog.web.TimeMO;
 
@@ -145,7 +146,7 @@ public class SongMO implements Serializable {
 
     @Override
     public int hashCode() {
-        return id == null ? 0 : id.hashCode();
+        return Objects.hashCode(id);
     }
 
     @Override

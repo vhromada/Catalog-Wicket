@@ -1,6 +1,7 @@
 package cz.vhromada.catalog.web.episodes.mo;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import cz.vhromada.catalog.web.TimeMO;
 
@@ -168,7 +169,7 @@ public class EpisodeMO implements Serializable {
 
     @Override
     public int hashCode() {
-        return id == null ? 0 : id.hashCode();
+        return Objects.hashCode(id);
     }
 
     @Override

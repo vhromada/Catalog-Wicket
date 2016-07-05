@@ -1,9 +1,6 @@
 package cz.vhromada.catalog.web.movies.panels;
 
-import java.util.List;
-
 import cz.vhromada.catalog.commons.Constants;
-import cz.vhromada.catalog.commons.Language;
 import cz.vhromada.catalog.web.TimeMO;
 import cz.vhromada.catalog.web.components.GenresChoice;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -75,8 +72,8 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
 
         final SingleLanguagePanel language = new SingleLanguagePanel("language");
 
-        final MultipleLanguagesPanel subtitles = new MultipleLanguagesPanel("subtitles", new PropertyModel<List<Language>>(getModelObject(), "subtitles"),
-                "Subtitles", "subtitlesItem");
+        final MultipleLanguagesPanel subtitles = new MultipleLanguagesPanel("subtitles", new PropertyModel<>(getModelObject(), "subtitles"), "Subtitles",
+                "subtitlesItem");
 
         final MediaPanel media = new MediaPanel("media") {
 

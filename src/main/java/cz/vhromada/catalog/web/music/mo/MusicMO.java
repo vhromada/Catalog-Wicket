@@ -1,6 +1,7 @@
 package cz.vhromada.catalog.web.music.mo;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * A class represents MO for music.
@@ -190,7 +191,7 @@ public class MusicMO implements Serializable {
 
     @Override
     public int hashCode() {
-        return id == null ? 0 : id.hashCode();
+        return Objects.hashCode(id);
     }
 
     @Override

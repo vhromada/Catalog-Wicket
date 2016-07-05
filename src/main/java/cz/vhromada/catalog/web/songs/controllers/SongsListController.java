@@ -1,7 +1,10 @@
 package cz.vhromada.catalog.web.songs.controllers;
 
+import java.util.List;
+
 import cz.vhromada.catalog.facade.SongFacade;
 import cz.vhromada.catalog.facade.to.MusicTO;
+import cz.vhromada.catalog.facade.to.SongTO;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -47,8 +50,8 @@ public class SongsListController extends Controller<Void> {
     @Override
     public void handle(final Void data) {
         final MusicTO music = CatalogApplication.getSessionAttribute(MusicSongsController.MUSIC_ATTRIBUTE);
-        final PanelData panelData = new PanelData(SongsListPanel.ID, Model.ofList(songFacade.findSongsByMusic(music)));
-        final PanelData menuData = new PanelData(SongsMenuPanel.ID, null);
+        final PanelData<List<SongTO>> panelData = new PanelData<>(SongsListPanel.ID, Model.ofList(songFacade.findSongsByMusic(music)));
+        final PanelData<Void> menuData = new PanelData<>(SongsMenuPanel.ID, null);
 
         final PageEvent event = new PanelEvent(panelData, "Songs", menuData);
 
