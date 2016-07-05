@@ -210,8 +210,8 @@ public class SeasonMO implements Serializable {
         if (obj == null || !(obj instanceof SeasonMO) || id == null) {
             return false;
         }
-        final SeasonMO season = (SeasonMO) obj;
-        return id.equals(season.id);
+
+        return id.equals(((SeasonMO) obj).id);
     }
 
     @Override

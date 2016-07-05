@@ -301,8 +301,8 @@ public class ShowMO implements Serializable {
         if (obj == null || !(obj instanceof ShowMO) || id == null) {
             return false;
         }
-        final ShowMO show = (ShowMO) obj;
-        return id.equals(show.id);
+
+        return id.equals(((ShowMO) obj).id);
     }
 
     @Override

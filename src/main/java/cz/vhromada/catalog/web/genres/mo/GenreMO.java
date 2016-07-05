@@ -25,6 +25,11 @@ public class GenreMO implements Serializable {
     private String name;
 
     /**
+     * Position
+     */
+    private int position;
+
+    /**
      * Returns ID.
      *
      * @return ID
@@ -61,6 +66,24 @@ public class GenreMO implements Serializable {
         this.name = name;
     }
 
+    /**
+     * Returns position.
+     *
+     * @return position
+     */
+    public int getPosition() {
+        return position;
+    }
+
+    /**
+     * Sets a new value to position.
+     *
+     * @param position new value
+     */
+    public void setPosition(final int position) {
+        this.position = position;
+    }
+
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -69,8 +92,8 @@ public class GenreMO implements Serializable {
         if (obj == null || !(obj instanceof GenreMO) || id == null) {
             return false;
         }
-        final GenreMO genre = (GenreMO) obj;
-        return id.equals(genre.id);
+
+        return id.equals(((GenreMO) obj).id);
     }
 
     @Override

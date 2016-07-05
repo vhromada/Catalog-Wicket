@@ -162,8 +162,8 @@ public class EpisodeMO implements Serializable {
         if (obj == null || !(obj instanceof EpisodeMO) || id == null) {
             return false;
         }
-        final EpisodeMO episode = (EpisodeMO) obj;
-        return id.equals(episode.id);
+
+        return id.equals(((EpisodeMO) obj).id);
     }
 
     @Override

@@ -395,8 +395,8 @@ public class MovieMO implements Serializable {
         if (obj == null || !(obj instanceof MovieMO) || id == null) {
             return false;
         }
-        final MovieMO movie = (MovieMO) obj;
-        return id.equals(movie.id);
+
+        return id.equals(((MovieMO) obj).id);
     }
 
     @Override

@@ -184,8 +184,8 @@ public class MusicMO implements Serializable {
         if (obj == null || !(obj instanceof MusicMO) || id == null) {
             return false;
         }
-        final MusicMO music = (MusicMO) obj;
-        return id.equals(music.id);
+
+        return id.equals(((MusicMO) obj).id);
     }
 
     @Override
