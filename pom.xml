@@ -17,7 +17,7 @@
     <name>Catalog Wicket</name>
     <packaging>war</packaging>
 
-    <description>Application in Wicket for catalog of movies, games, music, programs and books</description>
+    <description>Application in Wicket for catalog of movies, games, music and programs</description>
     <url>https://github.com/vhromada/Catalog-Wicket</url>
 
      <licenses>
