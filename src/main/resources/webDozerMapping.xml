@@ -5,6 +5,10 @@
 
     <configuration>
         <custom-converters>
+            <converter type="cz.vhromada.catalog.web.converters.MovieConverter">
+                <class-a>cz.vhromada.catalog.web.movies.mo.MovieMO</class-a>
+                <class-b>cz.vhromada.catalog.facade.to.MovieTO</class-b>
+            </converter>
             <converter type="cz.vhromada.catalog.web.converters.TimeConverter">
                 <class-a>cz.vhromada.catalog.web.TimeMO</class-a>
                 <class-b>java.lang.Integer</class-b>

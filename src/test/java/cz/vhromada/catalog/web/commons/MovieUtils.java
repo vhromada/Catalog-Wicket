@@ -2,7 +2,6 @@ package cz.vhromada.catalog.web.commons;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 import java.util.List;
 
@@ -59,8 +58,7 @@ public final class MovieUtils {
      */
     public static MovieTO getMovieTO() {
         final MediumTO medium = new MediumTO();
-        medium.setId(CatalogUtils.ID);
-        medium.setNumber(CatalogUtils.NUMBER);
+        medium.setNumber(1);
         medium.setLength(CatalogUtils.LENGTH);
 
         final MovieTO movie = new MovieTO();
@@ -131,7 +129,6 @@ public final class MovieUtils {
      */
     public static void assertMediumDeepEquals(final TimeMO expected, final MediumTO actual, final int index) {
         assertNotNull(actual);
-        assertNull(actual.getId());
         assertEquals(index + 1, actual.getNumber());
         TimeUtils.assertTimeDeepEquals(expected, actual.getLength());
     }

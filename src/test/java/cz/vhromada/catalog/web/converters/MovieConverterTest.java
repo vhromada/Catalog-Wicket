@@ -7,7 +7,6 @@ import cz.vhromada.catalog.web.commons.MovieUtils;
 import cz.vhromada.catalog.web.movies.mo.MovieMO;
 import cz.vhromada.converters.Converter;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:webDozerMappingContext.xml")
-@Ignore
-//TODO vhromada 05.07.2016: movie test
 public class MovieConverterTest {
 
     /**
