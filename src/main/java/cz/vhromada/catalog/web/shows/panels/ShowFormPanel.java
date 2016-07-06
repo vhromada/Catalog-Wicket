@@ -7,6 +7,7 @@ import cz.vhromada.catalog.web.panels.ImdbPanel;
 import cz.vhromada.catalog.web.shows.mo.ShowMO;
 import cz.vhromada.web.wicket.controllers.Flow;
 
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
@@ -50,10 +51,12 @@ public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
         super.onInitialize();
 
         final RequiredTextField<String> czechName = new RequiredTextField<>("czechName");
-        czechName.setLabel(Model.of("Czech name"));
+        czechName.setLabel(Model.of("Czech name"))
+                .add(getValidationBehavior());
 
         final RequiredTextField<String> originalName = new RequiredTextField<>("originalName");
-        originalName.setLabel(Model.of("Original name"));
+        originalName.setLabel(Model.of("Original name"))
+                .add(getValidationBehavior());
 
         final TextField<String> csfd = new TextField<>("csfd");
 
@@ -69,6 +72,11 @@ public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
                 ShowFormPanel.this.getModelObject().setImdbCode(imdbCodeValue);
             }
 
+            @Override
+            protected AjaxFormComponentUpdatingBehavior getValidationBehavior() {
+                return ShowFormPanel.this.getValidationBehavior();
+            }
+
         };
 
         final TextField<String> wikiCz = new TextField<>("wikiCz");
@@ -79,7 +87,19 @@ public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
 
         final TextField<String> note = new TextField<>("note");
 
-        final GenresChoice genres = new GenresChoice("genres", getModelObject().getAllGenres());
+        final GenresChoice genres = new GenresChoice("genres", getModelObject().getAllGenres()) {
+
+            /**
+             * SerialVersionUID
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected AjaxFormComponentUpdatingBehavior getValidationBehavior() {
+                return ShowFormPanel.this.getValidationBehavior();
+            }
+
+        };
 
         getForm().add(czechName, originalName, csfd, imdb, wikiEn, wikiCz, picture, note, genres);
     }

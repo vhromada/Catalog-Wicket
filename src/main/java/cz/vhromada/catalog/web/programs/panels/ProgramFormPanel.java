@@ -56,7 +56,8 @@ public class ProgramFormPanel extends AbstractFormPanel<ProgramMO> {
         super.onInitialize();
 
         final RequiredTextField<String> name = new RequiredTextField<>("name");
-        name.setLabel(Model.of("Name"));
+        name.setLabel(Model.of("Name"))
+                .add(getValidationBehavior());
 
         final TextField<String> wikiCz = new TextField<>("wikiCz");
 
@@ -67,7 +68,8 @@ public class ProgramFormPanel extends AbstractFormPanel<ProgramMO> {
                 .setMaximum(MAX_MEDIA_COUNT)
                 .setLabel(Model.of("Count of media"))
                 .setRequired(true)
-                .add(RangeValidator.range(1, MAX_MEDIA_COUNT));
+                .add(RangeValidator.range(1, MAX_MEDIA_COUNT))
+                .add(getValidationBehavior());
 
         final CheckBox crack = new CheckBox("crack");
         crack.setLabel(Model.of("Crack"));

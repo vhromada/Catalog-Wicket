@@ -47,7 +47,8 @@ public class GenreFormPanel extends AbstractFormPanel<GenreMO> {
         super.onInitialize();
 
         final RequiredTextField<String> name = new RequiredTextField<>("name");
-        name.setLabel(Model.of("Name"));
+        name.setLabel(Model.of("Name"))
+                .add(getValidationBehavior());
 
         getForm().add(name);
     }

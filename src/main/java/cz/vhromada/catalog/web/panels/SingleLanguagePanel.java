@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import cz.vhromada.catalog.commons.Language;
 
+import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Radio;
 import org.apache.wicket.markup.html.form.RadioGroup;
@@ -13,11 +14,11 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 
 /**
- * A class represents panel for choosing one language.
+ * An abstract class represents panel for choosing one language.
  *
  * @author Vladimir Hromada
  */
-public class SingleLanguagePanel extends Panel {
+public abstract class SingleLanguagePanel extends Panel {
 
     /**
      * SerialVersionUID
@@ -40,7 +41,8 @@ public class SingleLanguagePanel extends Panel {
 
         final RadioGroup<Language> language = new RadioGroup<>("language");
         language.setLabel(Model.of("Language"))
-                .setRequired(true);
+                .setRequired(true)
+                .add(getValidationBehavior());
 
         final ListView<Language> languages = new ListView<Language>("languages", Arrays.asList(Language.values())) {
 
@@ -64,5 +66,12 @@ public class SingleLanguagePanel extends Panel {
         language.add(languages);
         add(language);
     }
+
+    /**
+     * Returns validation behavior.
+     *
+     * @return validation behavior
+     */
+    protected abstract AjaxFormChoiceComponentUpdatingBehavior getValidationBehavior();
 
 }

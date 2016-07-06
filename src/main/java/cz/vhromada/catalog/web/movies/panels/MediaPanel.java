@@ -3,6 +3,7 @@ package cz.vhromada.catalog.web.movies.panels;
 import cz.vhromada.catalog.web.TimeMO;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -102,9 +103,16 @@ public abstract class MediaPanel extends Panel {
     protected abstract void onMediumAdd(final AjaxRequestTarget target);
 
     /**
+     * Returns validation behavior.
+     *
+     * @return validation behavior
+     */
+    protected abstract AjaxFormComponentUpdatingBehavior getValidationBehavior();
+
+    /**
      * An abstract class represents list view with media
      */
-    private abstract static class MediaListView extends ListView<TimeMO> {
+    private abstract class MediaListView extends ListView<TimeMO> {
 
         /**
          * SerialVersionUID
@@ -163,7 +171,8 @@ public abstract class MediaPanel extends Panel {
                     .setLabel(Model.of(baseName + " hours"))
                     .setRequired(true)
                     .add(RangeValidator.range(0, MAX_HOURS))
-                    .setMarkupId(baseId + "Hours");
+                    .setMarkupId(baseId + "Hours")
+                    .add(getValidationBehavior());
 
             final Label mediumMinutesLabel = new Label("mediumMinutesLabel", baseName + " minutes");
 
@@ -174,7 +183,8 @@ public abstract class MediaPanel extends Panel {
                     .setLabel(Model.of(baseName + " minutes"))
                     .setRequired(true)
                     .add(RangeValidator.range(0, MAX_MINUTES))
-                    .setMarkupId(baseId + "Minutes");
+                    .setMarkupId(baseId + "Minutes")
+                    .add(getValidationBehavior());
 
             final Label mediumSecondsLabel = new Label("mediumSecondsLabel", baseName + " seconds");
 
@@ -185,7 +195,8 @@ public abstract class MediaPanel extends Panel {
                     .setLabel(Model.of(baseName + " seconds"))
                     .setRequired(true)
                     .add(RangeValidator.range(0, MAX_SECONDS))
-                    .setMarkupId(baseId + "Seconds");
+                    .setMarkupId(baseId + "Seconds")
+                    .add(getValidationBehavior());
 
             item.add(mediumLabel, remove, mediumHoursLabel, mediumHours, mediumMinutesLabel, mediumMinutes, mediumSecondsLabel, mediumSeconds);
         }

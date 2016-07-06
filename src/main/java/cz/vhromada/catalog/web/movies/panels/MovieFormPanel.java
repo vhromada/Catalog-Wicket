@@ -12,6 +12,8 @@ import cz.vhromada.catalog.web.panels.SingleLanguagePanel;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -58,19 +60,34 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
         super.onInitialize();
 
         final RequiredTextField<String> czechName = new RequiredTextField<>("czechName");
-        czechName.setLabel(Model.of("Czech name"));
+        czechName.setLabel(Model.of("Czech name"))
+                .add(getValidationBehavior());
 
         final RequiredTextField<String> originalName = new RequiredTextField<>("originalName");
-        originalName.setLabel(Model.of("Original name"));
+        originalName.setLabel(Model.of("Original name"))
+                .add(getValidationBehavior());
 
         final NumberTextField<Integer> year = new NumberTextField<>("year");
         year.setMinimum(Constants.MIN_YEAR)
                 .setMaximum(Constants.CURRENT_YEAR)
                 .setLabel(Model.of("Year"))
                 .setRequired(true)
-                .add(RangeValidator.range(Constants.MIN_YEAR, Constants.CURRENT_YEAR));
+                .add(RangeValidator.range(Constants.MIN_YEAR, Constants.CURRENT_YEAR))
+                .add(getValidationBehavior());
 
-        final SingleLanguagePanel language = new SingleLanguagePanel("language");
+        final SingleLanguagePanel language = new SingleLanguagePanel("language") {
+
+            /**
+             * SerialVersionUID
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected AjaxFormChoiceComponentUpdatingBehavior getValidationBehavior() {
+                return MovieFormPanel.this.getChoiceValidationBehavior();
+            }
+
+        };
 
         final MultipleLanguagesPanel subtitles = new MultipleLanguagesPanel("subtitles", new PropertyModel<>(getModelObject(), "subtitles"), "Subtitles",
                 "subtitlesItem");
@@ -85,6 +102,11 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
             @Override
             protected void onMediumAdd(final AjaxRequestTarget target) {
                 getModelObject().getMedia().add(new TimeMO());
+            }
+
+            @Override
+            protected AjaxFormComponentUpdatingBehavior getValidationBehavior() {
+                return MovieFormPanel.this.getValidationBehavior();
             }
 
         };
@@ -103,6 +125,11 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
                 MovieFormPanel.this.getModelObject().setImdbCode(imdbCodeValue);
             }
 
+            @Override
+            protected AjaxFormComponentUpdatingBehavior getValidationBehavior() {
+                return MovieFormPanel.this.getValidationBehavior();
+            }
+
         };
 
         final TextField<String> wikiCz = new TextField<>("wikiCz");
@@ -113,7 +140,19 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
 
         final TextField<String> note = new TextField<>("note");
 
-        final GenresChoice genres = new GenresChoice("genres", getModelObject().getAllGenres());
+        final GenresChoice genres = new GenresChoice("genres", getModelObject().getAllGenres()) {
+
+            /**
+             * SerialVersionUID
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected AjaxFormComponentUpdatingBehavior getValidationBehavior() {
+                return MovieFormPanel.this.getValidationBehavior();
+            }
+
+        };
 
         getForm().add(czechName, originalName, year, language, subtitles, media, csfd, imdb, wikiEn, wikiCz, picture, note, genres);
     }

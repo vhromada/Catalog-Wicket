@@ -9,6 +9,7 @@ import cz.vhromada.catalog.web.seasons.mo.SeasonMO;
 import cz.vhromada.catalog.web.seasons.validation.YearsValidator;
 import cz.vhromada.web.wicket.controllers.Flow;
 
+import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.TextField;
@@ -63,23 +64,38 @@ public class SeasonFormPanel extends AbstractFormPanel<SeasonMO> {
                 .setMaximum(MAX_NUMBER)
                 .setLabel(Model.of("Number"))
                 .setRequired(true)
-                .add(RangeValidator.range(1, MAX_NUMBER));
+                .add(RangeValidator.range(1, MAX_NUMBER))
+                .add(getValidationBehavior());
 
         final NumberTextField<Integer> startYear = new NumberTextField<>("startYear");
         startYear.setMinimum(Constants.MIN_YEAR)
                 .setMaximum(Constants.CURRENT_YEAR)
                 .setLabel(Model.of("Starting year"))
                 .setRequired(true)
-                .add(RangeValidator.range(Constants.MIN_YEAR, Constants.CURRENT_YEAR));
+                .add(RangeValidator.range(Constants.MIN_YEAR, Constants.CURRENT_YEAR))
+                .add(getValidationBehavior());
 
         final NumberTextField<Integer> endYear = new NumberTextField<>("endYear");
         endYear.setMinimum(Constants.MIN_YEAR)
                 .setMaximum(Constants.CURRENT_YEAR)
                 .setLabel(Model.of("Ending year"))
                 .setRequired(true)
-                .add(RangeValidator.range(Constants.MIN_YEAR, Constants.CURRENT_YEAR));
+                .add(RangeValidator.range(Constants.MIN_YEAR, Constants.CURRENT_YEAR))
+                .add(getValidationBehavior());
 
-        final SingleLanguagePanel language = new SingleLanguagePanel("language");
+        final SingleLanguagePanel language = new SingleLanguagePanel("language") {
+
+            /**
+             * SerialVersionUID
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected AjaxFormChoiceComponentUpdatingBehavior getValidationBehavior() {
+                return SeasonFormPanel.this.getChoiceValidationBehavior();
+            }
+
+        };
 
         final MultipleLanguagesPanel subtitles = new MultipleLanguagesPanel("subtitles", new PropertyModel<>(getModelObject(), "subtitles"), "Subtitles",
                 "subtitlesItem");

@@ -3,6 +3,7 @@ package cz.vhromada.catalog.web.panels;
 import cz.vhromada.catalog.commons.Constants;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.form.AjaxCheckBox;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -52,7 +53,8 @@ public abstract class ImdbPanel extends Panel {
                 .setLabel(Model.of("IMDB code"))
                 .add(RangeValidator.range(1, Constants.MAX_IMDB_CODE))
                 .setVisible(imdbModel.getObject())
-                .setOutputMarkupPlaceholderTag(true);
+                .setOutputMarkupPlaceholderTag(true)
+                .add(getValidationBehavior());
 
         final AjaxCheckBox imdb = new AjaxCheckBox("imdb", imdbModel) {
 
@@ -81,5 +83,12 @@ public abstract class ImdbPanel extends Panel {
      * @param imdbCodeValue new IMDB code value
      */
     protected abstract void onImdbChange(final Integer imdbCodeValue);
+
+    /**
+     * Returns validation behavior.
+     *
+     * @return validation behavior
+     */
+    protected abstract AjaxFormComponentUpdatingBehavior getValidationBehavior();
 
 }

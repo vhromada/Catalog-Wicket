@@ -3,17 +3,16 @@ package cz.vhromada.catalog.web.panels;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.system.CatalogApplication;
 import cz.vhromada.web.wicket.controllers.Flow;
-import cz.vhromada.web.wicket.flow.AjaxFlowLink;
 import cz.vhromada.web.wicket.flow.AjaxFlowSubmitLink;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.form.AjaxFormValidatingBehavior;
+import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.util.time.Duration;
 
 /**
  * An abstract class represents form.
@@ -44,6 +43,11 @@ public abstract class AbstractFormPanel<T> extends GenericPanel<T> {
     private Form<T> form;
 
     /**
+     * Feedback panel
+     */
+    private FeedbackPanel feedbackPanel;
+
+    /**
      * Creates a new instance of AbstractFormPanel.
      *
      * @param id    ID
@@ -60,7 +64,7 @@ public abstract class AbstractFormPanel<T> extends GenericPanel<T> {
 
         form = new Form<>("form", getModel());
 
-        final FeedbackPanel feedbackPanel = new FeedbackPanel("feedbackPanel");
+        feedbackPanel = new FeedbackPanel("feedbackPanel");
         feedbackPanel.setOutputMarkupId(true);
 
         final AjaxFlowSubmitLink submit = new AjaxFlowSubmitLink("submit", form, CatalogApplication.<CatalogFlow>getSessionAttribute(SUBMIT_FLOW)) {
@@ -94,7 +98,7 @@ public abstract class AbstractFormPanel<T> extends GenericPanel<T> {
 
         };
 
-        final AjaxFlowLink cancel = new AjaxFlowLink("cancel", getCancelFlow()) {
+        final AjaxFlowSubmitLink cancel = new AjaxFlowSubmitLink("cancel", form, getCancelFlow()) {
 
             /**
              * SerialVersionUID
@@ -109,9 +113,7 @@ public abstract class AbstractFormPanel<T> extends GenericPanel<T> {
             }
 
         };
-
-        //TODO vhromada 05.07.2016: change behavior
-        form.add(new AjaxFormValidatingBehavior("change", Duration.ONE_SECOND));
+        cancel.setDefaultFormProcessing(false);
 
         form.add(submit, cancel);
         add(feedbackPanel, form);
@@ -139,5 +141,63 @@ public abstract class AbstractFormPanel<T> extends GenericPanel<T> {
      * @param panelForm form
      */
     protected abstract void onFormSubmit(final Form<T> panelForm);
+
+    /**
+     * Returns validation behavior.
+     *
+     * @return validation behavior
+     */
+    protected AjaxFormComponentUpdatingBehavior getValidationBehavior() {
+        return new AjaxFormComponentUpdatingBehavior("blur") {
+
+            /**
+             * SerialVersionUID
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected void onUpdate(final AjaxRequestTarget target) {
+                target.add(feedbackPanel);
+            }
+
+            @Override
+            protected void onError(final AjaxRequestTarget target, final RuntimeException e) {
+                super.onError(target, e);
+
+                target.add(feedbackPanel);
+            }
+
+        };
+
+    }
+
+    /**
+     * Returns validation behavior for choice.
+     *
+     * @return validation behavior for choice
+     */
+    protected AjaxFormChoiceComponentUpdatingBehavior getChoiceValidationBehavior() {
+        return new AjaxFormChoiceComponentUpdatingBehavior() {
+
+            /**
+             * SerialVersionUID
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected void onUpdate(final AjaxRequestTarget target) {
+                target.add(feedbackPanel);
+            }
+
+            @Override
+            protected void onError(final AjaxRequestTarget target, final RuntimeException e) {
+                super.onError(target, e);
+
+                target.add(feedbackPanel);
+            }
+
+        };
+
+    }
 
 }
