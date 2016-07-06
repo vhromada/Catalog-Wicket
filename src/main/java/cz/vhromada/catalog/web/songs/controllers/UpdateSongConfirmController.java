@@ -1,13 +1,10 @@
 package cz.vhromada.catalog.web.songs.controllers;
 
 import cz.vhromada.catalog.facade.SongFacade;
-import cz.vhromada.catalog.facade.to.MusicTO;
 import cz.vhromada.catalog.facade.to.SongTO;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.catalog.web.music.controllers.MusicSongsController;
 import cz.vhromada.catalog.web.songs.mo.SongMO;
-import cz.vhromada.catalog.web.system.CatalogApplication;
 import cz.vhromada.converters.Converter;
 import cz.vhromada.validators.Validators;
 import cz.vhromada.web.wicket.controllers.Controller;
@@ -56,7 +53,6 @@ public class UpdateSongConfirmController extends Controller<IModel<SongMO>> {
 
     @Override
     public void handle(final IModel<SongMO> data) {
-        final MusicTO music = CatalogApplication.getSessionAttribute(MusicSongsController.MUSIC_ATTRIBUTE);
         final SongTO song = converter.convert(data.getObject(), SongTO.class);
         songFacade.update(song);
 

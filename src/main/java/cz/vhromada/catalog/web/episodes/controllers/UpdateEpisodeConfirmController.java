@@ -2,12 +2,9 @@ package cz.vhromada.catalog.web.episodes.controllers;
 
 import cz.vhromada.catalog.facade.EpisodeFacade;
 import cz.vhromada.catalog.facade.to.EpisodeTO;
-import cz.vhromada.catalog.facade.to.SeasonTO;
 import cz.vhromada.catalog.web.episodes.mo.EpisodeMO;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.catalog.web.seasons.controllers.SeasonEpisodesController;
-import cz.vhromada.catalog.web.system.CatalogApplication;
 import cz.vhromada.converters.Converter;
 import cz.vhromada.validators.Validators;
 import cz.vhromada.web.wicket.controllers.Controller;
@@ -56,7 +53,6 @@ public class UpdateEpisodeConfirmController extends Controller<IModel<EpisodeMO>
 
     @Override
     public void handle(final IModel<EpisodeMO> data) {
-        final SeasonTO season = CatalogApplication.getSessionAttribute(SeasonEpisodesController.SEASON_ATTRIBUTE);
         final EpisodeTO episode = converter.convert(data.getObject(), EpisodeTO.class);
         episodeFacade.update(episode);
 
