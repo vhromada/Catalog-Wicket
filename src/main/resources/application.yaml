@@ -1,5 +1,5 @@
 server:
-  port: 8100
+  port: 8000
 spring:
   application:
     name: Catalog
@@ -13,4 +13,4 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: false
 wicket:
-  configuration: development
+  configuration: deployment
