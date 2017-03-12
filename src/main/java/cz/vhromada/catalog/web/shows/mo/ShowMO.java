@@ -299,7 +299,7 @@ public class ShowMO implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof ShowMO) || id == null) {
+        if (!(obj instanceof ShowMO) || id == null) {
             return false;
         }
 

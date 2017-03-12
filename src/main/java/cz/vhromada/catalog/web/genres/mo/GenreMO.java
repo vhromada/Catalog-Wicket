@@ -90,7 +90,7 @@ public class GenreMO implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof GenreMO) || id == null) {
+        if (!(obj instanceof GenreMO) || id == null) {
             return false;
         }
 

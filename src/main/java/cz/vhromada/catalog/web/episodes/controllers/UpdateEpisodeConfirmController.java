@@ -1,19 +1,18 @@
 package cz.vhromada.catalog.web.episodes.controllers;
 
+import cz.vhromada.catalog.entity.Episode;
 import cz.vhromada.catalog.facade.EpisodeFacade;
-import cz.vhromada.catalog.facade.to.EpisodeTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.episodes.mo.EpisodeMO;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.converters.Converter;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for updating episode.
@@ -21,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("updateEpisodeConfirmController")
-public class UpdateEpisodeConfirmController extends Controller<IModel<EpisodeMO>> {
+public class UpdateEpisodeConfirmController extends ResultController<IModel<EpisodeMO>> {
 
     /**
      * Facade for episodes
@@ -43,9 +42,9 @@ public class UpdateEpisodeConfirmController extends Controller<IModel<EpisodeMO>
      */
     @Autowired
     public UpdateEpisodeConfirmController(final EpisodeFacade episodeFacade,
-            @Qualifier("webDozerConverter") final Converter converter) {
-        Validators.validateArgumentNotNull(episodeFacade, "Facade for episodes");
-        Validators.validateArgumentNotNull(converter, "converter");
+            final Converter converter) {
+        Assert.notNull(episodeFacade, "Facade for episodes mustn't be null.");
+        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.episodeFacade = episodeFacade;
         this.converter = converter;
@@ -53,10 +52,11 @@ public class UpdateEpisodeConfirmController extends Controller<IModel<EpisodeMO>
 
     @Override
     public void handle(final IModel<EpisodeMO> data) {
-        final EpisodeTO episode = converter.convert(data.getObject(), EpisodeTO.class);
-        episodeFacade.update(episode);
+        addResults(episodeFacade.update(converter.convert(data.getObject(), Episode.class)));
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.EPISODES_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.EPISODES_LIST, null));
+        }
     }
 
     @Override

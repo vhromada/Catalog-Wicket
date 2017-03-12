@@ -1,6 +1,6 @@
 package cz.vhromada.catalog.web.panels;
 
-import cz.vhromada.catalog.commons.Constants;
+import cz.vhromada.catalog.utils.Constants;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
@@ -82,7 +82,7 @@ public abstract class ImdbPanel extends Panel {
      *
      * @param imdbCodeValue new IMDB code value
      */
-    protected abstract void onImdbChange(final Integer imdbCodeValue);
+    protected abstract void onImdbChange(Integer imdbCodeValue);
 
     /**
      * Returns validation behavior.

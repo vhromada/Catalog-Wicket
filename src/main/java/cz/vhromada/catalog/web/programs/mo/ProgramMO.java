@@ -251,7 +251,7 @@ public class ProgramMO implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof ProgramMO) || id == null) {
+        if (!(obj instanceof ProgramMO) || id == null) {
             return false;
         }
 

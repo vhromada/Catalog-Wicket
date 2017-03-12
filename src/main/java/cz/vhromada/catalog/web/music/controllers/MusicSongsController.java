@@ -1,6 +1,6 @@
 package cz.vhromada.catalog.web.music.controllers;
 
-import cz.vhromada.catalog.facade.to.MusicTO;
+import cz.vhromada.catalog.entity.Music;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.web.wicket.controllers.Controller;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("musicSongsController")
-public class MusicSongsController extends Controller<IModel<MusicTO>> {
+public class MusicSongsController extends Controller<IModel<Music>> {
 
     /**
      * Name of music attribute in session
@@ -24,7 +24,7 @@ public class MusicSongsController extends Controller<IModel<MusicTO>> {
     public static final String MUSIC_ATTRIBUTE = "music";
 
     @Override
-    public void handle(final IModel<MusicTO> data) {
+    public void handle(final IModel<Music> data) {
         final WebSession session = WebSession.get();
         session.setAttribute(MUSIC_ATTRIBUTE, data.getObject());
 

@@ -3,12 +3,13 @@ package cz.vhromada.catalog.web.seasons.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.vhromada.catalog.commons.Time;
+import cz.vhromada.catalog.common.Time;
+import cz.vhromada.catalog.entity.Episode;
+import cz.vhromada.catalog.entity.Season;
+import cz.vhromada.catalog.entity.Show;
 import cz.vhromada.catalog.facade.EpisodeFacade;
 import cz.vhromada.catalog.facade.SeasonFacade;
-import cz.vhromada.catalog.facade.to.EpisodeTO;
-import cz.vhromada.catalog.facade.to.SeasonTO;
-import cz.vhromada.catalog.facade.to.ShowTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -17,14 +18,13 @@ import cz.vhromada.catalog.web.seasons.panels.SeasonsListPanel;
 import cz.vhromada.catalog.web.seasons.panels.SeasonsMenuPanel;
 import cz.vhromada.catalog.web.shows.controllers.ShowSeasonsController;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.result.Result;
 import cz.vhromada.web.wicket.controllers.Flow;
-import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for seasoning list of seasons.
@@ -32,7 +32,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("seasonsListController")
-public class SeasonsListController extends Controller<Void> {
+public class SeasonsListController extends ResultController<Void> {
 
     /**
      * Facade for seasons
@@ -55,8 +55,8 @@ public class SeasonsListController extends Controller<Void> {
     @Autowired
     public SeasonsListController(final SeasonFacade seasonFacade,
             final EpisodeFacade episodeFacade) {
-        Validators.validateArgumentNotNull(seasonFacade, "Facade for seasons");
-        Validators.validateArgumentNotNull(episodeFacade, "Facade for episodes");
+        Assert.notNull(seasonFacade, "Facade for seasons mustn't be null.");
+        Assert.notNull(episodeFacade, "Facade for episodes mustn't be null.");
 
         this.seasonFacade = seasonFacade;
         this.episodeFacade = episodeFacade;
@@ -64,33 +64,100 @@ public class SeasonsListController extends Controller<Void> {
 
     @Override
     public void handle(final Void data) {
-        final ShowTO show = CatalogApplication.getSessionAttribute(ShowSeasonsController.SHOW_ATTRIBUTE);
+        final Show show = CatalogApplication.getSessionAttribute(ShowSeasonsController.SHOW_ATTRIBUTE);
+        final Result<List<Season>> result = seasonFacade.find(show);
+
+        addResults(result);
+
         final List<SeasonDataMO> seasons = new ArrayList<>();
-        for (final SeasonTO season : seasonFacade.findSeasonsByShow(show)) {
-            final SeasonDataMO seasonData = new SeasonDataMO();
-            seasonData.setSeason(season);
-            int episodesCount = 0;
-            int length = 0;
-            for (final EpisodeTO episode : episodeFacade.findEpisodesBySeason(season)) {
-                episodesCount++;
-                length += episode.getLength();
+        if (isOk()) {
+            for (final Season season : result.getData()) {
+                final SeasonDataMO seasonData = new SeasonDataMO();
+                seasonData.setSeason(season);
+                final Data episodesData = processEpisodes(season);
+                seasonData.setEpisodesCount(episodesData.getEpisodesCount());
+                seasonData.setTotalLength(new Time(episodesData.getTotalLength()));
+                seasons.add(seasonData);
             }
-            seasonData.setEpisodesCount(episodesCount);
-            seasonData.setTotalLength(new Time(length));
-            seasons.add(seasonData);
         }
 
-        final PanelData<List<SeasonDataMO>> panelData = new PanelData<>(SeasonsListPanel.ID, Model.ofList(seasons));
-        final PanelData<Void> menuData = new PanelData<>(SeasonsMenuPanel.ID, null);
+        if (processResult()) {
+            final PanelData<List<SeasonDataMO>> panelData = new PanelData<>(SeasonsListPanel.ID, Model.ofList(seasons));
+            final PanelData<Void> menuData = new PanelData<>(SeasonsMenuPanel.ID, null);
 
-        final PageEvent event = new PanelEvent(panelData, "Seasons", menuData);
-
-        getUi().fireEvent(event);
+            getUi().fireEvent(new PanelEvent(panelData, "Seasons", menuData));
+        }
     }
 
     @Override
     public Flow getFlow() {
         return CatalogFlow.SEASONS_LIST;
+    }
+
+    /**
+     * Process episodes.
+     *
+     * @param season season
+     * @return season data
+     */
+    private Data processEpisodes(final Season season) {
+        final Data data = new Data();
+        final Result<List<Episode>> result = episodeFacade.find(season);
+
+        addResults(result);
+
+        if (isOk()) {
+            for (final Episode episode : result.getData()) {
+                data.add(episode.getLength());
+            }
+        }
+
+        return data;
+    }
+
+    /**
+     * A class represents season data.
+     */
+    private static final class Data {
+
+        /**
+         * Count of episodes
+         */
+        private int episodesCount;
+
+        /**
+         * Total length
+         */
+        private int totalLength;
+
+        /**
+         * Returns count of episodes.
+         *
+         * @return count of episodes
+         */
+        int getEpisodesCount() {
+            return episodesCount;
+        }
+
+        /**
+         * Returns total length.
+         *
+         * @return total length
+         */
+        int getTotalLength() {
+            return totalLength;
+        }
+
+        /**
+         * Adds data.
+         *
+         * @param length total length
+         */
+        void add(final int length) {
+            this.episodesCount++;
+            this.totalLength += length;
+        }
+
     }
 
 }

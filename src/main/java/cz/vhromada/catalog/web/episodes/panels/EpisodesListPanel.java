@@ -2,8 +2,8 @@ package cz.vhromada.catalog.web.episodes.panels;
 
 import java.util.List;
 
-import cz.vhromada.catalog.commons.Time;
-import cz.vhromada.catalog.facade.to.EpisodeTO;
+import cz.vhromada.catalog.common.Time;
+import cz.vhromada.catalog.entity.Episode;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
 
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(EpisodesListPanel.ID)
 @Scope("prototype")
-public class EpisodesListPanel extends GenericPanel<List<EpisodeTO>> {
+public class EpisodesListPanel extends GenericPanel<List<Episode>> {
 
     /**
      * ID
@@ -42,7 +42,7 @@ public class EpisodesListPanel extends GenericPanel<List<EpisodeTO>> {
      * @param model model
      * @throws org.apache.wicket.WicketRuntimeException if ID is null
      */
-    public EpisodesListPanel(final String id, final IModel<List<EpisodeTO>> model) {
+    public EpisodesListPanel(final String id, final IModel<List<Episode>> model) {
         super(id, model);
     }
 
@@ -53,7 +53,7 @@ public class EpisodesListPanel extends GenericPanel<List<EpisodeTO>> {
         final WebMarkupContainer episodesTable = new WebMarkupContainer("episodesTable");
         episodesTable.setVisible(!getModelObject().isEmpty());
 
-        final ListView<EpisodeTO> episodes = new ListView<EpisodeTO>("episodes", getModel()) {
+        final ListView<Episode> episodes = new ListView<Episode>("episodes", getModel()) {
 
             /**
              * SerialVersionUID
@@ -61,8 +61,8 @@ public class EpisodesListPanel extends GenericPanel<List<EpisodeTO>> {
             private static final long serialVersionUID = 1L;
 
             @Override
-            protected void populateItem(final ListItem<EpisodeTO> item) {
-                final EpisodeTO episode = item.getModelObject();
+            protected void populateItem(final ListItem<Episode> item) {
+                final Episode episode = item.getModelObject();
 
                 final Label number = new Label("number", episode.getNumber());
 
@@ -72,17 +72,17 @@ public class EpisodesListPanel extends GenericPanel<List<EpisodeTO>> {
 
                 final Label note = new Label("note", episode.getNote());
 
-                final AjaxFlowLink<EpisodeTO> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), CatalogFlow.EPISODES_MOVE_UP);
+                final AjaxFlowLink<Episode> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), CatalogFlow.EPISODES_MOVE_UP);
                 moveUp.setVisible(item.getIndex() > 0);
 
-                final AjaxFlowLink<EpisodeTO> moveDown = new AjaxFlowLink<>("moveDown", item.getModel(), CatalogFlow.EPISODES_MOVE_DOWN);
+                final AjaxFlowLink<Episode> moveDown = new AjaxFlowLink<>("moveDown", item.getModel(), CatalogFlow.EPISODES_MOVE_DOWN);
                 moveDown.setVisible(item.getIndex() < getModelObject().size() - 1);
 
-                final AjaxFlowLink<EpisodeTO> duplicate = new AjaxFlowLink<>("duplicate", item.getModel(), CatalogFlow.EPISODES_DUPLICATE);
+                final AjaxFlowLink<Episode> duplicate = new AjaxFlowLink<>("duplicate", item.getModel(), CatalogFlow.EPISODES_DUPLICATE);
 
-                final AjaxFlowLink<EpisodeTO> edit = new AjaxFlowLink<>("edit", item.getModel(), CatalogFlow.EPISODES_UPDATE);
+                final AjaxFlowLink<Episode> edit = new AjaxFlowLink<>("edit", item.getModel(), CatalogFlow.EPISODES_UPDATE);
 
-                final AjaxFlowLink<EpisodeTO> remove = new AjaxFlowLink<>("remove", item.getModel(), CatalogFlow.EPISODES_REMOVE);
+                final AjaxFlowLink<Episode> remove = new AjaxFlowLink<>("remove", item.getModel(), CatalogFlow.EPISODES_REMOVE);
 
                 item.add(number, name, length, note, moveUp, moveDown, duplicate, edit, remove);
             }

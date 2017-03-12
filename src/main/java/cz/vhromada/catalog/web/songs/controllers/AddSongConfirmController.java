@@ -1,22 +1,21 @@
 package cz.vhromada.catalog.web.songs.controllers;
 
+import cz.vhromada.catalog.entity.Music;
+import cz.vhromada.catalog.entity.Song;
 import cz.vhromada.catalog.facade.SongFacade;
-import cz.vhromada.catalog.facade.to.MusicTO;
-import cz.vhromada.catalog.facade.to.SongTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.music.controllers.MusicSongsController;
 import cz.vhromada.catalog.web.songs.mo.SongMO;
 import cz.vhromada.catalog.web.system.CatalogApplication;
 import cz.vhromada.converters.Converter;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for adding song.
@@ -24,7 +23,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("addSongConfirmController")
-public class AddSongConfirmController extends Controller<IModel<SongMO>> {
+public class AddSongConfirmController extends ResultController<IModel<SongMO>> {
 
     /**
      * Facade for songs
@@ -46,9 +45,9 @@ public class AddSongConfirmController extends Controller<IModel<SongMO>> {
      */
     @Autowired
     public AddSongConfirmController(final SongFacade songFacade,
-            @Qualifier("webDozerConverter") final Converter converter) {
-        Validators.validateArgumentNotNull(songFacade, "Facade for songs");
-        Validators.validateArgumentNotNull(converter, "converter");
+            final Converter converter) {
+        Assert.notNull(songFacade, "Facade for songs mustn't be null.");
+        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.songFacade = songFacade;
         this.converter = converter;
@@ -56,11 +55,14 @@ public class AddSongConfirmController extends Controller<IModel<SongMO>> {
 
     @Override
     public void handle(final IModel<SongMO> data) {
-        final MusicTO music = CatalogApplication.getSessionAttribute(MusicSongsController.MUSIC_ATTRIBUTE);
-        final SongTO song = converter.convert(data.getObject(), SongTO.class);
-        songFacade.add(music, song);
+        final Music music = CatalogApplication.getSessionAttribute(MusicSongsController.MUSIC_ATTRIBUTE);
+        final Song song = converter.convert(data.getObject(), Song.class);
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.SONGS_LIST, null));
+        addResults(songFacade.add(music, song));
+
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.SONGS_LIST, null));
+        }
     }
 
     @Override

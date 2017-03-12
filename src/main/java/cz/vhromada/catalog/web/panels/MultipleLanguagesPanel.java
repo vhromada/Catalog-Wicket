@@ -3,8 +3,7 @@ package cz.vhromada.catalog.web.panels;
 import java.util.Arrays;
 import java.util.List;
 
-import cz.vhromada.catalog.commons.Language;
-import cz.vhromada.validators.Validators;
+import cz.vhromada.catalog.common.Language;
 
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Check;
@@ -14,6 +13,7 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.springframework.util.Assert;
 
 /**
  * A class represents panel for choosing multiple language.
@@ -57,9 +57,9 @@ public class MultipleLanguagesPanel extends Panel {
     public MultipleLanguagesPanel(final String id, final IModel<List<Language>> model, final String label, final String itemId) {
         super(id);
 
-        Validators.validateArgumentNotNull(model, "Model");
-        Validators.validateArgumentNotNull(label, "Label");
-        Validators.validateArgumentNotNull(itemId, "Item ID");
+        Assert.notNull(model, "Model mustn't be null.");
+        Assert.notNull(label, "Label mustn't be null.");
+        Assert.notNull(itemId, "Item ID mustn't be null.");
 
         this.model = model;
         this.label = label;

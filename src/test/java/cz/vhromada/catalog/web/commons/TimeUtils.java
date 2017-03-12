@@ -3,7 +3,7 @@ package cz.vhromada.catalog.web.commons;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import cz.vhromada.catalog.commons.Time;
+import cz.vhromada.catalog.common.Time;
 import cz.vhromada.catalog.web.TimeMO;
 
 /**
@@ -36,7 +36,7 @@ public final class TimeUtils {
     /**
      * Asserts time deep equals.
      *
-     * @param expected expected TO for time
+     * @param expected expected time
      * @param actual   actual length
      */
     public static void assertTimeDeepEquals(final TimeMO expected, final Integer actual) {
@@ -47,7 +47,7 @@ public final class TimeUtils {
     /**
      * Asserts time deep equals.
      *
-     * @param expected expected TO for time
+     * @param expected expected time
      * @param actual   actual length
      */
     public static void assertTimeDeepEquals(final TimeMO expected, final Time actual) {

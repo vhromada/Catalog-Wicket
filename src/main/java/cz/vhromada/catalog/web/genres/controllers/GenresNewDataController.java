@@ -1,14 +1,14 @@
 package cz.vhromada.catalog.web.genres.controllers;
 
 import cz.vhromada.catalog.facade.GenreFacade;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for creating new data.
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("genresNewDataController")
-public class GenresNewDataController extends Controller<Void> {
+public class GenresNewDataController extends ResultController<Void> {
 
     /**
      * Facade for genres
@@ -31,16 +31,18 @@ public class GenresNewDataController extends Controller<Void> {
      */
     @Autowired
     public GenresNewDataController(final GenreFacade genreFacade) {
-        Validators.validateArgumentNotNull(genreFacade, "Facade for genres");
+        Assert.notNull(genreFacade, "Facade for genres mustn't be null.");
 
         this.genreFacade = genreFacade;
     }
 
     @Override
     public void handle(final Void data) {
-        genreFacade.newData();
+        addResults(genreFacade.newData());
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.GENRES_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.GENRES_LIST, null));
+        }
     }
 
     @Override

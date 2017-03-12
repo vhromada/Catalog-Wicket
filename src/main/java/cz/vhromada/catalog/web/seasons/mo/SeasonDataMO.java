@@ -3,8 +3,8 @@ package cz.vhromada.catalog.web.seasons.mo;
 import java.io.Serializable;
 import java.util.Objects;
 
-import cz.vhromada.catalog.commons.Time;
-import cz.vhromada.catalog.facade.to.SeasonTO;
+import cz.vhromada.catalog.common.Time;
+import cz.vhromada.catalog.entity.Season;
 
 /**
  * A class represents MO for season data.
@@ -21,7 +21,7 @@ public class SeasonDataMO implements Serializable {
     /**
      * Season
      */
-    private SeasonTO season;
+    private Season season;
 
     /**
      * Count of episodes
@@ -38,7 +38,7 @@ public class SeasonDataMO implements Serializable {
      *
      * @return season
      */
-    public SeasonTO getSeason() {
+    public Season getSeason() {
         return season;
     }
 
@@ -47,7 +47,7 @@ public class SeasonDataMO implements Serializable {
      *
      * @param season new value
      */
-    public void setSeason(final SeasonTO season) {
+    public void setSeason(final Season season) {
         this.season = season;
     }
 

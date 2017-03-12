@@ -1,19 +1,18 @@
 package cz.vhromada.catalog.web.genres.controllers;
 
+import cz.vhromada.catalog.entity.Genre;
 import cz.vhromada.catalog.facade.GenreFacade;
-import cz.vhromada.catalog.facade.to.GenreTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.genres.mo.GenreMO;
 import cz.vhromada.converters.Converter;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for adding genre.
@@ -21,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("addGenreConfirmController")
-public class AddGenreConfirmController extends Controller<IModel<GenreMO>> {
+public class AddGenreConfirmController extends ResultController<IModel<GenreMO>> {
 
     /**
      * Facade for genres
@@ -43,9 +42,9 @@ public class AddGenreConfirmController extends Controller<IModel<GenreMO>> {
      */
     @Autowired
     public AddGenreConfirmController(final GenreFacade genreFacade,
-            @Qualifier("webDozerConverter") final Converter converter) {
-        Validators.validateArgumentNotNull(genreFacade, "Facade for genres");
-        Validators.validateArgumentNotNull(converter, "converter");
+            final Converter converter) {
+        Assert.notNull(genreFacade, "Facade for genres mustn't be null.");
+        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.genreFacade = genreFacade;
         this.converter = converter;
@@ -53,9 +52,11 @@ public class AddGenreConfirmController extends Controller<IModel<GenreMO>> {
 
     @Override
     public void handle(final IModel<GenreMO> data) {
-        genreFacade.add(converter.convert(data.getObject(), GenreTO.class));
+        addResults(genreFacade.add(converter.convert(data.getObject(), Genre.class)));
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.GENRES_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.GENRES_LIST, null));
+        }
     }
 
     @Override

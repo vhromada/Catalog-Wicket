@@ -1,8 +1,7 @@
 package cz.vhromada.catalog.web.events;
 
-import cz.vhromada.validators.Validators;
-
 import org.apache.wicket.model.IModel;
+import org.springframework.util.Assert;
 
 /**
  * A class represents panel data.
@@ -30,7 +29,7 @@ public class PanelData<T> {
      * @throws IllegalArgumentException if ID is null
      */
     public PanelData(final String id, final IModel<T> data) {
-        Validators.validateArgumentNotNull(id, "ID");
+        Assert.notNull(id, "ID mustn't be null.");
 
         this.id = id;
         this.data = data;

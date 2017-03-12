@@ -1,19 +1,18 @@
 package cz.vhromada.catalog.web.games.controllers;
 
+import cz.vhromada.catalog.entity.Game;
 import cz.vhromada.catalog.facade.GameFacade;
-import cz.vhromada.catalog.facade.to.GameTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.games.mo.GameMO;
 import cz.vhromada.converters.Converter;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for adding game.
@@ -21,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("addGameConfirmController")
-public class AddGameConfirmController extends Controller<IModel<GameMO>> {
+public class AddGameConfirmController extends ResultController<IModel<GameMO>> {
 
     /**
      * Facade for games
@@ -43,9 +42,9 @@ public class AddGameConfirmController extends Controller<IModel<GameMO>> {
      */
     @Autowired
     public AddGameConfirmController(final GameFacade gameFacade,
-            @Qualifier("webDozerConverter") final Converter converter) {
-        Validators.validateArgumentNotNull(gameFacade, "Facade for games");
-        Validators.validateArgumentNotNull(converter, "converter");
+            final Converter converter) {
+        Assert.notNull(gameFacade, "Facade for games mustn't be null.");
+        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.gameFacade = gameFacade;
         this.converter = converter;
@@ -53,9 +52,11 @@ public class AddGameConfirmController extends Controller<IModel<GameMO>> {
 
     @Override
     public void handle(final IModel<GameMO> data) {
-        gameFacade.add(converter.convert(data.getObject(), GameTO.class));
+        addResults(gameFacade.add(converter.convert(data.getObject(), Game.class)));
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.GAMES_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.GAMES_LIST, null));
+        }
     }
 
     @Override

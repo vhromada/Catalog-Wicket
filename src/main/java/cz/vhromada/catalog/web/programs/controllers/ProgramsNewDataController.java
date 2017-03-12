@@ -1,14 +1,14 @@
 package cz.vhromada.catalog.web.programs.controllers;
 
 import cz.vhromada.catalog.facade.ProgramFacade;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for creating new data.
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("programsNewDataController")
-public class ProgramsNewDataController extends Controller<Void> {
+public class ProgramsNewDataController extends ResultController<Void> {
 
     /**
      * Facade for programs
@@ -31,16 +31,18 @@ public class ProgramsNewDataController extends Controller<Void> {
      */
     @Autowired
     public ProgramsNewDataController(final ProgramFacade programFacade) {
-        Validators.validateArgumentNotNull(programFacade, "Facade for programs");
+        Assert.notNull(programFacade, "Facade for programs mustn't be null.");
 
         this.programFacade = programFacade;
     }
 
     @Override
     public void handle(final Void data) {
-        programFacade.newData();
+        addResults(programFacade.newData());
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.PROGRAMS_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.PROGRAMS_LIST, null));
+        }
     }
 
     @Override

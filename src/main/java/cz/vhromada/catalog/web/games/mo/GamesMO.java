@@ -3,7 +3,7 @@ package cz.vhromada.catalog.web.games.mo;
 import java.io.Serializable;
 import java.util.List;
 
-import cz.vhromada.catalog.facade.to.GameTO;
+import cz.vhromada.catalog.entity.Game;
 
 /**
  * A class represents MO for games.
@@ -20,7 +20,7 @@ public class GamesMO implements Serializable {
     /**
      * List of games
      */
-    private List<GameTO> games;
+    private List<Game> games;
 
     /**
      * Count of media
@@ -32,7 +32,7 @@ public class GamesMO implements Serializable {
      *
      * @return list of games
      */
-    public List<GameTO> getGames() {
+    public List<Game> getGames() {
         return games;
     }
 
@@ -41,7 +41,7 @@ public class GamesMO implements Serializable {
      *
      * @param games new value
      */
-    public void setGames(final List<GameTO> games) {
+    public void setGames(final List<Game> games) {
         this.games = games;
     }
 

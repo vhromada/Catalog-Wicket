@@ -140,7 +140,7 @@ public abstract class AbstractFormPanel<T> extends GenericPanel<T> {
      *
      * @param panelForm form
      */
-    protected abstract void onFormSubmit(final Form<T> panelForm);
+    protected abstract void onFormSubmit(Form<T> panelForm);
 
     /**
      * Returns validation behavior.

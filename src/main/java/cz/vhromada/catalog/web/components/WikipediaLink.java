@@ -1,8 +1,7 @@
 package cz.vhromada.catalog.web.components;
 
-import cz.vhromada.validators.Validators;
-
 import org.apache.wicket.util.string.Strings;
+import org.springframework.util.Assert;
 
 /**
  * A class represents link for Wikipedia.
@@ -33,7 +32,7 @@ public class WikipediaLink extends WebLink<String> {
     public WikipediaLink(final String id, final String value, final Country country) {
         super(id, value);
 
-        Validators.validateArgumentNotNull(country, "Country");
+        Assert.notNull(country, "Country mustn't be null.");
 
         this.country = country;
     }

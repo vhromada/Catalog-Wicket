@@ -5,14 +5,15 @@ import cz.vhromada.catalog.web.pages.CatalogPage;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.protocol.http.WebSession;
-import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
+import org.springframework.stereotype.Component;
 
 /**
  * A class represents application.
  *
  * @author Vladimir Hromada
  */
+@Component
 public class CatalogApplication extends WebApplication {
 
     @Override
@@ -51,8 +52,6 @@ public class CatalogApplication extends WebApplication {
         getMarkupSettings().setStripWicketTags(true);
 
         getComponentInstantiationListeners().add(new SpringComponentInjector(this));
-
-        getJavaScriptLibrarySettings().setJQueryReference(new JavaScriptResourceReference(CatalogPage.class, "js/jquery-3.0.0.js"));
 
         if (usesDevelopmentConfig()) {
             getDebugSettings().setDevelopmentUtilitiesEnabled(true);

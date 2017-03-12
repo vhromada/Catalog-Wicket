@@ -1,19 +1,18 @@
 package cz.vhromada.catalog.web.movies.controllers;
 
+import cz.vhromada.catalog.entity.Movie;
 import cz.vhromada.catalog.facade.MovieFacade;
-import cz.vhromada.catalog.facade.to.MovieTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.movies.mo.MovieMO;
 import cz.vhromada.converters.Converter;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for updating movie.
@@ -21,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("updateMovieConfirmController")
-public class UpdateMovieConfirmController extends Controller<IModel<MovieMO>> {
+public class UpdateMovieConfirmController extends ResultController<IModel<MovieMO>> {
 
     /**
      * Facade for movies
@@ -43,9 +42,9 @@ public class UpdateMovieConfirmController extends Controller<IModel<MovieMO>> {
      */
     @Autowired
     public UpdateMovieConfirmController(final MovieFacade movieFacade,
-            @Qualifier("webDozerConverter") final Converter converter) {
-        Validators.validateArgumentNotNull(movieFacade, "Facade for movies");
-        Validators.validateArgumentNotNull(converter, "converter");
+            final Converter converter) {
+        Assert.notNull(movieFacade, "Facade for movies mustn't be null.");
+        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.movieFacade = movieFacade;
         this.converter = converter;
@@ -53,9 +52,11 @@ public class UpdateMovieConfirmController extends Controller<IModel<MovieMO>> {
 
     @Override
     public void handle(final IModel<MovieMO> data) {
-        movieFacade.update(converter.convert(data.getObject(), MovieTO.class));
+        addResults(movieFacade.update(converter.convert(data.getObject(), Movie.class)));
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.MOVIES_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.MOVIES_LIST, null));
+        }
     }
 
     @Override

@@ -2,8 +2,8 @@ package cz.vhromada.catalog.web.songs.panels;
 
 import java.util.List;
 
-import cz.vhromada.catalog.commons.Time;
-import cz.vhromada.catalog.facade.to.SongTO;
+import cz.vhromada.catalog.common.Time;
+import cz.vhromada.catalog.entity.Song;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
 
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(SongsListPanel.ID)
 @Scope("prototype")
-public class SongsListPanel extends GenericPanel<List<SongTO>> {
+public class SongsListPanel extends GenericPanel<List<Song>> {
 
     /**
      * ID
@@ -42,7 +42,7 @@ public class SongsListPanel extends GenericPanel<List<SongTO>> {
      * @param model model
      * @throws org.apache.wicket.WicketRuntimeException if ID is null
      */
-    public SongsListPanel(final String id, final IModel<List<SongTO>> model) {
+    public SongsListPanel(final String id, final IModel<List<Song>> model) {
         super(id, model);
     }
 
@@ -53,7 +53,7 @@ public class SongsListPanel extends GenericPanel<List<SongTO>> {
         final WebMarkupContainer songsTable = new WebMarkupContainer("songsTable");
         songsTable.setVisible(!getModelObject().isEmpty());
 
-        final ListView<SongTO> songs = new ListView<SongTO>("songs", getModel()) {
+        final ListView<Song> songs = new ListView<Song>("songs", getModel()) {
 
             /**
              * SerialVersionUID
@@ -61,8 +61,8 @@ public class SongsListPanel extends GenericPanel<List<SongTO>> {
             private static final long serialVersionUID = 1L;
 
             @Override
-            protected void populateItem(final ListItem<SongTO> item) {
-                final SongTO song = item.getModelObject();
+            protected void populateItem(final ListItem<Song> item) {
+                final Song song = item.getModelObject();
 
                 final Label name = new Label("name", song.getName());
 
@@ -70,17 +70,17 @@ public class SongsListPanel extends GenericPanel<List<SongTO>> {
 
                 final Label note = new Label("note", song.getNote());
 
-                final AjaxFlowLink<SongTO> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), CatalogFlow.SONGS_MOVE_UP);
+                final AjaxFlowLink<Song> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), CatalogFlow.SONGS_MOVE_UP);
                 moveUp.setVisible(item.getIndex() > 0);
 
-                final AjaxFlowLink<SongTO> moveDown = new AjaxFlowLink<>("moveDown", item.getModel(), CatalogFlow.SONGS_MOVE_DOWN);
+                final AjaxFlowLink<Song> moveDown = new AjaxFlowLink<>("moveDown", item.getModel(), CatalogFlow.SONGS_MOVE_DOWN);
                 moveDown.setVisible(item.getIndex() < getModelObject().size() - 1);
 
-                final AjaxFlowLink<SongTO> duplicate = new AjaxFlowLink<>("duplicate", item.getModel(), CatalogFlow.SONGS_DUPLICATE);
+                final AjaxFlowLink<Song> duplicate = new AjaxFlowLink<>("duplicate", item.getModel(), CatalogFlow.SONGS_DUPLICATE);
 
-                final AjaxFlowLink<SongTO> edit = new AjaxFlowLink<>("edit", item.getModel(), CatalogFlow.SONGS_UPDATE);
+                final AjaxFlowLink<Song> edit = new AjaxFlowLink<>("edit", item.getModel(), CatalogFlow.SONGS_UPDATE);
 
-                final AjaxFlowLink<SongTO> remove = new AjaxFlowLink<>("remove", item.getModel(), CatalogFlow.SONGS_REMOVE);
+                final AjaxFlowLink<Song> remove = new AjaxFlowLink<>("remove", item.getModel(), CatalogFlow.SONGS_REMOVE);
 
                 item.add(name, length, note, moveUp, moveDown, duplicate, edit, remove);
             }

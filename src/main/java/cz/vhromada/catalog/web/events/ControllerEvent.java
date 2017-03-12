@@ -1,8 +1,9 @@
 package cz.vhromada.catalog.web.events;
 
-import cz.vhromada.validators.Validators;
 import cz.vhromada.web.wicket.controllers.Flow;
 import cz.vhromada.web.wicket.events.PageEvent;
+
+import org.springframework.util.Assert;
 
 /**
  * A class represents event for calling another controller.
@@ -29,7 +30,7 @@ public class ControllerEvent implements PageEvent {
      * @throws IllegalArgumentException if flow is null
      */
     public ControllerEvent(final Flow flow, final Object data) {
-        Validators.validateArgumentNotNull(flow, "Flow");
+        Assert.notNull(flow, "Flow mustn't be null.");
 
         this.flow = flow;
         this.data = data;

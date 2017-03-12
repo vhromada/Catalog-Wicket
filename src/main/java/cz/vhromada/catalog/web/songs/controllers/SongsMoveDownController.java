@@ -1,16 +1,16 @@
 package cz.vhromada.catalog.web.songs.controllers;
 
+import cz.vhromada.catalog.entity.Song;
 import cz.vhromada.catalog.facade.SongFacade;
-import cz.vhromada.catalog.facade.to.SongTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for moving down song.
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("songsMoveDownController")
-public class SongsMoveDownController extends Controller<IModel<SongTO>> {
+public class SongsMoveDownController extends ResultController<IModel<Song>> {
 
     /**
      * Facade for songs
@@ -26,23 +26,25 @@ public class SongsMoveDownController extends Controller<IModel<SongTO>> {
     private SongFacade songFacade;
 
     /**
-     * Creates a new instance of GenresMoveDownController.
+     * Creates a new instance of SongsMoveDownController.
      *
      * @param songFacade facade for songs
      * @throws IllegalArgumentException if facade for songs is null
      */
     @Autowired
     public SongsMoveDownController(final SongFacade songFacade) {
-        Validators.validateArgumentNotNull(songFacade, "Facade for songs");
+        Assert.notNull(songFacade, "Facade for songs mustn't be null.");
 
         this.songFacade = songFacade;
     }
 
     @Override
-    public void handle(final IModel<SongTO> data) {
-        songFacade.moveDown(data.getObject());
+    public void handle(final IModel<Song> data) {
+        addResults(songFacade.moveDown(data.getObject()));
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.SONGS_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.SONGS_LIST, null));
+        }
     }
 
     @Override

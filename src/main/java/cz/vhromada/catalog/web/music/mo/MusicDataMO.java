@@ -3,8 +3,8 @@ package cz.vhromada.catalog.web.music.mo;
 import java.io.Serializable;
 import java.util.Objects;
 
-import cz.vhromada.catalog.commons.Time;
-import cz.vhromada.catalog.facade.to.MusicTO;
+import cz.vhromada.catalog.common.Time;
+import cz.vhromada.catalog.entity.Music;
 
 /**
  * A class represents MO for music data.
@@ -21,7 +21,7 @@ public class MusicDataMO implements Serializable {
     /**
      * Music
      */
-    private MusicTO music;
+    private Music music;
 
     /**
      * Count of songs
@@ -38,7 +38,7 @@ public class MusicDataMO implements Serializable {
      *
      * @return music
      */
-    public MusicTO getMusic() {
+    public Music getMusic() {
         return music;
     }
 
@@ -47,7 +47,7 @@ public class MusicDataMO implements Serializable {
      *
      * @param music new value
      */
-    public void setMusic(final MusicTO music) {
+    public void setMusic(final Music music) {
         this.music = music;
     }
 

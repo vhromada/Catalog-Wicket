@@ -3,7 +3,7 @@ package cz.vhromada.catalog.web.commons;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import cz.vhromada.catalog.facade.to.MusicTO;
+import cz.vhromada.catalog.entity.Music;
 import cz.vhromada.catalog.web.music.mo.MusicMO;
 
 /**
@@ -38,12 +38,12 @@ public final class MusicUtils {
     }
 
     /**
-     * Returns TO for music.
+     * Returns music.
      *
-     * @return TO for music
+     * @return music
      */
-    public static MusicTO getMusicTO() {
-        final MusicTO music = new MusicTO();
+    public static Music getMusic() {
+        final Music music = new Music();
         music.setId(CatalogUtils.ID);
         music.setName(CatalogUtils.NAME);
         music.setWikiEn(CatalogUtils.EN_WIKI);
@@ -59,9 +59,9 @@ public final class MusicUtils {
      * Asserts music deep equals.
      *
      * @param expected expected MO for music
-     * @param actual   actual TO for music
+     * @param actual   actual music
      */
-    public static void assertMusicDeepEquals(final MusicMO expected, final MusicTO actual) {
+    public static void assertMusicDeepEquals(final MusicMO expected, final Music actual) {
         assertNotNull(actual);
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getName(), actual.getName());

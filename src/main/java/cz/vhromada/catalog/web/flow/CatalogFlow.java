@@ -537,7 +537,12 @@ public enum CatalogFlow implements Flow {
     /**
      * Flow for cancel updating genre
      */
-    GENRES_CANCEL;
+    GENRES_CANCEL,
+
+    /**
+     * Flow for errors
+     */
+    ERROR;
 
     @Override
     public String getFlow() {

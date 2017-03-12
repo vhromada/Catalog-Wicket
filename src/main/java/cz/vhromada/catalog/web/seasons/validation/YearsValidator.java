@@ -1,11 +1,10 @@
 package cz.vhromada.catalog.web.seasons.validation;
 
-import cz.vhromada.validators.Validators;
-
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.validation.AbstractFormValidator;
+import org.springframework.util.Assert;
 
 /**
  * A class represents validator for years.
@@ -38,8 +37,8 @@ public class YearsValidator extends AbstractFormValidator {
      *                                  or field for ending year is null
      */
     public YearsValidator(final NumberTextField<Integer> startYear, final NumberTextField<Integer> endYear) {
-        Validators.validateArgumentNotNull(startYear, "Starting year");
-        Validators.validateArgumentNotNull(endYear, "Ending year");
+        Assert.notNull(startYear, "Starting year mustn't be null.");
+        Assert.notNull(endYear, "Ending year mustn't be null.");
 
         this.startYear = startYear;
         this.endYear = endYear;

@@ -1,20 +1,23 @@
 package cz.vhromada.catalog.web.games.controllers;
 
+import java.util.List;
+
+import cz.vhromada.catalog.entity.Game;
 import cz.vhromada.catalog.facade.GameFacade;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.games.mo.GamesMO;
 import cz.vhromada.catalog.web.games.panels.GamesListPanel;
 import cz.vhromada.catalog.web.games.panels.GamesMenuPanel;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.result.Result;
 import cz.vhromada.web.wicket.controllers.Flow;
-import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for showing list of games.
@@ -22,7 +25,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("gamesListController")
-public class GamesListController extends Controller<Void> {
+public class GamesListController extends ResultController<Void> {
 
     /**
      * Facade for games
@@ -37,22 +40,27 @@ public class GamesListController extends Controller<Void> {
      */
     @Autowired
     public GamesListController(final GameFacade gameFacade) {
-        Validators.validateArgumentNotNull(gameFacade, "Facade for games");
+        Assert.notNull(gameFacade, "Facade for games mustn't be null.");
 
         this.gameFacade = gameFacade;
     }
 
     @Override
     public void handle(final Void data) {
-        final GamesMO games = new GamesMO();
-        games.setGames(gameFacade.getGames());
-        games.setMediaCount(gameFacade.getTotalMediaCount());
-        final PanelData<GamesMO> panelData = new PanelData<>(GamesListPanel.ID, Model.of(games));
-        final PanelData<Void> menuData = new PanelData<>(GamesMenuPanel.ID, null);
+        final Result<List<Game>> gamesResult = gameFacade.getAll();
+        final Result<Integer> mediaCountResult = gameFacade.getTotalMediaCount();
 
-        final PageEvent event = new PanelEvent(panelData, "Games", menuData);
+        addResults(gamesResult, mediaCountResult);
 
-        getUi().fireEvent(event);
+        if (processResult()) {
+            final GamesMO games = new GamesMO();
+            games.setGames(gamesResult.getData());
+            games.setMediaCount(mediaCountResult.getData());
+            final PanelData<GamesMO> panelData = new PanelData<>(GamesListPanel.ID, Model.of(games));
+            final PanelData<Void> menuData = new PanelData<>(GamesMenuPanel.ID, null);
+
+            getUi().fireEvent(new PanelEvent(panelData, "Games", menuData));
+        }
     }
 
     @Override

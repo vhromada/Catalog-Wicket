@@ -1,16 +1,16 @@
 package cz.vhromada.catalog.web.programs.controllers;
 
+import cz.vhromada.catalog.entity.Program;
 import cz.vhromada.catalog.facade.ProgramFacade;
-import cz.vhromada.catalog.facade.to.ProgramTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for duplicating program.
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("programsDuplicateController")
-public class ProgramsDuplicateController extends Controller<IModel<ProgramTO>> {
+public class ProgramsDuplicateController extends ResultController<IModel<Program>> {
 
     /**
      * Facade for programs
@@ -33,16 +33,18 @@ public class ProgramsDuplicateController extends Controller<IModel<ProgramTO>> {
      */
     @Autowired
     public ProgramsDuplicateController(final ProgramFacade programFacade) {
-        Validators.validateArgumentNotNull(programFacade, "Facade for programs");
+        Assert.notNull(programFacade, "Facade for programs mustn't be null.");
 
         this.programFacade = programFacade;
     }
 
     @Override
-    public void handle(final IModel<ProgramTO> data) {
-        programFacade.duplicate(data.getObject());
+    public void handle(final IModel<Program> data) {
+        addResults(programFacade.duplicate(data.getObject()));
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.PROGRAMS_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.PROGRAMS_LIST, null));
+        }
     }
 
     @Override

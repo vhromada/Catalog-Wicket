@@ -160,7 +160,7 @@ public class EpisodeMO implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof EpisodeMO) || id == null) {
+        if (!(obj instanceof EpisodeMO) || id == null) {
             return false;
         }
 

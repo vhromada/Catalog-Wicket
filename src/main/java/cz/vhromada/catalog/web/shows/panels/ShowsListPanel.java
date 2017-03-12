@@ -1,6 +1,6 @@
 package cz.vhromada.catalog.web.shows.panels;
 
-import cz.vhromada.catalog.facade.to.ShowTO;
+import cz.vhromada.catalog.entity.Show;
 import cz.vhromada.catalog.web.commons.FormatUtils;
 import cz.vhromada.catalog.web.components.CsfdLink;
 import cz.vhromada.catalog.web.components.ImdbLink;
@@ -57,7 +57,7 @@ public class ShowsListPanel extends GenericPanel<ShowsMO> {
         final WebMarkupContainer showsTable = new WebMarkupContainer("showsTable");
         showsTable.setVisible(!getModelObject().getShows().isEmpty());
 
-        final ListView<ShowDataMO> shows = new ListView<ShowDataMO>("shows", Model.ofList(getModelObject().getShows())) {
+        final ListView<ShowDataMO> shows = new ListView<ShowDataMO>("shows", getModelObject().getShows()) {
 
             /**
              * SerialVersionUID
@@ -67,7 +67,7 @@ public class ShowsListPanel extends GenericPanel<ShowsMO> {
             @Override
             protected void populateItem(final ListItem<ShowDataMO> item) {
                 final ShowDataMO showData = item.getModelObject();
-                final ShowTO show = showData.getShow();
+                final Show show = showData.getShow();
 
                 final Label czechName = new Label("czechName", show.getCzechName());
 
@@ -93,19 +93,19 @@ public class ShowsListPanel extends GenericPanel<ShowsMO> {
 
                 final WikipediaLink wikiEn = new WikipediaLink("wikiEn", show.getWikiEn(), WikipediaLink.Country.EN);
 
-                final AjaxFlowLink<ShowTO> seasons = new AjaxFlowLink<>("seasons", Model.of(show), CatalogFlow.SHOWS_SEASONS);
+                final AjaxFlowLink<Show> seasons = new AjaxFlowLink<>("seasons", Model.of(show), CatalogFlow.SHOWS_SEASONS);
 
-                final AjaxFlowLink<ShowTO> moveUp = new AjaxFlowLink<>("moveUp", Model.of(show), CatalogFlow.SHOWS_MOVE_UP);
+                final AjaxFlowLink<Show> moveUp = new AjaxFlowLink<>("moveUp", Model.of(show), CatalogFlow.SHOWS_MOVE_UP);
                 moveUp.setVisible(item.getIndex() > 0);
 
-                final AjaxFlowLink<ShowTO> moveDown = new AjaxFlowLink<>("moveDown", Model.of(show), CatalogFlow.SHOWS_MOVE_DOWN);
+                final AjaxFlowLink<Show> moveDown = new AjaxFlowLink<>("moveDown", Model.of(show), CatalogFlow.SHOWS_MOVE_DOWN);
                 moveDown.setVisible(item.getIndex() < getModelObject().size() - 1);
 
-                final AjaxFlowLink<ShowTO> duplicate = new AjaxFlowLink<>("duplicate", Model.of(show), CatalogFlow.SHOWS_DUPLICATE);
+                final AjaxFlowLink<Show> duplicate = new AjaxFlowLink<>("duplicate", Model.of(show), CatalogFlow.SHOWS_DUPLICATE);
 
-                final AjaxFlowLink<ShowTO> edit = new AjaxFlowLink<>("edit", Model.of(show), CatalogFlow.SHOWS_UPDATE);
+                final AjaxFlowLink<Show> edit = new AjaxFlowLink<>("edit", Model.of(show), CatalogFlow.SHOWS_UPDATE);
 
-                final AjaxFlowLink<ShowTO> remove = new AjaxFlowLink<>("remove", Model.of(show), CatalogFlow.SHOWS_REMOVE);
+                final AjaxFlowLink<Show> remove = new AjaxFlowLink<>("remove", Model.of(show), CatalogFlow.SHOWS_REMOVE);
 
                 item.add(czechName, originalName, genres, seasonsCount, episodesCount, totalLength, picture, note, csfd, imdb, wikiCz, wikiEn, seasons, moveUp,
                         moveDown, duplicate, edit, remove);

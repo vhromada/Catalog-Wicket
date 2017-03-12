@@ -3,13 +3,14 @@ package cz.vhromada.catalog.web.shows.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.vhromada.catalog.commons.Time;
+import cz.vhromada.catalog.common.Time;
+import cz.vhromada.catalog.entity.Episode;
+import cz.vhromada.catalog.entity.Season;
+import cz.vhromada.catalog.entity.Show;
 import cz.vhromada.catalog.facade.EpisodeFacade;
 import cz.vhromada.catalog.facade.SeasonFacade;
 import cz.vhromada.catalog.facade.ShowFacade;
-import cz.vhromada.catalog.facade.to.EpisodeTO;
-import cz.vhromada.catalog.facade.to.SeasonTO;
-import cz.vhromada.catalog.facade.to.ShowTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -17,14 +18,13 @@ import cz.vhromada.catalog.web.shows.mo.ShowDataMO;
 import cz.vhromada.catalog.web.shows.mo.ShowsMO;
 import cz.vhromada.catalog.web.shows.panels.ShowsListPanel;
 import cz.vhromada.catalog.web.shows.panels.ShowsMenuPanel;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.result.Result;
 import cz.vhromada.web.wicket.controllers.Flow;
-import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for showing list of shows.
@@ -32,7 +32,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("showsListController")
-public class ShowsListController extends Controller<Void> {
+public class ShowsListController extends ResultController<Void> {
 
     /**
      * Facade for shows
@@ -63,9 +63,9 @@ public class ShowsListController extends Controller<Void> {
     public ShowsListController(final ShowFacade showFacade,
             final SeasonFacade seasonFacade,
             final EpisodeFacade episodeFacade) {
-        Validators.validateArgumentNotNull(showFacade, "Facade for shows");
-        Validators.validateArgumentNotNull(seasonFacade, "Facade for seasons");
-        Validators.validateArgumentNotNull(episodeFacade, "Facade for episodes");
+        Assert.notNull(showFacade, "Facade for shows mustn't be null.");
+        Assert.notNull(seasonFacade, "Facade for seasons mustn't be null.");
+        Assert.notNull(episodeFacade, "Facade for episodes mustn't be null.");
 
         this.showFacade = showFacade;
         this.seasonFacade = seasonFacade;
@@ -74,42 +74,139 @@ public class ShowsListController extends Controller<Void> {
 
     @Override
     public void handle(final Void data) {
-        final List<ShowDataMO> showDataList = new ArrayList<>();
-        for (final ShowTO show : showFacade.getShows()) {
-            final ShowDataMO showData = new ShowDataMO();
-            showData.setShow(show);
-            int seasonsCount = 0;
-            int episodesCount = 0;
-            int length = 0;
-            for (final SeasonTO season : seasonFacade.findSeasonsByShow(show)) {
-                seasonsCount++;
-                for (final EpisodeTO episode : episodeFacade.findEpisodesBySeason(season)) {
-                    episodesCount++;
-                    length += episode.getLength();
-                }
+        final Result<List<Show>> moviesResult = showFacade.getAll();
+        final Result<Integer> seasonsCountResult = showFacade.getSeasonsCount();
+        final Result<Integer> episodesCountResult = showFacade.getEpisodesCount();
+        final Result<Time> totalLengthResult = showFacade.getTotalLength();
+
+        addResults(moviesResult, seasonsCountResult, episodesCountResult, totalLengthResult);
+
+        if (isOk()) {
+            final List<ShowDataMO> showDataList = new ArrayList<>();
+            for (final Show show : showFacade.getAll().getData()) {
+                final ShowDataMO showData = new ShowDataMO();
+                showData.setShow(show);
+                final Data showInfoData = processSeasons(show);
+                showData.setSeasonsCount(showInfoData.getSeasonsCount());
+                showData.setEpisodesCount(showInfoData.getEpisodesCount());
+                showData.setTotalLength(new Time(showInfoData.getTotalLength()));
+                showDataList.add(showData);
             }
-            showData.setSeasonsCount(seasonsCount);
-            showData.setEpisodesCount(episodesCount);
-            showData.setTotalLength(new Time(length));
-            showDataList.add(showData);
+
+            final ShowsMO shows = new ShowsMO();
+            shows.setShows(showDataList);
+            shows.setSeasonsCount(seasonsCountResult.getData());
+            shows.setEpisodesCount(episodesCountResult.getData());
+            shows.setTotalLength(totalLengthResult.getData());
+            final PanelData<ShowsMO> panelData = new PanelData<>(ShowsListPanel.ID, Model.of(shows));
+            final PanelData<Void> menuData = new PanelData<>(ShowsMenuPanel.ID, null);
+
+            getUi().fireEvent(new PanelEvent(panelData, "Shows", menuData));
         }
-
-        final ShowsMO shows = new ShowsMO();
-        shows.setShows(showDataList);
-        shows.setSeasonsCount(showFacade.getSeasonsCount());
-        shows.setEpisodesCount(showFacade.getEpisodesCount());
-        shows.setTotalLength(showFacade.getTotalLength());
-        final PanelData<ShowsMO> panelData = new PanelData<>(ShowsListPanel.ID, Model.of(shows));
-        final PanelData<Void> menuData = new PanelData<>(ShowsMenuPanel.ID, null);
-
-        final PageEvent event = new PanelEvent(panelData, "Shows", menuData);
-
-        getUi().fireEvent(event);
     }
 
     @Override
     public Flow getFlow() {
         return CatalogFlow.SHOWS_LIST;
+    }
+
+    /**
+     * Process seasons.
+     *
+     * @param show show
+     * @return show data
+     */
+    private Data processSeasons(final Show show) {
+        final Data data = new Data();
+        final Result<List<Season>> seasonsResult = seasonFacade.find(show);
+
+        addResults(seasonsResult);
+
+        if (isOk()) {
+            for (final Season season : seasonsResult.getData()) {
+                data.add();
+
+                final Result<List<Episode>> episodesResult = episodeFacade.find(season);
+
+                addResults(episodesResult);
+
+                if (isOk()) {
+                    for (final Episode episode : episodeFacade.find(season).getData()) {
+                        data.add(episode.getLength());
+                    }
+                } else {
+                    break;
+                }
+            }
+        }
+
+        return data;
+    }
+
+    /**
+     * A class represents show data.
+     */
+    private static final class Data {
+
+        /**
+         * Count of seasons
+         */
+        private int seasonsCount;
+
+        /**
+         * Count of episodes
+         */
+        private int episodesCount;
+
+        /**
+         * Total length
+         */
+        private int totalLength;
+
+        /**
+         * Returns count of seasons.
+         *
+         * @return count of seasons
+         */
+        int getSeasonsCount() {
+            return seasonsCount;
+        }
+
+        /**
+         * Returns count of episodes.
+         *
+         * @return count of episodes
+         */
+        int getEpisodesCount() {
+            return episodesCount;
+        }
+
+        /**
+         * Returns total length.
+         *
+         * @return total length
+         */
+        int getTotalLength() {
+            return totalLength;
+        }
+
+        /**
+         * Adds data.
+         */
+        void add() {
+            this.seasonsCount++;
+        }
+
+        /**
+         * Adds data.
+         *
+         * @param length total length
+         */
+        void add(final int length) {
+            this.episodesCount++;
+            this.totalLength += length;
+        }
+
     }
 
 }

@@ -2,21 +2,21 @@ package cz.vhromada.catalog.web.genres.controllers;
 
 import java.util.List;
 
+import cz.vhromada.catalog.entity.Genre;
 import cz.vhromada.catalog.facade.GenreFacade;
-import cz.vhromada.catalog.facade.to.GenreTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.genres.panels.GenresListPanel;
 import cz.vhromada.catalog.web.genres.panels.GenresMenuPanel;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.result.Result;
 import cz.vhromada.web.wicket.controllers.Flow;
-import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for showing list of genres.
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("genresListController")
-public class GenresListController extends Controller<Void> {
+public class GenresListController extends ResultController<Void> {
 
     /**
      * Facade for genres
@@ -39,19 +39,23 @@ public class GenresListController extends Controller<Void> {
      */
     @Autowired
     public GenresListController(final GenreFacade genreFacade) {
-        Validators.validateArgumentNotNull(genreFacade, "Facade for genres");
+        Assert.notNull(genreFacade, "Facade for genres mustn't be null.");
 
         this.genreFacade = genreFacade;
     }
 
     @Override
     public void handle(final Void data) {
-        final PanelData<List<GenreTO>> panelData = new PanelData<>(GenresListPanel.ID, Model.ofList(genreFacade.getGenres()));
-        final PanelData<Void> menuData = new PanelData<>(GenresMenuPanel.ID, null);
+        final Result<List<Genre>> result = genreFacade.getAll();
 
-        final PageEvent event = new PanelEvent(panelData, "Genres", menuData);
+        addResults(result);
 
-        getUi().fireEvent(event);
+        if (processResult()) {
+            final PanelData<List<Genre>> panelData = new PanelData<>(GenresListPanel.ID, Model.ofList(result.getData()));
+            final PanelData<Void> menuData = new PanelData<>(GenresMenuPanel.ID, null);
+
+            getUi().fireEvent(new PanelEvent(panelData, "Genres", menuData));
+        }
     }
 
     @Override

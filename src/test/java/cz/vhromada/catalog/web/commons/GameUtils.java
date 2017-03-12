@@ -3,7 +3,7 @@ package cz.vhromada.catalog.web.commons;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import cz.vhromada.catalog.facade.to.GameTO;
+import cz.vhromada.catalog.entity.Game;
 import cz.vhromada.catalog.web.games.mo.GameMO;
 
 /**
@@ -46,12 +46,12 @@ public final class GameUtils {
     }
 
     /**
-     * Returns TO for game.
+     * Returns game.
      *
-     * @return TO for game
+     * @return game
      */
-    public static GameTO getGameTO() {
-        final GameTO game = new GameTO();
+    public static Game getGame() {
+        final Game game = new Game();
         game.setId(CatalogUtils.ID);
         game.setName(CatalogUtils.NAME);
         game.setWikiEn(CatalogUtils.EN_WIKI);
@@ -75,9 +75,9 @@ public final class GameUtils {
      * Asserts game deep equals.
      *
      * @param expected expected MO for game
-     * @param actual   actual TO for game
+     * @param actual   actual game
      */
-    public static void assertGameDeepEquals(final GameMO expected, final GameTO actual) {
+    public static void assertGameDeepEquals(final GameMO expected, final Game actual) {
         assertNotNull(actual);
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getName(), actual.getName());

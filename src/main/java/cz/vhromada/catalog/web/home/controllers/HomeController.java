@@ -6,7 +6,6 @@ import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.home.panels.HomePanel;
 import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
-import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.springframework.stereotype.Component;
 
@@ -22,9 +21,7 @@ public class HomeController extends Controller<Void> {
     public void handle(final Void data) {
         final PanelData<Void> panelData = new PanelData<>(HomePanel.ID, null);
 
-        final PageEvent event = new PanelEvent(panelData, "Catalog");
-
-        getUi().fireEvent(event);
+        getUi().fireEvent(new PanelEvent(panelData, "Catalog"));
     }
 
     @Override

@@ -3,7 +3,7 @@ package cz.vhromada.catalog.web.commons;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import cz.vhromada.catalog.facade.to.SongTO;
+import cz.vhromada.catalog.entity.Song;
 import cz.vhromada.catalog.web.songs.mo.SongMO;
 
 /**
@@ -36,12 +36,12 @@ public final class SongUtils {
     }
 
     /**
-     * Returns TO for song.
+     * Returns song.
      *
-     * @return TO for song
+     * @return song
      */
-    public static SongTO getSongTO() {
-        final SongTO song = new SongTO();
+    public static Song getSong() {
+        final Song song = new Song();
         song.setId(CatalogUtils.ID);
         song.setName(CatalogUtils.NAME);
         song.setLength(CatalogUtils.LENGTH);
@@ -55,9 +55,9 @@ public final class SongUtils {
      * Asserts song deep equals.
      *
      * @param expected expected MO for song
-     * @param actual   actual TO for song
+     * @param actual   actual song
      */
-    public static void assertSongDeepEquals(final SongMO expected, final SongTO actual) {
+    public static void assertSongDeepEquals(final SongMO expected, final Song actual) {
         assertNotNull(actual);
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getName(), actual.getName());

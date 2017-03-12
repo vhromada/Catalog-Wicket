@@ -137,7 +137,7 @@ public class SongMO implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof SongMO) || id == null) {
+        if (!(obj instanceof SongMO) || id == null) {
             return false;
         }
 

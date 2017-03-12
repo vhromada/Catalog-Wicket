@@ -100,7 +100,7 @@ public abstract class MediaPanel extends Panel {
      *
      * @param target AJAX request target
      */
-    protected abstract void onMediumAdd(final AjaxRequestTarget target);
+    protected abstract void onMediumAdd(AjaxRequestTarget target);
 
     /**
      * Returns validation behavior.
@@ -206,7 +206,7 @@ public abstract class MediaPanel extends Panel {
          *
          * @param target AJAX request target
          */
-        protected abstract void onMediumRemove(final AjaxRequestTarget target);
+        protected abstract void onMediumRemove(AjaxRequestTarget target);
 
     }
 

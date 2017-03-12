@@ -1,20 +1,24 @@
 package cz.vhromada.catalog.web.movies.controllers;
 
+import java.util.List;
+
+import cz.vhromada.catalog.common.Time;
+import cz.vhromada.catalog.entity.Movie;
 import cz.vhromada.catalog.facade.MovieFacade;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.movies.mo.MoviesMO;
 import cz.vhromada.catalog.web.movies.panels.MoviesListPanel;
 import cz.vhromada.catalog.web.movies.panels.MoviesMenuPanel;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.result.Result;
 import cz.vhromada.web.wicket.controllers.Flow;
-import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for showing list of movies.
@@ -22,7 +26,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("moviesListController")
-public class MoviesListController extends Controller<Void> {
+public class MoviesListController extends ResultController<Void> {
 
     /**
      * Facade for movies
@@ -37,23 +41,29 @@ public class MoviesListController extends Controller<Void> {
      */
     @Autowired
     public MoviesListController(final MovieFacade movieFacade) {
-        Validators.validateArgumentNotNull(movieFacade, "Facade for movies");
+        Assert.notNull(movieFacade, "Facade for movies mustn't be null.");
 
         this.movieFacade = movieFacade;
     }
 
     @Override
     public void handle(final Void data) {
-        final MoviesMO movies = new MoviesMO();
-        movies.setMovies(movieFacade.getMovies());
-        movies.setMediaCount(movieFacade.getTotalMediaCount());
-        movies.setTotalLength(movieFacade.getTotalLength());
-        final PanelData<MoviesMO> panelData = new PanelData<>(MoviesListPanel.ID, Model.of(movies));
-        final PanelData<Void> menuData = new PanelData<>(MoviesMenuPanel.ID, null);
+        final Result<List<Movie>> moviesResult = movieFacade.getAll();
+        final Result<Integer> mediaCountResult = movieFacade.getTotalMediaCount();
+        final Result<Time> totalLengthResult = movieFacade.getTotalLength();
 
-        final PageEvent event = new PanelEvent(panelData, "Movies", menuData);
+        addResults(moviesResult, mediaCountResult, totalLengthResult);
 
-        getUi().fireEvent(event);
+        if (processResult()) {
+            final MoviesMO movies = new MoviesMO();
+            movies.setMovies(moviesResult.getData());
+            movies.setMediaCount(mediaCountResult.getData());
+            movies.setTotalLength(totalLengthResult.getData());
+            final PanelData<MoviesMO> panelData = new PanelData<>(MoviesListPanel.ID, Model.of(movies));
+            final PanelData<Void> menuData = new PanelData<>(MoviesMenuPanel.ID, null);
+
+            getUi().fireEvent(new PanelEvent(panelData, "Movies", menuData));
+        }
     }
 
     @Override

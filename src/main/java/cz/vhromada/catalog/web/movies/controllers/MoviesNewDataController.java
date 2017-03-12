@@ -1,14 +1,14 @@
 package cz.vhromada.catalog.web.movies.controllers;
 
 import cz.vhromada.catalog.facade.MovieFacade;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for creating new data.
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("moviesNewDataController")
-public class MoviesNewDataController extends Controller<Void> {
+public class MoviesNewDataController extends ResultController<Void> {
 
     /**
      * Facade for movies
@@ -31,16 +31,18 @@ public class MoviesNewDataController extends Controller<Void> {
      */
     @Autowired
     public MoviesNewDataController(final MovieFacade movieFacade) {
-        Validators.validateArgumentNotNull(movieFacade, "Facade for movies");
+        Assert.notNull(movieFacade, "Facade for movies mustn't be null.");
 
         this.movieFacade = movieFacade;
     }
 
     @Override
     public void handle(final Void data) {
-        movieFacade.newData();
+        addResults(movieFacade.newData());
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.MOVIES_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.MOVIES_LIST, null));
+        }
     }
 
     @Override

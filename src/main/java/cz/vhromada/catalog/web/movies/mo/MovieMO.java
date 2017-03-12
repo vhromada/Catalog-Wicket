@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import cz.vhromada.catalog.commons.Language;
+import cz.vhromada.catalog.common.Language;
 import cz.vhromada.catalog.web.TimeMO;
 import cz.vhromada.catalog.web.genres.mo.GenreMO;
 
@@ -393,7 +393,7 @@ public class MovieMO implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof MovieMO) || id == null) {
+        if (!(obj instanceof MovieMO) || id == null) {
             return false;
         }
 

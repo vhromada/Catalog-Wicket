@@ -5,10 +5,10 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
-import cz.vhromada.catalog.commons.CollectionUtils;
-import cz.vhromada.catalog.commons.Language;
-import cz.vhromada.catalog.facade.to.MediumTO;
-import cz.vhromada.catalog.facade.to.MovieTO;
+import cz.vhromada.catalog.common.Language;
+import cz.vhromada.catalog.entity.Medium;
+import cz.vhromada.catalog.entity.Movie;
+import cz.vhromada.catalog.utils.CollectionUtils;
 import cz.vhromada.catalog.web.TimeMO;
 import cz.vhromada.catalog.web.movies.mo.MovieMO;
 
@@ -52,16 +52,16 @@ public final class MovieUtils {
     }
 
     /**
-     * Returns TO for movie.
+     * Returns movie.
      *
-     * @return TO for movie
+     * @return movie
      */
-    public static MovieTO getMovieTO() {
-        final MediumTO medium = new MediumTO();
+    public static Movie getMovie() {
+        final Medium medium = new Medium();
         medium.setNumber(1);
         medium.setLength(CatalogUtils.LENGTH);
 
-        final MovieTO movie = new MovieTO();
+        final Movie movie = new Movie();
         movie.setId(CatalogUtils.ID);
         movie.setCzechName("czName");
         movie.setOriginalName("origName");
@@ -76,7 +76,7 @@ public final class MovieUtils {
         movie.setNote(CatalogUtils.NOTE);
         movie.setPosition(CatalogUtils.POSITION);
         movie.setMedia(CollectionUtils.newList(medium));
-        movie.setGenres(CollectionUtils.newList(GenreUtils.getGenreTO()));
+        movie.setGenres(CollectionUtils.newList(GenreUtils.getGenre()));
 
         return movie;
     }
@@ -85,9 +85,9 @@ public final class MovieUtils {
      * Asserts movie deep equals.
      *
      * @param expected expected MO for movie
-     * @param actual   actual TO for movie
+     * @param actual   actual movie
      */
-    public static void assertMovieDeepEquals(final MovieMO expected, final MovieTO actual) {
+    public static void assertMovieDeepEquals(final MovieMO expected, final Movie actual) {
         assertNotNull(actual);
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getCzechName(), actual.getCzechName());
@@ -110,9 +110,9 @@ public final class MovieUtils {
      * Asserts media deep equals.
      *
      * @param expected expected list of MO for time
-     * @param actual   actual list of TO for medium
+     * @param actual   actual list of medium
      */
-    public static void assertMediaDeepEquals(final List<TimeMO> expected, final List<MediumTO> actual) {
+    public static void assertMediaDeepEquals(final List<TimeMO> expected, final List<Medium> actual) {
         assertNotNull(actual);
         assertEquals(expected.size(), actual.size());
         for (int i = 0; i < expected.size(); i++) {
@@ -124,10 +124,10 @@ public final class MovieUtils {
      * Asserts medium deep equals.
      *
      * @param expected expected MO for time
-     * @param actual   actual TO for medium
+     * @param actual   actual medium
      * @param index    index
      */
-    public static void assertMediumDeepEquals(final TimeMO expected, final MediumTO actual, final int index) {
+    public static void assertMediumDeepEquals(final TimeMO expected, final Medium actual, final int index) {
         assertNotNull(actual);
         assertEquals(index + 1, actual.getNumber());
         TimeUtils.assertTimeDeepEquals(expected, actual.getLength());

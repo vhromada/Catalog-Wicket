@@ -1,16 +1,16 @@
 package cz.vhromada.catalog.web.shows.controllers;
 
+import cz.vhromada.catalog.entity.Show;
 import cz.vhromada.catalog.facade.ShowFacade;
-import cz.vhromada.catalog.facade.to.ShowTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for removing show.
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("showsRemoveController")
-public class ShowsRemoveController extends Controller<IModel<ShowTO>> {
+public class ShowsRemoveController extends ResultController<IModel<Show>> {
 
     /**
      * Facade for shows
@@ -33,16 +33,18 @@ public class ShowsRemoveController extends Controller<IModel<ShowTO>> {
      */
     @Autowired
     public ShowsRemoveController(final ShowFacade showFacade) {
-        Validators.validateArgumentNotNull(showFacade, "Facade for shows");
+        Assert.notNull(showFacade, "Facade for shows mustn't be null.");
 
         this.showFacade = showFacade;
     }
 
     @Override
-    public void handle(final IModel<ShowTO> data) {
-        showFacade.remove(data.getObject());
+    public void handle(final IModel<Show> data) {
+        addResults(showFacade.remove(data.getObject()));
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.SHOWS_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.SHOWS_LIST, null));
+        }
     }
 
     @Override

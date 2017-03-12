@@ -10,7 +10,6 @@ import cz.vhromada.catalog.web.panels.AbstractFormPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
 import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
-import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.protocol.http.WebSession;
@@ -32,9 +31,7 @@ public class AddGameController extends Controller<Void> {
         final PanelData<GameMO> panelData = new PanelData<>(GameFormPanel.ID, new CompoundPropertyModel<>(new GameMO()));
         final PanelData<Void> menuData = new PanelData<>(GamesMenuPanel.ID, null);
 
-        final PageEvent event = new PanelEvent(panelData, "Add game", menuData);
-
-        getUi().fireEvent(event);
+        getUi().fireEvent(new PanelEvent(panelData, "Add game", menuData));
     }
 
     @Override

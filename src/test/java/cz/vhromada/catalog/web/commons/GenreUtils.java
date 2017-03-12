@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
-import cz.vhromada.catalog.facade.to.GenreTO;
+import cz.vhromada.catalog.entity.Genre;
 import cz.vhromada.catalog.web.genres.mo.GenreMO;
 
 /**
@@ -36,12 +36,12 @@ public final class GenreUtils {
     }
 
     /**
-     * Returns TO for genre.
+     * Returns genre.
      *
-     * @return TO for genre
+     * @return genre
      */
-    public static GenreTO getGenreTO() {
-        final GenreTO genre = new GenreTO();
+    public static Genre getGenre() {
+        final Genre genre = new Genre();
         genre.setId(CatalogUtils.ID);
         genre.setName(CatalogUtils.NAME);
         genre.setPosition(CatalogUtils.POSITION);
@@ -54,9 +54,9 @@ public final class GenreUtils {
      * Asserts genres deep equals.
      *
      * @param expected expected list of genres
-     * @param actual   actual list of TO for genre
+     * @param actual   actual list of genre
      */
-    public static void assertGenresDeepEquals(final List<GenreMO> expected, final List<GenreTO> actual) {
+    public static void assertGenresDeepEquals(final List<GenreMO> expected, final List<Genre> actual) {
         assertNotNull(actual);
         assertEquals(expected.size(), actual.size());
         for (int i = 0; i < expected.size(); i++) {
@@ -68,9 +68,9 @@ public final class GenreUtils {
      * Asserts genre deep equals.
      *
      * @param expected expected MO for genre
-     * @param actual   actual TO for genre
+     * @param actual   actual genre
      */
-    public static void assertGenreDeepEquals(final GenreMO expected, final GenreTO actual) {
+    public static void assertGenreDeepEquals(final GenreMO expected, final Genre actual) {
         assertNotNull(actual);
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getName(), actual.getName());

@@ -3,9 +3,9 @@ package cz.vhromada.catalog.web.commons;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import cz.vhromada.catalog.commons.CollectionUtils;
-import cz.vhromada.catalog.facade.to.MediumTO;
-import cz.vhromada.catalog.facade.to.ShowTO;
+import cz.vhromada.catalog.entity.Medium;
+import cz.vhromada.catalog.entity.Show;
+import cz.vhromada.catalog.utils.CollectionUtils;
 import cz.vhromada.catalog.web.shows.mo.ShowMO;
 
 /**
@@ -27,7 +27,7 @@ public final class ShowUtils {
      * @return MO for show
      */
     public static ShowMO getShowMO() {
-        final MediumTO medium = new MediumTO();
+        final Medium medium = new Medium();
         medium.setId(CatalogUtils.ID);
         medium.setNumber(CatalogUtils.NUMBER);
         medium.setLength(CatalogUtils.LENGTH);
@@ -49,17 +49,17 @@ public final class ShowUtils {
     }
 
     /**
-     * Returns TO for show.
+     * Returns show.
      *
-     * @return TO for show
+     * @return show
      */
-    public static ShowTO getShowTO() {
-        final MediumTO medium = new MediumTO();
+    public static Show getShow() {
+        final Medium medium = new Medium();
         medium.setId(CatalogUtils.ID);
         medium.setNumber(CatalogUtils.NUMBER);
         medium.setLength(CatalogUtils.LENGTH);
 
-        final ShowTO show = new ShowTO();
+        final Show show = new Show();
         show.setId(CatalogUtils.ID);
         show.setCzechName("czName");
         show.setOriginalName("origName");
@@ -70,7 +70,7 @@ public final class ShowUtils {
         show.setPicture("Picture");
         show.setNote(CatalogUtils.NOTE);
         show.setPosition(CatalogUtils.POSITION);
-        show.setGenres(CollectionUtils.newList(GenreUtils.getGenreTO()));
+        show.setGenres(CollectionUtils.newList(GenreUtils.getGenre()));
 
         return show;
     }
@@ -79,9 +79,9 @@ public final class ShowUtils {
      * Asserts show deep equals.
      *
      * @param expected expected MO for show
-     * @param actual   actual TO for show
+     * @param actual   actual show
      */
-    public static void assertShowDeepEquals(final ShowMO expected, final ShowTO actual) {
+    public static void assertShowDeepEquals(final ShowMO expected, final Show actual) {
         assertNotNull(actual);
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getCzechName(), actual.getCzechName());

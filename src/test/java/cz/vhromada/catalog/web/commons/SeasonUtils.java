@@ -3,9 +3,9 @@ package cz.vhromada.catalog.web.commons;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import cz.vhromada.catalog.commons.CollectionUtils;
-import cz.vhromada.catalog.commons.Language;
-import cz.vhromada.catalog.facade.to.SeasonTO;
+import cz.vhromada.catalog.common.Language;
+import cz.vhromada.catalog.entity.Season;
+import cz.vhromada.catalog.utils.CollectionUtils;
 import cz.vhromada.catalog.web.seasons.mo.SeasonMO;
 
 /**
@@ -41,12 +41,12 @@ public final class SeasonUtils {
     }
 
     /**
-     * Returns TO for season.
+     * Returns season.
      *
-     * @return TO for season
+     * @return season
      */
-    public static SeasonTO getSeasonTO() {
-        final SeasonTO season = new SeasonTO();
+    public static Season getSeason() {
+        final Season season = new Season();
         season.setId(CatalogUtils.ID);
         season.setNumber(CatalogUtils.NUMBER);
         season.setStartYear(CatalogUtils.YEAR);
@@ -63,9 +63,9 @@ public final class SeasonUtils {
      * Asserts season deep equals.
      *
      * @param expected expected MO for season
-     * @param actual   actual TO for season
+     * @param actual   actual season
      */
-    public static void assertSeasonDeepEquals(final SeasonMO expected, final SeasonTO actual) {
+    public static void assertSeasonDeepEquals(final SeasonMO expected, final Season actual) {
         assertNotNull(actual);
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getNumber().intValue(), actual.getNumber());

@@ -1,6 +1,6 @@
 package cz.vhromada.catalog.web.games.panels;
 
-import cz.vhromada.catalog.facade.to.GameTO;
+import cz.vhromada.catalog.entity.Game;
 import cz.vhromada.catalog.web.commons.FormatUtils;
 import cz.vhromada.catalog.web.components.WikipediaLink;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -13,7 +13,6 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -54,7 +53,7 @@ public class GamesListPanel extends GenericPanel<GamesMO> {
         final WebMarkupContainer gamesTable = new WebMarkupContainer("gamesTable");
         gamesTable.setVisible(!getModelObject().getGames().isEmpty());
 
-        final ListView<GameTO> games = new ListView<GameTO>("games", Model.ofList(getModelObject().getGames())) {
+        final ListView<Game> games = new ListView<Game>("games", getModelObject().getGames()) {
 
             /**
              * SerialVersionUID
@@ -62,8 +61,8 @@ public class GamesListPanel extends GenericPanel<GamesMO> {
             private static final long serialVersionUID = 1L;
 
             @Override
-            protected void populateItem(final ListItem<GameTO> item) {
-                final GameTO game = item.getModelObject();
+            protected void populateItem(final ListItem<Game> item) {
+                final Game game = item.getModelObject();
 
                 final Label name = new Label("name", game.getName());
 
@@ -77,17 +76,17 @@ public class GamesListPanel extends GenericPanel<GamesMO> {
 
                 final WikipediaLink wikiEn = new WikipediaLink("wikiEn", game.getWikiEn(), WikipediaLink.Country.EN);
 
-                final AjaxFlowLink<GameTO> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), CatalogFlow.GAMES_MOVE_UP);
+                final AjaxFlowLink<Game> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), CatalogFlow.GAMES_MOVE_UP);
                 moveUp.setVisible(item.getIndex() > 0);
 
-                final AjaxFlowLink<GameTO> moveDown = new AjaxFlowLink<>("moveDown", item.getModel(), CatalogFlow.GAMES_MOVE_DOWN);
+                final AjaxFlowLink<Game> moveDown = new AjaxFlowLink<>("moveDown", item.getModel(), CatalogFlow.GAMES_MOVE_DOWN);
                 moveDown.setVisible(item.getIndex() < getModelObject().size() - 1);
 
-                final AjaxFlowLink<GameTO> duplicate = new AjaxFlowLink<>("duplicate", item.getModel(), CatalogFlow.GAMES_DUPLICATE);
+                final AjaxFlowLink<Game> duplicate = new AjaxFlowLink<>("duplicate", item.getModel(), CatalogFlow.GAMES_DUPLICATE);
 
-                final AjaxFlowLink<GameTO> edit = new AjaxFlowLink<>("edit", item.getModel(), CatalogFlow.GAMES_UPDATE);
+                final AjaxFlowLink<Game> edit = new AjaxFlowLink<>("edit", item.getModel(), CatalogFlow.GAMES_UPDATE);
 
-                final AjaxFlowLink<GameTO> remove = new AjaxFlowLink<>("remove", item.getModel(), CatalogFlow.GAMES_REMOVE);
+                final AjaxFlowLink<Game> remove = new AjaxFlowLink<>("remove", item.getModel(), CatalogFlow.GAMES_REMOVE);
 
                 item.add(name, mediaCount, additionalData, note, wikiCz, wikiEn, moveUp, moveDown, duplicate, edit, remove);
             }
@@ -111,7 +110,7 @@ public class GamesListPanel extends GenericPanel<GamesMO> {
      * @param game TO for game
      * @return additional data
      */
-    private static String getAdditionalData(final GameTO game) {
+    private static String getAdditionalData(final Game game) {
         final StringBuilder result = new StringBuilder();
         if (game.getCrack()) {
             result.append("Crack");

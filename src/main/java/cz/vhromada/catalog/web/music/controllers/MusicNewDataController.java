@@ -1,14 +1,14 @@
 package cz.vhromada.catalog.web.music.controllers;
 
 import cz.vhromada.catalog.facade.MusicFacade;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for creating new data.
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("musicNewDataController")
-public class MusicNewDataController extends Controller<Void> {
+public class MusicNewDataController extends ResultController<Void> {
 
     /**
      * Facade for music
@@ -31,16 +31,18 @@ public class MusicNewDataController extends Controller<Void> {
      */
     @Autowired
     public MusicNewDataController(final MusicFacade musicFacade) {
-        Validators.validateArgumentNotNull(musicFacade, "Facade for music");
+        Assert.notNull(musicFacade, "Facade for music mustn't be null.");
 
         this.musicFacade = musicFacade;
     }
 
     @Override
     public void handle(final Void data) {
-        musicFacade.newData();
+        addResults(musicFacade.newData());
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.MUSIC_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.MUSIC_LIST, null));
+        }
     }
 
     @Override

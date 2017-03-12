@@ -2,7 +2,7 @@ package cz.vhromada.catalog.web.seasons.panels;
 
 import java.util.List;
 
-import cz.vhromada.catalog.facade.to.SeasonTO;
+import cz.vhromada.catalog.entity.Season;
 import cz.vhromada.catalog.web.commons.FormatUtils;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.seasons.mo.SeasonDataMO;
@@ -55,7 +55,7 @@ public class SeasonsListPanel extends GenericPanel<List<SeasonDataMO>> {
         final WebMarkupContainer seasonsTable = new WebMarkupContainer("seasonsTable");
         seasonsTable.setVisible(!getModelObject().isEmpty());
 
-        final ListView<SeasonDataMO> seasons = new ListView<SeasonDataMO>("seasons", Model.ofList(getModelObject())) {
+        final ListView<SeasonDataMO> seasons = new ListView<SeasonDataMO>("seasons", getModel()) {
 
             /**
              * SerialVersionUID
@@ -65,7 +65,7 @@ public class SeasonsListPanel extends GenericPanel<List<SeasonDataMO>> {
             @Override
             protected void populateItem(final ListItem<SeasonDataMO> item) {
                 final SeasonDataMO seasonData = item.getModelObject();
-                final SeasonTO season = seasonData.getSeason();
+                final Season season = seasonData.getSeason();
 
                 final Label number = new Label("number", season.getNumber());
 
@@ -81,19 +81,19 @@ public class SeasonsListPanel extends GenericPanel<List<SeasonDataMO>> {
 
                 final Label note = new Label("note", season.getNote());
 
-                final AjaxFlowLink<SeasonTO> episodes = new AjaxFlowLink<>("episodes", Model.of(season), CatalogFlow.SEASONS_EPISODES);
+                final AjaxFlowLink<Season> episodes = new AjaxFlowLink<>("episodes", Model.of(season), CatalogFlow.SEASONS_EPISODES);
 
-                final AjaxFlowLink<SeasonTO> moveUp = new AjaxFlowLink<>("moveUp", Model.of(season), CatalogFlow.SEASONS_MOVE_UP);
+                final AjaxFlowLink<Season> moveUp = new AjaxFlowLink<>("moveUp", Model.of(season), CatalogFlow.SEASONS_MOVE_UP);
                 moveUp.setVisible(item.getIndex() > 0);
 
-                final AjaxFlowLink<SeasonTO> moveDown = new AjaxFlowLink<>("moveDown", Model.of(season), CatalogFlow.SEASONS_MOVE_DOWN);
+                final AjaxFlowLink<Season> moveDown = new AjaxFlowLink<>("moveDown", Model.of(season), CatalogFlow.SEASONS_MOVE_DOWN);
                 moveDown.setVisible(item.getIndex() < getModelObject().size() - 1);
 
-                final AjaxFlowLink<SeasonTO> duplicate = new AjaxFlowLink<>("duplicate", Model.of(season), CatalogFlow.SEASONS_DUPLICATE);
+                final AjaxFlowLink<Season> duplicate = new AjaxFlowLink<>("duplicate", Model.of(season), CatalogFlow.SEASONS_DUPLICATE);
 
-                final AjaxFlowLink<SeasonTO> edit = new AjaxFlowLink<>("edit", Model.of(season), CatalogFlow.SEASONS_UPDATE);
+                final AjaxFlowLink<Season> edit = new AjaxFlowLink<>("edit", Model.of(season), CatalogFlow.SEASONS_UPDATE);
 
-                final AjaxFlowLink<SeasonTO> remove = new AjaxFlowLink<>("remove", Model.of(season), CatalogFlow.SEASONS_REMOVE);
+                final AjaxFlowLink<Season> remove = new AjaxFlowLink<>("remove", Model.of(season), CatalogFlow.SEASONS_REMOVE);
 
                 item.add(number, year, language, subtitles, episodesCount, totalLength, note, episodes, moveUp, moveDown, duplicate, edit, remove);
             }
@@ -113,7 +113,7 @@ public class SeasonsListPanel extends GenericPanel<List<SeasonDataMO>> {
      * @param season TO for season
      * @return year
      */
-    private static String getYear(final SeasonTO season) {
+    private static String getYear(final Season season) {
         final int startYear = season.getStartYear();
         final int endYear = season.getEndYear();
 

@@ -2,7 +2,9 @@ package cz.vhromada.catalog.web.converters;
 
 import static org.junit.Assert.assertNull;
 
-import cz.vhromada.catalog.facade.to.GenreTO;
+import cz.vhromada.catalog.CatalogConfiguration;
+import cz.vhromada.catalog.entity.Genre;
+import cz.vhromada.catalog.web.WicketApplication;
 import cz.vhromada.catalog.web.commons.GenreUtils;
 import cz.vhromada.catalog.web.genres.mo.GenreMO;
 import cz.vhromada.converters.Converter;
@@ -15,58 +17,57 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * A class represents test for converter from {@link GenreMO} to {@link GenreTO}.
+ * A class represents test for converter from {@link GenreMO} to {@link Genre}.
  *
  * @author Vladimir Hromada
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:webDozerMappingContext.xml")
+@ContextConfiguration(classes = WicketApplication.class)
 public class GenreConverterTest {
 
     /**
      * Instance of {@link Converter}
      */
     @Autowired
-    @Qualifier("webDozerConverter")
     private Converter converter;
 
     /**
-     * Test method for {@link Converter#convert(Object, Class)} from MO to TO.
+     * Test method for {@link Converter#convert(Object, Class)} from MO to entity.
      */
     @Test
-    public void testConvertGenreMO() {
+    public void convertGenreMO() {
         final GenreMO genreMO = GenreUtils.getGenreMO();
 
-        final GenreTO genreTO = converter.convert(genreMO, GenreTO.class);
+        final Genre genre = converter.convert(genreMO, Genre.class);
 
-        GenreUtils.assertGenreDeepEquals(genreMO, genreTO);
+        GenreUtils.assertGenreDeepEquals(genreMO, genre);
     }
 
     /**
-     * Test method for {@link Converter#convert(Object, Class)} from MO to TO with null argument.
+     * Test method for {@link Converter#convert(Object, Class)} from MO to entity with null MO for genre.
      */
     @Test
-    public void testConvertGenreMO_NullArgument() {
-        assertNull(converter.convert(null, GenreTO.class));
+    public void convertGenreMO_NullGenreMO() {
+        assertNull(converter.convert(null, Genre.class));
     }
 
     /**
-     * Test method for {@link Converter#convert(Object, Class)} from TO to MO.
+     * Test method for {@link Converter#convert(Object, Class)} from entity to MO.
      */
     @Test
-    public void testConvertGenreTO() {
-        final GenreTO genreTO = GenreUtils.getGenreTO();
+    public void convertGenre() {
+        final Genre genre = GenreUtils.getGenre();
 
-        final GenreMO genreMO = converter.convert(genreTO, GenreMO.class);
+        final GenreMO genreMO = converter.convert(genre, GenreMO.class);
 
-        GenreUtils.assertGenreDeepEquals(genreMO, genreTO);
+        GenreUtils.assertGenreDeepEquals(genreMO, genre);
     }
 
     /**
-     * Test method for {@link Converter#convert(Object, Class)} from TO to MO with null argument.
+     * Test method for {@link Converter#convert(Object, Class)} from entity to MO with null genre.
      */
     @Test
-    public void testConvertGenreTO_NullArgument() {
+    public void convertGenre_NullGenre() {
         assertNull(converter.convert(null, GenreMO.class));
     }
 

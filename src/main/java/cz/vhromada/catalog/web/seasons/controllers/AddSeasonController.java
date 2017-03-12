@@ -12,7 +12,6 @@ import cz.vhromada.catalog.web.seasons.panels.SeasonsMenuPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
 import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
-import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.protocol.http.WebSession;
@@ -36,9 +35,7 @@ public class AddSeasonController extends Controller<Void> {
         final PanelData<SeasonMO> panelData = new PanelData<>(SeasonFormPanel.ID, new CompoundPropertyModel<>(season));
         final PanelData<Void> menuData = new PanelData<>(SeasonsMenuPanel.ID, null);
 
-        final PageEvent event = new PanelEvent(panelData, "Add season", menuData);
-
-        getUi().fireEvent(event);
+        getUi().fireEvent(new PanelEvent(panelData, "Add season", menuData));
     }
 
     @Override

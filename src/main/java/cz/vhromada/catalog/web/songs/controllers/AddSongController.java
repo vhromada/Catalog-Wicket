@@ -10,7 +10,6 @@ import cz.vhromada.catalog.web.songs.panels.SongsMenuPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
 import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
-import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.protocol.http.WebSession;
@@ -32,9 +31,7 @@ public class AddSongController extends Controller<Void> {
         final PanelData<SongMO> panelData = new PanelData<>(SongFormPanel.ID, new CompoundPropertyModel<>(new SongMO()));
         final PanelData<Void> menuData = new PanelData<>(SongsMenuPanel.ID, null);
 
-        final PageEvent event = new PanelEvent(panelData, "Add song", menuData);
-
-        getUi().fireEvent(event);
+        getUi().fireEvent(new PanelEvent(panelData, "Add song", menuData));
     }
 
     @Override

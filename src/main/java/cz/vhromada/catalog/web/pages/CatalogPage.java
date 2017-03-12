@@ -89,6 +89,7 @@ public class CatalogPage extends WicketPage {
      * @param event  panel event
      * @param target AJAX request target
      */
+    @SuppressWarnings("unchecked")
     private void onPanelEvent(final PanelEvent event, final AjaxRequestTarget target) {
         title.setDefaultModelObject(event.getTitle());
 
@@ -111,4 +112,3 @@ public class CatalogPage extends WicketPage {
     }
 
 }
-

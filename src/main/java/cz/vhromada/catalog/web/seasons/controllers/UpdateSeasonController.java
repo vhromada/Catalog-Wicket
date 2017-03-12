@@ -2,7 +2,7 @@ package cz.vhromada.catalog.web.seasons.controllers;
 
 import java.util.ArrayList;
 
-import cz.vhromada.catalog.facade.to.SeasonTO;
+import cz.vhromada.catalog.entity.Season;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -12,17 +12,15 @@ import cz.vhromada.catalog.web.seasons.panels.SeasonFormPanel;
 import cz.vhromada.catalog.web.seasons.panels.SeasonsMenuPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
 import cz.vhromada.converters.Converter;
-import cz.vhromada.validators.Validators;
 import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
-import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.protocol.http.WebSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for seasoning form for updating season.
@@ -30,7 +28,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("updateSeasonController")
-public class UpdateSeasonController extends Controller<IModel<SeasonTO>> {
+public class UpdateSeasonController extends Controller<IModel<Season>> {
 
     /**
      * Converter
@@ -44,14 +42,14 @@ public class UpdateSeasonController extends Controller<IModel<SeasonTO>> {
      * @throws IllegalArgumentException if converter is null
      */
     @Autowired
-    public UpdateSeasonController(@Qualifier("webDozerConverter") final Converter converter) {
-        Validators.validateArgumentNotNull(converter, "converter");
+    public UpdateSeasonController(final Converter converter) {
+        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.converter = converter;
     }
 
     @Override
-    public void handle(final IModel<SeasonTO> data) {
+    public void handle(final IModel<Season> data) {
         final WebSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.SEASONS_UPDATE_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
@@ -62,9 +60,7 @@ public class UpdateSeasonController extends Controller<IModel<SeasonTO>> {
         final PanelData<SeasonMO> panelData = new PanelData<>(SeasonFormPanel.ID, new CompoundPropertyModel<>(season));
         final PanelData<Void> menuData = new PanelData<>(SeasonsMenuPanel.ID, null);
 
-        final PageEvent event = new PanelEvent(panelData, "Edit season", menuData);
-
-        getUi().fireEvent(event);
+        getUi().fireEvent(new PanelEvent(panelData, "Edit season", menuData));
     }
 
     @Override

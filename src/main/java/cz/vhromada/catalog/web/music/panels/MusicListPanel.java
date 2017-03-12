@@ -1,6 +1,6 @@
 package cz.vhromada.catalog.web.music.panels;
 
-import cz.vhromada.catalog.facade.to.MusicTO;
+import cz.vhromada.catalog.entity.Music;
 import cz.vhromada.catalog.web.components.WikipediaLink;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.music.mo.MusicDataMO;
@@ -54,7 +54,7 @@ public class MusicListPanel extends GenericPanel<MusicInfoMO> {
         final WebMarkupContainer musicTable = new WebMarkupContainer("musicTable");
         musicTable.setVisible(!getModelObject().getMusicData().isEmpty());
 
-        final ListView<MusicDataMO> music = new ListView<MusicDataMO>("music", Model.ofList(getModelObject().getMusicData())) {
+        final ListView<MusicDataMO> music = new ListView<MusicDataMO>("music", getModelObject().getMusicData()) {
 
             /**
              * SerialVersionUID
@@ -64,7 +64,7 @@ public class MusicListPanel extends GenericPanel<MusicInfoMO> {
             @Override
             protected void populateItem(final ListItem<MusicDataMO> item) {
                 final MusicDataMO musicData = item.getModelObject();
-                final MusicTO musicTO = musicData.getMusic();
+                final Music musicTO = musicData.getMusic();
 
                 final Label name = new Label("name", musicTO.getName());
 
@@ -80,19 +80,19 @@ public class MusicListPanel extends GenericPanel<MusicInfoMO> {
 
                 final WikipediaLink wikiEn = new WikipediaLink("wikiEn", musicTO.getWikiEn(), WikipediaLink.Country.EN);
 
-                final AjaxFlowLink<MusicTO> songs = new AjaxFlowLink<>("songs", Model.of(musicTO), CatalogFlow.MUSIC_SONGS);
+                final AjaxFlowLink<Music> songs = new AjaxFlowLink<>("songs", Model.of(musicTO), CatalogFlow.MUSIC_SONGS);
 
-                final AjaxFlowLink<MusicTO> moveUp = new AjaxFlowLink<>("moveUp", Model.of(musicTO), CatalogFlow.MUSIC_MOVE_UP);
+                final AjaxFlowLink<Music> moveUp = new AjaxFlowLink<>("moveUp", Model.of(musicTO), CatalogFlow.MUSIC_MOVE_UP);
                 moveUp.setVisible(item.getIndex() > 0);
 
-                final AjaxFlowLink<MusicTO> moveDown = new AjaxFlowLink<>("moveDown", Model.of(musicTO), CatalogFlow.MUSIC_MOVE_DOWN);
+                final AjaxFlowLink<Music> moveDown = new AjaxFlowLink<>("moveDown", Model.of(musicTO), CatalogFlow.MUSIC_MOVE_DOWN);
                 moveDown.setVisible(item.getIndex() < getModelObject().size() - 1);
 
-                final AjaxFlowLink<MusicTO> duplicate = new AjaxFlowLink<>("duplicate", Model.of(musicTO), CatalogFlow.MUSIC_DUPLICATE);
+                final AjaxFlowLink<Music> duplicate = new AjaxFlowLink<>("duplicate", Model.of(musicTO), CatalogFlow.MUSIC_DUPLICATE);
 
-                final AjaxFlowLink<MusicTO> edit = new AjaxFlowLink<>("edit", Model.of(musicTO), CatalogFlow.MUSIC_UPDATE);
+                final AjaxFlowLink<Music> edit = new AjaxFlowLink<>("edit", Model.of(musicTO), CatalogFlow.MUSIC_UPDATE);
 
-                final AjaxFlowLink<MusicTO> remove = new AjaxFlowLink<>("remove", Model.of(musicTO), CatalogFlow.MUSIC_REMOVE);
+                final AjaxFlowLink<Music> remove = new AjaxFlowLink<>("remove", Model.of(musicTO), CatalogFlow.MUSIC_REMOVE);
 
                 item.add(name, mediaCount, songsCount, totalLength, note, wikiCz, wikiEn, songs, moveUp, moveDown, duplicate, edit, remove);
             }

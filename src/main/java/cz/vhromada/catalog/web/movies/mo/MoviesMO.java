@@ -3,8 +3,8 @@ package cz.vhromada.catalog.web.movies.mo;
 import java.io.Serializable;
 import java.util.List;
 
-import cz.vhromada.catalog.commons.Time;
-import cz.vhromada.catalog.facade.to.MovieTO;
+import cz.vhromada.catalog.common.Time;
+import cz.vhromada.catalog.entity.Movie;
 
 /**
  * A class represents MO for movies.
@@ -21,7 +21,7 @@ public class MoviesMO implements Serializable {
     /**
      * List of movies
      */
-    private List<MovieTO> movies;
+    private List<Movie> movies;
 
     /**
      * Count of media
@@ -38,7 +38,7 @@ public class MoviesMO implements Serializable {
      *
      * @return list of movies
      */
-    public List<MovieTO> getMovies() {
+    public List<Movie> getMovies() {
         return movies;
     }
 
@@ -47,7 +47,7 @@ public class MoviesMO implements Serializable {
      *
      * @param movies new value
      */
-    public void setMovies(final List<MovieTO> movies) {
+    public void setMovies(final List<Movie> movies) {
         this.movies = movies;
     }
 

@@ -1,19 +1,18 @@
 package cz.vhromada.catalog.web.shows.controllers;
 
+import cz.vhromada.catalog.entity.Show;
 import cz.vhromada.catalog.facade.ShowFacade;
-import cz.vhromada.catalog.facade.to.ShowTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.shows.mo.ShowMO;
 import cz.vhromada.converters.Converter;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for updating show.
@@ -21,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("updateShowConfirmController")
-public class UpdateShowConfirmController extends Controller<IModel<ShowMO>> {
+public class UpdateShowConfirmController extends ResultController<IModel<ShowMO>> {
 
     /**
      * Facade for shows
@@ -43,9 +42,9 @@ public class UpdateShowConfirmController extends Controller<IModel<ShowMO>> {
      */
     @Autowired
     public UpdateShowConfirmController(final ShowFacade showFacade,
-            @Qualifier("webDozerConverter") final Converter converter) {
-        Validators.validateArgumentNotNull(showFacade, "Facade for shows");
-        Validators.validateArgumentNotNull(converter, "converter");
+            final Converter converter) {
+        Assert.notNull(showFacade, "Facade for shows mustn't be null.");
+        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.showFacade = showFacade;
         this.converter = converter;
@@ -53,9 +52,11 @@ public class UpdateShowConfirmController extends Controller<IModel<ShowMO>> {
 
     @Override
     public void handle(final IModel<ShowMO> data) {
-        showFacade.update(converter.convert(data.getObject(), ShowTO.class));
+        addResults(showFacade.update(converter.convert(data.getObject(), Show.class)));
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.SHOWS_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.SHOWS_LIST, null));
+        }
     }
 
     @Override

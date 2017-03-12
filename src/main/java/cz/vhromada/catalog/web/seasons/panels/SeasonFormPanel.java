@@ -1,6 +1,6 @@
 package cz.vhromada.catalog.web.seasons.panels;
 
-import cz.vhromada.catalog.commons.Constants;
+import cz.vhromada.catalog.utils.Constants;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.panels.AbstractFormPanel;
 import cz.vhromada.catalog.web.panels.MultipleLanguagesPanel;

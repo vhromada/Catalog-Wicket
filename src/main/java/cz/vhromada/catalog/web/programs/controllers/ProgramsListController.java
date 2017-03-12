@@ -1,20 +1,23 @@
 package cz.vhromada.catalog.web.programs.controllers;
 
+import java.util.List;
+
+import cz.vhromada.catalog.entity.Program;
 import cz.vhromada.catalog.facade.ProgramFacade;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.programs.mo.ProgramsMO;
 import cz.vhromada.catalog.web.programs.panels.ProgramsListPanel;
 import cz.vhromada.catalog.web.programs.panels.ProgramsMenuPanel;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.result.Result;
 import cz.vhromada.web.wicket.controllers.Flow;
-import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for showing list of programs.
@@ -22,7 +25,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("programsListController")
-public class ProgramsListController extends Controller<Void> {
+public class ProgramsListController extends ResultController<Void> {
 
     /**
      * Facade for programs
@@ -37,22 +40,27 @@ public class ProgramsListController extends Controller<Void> {
      */
     @Autowired
     public ProgramsListController(final ProgramFacade programFacade) {
-        Validators.validateArgumentNotNull(programFacade, "Facade for programs");
+        Assert.notNull(programFacade, "Facade for programs mustn't be null.");
 
         this.programFacade = programFacade;
     }
 
     @Override
     public void handle(final Void data) {
-        final ProgramsMO programs = new ProgramsMO();
-        programs.setPrograms(programFacade.getPrograms());
-        programs.setMediaCount(programFacade.getTotalMediaCount());
-        final PanelData<ProgramsMO> panelData = new PanelData<>(ProgramsListPanel.ID, Model.of(programs));
-        final PanelData<Void> menuData = new PanelData<>(ProgramsMenuPanel.ID, null);
+        final Result<List<Program>> programsResult = programFacade.getAll();
+        final Result<Integer> mediaCountResult = programFacade.getTotalMediaCount();
 
-        final PageEvent event = new PanelEvent(panelData, "Programs", menuData);
+        addResults(programsResult, mediaCountResult);
 
-        getUi().fireEvent(event);
+        if (processResult()) {
+            final ProgramsMO programs = new ProgramsMO();
+            programs.setPrograms(programsResult.getData());
+            programs.setMediaCount(mediaCountResult.getData());
+            final PanelData<ProgramsMO> panelData = new PanelData<>(ProgramsListPanel.ID, Model.of(programs));
+            final PanelData<Void> menuData = new PanelData<>(ProgramsMenuPanel.ID, null);
+
+            getUi().fireEvent(new PanelEvent(panelData, "Programs", menuData));
+        }
     }
 
     @Override

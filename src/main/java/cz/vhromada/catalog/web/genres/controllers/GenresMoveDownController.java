@@ -1,16 +1,16 @@
 package cz.vhromada.catalog.web.genres.controllers;
 
+import cz.vhromada.catalog.entity.Genre;
 import cz.vhromada.catalog.facade.GenreFacade;
-import cz.vhromada.catalog.facade.to.GenreTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for moving down genre.
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("genresMoveDownController")
-public class GenresMoveDownController extends Controller<IModel<GenreTO>> {
+public class GenresMoveDownController extends ResultController<IModel<Genre>> {
 
     /**
      * Facade for genres
@@ -33,16 +33,18 @@ public class GenresMoveDownController extends Controller<IModel<GenreTO>> {
      */
     @Autowired
     public GenresMoveDownController(final GenreFacade genreFacade) {
-        Validators.validateArgumentNotNull(genreFacade, "Facade for genres");
+        Assert.notNull(genreFacade, "Facade for genres mustn't be null.");
 
         this.genreFacade = genreFacade;
     }
 
     @Override
-    public void handle(final IModel<GenreTO> data) {
-        genreFacade.moveDown(data.getObject());
+    public void handle(final IModel<Genre> data) {
+        addResults(genreFacade.moveDown(data.getObject()));
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.GENRES_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.GENRES_LIST, null));
+        }
     }
 
     @Override

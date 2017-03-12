@@ -2,9 +2,9 @@ package cz.vhromada.catalog.web.movies.panels;
 
 import java.util.List;
 
-import cz.vhromada.catalog.commons.Time;
-import cz.vhromada.catalog.facade.to.MediumTO;
-import cz.vhromada.catalog.facade.to.MovieTO;
+import cz.vhromada.catalog.common.Time;
+import cz.vhromada.catalog.entity.Medium;
+import cz.vhromada.catalog.entity.Movie;
 import cz.vhromada.catalog.web.commons.FormatUtils;
 import cz.vhromada.catalog.web.components.CsfdLink;
 import cz.vhromada.catalog.web.components.ImdbLink;
@@ -60,7 +60,7 @@ public class MoviesListPanel extends GenericPanel<MoviesMO> {
         final WebMarkupContainer moviesTable = new WebMarkupContainer("moviesTable");
         moviesTable.setVisible(!getModelObject().getMovies().isEmpty());
 
-        final ListView<MovieTO> movies = new ListView<MovieTO>("movies", Model.ofList(getModelObject().getMovies())) {
+        final ListView<Movie> movies = new ListView<Movie>("movies", getModelObject().getMovies()) {
 
             /**
              * SerialVersionUID
@@ -68,8 +68,8 @@ public class MoviesListPanel extends GenericPanel<MoviesMO> {
             private static final long serialVersionUID = 1L;
 
             @Override
-            protected void populateItem(final ListItem<MovieTO> item) {
-                final MovieTO movie = item.getModelObject();
+            protected void populateItem(final ListItem<Movie> item) {
+                final Movie movie = item.getModelObject();
 
                 final Label czechName = new Label("czechName", movie.getCzechName());
 
@@ -99,17 +99,17 @@ public class MoviesListPanel extends GenericPanel<MoviesMO> {
 
                 final WikipediaLink wikiEn = new WikipediaLink("wikiEn", movie.getWikiEn(), WikipediaLink.Country.EN);
 
-                final AjaxFlowLink<MovieTO> moveUp = new AjaxFlowLink<>("moveUp", Model.of(movie), CatalogFlow.MOVIES_MOVE_UP);
+                final AjaxFlowLink<Movie> moveUp = new AjaxFlowLink<>("moveUp", Model.of(movie), CatalogFlow.MOVIES_MOVE_UP);
                 moveUp.setVisible(item.getIndex() > 0);
 
-                final AjaxFlowLink<MovieTO> moveDown = new AjaxFlowLink<>("moveDown", Model.of(movie), CatalogFlow.MOVIES_MOVE_DOWN);
+                final AjaxFlowLink<Movie> moveDown = new AjaxFlowLink<>("moveDown", Model.of(movie), CatalogFlow.MOVIES_MOVE_DOWN);
                 moveDown.setVisible(item.getIndex() < getModelObject().size() - 1);
 
-                final AjaxFlowLink<MovieTO> duplicate = new AjaxFlowLink<>("duplicate", Model.of(movie), CatalogFlow.MOVIES_DUPLICATE);
+                final AjaxFlowLink<Movie> duplicate = new AjaxFlowLink<>("duplicate", Model.of(movie), CatalogFlow.MOVIES_DUPLICATE);
 
-                final AjaxFlowLink<MovieTO> edit = new AjaxFlowLink<>("edit", Model.of(movie), CatalogFlow.MOVIES_UPDATE);
+                final AjaxFlowLink<Movie> edit = new AjaxFlowLink<>("edit", Model.of(movie), CatalogFlow.MOVIES_UPDATE);
 
-                final AjaxFlowLink<MovieTO> remove = new AjaxFlowLink<>("remove", Model.of(movie), CatalogFlow.MOVIES_REMOVE);
+                final AjaxFlowLink<Movie> remove = new AjaxFlowLink<>("remove", Model.of(movie), CatalogFlow.MOVIES_REMOVE);
 
                 item.add(czechName, originalName, genres, year, language, subtitles, media, totalLength, picture, note, csfd, imdb, wikiCz, wikiEn, moveUp,
                         moveDown, duplicate, edit, remove);
@@ -136,15 +136,15 @@ public class MoviesListPanel extends GenericPanel<MoviesMO> {
      * @param movie TO for movie
      * @return media
      */
-    private static String getMedia(final MovieTO movie) {
-        final List<MediumTO> media = movie.getMedia();
+    private static String getMedia(final Movie movie) {
+        final List<Medium> media = movie.getMedia();
 
         if (media == null || media.isEmpty()) {
             return "";
         }
 
         final StringBuilder result = new StringBuilder();
-        for (final MediumTO medium : media) {
+        for (final Medium medium : media) {
             result.append(new Time(medium.getLength()));
             result.append(", ");
         }
@@ -158,15 +158,15 @@ public class MoviesListPanel extends GenericPanel<MoviesMO> {
      * @param movie TO for movie
      * @return total length
      */
-    private static Time getTotalLength(final MovieTO movie) {
-        final List<MediumTO> media = movie.getMedia();
+    private static Time getTotalLength(final Movie movie) {
+        final List<Medium> media = movie.getMedia();
 
         if (media == null || media.isEmpty()) {
             return new Time(0);
         }
 
         int totalLength = 0;
-        for (final MediumTO medium : media) {
+        for (final Medium medium : media) {
             totalLength += medium.getLength();
         }
 

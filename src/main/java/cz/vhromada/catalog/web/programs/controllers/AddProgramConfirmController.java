@@ -1,19 +1,18 @@
 package cz.vhromada.catalog.web.programs.controllers;
 
+import cz.vhromada.catalog.entity.Program;
 import cz.vhromada.catalog.facade.ProgramFacade;
-import cz.vhromada.catalog.facade.to.ProgramTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.programs.mo.ProgramMO;
 import cz.vhromada.converters.Converter;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for adding program.
@@ -21,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("addProgramConfirmController")
-public class AddProgramConfirmController extends Controller<IModel<ProgramMO>> {
+public class AddProgramConfirmController extends ResultController<IModel<ProgramMO>> {
 
     /**
      * Facade for programs
@@ -43,9 +42,9 @@ public class AddProgramConfirmController extends Controller<IModel<ProgramMO>> {
      */
     @Autowired
     public AddProgramConfirmController(final ProgramFacade programFacade,
-            @Qualifier("webDozerConverter") final Converter converter) {
-        Validators.validateArgumentNotNull(programFacade, "Facade for programs");
-        Validators.validateArgumentNotNull(converter, "converter");
+            final Converter converter) {
+        Assert.notNull(programFacade, "Facade for programs mustn't be null.");
+        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.programFacade = programFacade;
         this.converter = converter;
@@ -53,9 +52,11 @@ public class AddProgramConfirmController extends Controller<IModel<ProgramMO>> {
 
     @Override
     public void handle(final IModel<ProgramMO> data) {
-        programFacade.add(converter.convert(data.getObject(), ProgramTO.class));
+        addResults(programFacade.add(converter.convert(data.getObject(), Program.class)));
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.PROGRAMS_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.PROGRAMS_LIST, null));
+        }
     }
 
     @Override

@@ -10,7 +10,6 @@ import cz.vhromada.catalog.web.programs.panels.ProgramsMenuPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
 import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
-import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.protocol.http.WebSession;
@@ -32,9 +31,7 @@ public class AddProgramController extends Controller<Void> {
         final PanelData<ProgramMO> panelData = new PanelData<>(ProgramFormPanel.ID, new CompoundPropertyModel<>(new ProgramMO()));
         final PanelData<Void> menuData = new PanelData<>(ProgramsMenuPanel.ID, null);
 
-        final PageEvent event = new PanelEvent(panelData, "Add program", menuData);
-
-        getUi().fireEvent(event);
+        getUi().fireEvent(new PanelEvent(panelData, "Add program", menuData));
     }
 
     @Override

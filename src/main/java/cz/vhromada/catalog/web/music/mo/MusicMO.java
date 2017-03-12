@@ -182,7 +182,7 @@ public class MusicMO implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof MusicMO) || id == null) {
+        if (!(obj instanceof MusicMO) || id == null) {
             return false;
         }
 

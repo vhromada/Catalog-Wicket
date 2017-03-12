@@ -3,7 +3,7 @@ package cz.vhromada.catalog.web.commons;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import cz.vhromada.catalog.facade.to.EpisodeTO;
+import cz.vhromada.catalog.entity.Episode;
 import cz.vhromada.catalog.web.episodes.mo.EpisodeMO;
 
 /**
@@ -37,12 +37,12 @@ public final class EpisodeUtils {
     }
 
     /**
-     * Returns TO for episode.
+     * Returns episode.
      *
-     * @return TO for episode
+     * @return episode
      */
-    public static EpisodeTO getEpisodeTO() {
-        final EpisodeTO episode = new EpisodeTO();
+    public static Episode getEpisode() {
+        final Episode episode = new Episode();
         episode.setId(CatalogUtils.ID);
         episode.setNumber(CatalogUtils.NUMBER);
         episode.setName(CatalogUtils.NAME);
@@ -57,9 +57,9 @@ public final class EpisodeUtils {
      * Asserts episode deep equals.
      *
      * @param expected expected MO for episode
-     * @param actual   actual TO for episode
+     * @param actual   actual episode
      */
-    public static void assertEpisodeDeepEquals(final EpisodeMO expected, final EpisodeTO actual) {
+    public static void assertEpisodeDeepEquals(final EpisodeMO expected, final Episode actual) {
         assertNotNull(actual);
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getNumber().intValue(), actual.getNumber());

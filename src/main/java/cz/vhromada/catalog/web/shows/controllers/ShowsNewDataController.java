@@ -1,14 +1,14 @@
 package cz.vhromada.catalog.web.shows.controllers;
 
 import cz.vhromada.catalog.facade.ShowFacade;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for creating new data.
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("showsNewDataController")
-public class ShowsNewDataController extends Controller<Void> {
+public class ShowsNewDataController extends ResultController<Void> {
 
     /**
      * Facade for shows
@@ -31,16 +31,18 @@ public class ShowsNewDataController extends Controller<Void> {
      */
     @Autowired
     public ShowsNewDataController(final ShowFacade showFacade) {
-        Validators.validateArgumentNotNull(showFacade, "Facade for shows");
+        Assert.notNull(showFacade, "Facade for shows mustn't be null.");
 
         this.showFacade = showFacade;
     }
 
     @Override
     public void handle(final Void data) {
-        showFacade.newData();
+        addResults(showFacade.newData());
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.SHOWS_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.SHOWS_LIST, null));
+        }
     }
 
     @Override

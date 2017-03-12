@@ -3,7 +3,7 @@ package cz.vhromada.catalog.web.commons;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import cz.vhromada.catalog.facade.to.ProgramTO;
+import cz.vhromada.catalog.entity.Program;
 import cz.vhromada.catalog.web.programs.mo.ProgramMO;
 
 /**
@@ -41,12 +41,12 @@ public final class ProgramUtils {
     }
 
     /**
-     * Returns TO for program.
+     * Returns program.
      *
-     * @return TO for program
+     * @return program
      */
-    public static ProgramTO getProgramTO() {
-        final ProgramTO program = new ProgramTO();
+    public static Program getProgram() {
+        final Program program = new Program();
         program.setId(CatalogUtils.ID);
         program.setName(CatalogUtils.NAME);
         program.setWikiEn(CatalogUtils.EN_WIKI);
@@ -65,9 +65,9 @@ public final class ProgramUtils {
      * Asserts program deep equals.
      *
      * @param expected expected MO for program
-     * @param actual   actual TO for program
+     * @param actual   actual program
      */
-    public static void assertProgramDeepEquals(final ProgramMO expected, final ProgramTO actual) {
+    public static void assertProgramDeepEquals(final ProgramMO expected, final Program actual) {
         assertNotNull(actual);
         assertNotNull(actual.getMediaCount());
         assertEquals(expected.getId(), actual.getId());

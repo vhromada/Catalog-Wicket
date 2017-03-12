@@ -1,6 +1,6 @@
 package cz.vhromada.catalog.web.movies.panels;
 
-import cz.vhromada.catalog.commons.Constants;
+import cz.vhromada.catalog.utils.Constants;
 import cz.vhromada.catalog.web.TimeMO;
 import cz.vhromada.catalog.web.components.GenresChoice;
 import cz.vhromada.catalog.web.flow.CatalogFlow;

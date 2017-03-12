@@ -1,14 +1,14 @@
 package cz.vhromada.catalog.web.games.controllers;
 
 import cz.vhromada.catalog.facade.GameFacade;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for updating positions.
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("gamesUpdatePositionsController")
-public class GamesUpdatePositionsController extends Controller<Void> {
+public class GamesUpdatePositionsController extends ResultController<Void> {
 
     /**
      * Facade for games
@@ -31,16 +31,18 @@ public class GamesUpdatePositionsController extends Controller<Void> {
      */
     @Autowired
     public GamesUpdatePositionsController(final GameFacade gameFacade) {
-        Validators.validateArgumentNotNull(gameFacade, "Facade for games");
+        Assert.notNull(gameFacade, "Facade for games mustn't be null.");
 
         this.gameFacade = gameFacade;
     }
 
     @Override
     public void handle(final Void data) {
-        gameFacade.updatePositions();
+        addResults(gameFacade.updatePositions());
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.GAMES_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.GAMES_LIST, null));
+        }
     }
 
     @Override

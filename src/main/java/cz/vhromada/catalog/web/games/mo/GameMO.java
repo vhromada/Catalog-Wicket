@@ -366,7 +366,7 @@ public class GameMO implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof GameMO) || id == null) {
+        if (!(obj instanceof GameMO) || id == null) {
             return false;
         }
 

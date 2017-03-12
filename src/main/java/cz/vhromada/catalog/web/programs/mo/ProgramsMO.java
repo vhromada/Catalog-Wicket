@@ -3,7 +3,7 @@ package cz.vhromada.catalog.web.programs.mo;
 import java.io.Serializable;
 import java.util.List;
 
-import cz.vhromada.catalog.facade.to.ProgramTO;
+import cz.vhromada.catalog.entity.Program;
 
 /**
  * A class represents MO for programs.
@@ -20,7 +20,7 @@ public class ProgramsMO implements Serializable {
     /**
      * List of programs
      */
-    private List<ProgramTO> programs;
+    private List<Program> programs;
 
     /**
      * Count of media
@@ -32,7 +32,7 @@ public class ProgramsMO implements Serializable {
      *
      * @return list of programs
      */
-    public List<ProgramTO> getPrograms() {
+    public List<Program> getPrograms() {
         return programs;
     }
 
@@ -41,7 +41,7 @@ public class ProgramsMO implements Serializable {
      *
      * @param programs new value
      */
-    public void setPrograms(final List<ProgramTO> programs) {
+    public void setPrograms(final List<Program> programs) {
         this.programs = programs;
     }
 

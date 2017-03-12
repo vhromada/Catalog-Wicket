@@ -3,7 +3,7 @@ package cz.vhromada.catalog.web.music.mo;
 import java.io.Serializable;
 import java.util.List;
 
-import cz.vhromada.catalog.commons.Time;
+import cz.vhromada.catalog.common.Time;
 
 /**
  * A class represents MO for music info

@@ -1,7 +1,8 @@
 package cz.vhromada.catalog.web.events;
 
-import cz.vhromada.validators.Validators;
 import cz.vhromada.web.wicket.events.PageEvent;
+
+import org.springframework.util.Assert;
 
 /**
  * A class represents event for calling showing panel.
@@ -47,8 +48,8 @@ public class PanelEvent implements PageEvent {
      *                                  or title is null
      */
     public PanelEvent(final PanelData panel, final String title, final PanelData menu) {
-        Validators.validateArgumentNotNull(panel, "Panel");
-        Validators.validateArgumentNotNull(title, "Title");
+        Assert.notNull(panel, "Panel mustn't be null.");
+        Assert.notNull(title, "Title mustn't be null.");
 
         this.panel = panel;
         this.title = title;

@@ -3,8 +3,8 @@ package cz.vhromada.catalog.web.shows.mo;
 import java.io.Serializable;
 import java.util.Objects;
 
-import cz.vhromada.catalog.commons.Time;
-import cz.vhromada.catalog.facade.to.ShowTO;
+import cz.vhromada.catalog.common.Time;
+import cz.vhromada.catalog.entity.Show;
 
 /**
  * A class represents MO for show data.
@@ -21,7 +21,7 @@ public class ShowDataMO implements Serializable {
     /**
      * Show
      */
-    private ShowTO show;
+    private Show show;
 
     /**
      * Count of seasons
@@ -43,7 +43,7 @@ public class ShowDataMO implements Serializable {
      *
      * @return show
      */
-    public ShowTO getShow() {
+    public Show getShow() {
         return show;
     }
 
@@ -52,7 +52,7 @@ public class ShowDataMO implements Serializable {
      *
      * @param show new value
      */
-    public void setShow(final ShowTO show) {
+    public void setShow(final Show show) {
         this.show = show;
     }
 

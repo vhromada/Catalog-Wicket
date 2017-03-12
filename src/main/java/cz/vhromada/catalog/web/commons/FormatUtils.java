@@ -2,8 +2,8 @@ package cz.vhromada.catalog.web.commons;
 
 import java.util.List;
 
-import cz.vhromada.catalog.commons.Language;
-import cz.vhromada.catalog.facade.to.GenreTO;
+import cz.vhromada.catalog.common.Language;
+import cz.vhromada.catalog.entity.Genre;
 
 /**
  * A class represents utility class for formatting.
@@ -60,16 +60,16 @@ public final class FormatUtils {
     /**
      * Returns genres.
      *
-     * @param genres list of TO for genre
+     * @param genres list of genres
      * @return genres
      */
-    public static String getGenres(final List<GenreTO> genres) {
+    public static String getGenres(final List<Genre> genres) {
         if (genres == null || genres.isEmpty()) {
             return "";
         }
 
         final StringBuilder result = new StringBuilder();
-        for (final GenreTO genre : genres) {
+        for (final Genre genre : genres) {
             result.append(genre.getName());
             result.append(", ");
         }

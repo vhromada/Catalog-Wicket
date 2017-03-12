@@ -37,4 +37,5 @@ public class ImdbLink extends WebLink<Integer> {
     protected boolean isLinkVisible() {
         return getModelObject() > 0;
     }
+
 }

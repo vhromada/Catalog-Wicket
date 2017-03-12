@@ -1,6 +1,6 @@
 package cz.vhromada.catalog.web.seasons.controllers;
 
-import cz.vhromada.catalog.facade.to.SeasonTO;
+import cz.vhromada.catalog.entity.Season;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.web.wicket.controllers.Controller;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("seasonEpisodesController")
-public class SeasonEpisodesController extends Controller<IModel<SeasonTO>> {
+public class SeasonEpisodesController extends Controller<IModel<Season>> {
 
     /**
      * Name of seasons attribute in session
@@ -24,7 +24,7 @@ public class SeasonEpisodesController extends Controller<IModel<SeasonTO>> {
     public static final String SEASON_ATTRIBUTE = "season";
 
     @Override
-    public void handle(final IModel<SeasonTO> data) {
+    public void handle(final IModel<Season> data) {
         final WebSession session = WebSession.get();
         session.setAttribute(SEASON_ATTRIBUTE, data.getObject());
 

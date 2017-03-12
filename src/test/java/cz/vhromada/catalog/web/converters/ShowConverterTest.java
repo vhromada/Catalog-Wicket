@@ -2,71 +2,69 @@ package cz.vhromada.catalog.web.converters;
 
 import static org.junit.Assert.assertNull;
 
-import cz.vhromada.catalog.facade.to.ShowTO;
+import cz.vhromada.catalog.entity.Show;
+import cz.vhromada.catalog.web.WicketApplication;
 import cz.vhromada.catalog.web.commons.ShowUtils;
 import cz.vhromada.catalog.web.shows.mo.ShowMO;
 import cz.vhromada.converters.Converter;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * A class represents test for converter from {@link ShowMO} to {@link ShowTO}.
+ * A class represents test for converter from {@link ShowMO} to {@link Show}.
  *
  * @author Vladimir Hromada
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:webDozerMappingContext.xml")
+@ContextConfiguration(classes = WicketApplication.class)
 public class ShowConverterTest {
 
     /**
      * Instance of {@link Converter}
      */
     @Autowired
-    @Qualifier("webDozerConverter")
     private Converter converter;
 
     /**
-     * Test method for {@link Converter#convert(Object, Class)} from MO to TO.
+     * Test method for {@link Converter#convert(Object, Class)} from MO to entity.
      */
     @Test
-    public void testConvertShowMO() {
+    public void convertShowMO() {
         final ShowMO showMO = ShowUtils.getShowMO();
 
-        final ShowTO showTO = converter.convert(showMO, ShowTO.class);
+        final Show show = converter.convert(showMO, Show.class);
 
-        ShowUtils.assertShowDeepEquals(showMO, showTO);
+        ShowUtils.assertShowDeepEquals(showMO, show);
     }
 
     /**
-     * Test method for {@link Converter#convert(Object, Class)} from MO to TO with null argument.
+     * Test method for {@link Converter#convert(Object, Class)} from MO to entity with null MO for show.
      */
     @Test
-    public void testConvertShowMO_NullArgument() {
-        assertNull(converter.convert(null, ShowTO.class));
+    public void convertShowMO_NullShowMO() {
+        assertNull(converter.convert(null, Show.class));
     }
 
     /**
-     * Test method for {@link Converter#convert(Object, Class)} from TO to MO.
+     * Test method for {@link Converter#convert(Object, Class)} from entity to MO.
      */
     @Test
-    public void testConvertShowTO() {
-        final ShowTO showTO = ShowUtils.getShowTO();
+    public void convertShow() {
+        final Show show = ShowUtils.getShow();
 
-        final ShowMO showMO = converter.convert(showTO, ShowMO.class);
+        final ShowMO showMO = converter.convert(show, ShowMO.class);
 
-        ShowUtils.assertShowDeepEquals(showMO, showTO);
+        ShowUtils.assertShowDeepEquals(showMO, show);
     }
 
     /**
-     * Test method for {@link Converter#convert(Object, Class)} from TO to MO with null argument.
+     * Test method for {@link Converter#convert(Object, Class)} from entity to MO with null show.
      */
     @Test
-    public void testConvertShowTO_NullArgument() {
+    public void convertShow_NullShow() {
         assertNull(converter.convert(null, ShowMO.class));
     }
 

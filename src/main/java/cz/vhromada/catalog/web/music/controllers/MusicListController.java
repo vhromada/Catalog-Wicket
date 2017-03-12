@@ -3,11 +3,12 @@ package cz.vhromada.catalog.web.music.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.vhromada.catalog.commons.Time;
+import cz.vhromada.catalog.common.Time;
+import cz.vhromada.catalog.entity.Music;
+import cz.vhromada.catalog.entity.Song;
 import cz.vhromada.catalog.facade.MusicFacade;
 import cz.vhromada.catalog.facade.SongFacade;
-import cz.vhromada.catalog.facade.to.MusicTO;
-import cz.vhromada.catalog.facade.to.SongTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -15,14 +16,13 @@ import cz.vhromada.catalog.web.music.mo.MusicDataMO;
 import cz.vhromada.catalog.web.music.mo.MusicInfoMO;
 import cz.vhromada.catalog.web.music.panels.MusicListPanel;
 import cz.vhromada.catalog.web.music.panels.MusicMenuPanel;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.result.Result;
 import cz.vhromada.web.wicket.controllers.Flow;
-import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for showing list of music.
@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("musicListController")
-public class MusicListController extends Controller<Void> {
+public class MusicListController extends ResultController<Void> {
 
     /**
      * Facade for music
@@ -53,8 +53,8 @@ public class MusicListController extends Controller<Void> {
     @Autowired
     public MusicListController(final MusicFacade musicFacade,
             final SongFacade songFacade) {
-        Validators.validateArgumentNotNull(musicFacade, "Facade for music");
-        Validators.validateArgumentNotNull(songFacade, "Facade for songs");
+        Assert.notNull(musicFacade, "Facade for music mustn't be null.");
+        Assert.notNull(songFacade, "Facade for songs mustn't be null.");
 
         this.musicFacade = musicFacade;
         this.songFacade = songFacade;
@@ -62,37 +62,105 @@ public class MusicListController extends Controller<Void> {
 
     @Override
     public void handle(final Void data) {
-        final List<MusicDataMO> musicDataList = new ArrayList<>();
-        for (final MusicTO music : musicFacade.getMusic()) {
-            final MusicDataMO musicData = new MusicDataMO();
-            musicData.setMusic(music);
-            int count = 0;
-            int length = 0;
-            for (final SongTO song : songFacade.findSongsByMusic(music)) {
-                count++;
-                length += song.getLength();
+        final Result<List<Music>> musicResult = musicFacade.getAll();
+        final Result<Integer> mediaCountResult = musicFacade.getTotalMediaCount();
+        final Result<Integer> songsCountResult = musicFacade.getSongsCount();
+        final Result<Time> totalLengthResult = musicFacade.getTotalLength();
+
+        addResults(musicResult, mediaCountResult, songsCountResult, totalLengthResult);
+
+        if (isOk()) {
+            final List<MusicDataMO> musicDataList = new ArrayList<>();
+            for (final Music music : musicResult.getData()) {
+                final MusicDataMO musicData = new MusicDataMO();
+                musicData.setMusic(music);
+                final Data musicInfoData = processSongs(music);
+                musicData.setSongsCount(musicInfoData.getSongsCount());
+                musicData.setTotalLength(new Time(musicInfoData.getTotalLength()));
+                musicDataList.add(musicData);
             }
-            musicData.setSongsCount(count);
-            musicData.setTotalLength(new Time(length));
-            musicDataList.add(musicData);
+
+            final MusicInfoMO musicInfo = new MusicInfoMO();
+            musicInfo.setMusicData(musicDataList);
+            musicInfo.setMediaCount(mediaCountResult.getData());
+            musicInfo.setSongsCount(songsCountResult.getData());
+            musicInfo.setTotalLength(totalLengthResult.getData());
+            final PanelData<MusicInfoMO> panelData = new PanelData<>(MusicListPanel.ID, Model.of(musicInfo));
+            final PanelData<Void> menuData = new PanelData<>(MusicMenuPanel.ID, null);
+
+            getUi().fireEvent(new PanelEvent(panelData, "Music", menuData));
         }
-
-        final MusicInfoMO musicInfo = new MusicInfoMO();
-        musicInfo.setMusicData(musicDataList);
-        musicInfo.setMediaCount(musicFacade.getTotalMediaCount());
-        musicInfo.setSongsCount(musicFacade.getSongsCount());
-        musicInfo.setTotalLength(musicFacade.getTotalLength());
-        final PanelData<MusicInfoMO> panelData = new PanelData<>(MusicListPanel.ID, Model.of(musicInfo));
-        final PanelData<Void> menuData = new PanelData<>(MusicMenuPanel.ID, null);
-
-        final PageEvent event = new PanelEvent(panelData, "Music", menuData);
-
-        getUi().fireEvent(event);
     }
 
     @Override
     public Flow getFlow() {
         return CatalogFlow.MUSIC_LIST;
+    }
+
+    /**
+     * Process songs.
+     *
+     * @param music music
+     * @return music data
+     */
+    private Data processSongs(final Music music) {
+        final Data data = new Data();
+        final Result<List<Song>> result = songFacade.find(music);
+
+        addResults(result);
+
+        if (isOk()) {
+            for (final Song song : result.getData()) {
+                data.add(song.getLength());
+            }
+        }
+
+        return data;
+    }
+
+    /**
+     * A class represents music data.
+     */
+    private static final class Data {
+
+        /**
+         * Count of songs
+         */
+        private int songsCount;
+
+        /**
+         * Total length
+         */
+        private int totalLength;
+
+        /**
+         * Returns count of songs.
+         *
+         * @return count of songs
+         */
+        int getSongsCount() {
+            return songsCount;
+        }
+
+        /**
+         * Returns total length.
+         *
+         * @return total length
+         */
+        int getTotalLength() {
+            return totalLength;
+        }
+
+        /**
+         * Adds data.
+         *
+         * @param length total length
+         */
+        void add(final int length) {
+            this.songsCount++;
+            this.totalLength += length;
+        }
+
     }
 
 }

@@ -2,9 +2,10 @@ package cz.vhromada.catalog.web.episodes.controllers;
 
 import java.util.List;
 
+import cz.vhromada.catalog.entity.Episode;
+import cz.vhromada.catalog.entity.Season;
 import cz.vhromada.catalog.facade.EpisodeFacade;
-import cz.vhromada.catalog.facade.to.EpisodeTO;
-import cz.vhromada.catalog.facade.to.SeasonTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.episodes.panels.EpisodesListPanel;
 import cz.vhromada.catalog.web.episodes.panels.EpisodesMenuPanel;
 import cz.vhromada.catalog.web.events.PanelData;
@@ -12,14 +13,13 @@ import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.seasons.controllers.SeasonEpisodesController;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.result.Result;
 import cz.vhromada.web.wicket.controllers.Flow;
-import cz.vhromada.web.wicket.events.PageEvent;
 
 import org.apache.wicket.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for showing list of episodes.
@@ -27,7 +27,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("episodesListController")
-public class EpisodesListController extends Controller<Void> {
+public class EpisodesListController extends ResultController<Void> {
 
     /**
      * Facade for episodes
@@ -42,20 +42,24 @@ public class EpisodesListController extends Controller<Void> {
      */
     @Autowired
     public EpisodesListController(final EpisodeFacade episodeFacade) {
-        Validators.validateArgumentNotNull(episodeFacade, "Facade for episodes");
+        Assert.notNull(episodeFacade, "Facade for episodes mustn't be null.");
 
         this.episodeFacade = episodeFacade;
     }
 
     @Override
     public void handle(final Void data) {
-        final SeasonTO season = CatalogApplication.getSessionAttribute(SeasonEpisodesController.SEASON_ATTRIBUTE);
-        final PanelData<List<EpisodeTO>> panelData = new PanelData<>(EpisodesListPanel.ID, Model.ofList(episodeFacade.findEpisodesBySeason(season)));
-        final PanelData<Void> menuData = new PanelData<>(EpisodesMenuPanel.ID, null);
+        final Season season = CatalogApplication.getSessionAttribute(SeasonEpisodesController.SEASON_ATTRIBUTE);
+        final Result<List<Episode>> result = episodeFacade.find(season);
 
-        final PageEvent event = new PanelEvent(panelData, "Episodes", menuData);
+        addResults(result);
 
-        getUi().fireEvent(event);
+        if (processResult()) {
+            final PanelData<List<Episode>> panelData = new PanelData<>(EpisodesListPanel.ID, Model.ofList(result.getData()));
+            final PanelData<Void> menuData = new PanelData<>(EpisodesMenuPanel.ID, null);
+
+            getUi().fireEvent(new PanelEvent(panelData, "Episodes", menuData));
+        }
     }
 
     @Override

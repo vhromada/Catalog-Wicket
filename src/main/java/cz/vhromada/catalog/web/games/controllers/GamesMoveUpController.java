@@ -1,16 +1,16 @@
 package cz.vhromada.catalog.web.games.controllers;
 
+import cz.vhromada.catalog.entity.Game;
 import cz.vhromada.catalog.facade.GameFacade;
-import cz.vhromada.catalog.facade.to.GameTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for moving up game.
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("gamesMoveUpController")
-public class GamesMoveUpController extends Controller<IModel<GameTO>> {
+public class GamesMoveUpController extends ResultController<IModel<Game>> {
 
     /**
      * Facade for games
@@ -33,16 +33,18 @@ public class GamesMoveUpController extends Controller<IModel<GameTO>> {
      */
     @Autowired
     public GamesMoveUpController(final GameFacade gameFacade) {
-        Validators.validateArgumentNotNull(gameFacade, "Facade for games");
+        Assert.notNull(gameFacade, "Facade for games mustn't be null.");
 
         this.gameFacade = gameFacade;
     }
 
     @Override
-    public void handle(final IModel<GameTO> data) {
-        gameFacade.moveUp(data.getObject());
+    public void handle(final IModel<Game> data) {
+        addResults(gameFacade.duplicate(data.getObject()));
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.GAMES_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.GAMES_LIST, null));
+        }
     }
 
     @Override

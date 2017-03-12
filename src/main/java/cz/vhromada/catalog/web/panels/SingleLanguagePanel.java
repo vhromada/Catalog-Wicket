@@ -2,7 +2,7 @@ package cz.vhromada.catalog.web.panels;
 
 import java.util.Arrays;
 
-import cz.vhromada.catalog.commons.Language;
+import cz.vhromada.catalog.common.Language;
 
 import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
 import org.apache.wicket.markup.html.basic.Label;

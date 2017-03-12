@@ -1,19 +1,18 @@
 package cz.vhromada.catalog.web.music.controllers;
 
+import cz.vhromada.catalog.entity.Music;
 import cz.vhromada.catalog.facade.MusicFacade;
-import cz.vhromada.catalog.facade.to.MusicTO;
+import cz.vhromada.catalog.web.commons.ResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.music.mo.MusicMO;
 import cz.vhromada.converters.Converter;
-import cz.vhromada.validators.Validators;
-import cz.vhromada.web.wicket.controllers.Controller;
 import cz.vhromada.web.wicket.controllers.Flow;
 
 import org.apache.wicket.model.IModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 /**
  * A class represents controller for adding music.
@@ -21,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Hromada
  */
 @Component("addMusicConfirmController")
-public class AddMusicConfirmController extends Controller<IModel<MusicMO>> {
+public class AddMusicConfirmController extends ResultController<IModel<MusicMO>> {
 
     /**
      * Facade for music
@@ -43,9 +42,9 @@ public class AddMusicConfirmController extends Controller<IModel<MusicMO>> {
      */
     @Autowired
     public AddMusicConfirmController(final MusicFacade musicFacade,
-            @Qualifier("webDozerConverter") final Converter converter) {
-        Validators.validateArgumentNotNull(musicFacade, "Facade for music");
-        Validators.validateArgumentNotNull(converter, "converter");
+            final Converter converter) {
+        Assert.notNull(musicFacade, "Facade for music mustn't be null.");
+        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.musicFacade = musicFacade;
         this.converter = converter;
@@ -53,9 +52,11 @@ public class AddMusicConfirmController extends Controller<IModel<MusicMO>> {
 
     @Override
     public void handle(final IModel<MusicMO> data) {
-        musicFacade.add(converter.convert(data.getObject(), MusicTO.class));
+        addResults(musicFacade.add(converter.convert(data.getObject(), Music.class)));
 
-        getUi().fireEvent(new ControllerEvent(CatalogFlow.MUSIC_LIST, null));
+        if (processResult()) {
+            getUi().fireEvent(new ControllerEvent(CatalogFlow.MUSIC_LIST, null));
+        }
     }
 
     @Override
