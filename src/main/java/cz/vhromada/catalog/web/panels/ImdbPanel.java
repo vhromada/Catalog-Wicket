@@ -2,6 +2,7 @@ package cz.vhromada.catalog.web.panels;
 
 import cz.vhromada.catalog.utils.Constants;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.form.AjaxCheckBox;
@@ -16,6 +17,7 @@ import org.apache.wicket.validation.validator.RangeValidator;
  *
  * @author Vladimir Hromada
  */
+@SuppressFBWarnings("CD_CIRCULAR_DEPENDENCY")
 public abstract class ImdbPanel extends Panel {
 
     /**

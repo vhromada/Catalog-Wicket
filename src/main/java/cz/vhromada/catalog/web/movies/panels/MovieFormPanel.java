@@ -11,6 +11,7 @@ import cz.vhromada.catalog.web.panels.MultipleLanguagesPanel;
 import cz.vhromada.catalog.web.panels.SingleLanguagePanel;
 import cz.vhromada.web.wicket.controllers.Flow;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
@@ -32,6 +33,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(MovieFormPanel.ID)
 @Scope("prototype")
+@SuppressFBWarnings("CD_CIRCULAR_DEPENDENCY")
 public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
 
     /**

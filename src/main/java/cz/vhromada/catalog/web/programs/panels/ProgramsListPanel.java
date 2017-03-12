@@ -1,5 +1,7 @@
 package cz.vhromada.catalog.web.programs.panels;
 
+import java.util.List;
+
 import cz.vhromada.catalog.entity.Program;
 import cz.vhromada.catalog.web.common.FormatUtils;
 import cz.vhromada.catalog.web.components.WikipediaLink;
@@ -53,45 +55,7 @@ public class ProgramsListPanel extends GenericPanel<ProgramsMO> {
         final WebMarkupContainer programsTable = new WebMarkupContainer("programsTable");
         programsTable.setVisible(!getModelObject().getPrograms().isEmpty());
 
-        final ListView<Program> programs = new ListView<Program>("programs", getModelObject().getPrograms()) {
-
-            /**
-             * SerialVersionUID
-             */
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            protected void populateItem(final ListItem<Program> item) {
-                final Program program = item.getModelObject();
-
-                final Label name = new Label("name", program.getName());
-
-                final Label mediaCount = new Label("mediaCount", program.getMediaCount());
-
-                final Label additionalData = new Label("additionalData", getAdditionalData(program));
-
-                final Label note = new Label("note", program.getNote());
-
-                final WikipediaLink wikiCz = new WikipediaLink("wikiCz", program.getWikiCz(), WikipediaLink.Country.CZ);
-
-                final WikipediaLink wikiEn = new WikipediaLink("wikiEn", program.getWikiEn(), WikipediaLink.Country.EN);
-
-                final AjaxFlowLink<Program> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), CatalogFlow.PROGRAMS_MOVE_UP);
-                moveUp.setVisible(item.getIndex() > 0);
-
-                final AjaxFlowLink<Program> moveDown = new AjaxFlowLink<>("moveDown", item.getModel(), CatalogFlow.PROGRAMS_MOVE_DOWN);
-                moveDown.setVisible(item.getIndex() < getModelObject().size() - 1);
-
-                final AjaxFlowLink<Program> duplicate = new AjaxFlowLink<>("duplicate", item.getModel(), CatalogFlow.PROGRAMS_DUPLICATE);
-
-                final AjaxFlowLink<Program> edit = new AjaxFlowLink<>("edit", item.getModel(), CatalogFlow.PROGRAMS_UPDATE);
-
-                final AjaxFlowLink<Program> remove = new AjaxFlowLink<>("remove", item.getModel(), CatalogFlow.PROGRAMS_REMOVE);
-
-                item.add(name, mediaCount, additionalData, note, wikiCz, wikiEn, moveUp, moveDown, duplicate, edit, remove);
-            }
-
-        };
+        final ListView<Program> programs = new ProgramsListView("programs", getModelObject().getPrograms());
 
         final WebMarkupContainer noPrograms = new WebMarkupContainer("noPrograms");
         noPrograms.setVisible(getModelObject().getPrograms().isEmpty());
@@ -105,25 +69,79 @@ public class ProgramsListPanel extends GenericPanel<ProgramsMO> {
     }
 
     /**
-     * Returns additional data.
-     *
-     * @param program program
-     * @return additional data
+     * A class represents list view with programs.
      */
-    private static String getAdditionalData(final Program program) {
-        final StringBuilder result = new StringBuilder();
-        if (program.getCrack()) {
-            result.append("Crack");
-        }
-        FormatUtils.addToResult(result, program.getSerialKey(), "serial key");
-        if (program.getOtherData() != null && !program.getOtherData().isEmpty()) {
-            if (result.length() != 0) {
-                result.append(", ");
-            }
-            result.append(program.getOtherData());
+    private static final class ProgramsListView extends ListView<Program> {
+
+        /**
+         * SerialVersionUID
+         */
+        private static final long serialVersionUID = 1L;
+
+        /**
+         * Creates a new instance of ProgramsListView.
+         *
+         * @param id   ID
+         * @param list list of programs
+         * @throws org.apache.wicket.WicketRuntimeException if ID is null
+         */
+        ProgramsListView(final String id, final List<Program> list) {
+            super(id, list);
         }
 
-        return result.toString();
+        @Override
+        protected void populateItem(final ListItem<Program> item) {
+            final Program program = item.getModelObject();
+
+            final Label name = new Label("name", program.getName());
+
+            final Label mediaCount = new Label("mediaCount", program.getMediaCount());
+
+            final Label additionalData = new Label("additionalData", getAdditionalData(program));
+
+            final Label note = new Label("note", program.getNote());
+
+            final WikipediaLink wikiCz = new WikipediaLink("wikiCz", program.getWikiCz(), WikipediaLink.Country.CZ);
+
+            final WikipediaLink wikiEn = new WikipediaLink("wikiEn", program.getWikiEn(), WikipediaLink.Country.EN);
+
+            final AjaxFlowLink<Program> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), CatalogFlow.PROGRAMS_MOVE_UP);
+            moveUp.setVisible(item.getIndex() > 0);
+
+            final AjaxFlowLink<Program> moveDown = new AjaxFlowLink<>("moveDown", item.getModel(), CatalogFlow.PROGRAMS_MOVE_DOWN);
+            moveDown.setVisible(item.getIndex() < getModelObject().size() - 1);
+
+            final AjaxFlowLink<Program> duplicate = new AjaxFlowLink<>("duplicate", item.getModel(), CatalogFlow.PROGRAMS_DUPLICATE);
+
+            final AjaxFlowLink<Program> edit = new AjaxFlowLink<>("edit", item.getModel(), CatalogFlow.PROGRAMS_UPDATE);
+
+            final AjaxFlowLink<Program> remove = new AjaxFlowLink<>("remove", item.getModel(), CatalogFlow.PROGRAMS_REMOVE);
+
+            item.add(name, mediaCount, additionalData, note, wikiCz, wikiEn, moveUp, moveDown, duplicate, edit, remove);
+        }
+
+        /**
+         * Returns additional data.
+         *
+         * @param program program
+         * @return additional data
+         */
+        private static String getAdditionalData(final Program program) {
+            final StringBuilder result = new StringBuilder();
+            if (program.getCrack()) {
+                result.append("Crack");
+            }
+            FormatUtils.addToResult(result, program.getSerialKey(), "serial key");
+            if (program.getOtherData() != null && !program.getOtherData().isEmpty()) {
+                if (result.length() != 0) {
+                    result.append(", ");
+                }
+                result.append(program.getOtherData());
+            }
+
+            return result.toString();
+        }
+
     }
 
 }

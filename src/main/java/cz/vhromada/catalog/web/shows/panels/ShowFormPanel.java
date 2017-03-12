@@ -7,6 +7,7 @@ import cz.vhromada.catalog.web.panels.ImdbPanel;
 import cz.vhromada.catalog.web.shows.mo.ShowMO;
 import cz.vhromada.web.wicket.controllers.Flow;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(ShowFormPanel.ID)
 @Scope("prototype")
+@SuppressFBWarnings("CD_CIRCULAR_DEPENDENCY")
 public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
 
     /**

@@ -9,6 +9,7 @@ import cz.vhromada.catalog.web.seasons.mo.SeasonMO;
 import cz.vhromada.catalog.web.seasons.validation.YearsValidator;
 import cz.vhromada.web.wicket.controllers.Flow;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
@@ -27,6 +28,7 @@ import org.springframework.stereotype.Component;
  */
 @Component(SeasonFormPanel.ID)
 @Scope("prototype")
+@SuppressFBWarnings("CD_CIRCULAR_DEPENDENCY")
 public class SeasonFormPanel extends AbstractFormPanel<SeasonMO> {
 
     /**

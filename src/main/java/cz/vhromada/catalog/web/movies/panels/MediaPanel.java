@@ -2,6 +2,7 @@ package cz.vhromada.catalog.web.movies.panels;
 
 import cz.vhromada.catalog.web.TimeMO;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -21,6 +22,7 @@ import org.apache.wicket.validation.validator.RangeValidator;
  *
  * @author Vladimir Hromada
  */
+@SuppressFBWarnings("CD_CIRCULAR_DEPENDENCY")
 public abstract class MediaPanel extends Panel {
 
     /**

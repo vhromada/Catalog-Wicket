@@ -76,27 +76,50 @@ public class MultipleLanguagesPanel extends Panel {
         languages.setLabel(Model.of(label))
                 .setRequired(model == null);
 
-        final ListView<Language> languagesList = new ListView<Language>("languagesList", Arrays.asList(Language.CZ, Language.EN)) {
-
-            /**
-             * SerialVersionUID
-             */
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            protected void populateItem(final ListItem<Language> item) {
-                final Check<Language> language = new Check<>("language", item.getModel());
-                language.setMarkupId(itemId + (item.getIndex() + 1));
-
-                final Label languageLabel = new Label("languageLabel", item.getModel());
-
-                item.add(language, languageLabel);
-            }
-
-        };
+        final ListView<Language> languagesList = new LanguagesListView("languagesList", Arrays.asList(Language.CZ, Language.EN), itemId);
 
         languages.add(languagesList);
         add(languagesLabel, languages);
+    }
+
+    /**
+     * A class represents list view with languages.
+     */
+    private static final class LanguagesListView extends ListView<Language> {
+
+        /**
+         * SerialVersionUID
+         */
+        private static final long serialVersionUID = 1L;
+
+        /**
+         * Item ID
+         */
+        private String itemId;
+
+        /**
+         * Creates a new instance of LanguagesListView.
+         *
+         * @param id   ID
+         * @param list list of data
+         * @throws org.apache.wicket.WicketRuntimeException if ID is null
+         */
+        LanguagesListView(final String id, final List<Language> list, final String itemId) {
+            super(id, list);
+
+            this.itemId = itemId;
+        }
+
+        @Override
+        protected void populateItem(final ListItem<Language> item) {
+            final Check<Language> language = new Check<>("language", item.getModel());
+            language.setMarkupId(itemId + (item.getIndex() + 1));
+
+            final Label languageLabel = new Label("languageLabel", item.getModel());
+
+            item.add(language, languageLabel);
+        }
+
     }
 
 }
