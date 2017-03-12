@@ -1,12 +1,15 @@
 package cz.vhromada.catalog.web.converters;
 
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Song;
 import cz.vhromada.catalog.web.WicketApplication;
-import cz.vhromada.catalog.web.commons.SongUtils;
+import cz.vhromada.catalog.web.common.SongUtils;
 import cz.vhromada.catalog.web.songs.mo.SongMO;
 import cz.vhromada.converters.Converter;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +23,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = WicketApplication.class)
-//TODO vladimir.hromada 06.03.2017: time converter
-@org.junit.Ignore
 public class SongConverterTest {
 
     /**
@@ -47,7 +48,7 @@ public class SongConverterTest {
      */
     @Test
     public void convertSongMO_NullSongMO() {
-        assertNull(converter.convert(null, Song.class));
+        assertThat(converter.convert(null, Song.class), is(nullValue()));
     }
 
     /**
@@ -67,7 +68,7 @@ public class SongConverterTest {
      */
     @Test
     public void convertSong_NullSong() {
-        assertNull(converter.convert(null, SongMO.class));
+        assertThat(converter.convert(null, SongMO.class), is(nullValue()));
     }
 
 }

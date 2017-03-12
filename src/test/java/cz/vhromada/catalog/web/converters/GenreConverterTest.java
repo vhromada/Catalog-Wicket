@@ -1,18 +1,18 @@
 package cz.vhromada.catalog.web.converters;
 
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
-import cz.vhromada.catalog.CatalogConfiguration;
 import cz.vhromada.catalog.entity.Genre;
 import cz.vhromada.catalog.web.WicketApplication;
-import cz.vhromada.catalog.web.commons.GenreUtils;
+import cz.vhromada.catalog.web.common.GenreUtils;
 import cz.vhromada.catalog.web.genres.mo.GenreMO;
 import cz.vhromada.converters.Converter;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -48,7 +48,7 @@ public class GenreConverterTest {
      */
     @Test
     public void convertGenreMO_NullGenreMO() {
-        assertNull(converter.convert(null, Genre.class));
+        assertThat(converter.convert(null, Genre.class), is(nullValue()));
     }
 
     /**
@@ -68,7 +68,7 @@ public class GenreConverterTest {
      */
     @Test
     public void convertGenre_NullGenre() {
-        assertNull(converter.convert(null, GenreMO.class));
+        assertThat(converter.convert(null, GenreMO.class), is(nullValue()));
     }
 
 }

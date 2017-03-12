@@ -1,7 +1,8 @@
-package cz.vhromada.catalog.web.commons;
+package cz.vhromada.catalog.web.common;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 import java.util.List;
 
@@ -88,20 +89,20 @@ public final class MovieUtils {
      * @param actual   actual movie
      */
     public static void assertMovieDeepEquals(final MovieMO expected, final Movie actual) {
-        assertNotNull(actual);
-        assertEquals(expected.getId(), actual.getId());
-        assertEquals(expected.getCzechName(), actual.getCzechName());
-        assertEquals(expected.getOriginalName(), actual.getOriginalName());
-        assertEquals(expected.getYear().intValue(), actual.getYear());
-        assertEquals(expected.getLanguage(), actual.getLanguage());
-        assertEquals(expected.getSubtitles(), actual.getSubtitles());
-        assertEquals(expected.getCsfd(), actual.getCsfd());
-        assertEquals(expected.getImdbCode().intValue(), actual.getImdbCode());
-        assertEquals(expected.getWikiEn(), actual.getWikiEn());
-        assertEquals(expected.getWikiCz(), actual.getWikiCz());
-        assertEquals(expected.getPicture(), actual.getPicture());
-        assertEquals(expected.getNote(), actual.getNote());
-        assertEquals(expected.getPosition(), actual.getPosition());
+        assertThat(actual, is(notNullValue()));
+        assertThat(actual.getId(), is(expected.getId()));
+        assertThat(actual.getCzechName(), is(expected.getCzechName()));
+        assertThat(actual.getOriginalName(), is(expected.getOriginalName()));
+        assertThat(actual.getYear(), is(expected.getYear()));
+        assertThat(actual.getLanguage(), is(expected.getLanguage()));
+        assertThat(actual.getSubtitles(), is(expected.getSubtitles()));
+        assertThat(actual.getCsfd(), is(expected.getCsfd()));
+        assertThat(actual.getImdbCode(), is(expected.getImdbCode()));
+        assertThat(actual.getWikiEn(), is(expected.getWikiEn()));
+        assertThat(actual.getWikiCz(), is(expected.getWikiCz()));
+        assertThat(actual.getPicture(), is(expected.getPicture()));
+        assertThat(actual.getNote(), is(expected.getNote()));
+        assertThat(actual.getPosition(), is(expected.getPosition()));
         assertMediaDeepEquals(expected.getMedia(), actual.getMedia());
         GenreUtils.assertGenresDeepEquals(expected.getGenres(), actual.getGenres());
     }
@@ -113,8 +114,8 @@ public final class MovieUtils {
      * @param actual   actual list of medium
      */
     public static void assertMediaDeepEquals(final List<TimeMO> expected, final List<Medium> actual) {
-        assertNotNull(actual);
-        assertEquals(expected.size(), actual.size());
+        assertThat(actual, is(notNullValue()));
+        assertThat(actual.size(), is(expected.size()));
         for (int i = 0; i < expected.size(); i++) {
             assertMediumDeepEquals(expected.get(i), actual.get(i), i);
         }
@@ -128,8 +129,8 @@ public final class MovieUtils {
      * @param index    index
      */
     public static void assertMediumDeepEquals(final TimeMO expected, final Medium actual, final int index) {
-        assertNotNull(actual);
-        assertEquals(index + 1, actual.getNumber());
+        assertThat(actual, is(notNullValue()));
+        assertThat(actual.getNumber(), is(index + 1));
         TimeUtils.assertTimeDeepEquals(expected, actual.getLength());
     }
 

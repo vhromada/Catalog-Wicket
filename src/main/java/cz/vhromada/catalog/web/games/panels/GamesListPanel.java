@@ -1,7 +1,7 @@
 package cz.vhromada.catalog.web.games.panels;
 
 import cz.vhromada.catalog.entity.Game;
-import cz.vhromada.catalog.web.commons.FormatUtils;
+import cz.vhromada.catalog.web.common.FormatUtils;
 import cz.vhromada.catalog.web.components.WikipediaLink;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.games.mo.GamesMO;

@@ -3,7 +3,7 @@ package cz.vhromada.catalog.web.seasons.panels;
 import java.util.List;
 
 import cz.vhromada.catalog.entity.Season;
-import cz.vhromada.catalog.web.commons.FormatUtils;
+import cz.vhromada.catalog.web.common.FormatUtils;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.seasons.mo.SeasonDataMO;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;

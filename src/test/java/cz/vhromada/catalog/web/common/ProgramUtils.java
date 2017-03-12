@@ -1,7 +1,8 @@
-package cz.vhromada.catalog.web.commons;
+package cz.vhromada.catalog.web.common;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Program;
 import cz.vhromada.catalog.web.programs.mo.ProgramMO;
@@ -68,18 +69,17 @@ public final class ProgramUtils {
      * @param actual   actual program
      */
     public static void assertProgramDeepEquals(final ProgramMO expected, final Program actual) {
-        assertNotNull(actual);
-        assertNotNull(actual.getMediaCount());
-        assertEquals(expected.getId(), actual.getId());
-        assertEquals(expected.getName(), actual.getName());
-        assertEquals(expected.getWikiEn(), actual.getWikiEn());
-        assertEquals(expected.getWikiCz(), actual.getWikiCz());
-        assertEquals(expected.getMediaCount().intValue(), actual.getMediaCount());
-        assertEquals(expected.getCrack(), actual.getCrack());
-        assertEquals(expected.getSerialKey(), actual.getSerialKey());
-        assertEquals(expected.getOtherData(), actual.getOtherData());
-        assertEquals(expected.getNote(), actual.getNote());
-        assertEquals(expected.getPosition(), actual.getPosition());
+        assertThat(actual, is(notNullValue()));
+        assertThat(actual.getId(), is(expected.getId()));
+        assertThat(actual.getName(), is(expected.getName()));
+        assertThat(actual.getWikiEn(), is(expected.getWikiEn()));
+        assertThat(actual.getWikiCz(), is(expected.getWikiCz()));
+        assertThat(actual.getMediaCount(), is(expected.getMediaCount()));
+        assertThat(actual.getCrack(), is(expected.getCrack()));
+        assertThat(actual.getSerialKey(), is(expected.getSerialKey()));
+        assertThat(actual.getOtherData(), is(expected.getOtherData()));
+        assertThat(actual.getNote(), is(expected.getNote()));
+        assertThat(actual.getPosition(), is(expected.getPosition()));
     }
 
 }

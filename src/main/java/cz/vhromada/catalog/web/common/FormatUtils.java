@@ -1,4 +1,4 @@
-package cz.vhromada.catalog.web.commons;
+package cz.vhromada.catalog.web.common;
 
 import java.util.List;
 

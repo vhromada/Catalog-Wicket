@@ -1,7 +1,8 @@
-package cz.vhromada.catalog.web.commons;
+package cz.vhromada.catalog.web.common;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.common.Language;
 import cz.vhromada.catalog.entity.Season;
@@ -66,15 +67,15 @@ public final class SeasonUtils {
      * @param actual   actual season
      */
     public static void assertSeasonDeepEquals(final SeasonMO expected, final Season actual) {
-        assertNotNull(actual);
-        assertEquals(expected.getId(), actual.getId());
-        assertEquals(expected.getNumber().intValue(), actual.getNumber());
-        assertEquals(expected.getStartYear().intValue(), actual.getStartYear());
-        assertEquals(expected.getEndYear().intValue(), actual.getEndYear());
-        assertEquals(expected.getLanguage(), actual.getLanguage());
-        assertEquals(expected.getSubtitles(), actual.getSubtitles());
-        assertEquals(expected.getNote(), actual.getNote());
-        assertEquals(expected.getPosition(), actual.getPosition());
+        assertThat(actual, is(notNullValue()));
+        assertThat(actual.getId(), is(expected.getId()));
+        assertThat(actual.getNumber(), is(expected.getNumber()));
+        assertThat(actual.getStartYear(), is(expected.getStartYear()));
+        assertThat(actual.getEndYear(), is(expected.getEndYear()));
+        assertThat(actual.getLanguage(), is(expected.getLanguage()));
+        assertThat(actual.getSubtitles(), is(expected.getSubtitles()));
+        assertThat(actual.getNote(), is(expected.getNote()));
+        assertThat(actual.getPosition(), is(expected.getPosition()));
     }
 
 }

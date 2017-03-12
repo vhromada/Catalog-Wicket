@@ -1,7 +1,8 @@
-package cz.vhromada.catalog.web.commons;
+package cz.vhromada.catalog.web.common;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Medium;
 import cz.vhromada.catalog.entity.Show;
@@ -82,17 +83,17 @@ public final class ShowUtils {
      * @param actual   actual show
      */
     public static void assertShowDeepEquals(final ShowMO expected, final Show actual) {
-        assertNotNull(actual);
-        assertEquals(expected.getId(), actual.getId());
-        assertEquals(expected.getCzechName(), actual.getCzechName());
-        assertEquals(expected.getOriginalName(), actual.getOriginalName());
-        assertEquals(expected.getCsfd(), actual.getCsfd());
-        assertEquals(expected.getImdbCode().intValue(), actual.getImdbCode());
-        assertEquals(expected.getWikiEn(), actual.getWikiEn());
-        assertEquals(expected.getWikiCz(), actual.getWikiCz());
-        assertEquals(expected.getPicture(), actual.getPicture());
-        assertEquals(expected.getNote(), actual.getNote());
-        assertEquals(expected.getPosition(), actual.getPosition());
+        assertThat(actual, is(notNullValue()));
+        assertThat(actual.getId(), is(expected.getId()));
+        assertThat(actual.getCzechName(), is(expected.getCzechName()));
+        assertThat(actual.getOriginalName(), is(expected.getOriginalName()));
+        assertThat(actual.getCsfd(), is(expected.getCsfd()));
+        assertThat(actual.getImdbCode(), is(expected.getImdbCode()));
+        assertThat(actual.getWikiEn(), is(expected.getWikiEn()));
+        assertThat(actual.getWikiCz(), is(expected.getWikiCz()));
+        assertThat(actual.getPicture(), is(expected.getPicture()));
+        assertThat(actual.getNote(), is(expected.getNote()));
+        assertThat(actual.getPosition(), is(expected.getPosition()));
         GenreUtils.assertGenresDeepEquals(expected.getGenres(), actual.getGenres());
     }
 

@@ -1,7 +1,8 @@
-package cz.vhromada.catalog.web.commons;
+package cz.vhromada.catalog.web.common;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Episode;
 import cz.vhromada.catalog.web.episodes.mo.EpisodeMO;
@@ -60,13 +61,13 @@ public final class EpisodeUtils {
      * @param actual   actual episode
      */
     public static void assertEpisodeDeepEquals(final EpisodeMO expected, final Episode actual) {
-        assertNotNull(actual);
-        assertEquals(expected.getId(), actual.getId());
-        assertEquals(expected.getNumber().intValue(), actual.getNumber());
-        assertEquals(expected.getName(), actual.getName());
+        assertThat(actual, is(notNullValue()));
+        assertThat(actual.getId(), is(expected.getId()));
+        assertThat(actual.getNumber(), is(expected.getNumber()));
+        assertThat(actual.getName(), is(expected.getName()));
         TimeUtils.assertTimeDeepEquals(expected.getLength(), actual.getLength());
-        assertEquals(expected.getNote(), actual.getNote());
-        assertEquals(expected.getPosition(), actual.getPosition());
+        assertThat(actual.getNote(), is(expected.getNote()));
+        assertThat(actual.getPosition(), is(expected.getPosition()));
     }
 
 }

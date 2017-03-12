@@ -1,12 +1,15 @@
 package cz.vhromada.catalog.web.converters;
 
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Music;
 import cz.vhromada.catalog.web.WicketApplication;
-import cz.vhromada.catalog.web.commons.MusicUtils;
+import cz.vhromada.catalog.web.common.MusicUtils;
 import cz.vhromada.catalog.web.music.mo.MusicMO;
 import cz.vhromada.converters.Converter;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +48,7 @@ public class MusicConverterTest {
      */
     @Test
     public void convertMusicMO_NullMusicMO() {
-        assertNull(converter.convert(null, Music.class));
+        assertThat(converter.convert(null, Music.class), is(nullValue()));
     }
 
     /**
@@ -65,7 +68,7 @@ public class MusicConverterTest {
      */
     @Test
     public void convertMusic_NullMusic() {
-        assertNull(converter.convert(null, MusicMO.class));
+        assertThat(converter.convert(null, MusicMO.class), is(nullValue()));
     }
 
 }

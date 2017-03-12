@@ -1,7 +1,7 @@
 package cz.vhromada.catalog.web.shows.panels;
 
 import cz.vhromada.catalog.entity.Show;
-import cz.vhromada.catalog.web.commons.FormatUtils;
+import cz.vhromada.catalog.web.common.FormatUtils;
 import cz.vhromada.catalog.web.components.CsfdLink;
 import cz.vhromada.catalog.web.components.ImdbLink;
 import cz.vhromada.catalog.web.components.WikipediaLink;

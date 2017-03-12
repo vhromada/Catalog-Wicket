@@ -1,7 +1,8 @@
-package cz.vhromada.catalog.web.commons;
+package cz.vhromada.catalog.web.common;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Music;
 import cz.vhromada.catalog.web.music.mo.MusicMO;
@@ -62,14 +63,14 @@ public final class MusicUtils {
      * @param actual   actual music
      */
     public static void assertMusicDeepEquals(final MusicMO expected, final Music actual) {
-        assertNotNull(actual);
-        assertEquals(expected.getId(), actual.getId());
-        assertEquals(expected.getName(), actual.getName());
-        assertEquals(expected.getWikiEn(), actual.getWikiEn());
-        assertEquals(expected.getWikiCz(), actual.getWikiCz());
-        assertEquals(expected.getMediaCount().intValue(), actual.getMediaCount());
-        assertEquals(expected.getNote(), actual.getNote());
-        assertEquals(expected.getPosition(), actual.getPosition());
+        assertThat(actual, is(notNullValue()));
+        assertThat(actual.getId(), is(expected.getId()));
+        assertThat(actual.getName(), is(expected.getName()));
+        assertThat(actual.getWikiEn(), is(expected.getWikiEn()));
+        assertThat(actual.getWikiCz(), is(expected.getWikiCz()));
+        assertThat(actual.getMediaCount(), is(expected.getMediaCount()));
+        assertThat(actual.getNote(), is(expected.getNote()));
+        assertThat(actual.getPosition(), is(expected.getPosition()));
     }
 
 }

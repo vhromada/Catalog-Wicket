@@ -5,7 +5,7 @@ import java.util.List;
 import cz.vhromada.catalog.entity.Episode;
 import cz.vhromada.catalog.entity.Season;
 import cz.vhromada.catalog.facade.EpisodeFacade;
-import cz.vhromada.catalog.web.commons.ResultController;
+import cz.vhromada.catalog.web.common.ResultController;
 import cz.vhromada.catalog.web.episodes.panels.EpisodesListPanel;
 import cz.vhromada.catalog.web.episodes.panels.EpisodesMenuPanel;
 import cz.vhromada.catalog.web.events.PanelData;

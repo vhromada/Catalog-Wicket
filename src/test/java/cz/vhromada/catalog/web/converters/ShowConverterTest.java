@@ -1,12 +1,15 @@
 package cz.vhromada.catalog.web.converters;
 
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Show;
 import cz.vhromada.catalog.web.WicketApplication;
-import cz.vhromada.catalog.web.commons.ShowUtils;
+import cz.vhromada.catalog.web.common.ShowUtils;
 import cz.vhromada.catalog.web.shows.mo.ShowMO;
 import cz.vhromada.converters.Converter;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +48,7 @@ public class ShowConverterTest {
      */
     @Test
     public void convertShowMO_NullShowMO() {
-        assertNull(converter.convert(null, Show.class));
+        assertThat(converter.convert(null, Show.class), is(nullValue()));
     }
 
     /**
@@ -65,7 +68,7 @@ public class ShowConverterTest {
      */
     @Test
     public void convertShow_NullShow() {
-        assertNull(converter.convert(null, ShowMO.class));
+        assertThat(converter.convert(null, ShowMO.class), is(nullValue()));
     }
 
 }

@@ -1,12 +1,15 @@
 package cz.vhromada.catalog.web.converters;
 
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Game;
 import cz.vhromada.catalog.web.WicketApplication;
-import cz.vhromada.catalog.web.commons.GameUtils;
+import cz.vhromada.catalog.web.common.GameUtils;
 import cz.vhromada.catalog.web.games.mo.GameMO;
 import cz.vhromada.converters.Converter;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +48,7 @@ public class GameConverterTest {
      */
     @Test
     public void convertGameMO_NullGameMO() {
-        assertNull(converter.convert(null, Game.class));
+        assertThat(converter.convert(null, Game.class), is(nullValue()));
     }
 
     /**
@@ -65,7 +68,7 @@ public class GameConverterTest {
      */
     @Test
     public void convertGame_NullGame() {
-        assertNull(converter.convert(null, GameMO.class));
+        assertThat(converter.convert(null, GameMO.class), is(nullValue()));
     }
 
 }

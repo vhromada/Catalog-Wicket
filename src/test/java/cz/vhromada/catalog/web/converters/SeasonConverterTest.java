@@ -1,12 +1,15 @@
 package cz.vhromada.catalog.web.converters;
 
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Season;
 import cz.vhromada.catalog.web.WicketApplication;
-import cz.vhromada.catalog.web.commons.SeasonUtils;
+import cz.vhromada.catalog.web.common.SeasonUtils;
 import cz.vhromada.catalog.web.seasons.mo.SeasonMO;
 import cz.vhromada.converters.Converter;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +48,7 @@ public class SeasonConverterTest {
      */
     @Test
     public void convertSeasonMO_NullSeasonMO() {
-        assertNull(converter.convert(null, Season.class));
+        assertThat(converter.convert(null, Season.class), is(nullValue()));
     }
 
     /**
@@ -65,7 +68,7 @@ public class SeasonConverterTest {
      */
     @Test
     public void convertSeason_NullSeason() {
-        assertNull(converter.convert(null, SeasonMO.class));
+        assertThat(converter.convert(null, SeasonMO.class), is(nullValue()));
     }
 
 }

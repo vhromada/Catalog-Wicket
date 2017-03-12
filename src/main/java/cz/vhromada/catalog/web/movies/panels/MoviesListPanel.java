@@ -5,7 +5,7 @@ import java.util.List;
 import cz.vhromada.catalog.common.Time;
 import cz.vhromada.catalog.entity.Medium;
 import cz.vhromada.catalog.entity.Movie;
-import cz.vhromada.catalog.web.commons.FormatUtils;
+import cz.vhromada.catalog.web.common.FormatUtils;
 import cz.vhromada.catalog.web.components.CsfdLink;
 import cz.vhromada.catalog.web.components.ImdbLink;
 import cz.vhromada.catalog.web.components.WikipediaLink;

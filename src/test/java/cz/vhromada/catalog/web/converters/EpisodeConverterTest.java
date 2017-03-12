@@ -1,12 +1,15 @@
 package cz.vhromada.catalog.web.converters;
 
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Episode;
 import cz.vhromada.catalog.web.WicketApplication;
-import cz.vhromada.catalog.web.commons.EpisodeUtils;
+import cz.vhromada.catalog.web.common.EpisodeUtils;
 import cz.vhromada.catalog.web.episodes.mo.EpisodeMO;
 import cz.vhromada.converters.Converter;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +23,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = WicketApplication.class)
-//TODO vladimir.hromada 06.03.2017: time converter
-@org.junit.Ignore
 public class EpisodeConverterTest {
 
     /**
@@ -47,7 +48,7 @@ public class EpisodeConverterTest {
      */
     @Test
     public void convertEpisodeMO_NullEpisodeMO() {
-        assertNull(converter.convert(null, Episode.class));
+        assertThat(converter.convert(null, Episode.class), is(nullValue()));
     }
 
     /**
@@ -67,7 +68,7 @@ public class EpisodeConverterTest {
      */
     @Test
     public void convertEpisode_NullEpisode() {
-        assertNull(converter.convert(null, EpisodeMO.class));
+        assertThat(converter.convert(null, EpisodeMO.class), is(nullValue()));
     }
 
 }

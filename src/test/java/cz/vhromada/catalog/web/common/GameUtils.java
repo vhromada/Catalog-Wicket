@@ -1,7 +1,8 @@
-package cz.vhromada.catalog.web.commons;
+package cz.vhromada.catalog.web.common;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Game;
 import cz.vhromada.catalog.web.games.mo.GameMO;
@@ -78,22 +79,22 @@ public final class GameUtils {
      * @param actual   actual game
      */
     public static void assertGameDeepEquals(final GameMO expected, final Game actual) {
-        assertNotNull(actual);
-        assertEquals(expected.getId(), actual.getId());
-        assertEquals(expected.getName(), actual.getName());
-        assertEquals(expected.getWikiEn(), actual.getWikiEn());
-        assertEquals(expected.getWikiCz(), actual.getWikiCz());
-        assertEquals(expected.getMediaCount().intValue(), actual.getMediaCount());
-        assertEquals(expected.getCrack(), actual.getCrack());
-        assertEquals(expected.getSerialKey(), actual.getSerialKey());
-        assertEquals(expected.getPatch(), actual.getPatch());
-        assertEquals(expected.getTrainer(), actual.getTrainer());
-        assertEquals(expected.getTrainerData(), actual.getTrainerData());
-        assertEquals(expected.getEditor(), actual.getEditor());
-        assertEquals(expected.getSaves(), actual.getSaves());
-        assertEquals(expected.getOtherData(), actual.getOtherData());
-        assertEquals(expected.getNote(), actual.getNote());
-        assertEquals(expected.getPosition(), actual.getPosition());
+        assertThat(actual, is(notNullValue()));
+        assertThat(actual.getId(), is(expected.getId()));
+        assertThat(actual.getName(), is(expected.getName()));
+        assertThat(actual.getWikiEn(), is(expected.getWikiEn()));
+        assertThat(actual.getWikiCz(), is(expected.getWikiCz()));
+        assertThat(actual.getMediaCount(), is(expected.getMediaCount()));
+        assertThat(actual.getCrack(), is(expected.getCrack()));
+        assertThat(actual.getSerialKey(), is(expected.getSerialKey()));
+        assertThat(actual.getPatch(), is(expected.getPatch()));
+        assertThat(actual.getTrainer(), is(expected.getTrainer()));
+        assertThat(actual.getTrainerData(), is(expected.getTrainerData()));
+        assertThat(actual.getEditor(), is(expected.getEditor()));
+        assertThat(actual.getSaves(), is(expected.getSaves()));
+        assertThat(actual.getOtherData(), is(expected.getOtherData()));
+        assertThat(actual.getNote(), is(expected.getNote()));
+        assertThat(actual.getPosition(), is(expected.getPosition()));
     }
 
 }

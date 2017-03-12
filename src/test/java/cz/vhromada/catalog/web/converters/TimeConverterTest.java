@@ -1,11 +1,14 @@
 package cz.vhromada.catalog.web.converters;
 
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.web.TimeMO;
 import cz.vhromada.catalog.web.WicketApplication;
-import cz.vhromada.catalog.web.commons.TimeUtils;
+import cz.vhromada.catalog.web.common.TimeUtils;
 import cz.vhromada.converters.Converter;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +22,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = WicketApplication.class)
-//TODO vladimir.hromada 06.03.2017: time converter
-@org.junit.Ignore
 public class TimeConverterTest {
 
     /**
@@ -46,7 +47,7 @@ public class TimeConverterTest {
      */
     @Test
     public void convertTimeMO_NullTimeMO() {
-        assertNull(converter.convert(null, Integer.class));
+        assertThat(converter.convert(null, Integer.class), is(nullValue()));
     }
 
     /**
@@ -66,7 +67,7 @@ public class TimeConverterTest {
      */
     @Test
     public void convertInteger_NullInteger() {
-        assertNull(converter.convert(null, Integer.class));
+        assertThat(converter.convert(null, TimeMO.class), is(nullValue()));
     }
 
 }
