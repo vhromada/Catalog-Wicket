@@ -107,7 +107,7 @@ public class ProgramsListPanel extends GenericPanel<ProgramsMO> {
     /**
      * Returns additional data.
      *
-     * @param program TO for program
+     * @param program program
      * @return additional data
      */
     private static String getAdditionalData(final Program program) {

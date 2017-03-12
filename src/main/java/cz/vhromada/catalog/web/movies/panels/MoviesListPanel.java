@@ -133,7 +133,7 @@ public class MoviesListPanel extends GenericPanel<MoviesMO> {
     /**
      * Returns media.
      *
-     * @param movie TO for movie
+     * @param movie movie
      * @return media
      */
     private static String getMedia(final Movie movie) {
@@ -155,7 +155,7 @@ public class MoviesListPanel extends GenericPanel<MoviesMO> {
     /**
      * Returns total length.
      *
-     * @param movie TO for movie
+     * @param movie movie
      * @return total length
      */
     private static Time getTotalLength(final Movie movie) {

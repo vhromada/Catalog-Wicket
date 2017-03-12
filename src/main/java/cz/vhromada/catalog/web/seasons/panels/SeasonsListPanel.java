@@ -110,7 +110,7 @@ public class SeasonsListPanel extends GenericPanel<List<SeasonDataMO>> {
     /**
      * Returns year.
      *
-     * @param season TO for season
+     * @param season season
      * @return year
      */
     private static String getYear(final Season season) {

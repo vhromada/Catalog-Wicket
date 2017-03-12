@@ -107,7 +107,7 @@ public class GamesListPanel extends GenericPanel<GamesMO> {
     /**
      * Returns additional data.
      *
-     * @param game TO for game
+     * @param game game
      * @return additional data
      */
     private static String getAdditionalData(final Game game) {
