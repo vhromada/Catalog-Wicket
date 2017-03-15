@@ -18,7 +18,7 @@ public class MovieMapper implements MapperConfig {
     @Override
     public void config(final MapperFactory mapperFactory) {
         mapperFactory.classMap(MovieMO.class, Movie.class)
-                .fieldMap("media{}", "media{length}").converter("timeConverter").add()
+                .field("media{}", "media{length}")
                 .byDefault()
                 .customize(new MovieCustomMapper())
                 .register();

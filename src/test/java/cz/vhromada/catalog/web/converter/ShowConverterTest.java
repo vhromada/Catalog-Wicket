@@ -1,11 +1,10 @@
-package cz.vhromada.catalog.web.converters;
+package cz.vhromada.catalog.web.converter;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Show;
-import cz.vhromada.catalog.web.WicketApplication;
 import cz.vhromada.catalog.web.common.ShowUtils;
 import cz.vhromada.catalog.web.shows.mo.ShowMO;
 import cz.vhromada.converters.Converter;
@@ -22,7 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author Vladimir Hromada
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = WicketApplication.class)
+@ContextConfiguration(classes = ConverterConfiguration.class)
 public class ShowConverterTest {
 
     /**
