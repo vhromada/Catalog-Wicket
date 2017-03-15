@@ -7,10 +7,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- * @author vladimir.hromada
+ * A class represents Spring configuration for tests of converters.
+ *
+ * @author Vladimir Hromada
  */
 @Configuration
 @ComponentScan("cz.vhromada.catalog.web.converter")
 @Import(OrikaConfiguration.class)
-public class ConverterConfiguration {
+public class ConverterTestConfiguration {
 }

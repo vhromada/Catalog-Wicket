@@ -21,7 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author Vladimir Hromada
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = ConverterConfiguration.class)
+@ContextConfiguration(classes = ConverterTestConfiguration.class)
 public class EpisodeConverterTest {
 
     /**
