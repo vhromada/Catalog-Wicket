@@ -2,7 +2,7 @@ package cz.vhromada.catalog.web.programs.controllers;
 
 import cz.vhromada.catalog.entity.Program;
 import cz.vhromada.catalog.facade.ProgramFacade;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.programs.mo.ProgramMO;
@@ -20,7 +20,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("addProgramConfirmController")
-public class AddProgramConfirmController extends ResultController<IModel<ProgramMO>> {
+public class AddProgramConfirmController extends AbstractResultController<IModel<ProgramMO>> {
 
     /**
      * Facade for programs

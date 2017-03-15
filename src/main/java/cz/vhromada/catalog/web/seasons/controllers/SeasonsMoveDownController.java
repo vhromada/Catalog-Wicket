@@ -2,7 +2,7 @@ package cz.vhromada.catalog.web.seasons.controllers;
 
 import cz.vhromada.catalog.entity.Season;
 import cz.vhromada.catalog.facade.SeasonFacade;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.web.wicket.controllers.Flow;
@@ -18,7 +18,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("seasonsMoveDownController")
-public class SeasonsMoveDownController extends ResultController<IModel<Season>> {
+public class SeasonsMoveDownController extends AbstractResultController<IModel<Season>> {
 
     /**
      * Facade for seasons

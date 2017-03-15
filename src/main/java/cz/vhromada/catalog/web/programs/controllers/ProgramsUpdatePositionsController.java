@@ -1,7 +1,7 @@
 package cz.vhromada.catalog.web.programs.controllers;
 
 import cz.vhromada.catalog.facade.ProgramFacade;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.web.wicket.controllers.Flow;
@@ -16,7 +16,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("programsUpdatePositionsController")
-public class ProgramsUpdatePositionsController extends ResultController<Void> {
+public class ProgramsUpdatePositionsController extends AbstractResultController<Void> {
 
     /**
      * Facade for programs

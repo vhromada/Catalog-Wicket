@@ -1,7 +1,7 @@
 package cz.vhromada.catalog.web.games.controllers;
 
 import cz.vhromada.catalog.facade.GameFacade;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.web.wicket.controllers.Flow;
@@ -16,7 +16,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("gamesUpdatePositionsController")
-public class GamesUpdatePositionsController extends ResultController<Void> {
+public class GamesUpdatePositionsController extends AbstractResultController<Void> {
 
     /**
      * Facade for games

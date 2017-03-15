@@ -2,7 +2,7 @@ package cz.vhromada.catalog.web.movies.controllers;
 
 import cz.vhromada.catalog.entity.Movie;
 import cz.vhromada.catalog.facade.MovieFacade;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.web.wicket.controllers.Flow;
@@ -18,7 +18,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("moviesMoveDownController")
-public class MoviesMoveDownController extends ResultController<IModel<Movie>> {
+public class MoviesMoveDownController extends AbstractResultController<IModel<Movie>> {
 
     /**
      * Facade for movies

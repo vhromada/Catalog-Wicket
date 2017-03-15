@@ -12,7 +12,7 @@ import cz.vhromada.web.wicket.controllers.Controller;
  * @param <T> type of data
  * @author Vladimir Hromada
  */
-public abstract class ResultController<T> extends Controller<T> {
+public abstract class AbstractResultController<T> extends Controller<T> {
 
     /**
      * Result

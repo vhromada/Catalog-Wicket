@@ -3,7 +3,7 @@ package cz.vhromada.catalog.web.songs.controllers;
 import cz.vhromada.catalog.entity.Music;
 import cz.vhromada.catalog.entity.Song;
 import cz.vhromada.catalog.facade.SongFacade;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.music.controllers.MusicSongsController;
@@ -23,7 +23,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("addSongConfirmController")
-public class AddSongConfirmController extends ResultController<IModel<SongMO>> {
+public class AddSongConfirmController extends AbstractResultController<IModel<SongMO>> {
 
     /**
      * Facade for songs

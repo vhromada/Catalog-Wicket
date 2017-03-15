@@ -8,7 +8,7 @@ import cz.vhromada.catalog.entity.Music;
 import cz.vhromada.catalog.entity.Song;
 import cz.vhromada.catalog.facade.MusicFacade;
 import cz.vhromada.catalog.facade.SongFacade;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -30,7 +30,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("musicListController")
-public class MusicListController extends ResultController<Void> {
+public class MusicListController extends AbstractResultController<Void> {
 
     /**
      * Facade for music

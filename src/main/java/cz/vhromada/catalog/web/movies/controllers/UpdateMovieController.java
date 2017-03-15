@@ -7,7 +7,7 @@ import cz.vhromada.catalog.entity.Genre;
 import cz.vhromada.catalog.entity.Movie;
 import cz.vhromada.catalog.facade.GenreFacade;
 import cz.vhromada.catalog.web.TimeMO;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -34,7 +34,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("updateMovieController")
-public class UpdateMovieController extends ResultController<IModel<Movie>> {
+public class UpdateMovieController extends AbstractResultController<IModel<Movie>> {
 
     /**
      * Facade for genres

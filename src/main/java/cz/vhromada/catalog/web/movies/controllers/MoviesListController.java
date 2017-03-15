@@ -5,7 +5,7 @@ import java.util.List;
 import cz.vhromada.catalog.common.Time;
 import cz.vhromada.catalog.entity.Movie;
 import cz.vhromada.catalog.facade.MovieFacade;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -26,7 +26,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("moviesListController")
-public class MoviesListController extends ResultController<Void> {
+public class MoviesListController extends AbstractResultController<Void> {
 
     /**
      * Facade for movies

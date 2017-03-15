@@ -2,7 +2,7 @@ package cz.vhromada.catalog.web.games.controllers;
 
 import cz.vhromada.catalog.entity.Game;
 import cz.vhromada.catalog.facade.GameFacade;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.games.mo.GameMO;
@@ -20,7 +20,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("addGameConfirmController")
-public class AddGameConfirmController extends ResultController<IModel<GameMO>> {
+public class AddGameConfirmController extends AbstractResultController<IModel<GameMO>> {
 
     /**
      * Facade for games

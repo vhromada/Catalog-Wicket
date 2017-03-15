@@ -2,7 +2,7 @@ package cz.vhromada.catalog.web.episodes.controllers;
 
 import cz.vhromada.catalog.entity.Episode;
 import cz.vhromada.catalog.facade.EpisodeFacade;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.episodes.mo.EpisodeMO;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -20,7 +20,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("updateEpisodeConfirmController")
-public class UpdateEpisodeConfirmController extends ResultController<IModel<EpisodeMO>> {
+public class UpdateEpisodeConfirmController extends AbstractResultController<IModel<EpisodeMO>> {
 
     /**
      * Facade for episodes

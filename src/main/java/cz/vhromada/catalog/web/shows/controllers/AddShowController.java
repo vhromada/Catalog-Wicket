@@ -4,7 +4,7 @@ import java.util.List;
 
 import cz.vhromada.catalog.entity.Genre;
 import cz.vhromada.catalog.facade.GenreFacade;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -30,7 +30,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("addShowController")
-public class AddShowController extends ResultController<Void> {
+public class AddShowController extends AbstractResultController<Void> {
 
     /**
      * Facade for genres

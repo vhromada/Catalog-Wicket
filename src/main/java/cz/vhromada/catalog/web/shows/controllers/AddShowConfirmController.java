@@ -2,7 +2,7 @@ package cz.vhromada.catalog.web.shows.controllers;
 
 import cz.vhromada.catalog.entity.Show;
 import cz.vhromada.catalog.facade.ShowFacade;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.shows.mo.ShowMO;
@@ -20,7 +20,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("addShowConfirmController")
-public class AddShowConfirmController extends ResultController<IModel<ShowMO>> {
+public class AddShowConfirmController extends AbstractResultController<IModel<ShowMO>> {
 
     /**
      * Facade for shows

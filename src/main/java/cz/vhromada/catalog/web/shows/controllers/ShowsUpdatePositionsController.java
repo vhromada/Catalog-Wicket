@@ -1,7 +1,7 @@
 package cz.vhromada.catalog.web.shows.controllers;
 
 import cz.vhromada.catalog.facade.ShowFacade;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.events.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.web.wicket.controllers.Flow;
@@ -16,7 +16,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("showsUpdatePositionsController")
-public class ShowsUpdatePositionsController extends ResultController<Void> {
+public class ShowsUpdatePositionsController extends AbstractResultController<Void> {
 
     /**
      * Facade for shows

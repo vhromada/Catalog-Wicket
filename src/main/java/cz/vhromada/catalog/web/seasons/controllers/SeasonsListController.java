@@ -9,7 +9,7 @@ import cz.vhromada.catalog.entity.Season;
 import cz.vhromada.catalog.entity.Show;
 import cz.vhromada.catalog.facade.EpisodeFacade;
 import cz.vhromada.catalog.facade.SeasonFacade;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -32,7 +32,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("seasonsListController")
-public class SeasonsListController extends ResultController<Void> {
+public class SeasonsListController extends AbstractResultController<Void> {
 
     /**
      * Facade for seasons

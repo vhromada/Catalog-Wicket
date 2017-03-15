@@ -4,7 +4,7 @@ import java.util.List;
 
 import cz.vhromada.catalog.entity.Program;
 import cz.vhromada.catalog.facade.ProgramFacade;
-import cz.vhromada.catalog.web.common.ResultController;
+import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.events.PanelData;
 import cz.vhromada.catalog.web.events.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
@@ -25,7 +25,7 @@ import org.springframework.util.Assert;
  * @author Vladimir Hromada
  */
 @Component("programsListController")
-public class ProgramsListController extends ResultController<Void> {
+public class ProgramsListController extends AbstractResultController<Void> {
 
     /**
      * Facade for programs
