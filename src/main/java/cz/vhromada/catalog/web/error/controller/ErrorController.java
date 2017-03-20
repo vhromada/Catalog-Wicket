@@ -2,8 +2,8 @@ package cz.vhromada.catalog.web.error.controller;
 
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.result.Result;
-import cz.vhromada.web.wicket.controllers.Controller;
-import cz.vhromada.web.wicket.controllers.Flow;
+import cz.vhromada.web.wicket.controller.Controller;
+import cz.vhromada.web.wicket.controller.Flow;
 
 import org.springframework.stereotype.Component;
 

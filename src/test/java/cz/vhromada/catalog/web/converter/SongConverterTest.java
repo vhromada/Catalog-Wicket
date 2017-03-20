@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Song;
 import cz.vhromada.catalog.web.common.SongUtils;
-import cz.vhromada.catalog.web.songs.mo.SongMO;
+import cz.vhromada.catalog.web.song.mo.SongMO;
 import cz.vhromada.converters.Converter;
 
 import org.junit.Test;

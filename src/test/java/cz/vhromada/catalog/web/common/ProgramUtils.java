@@ -5,7 +5,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Program;
-import cz.vhromada.catalog.web.programs.mo.ProgramMO;
+import cz.vhromada.catalog.web.program.mo.ProgramMO;
 
 /**
  * A class represents utility class for programs.

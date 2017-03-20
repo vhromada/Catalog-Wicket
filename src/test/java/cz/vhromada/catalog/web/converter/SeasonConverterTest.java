@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Season;
 import cz.vhromada.catalog.web.common.SeasonUtils;
-import cz.vhromada.catalog.web.seasons.mo.SeasonMO;
+import cz.vhromada.catalog.web.season.mo.SeasonMO;
 import cz.vhromada.converters.Converter;
 
 import org.junit.Test;

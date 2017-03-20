@@ -4,7 +4,7 @@ import java.util.List;
 
 import cz.vhromada.catalog.entity.Medium;
 import cz.vhromada.catalog.entity.Movie;
-import cz.vhromada.catalog.web.movies.mo.MovieMO;
+import cz.vhromada.catalog.web.movie.mo.MovieMO;
 
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;

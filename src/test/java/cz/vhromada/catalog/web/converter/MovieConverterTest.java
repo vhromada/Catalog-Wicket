@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Movie;
 import cz.vhromada.catalog.web.common.MovieUtils;
-import cz.vhromada.catalog.web.movies.mo.MovieMO;
+import cz.vhromada.catalog.web.movie.mo.MovieMO;
 import cz.vhromada.converters.Converter;
 
 import org.junit.Test;

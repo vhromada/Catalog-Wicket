@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Episode;
 import cz.vhromada.catalog.web.common.EpisodeUtils;
-import cz.vhromada.catalog.web.episodes.mo.EpisodeMO;
+import cz.vhromada.catalog.web.episode.mo.EpisodeMO;
 import cz.vhromada.converters.Converter;
 
 import org.junit.Test;

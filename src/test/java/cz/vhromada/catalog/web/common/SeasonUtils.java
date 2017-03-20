@@ -7,7 +7,7 @@ import static org.junit.Assert.assertThat;
 import cz.vhromada.catalog.common.Language;
 import cz.vhromada.catalog.entity.Season;
 import cz.vhromada.catalog.utils.CollectionUtils;
-import cz.vhromada.catalog.web.seasons.mo.SeasonMO;
+import cz.vhromada.catalog.web.season.mo.SeasonMO;
 
 /**
  * A class represents utility class for seasons.

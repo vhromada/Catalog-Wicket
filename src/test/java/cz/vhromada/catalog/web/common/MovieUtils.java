@@ -11,7 +11,7 @@ import cz.vhromada.catalog.entity.Medium;
 import cz.vhromada.catalog.entity.Movie;
 import cz.vhromada.catalog.utils.CollectionUtils;
 import cz.vhromada.catalog.web.TimeMO;
-import cz.vhromada.catalog.web.movies.mo.MovieMO;
+import cz.vhromada.catalog.web.movie.mo.MovieMO;
 
 /**
  * A class represents utility class for movies.

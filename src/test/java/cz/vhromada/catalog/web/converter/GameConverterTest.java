@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Game;
 import cz.vhromada.catalog.web.common.GameUtils;
-import cz.vhromada.catalog.web.games.mo.GameMO;
+import cz.vhromada.catalog.web.game.mo.GameMO;
 import cz.vhromada.converters.Converter;
 
 import org.junit.Test;

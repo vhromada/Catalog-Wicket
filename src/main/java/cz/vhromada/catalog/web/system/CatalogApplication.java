@@ -1,6 +1,6 @@
 package cz.vhromada.catalog.web.system;
 
-import cz.vhromada.catalog.web.pages.CatalogPage;
+import cz.vhromada.catalog.web.page.CatalogPage;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;

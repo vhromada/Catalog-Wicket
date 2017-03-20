@@ -7,7 +7,7 @@ import static org.junit.Assert.assertThat;
 import java.util.List;
 
 import cz.vhromada.catalog.entity.Genre;
-import cz.vhromada.catalog.web.genres.mo.GenreMO;
+import cz.vhromada.catalog.web.genre.mo.GenreMO;
 
 /**
  * A class represents utility class for genres.

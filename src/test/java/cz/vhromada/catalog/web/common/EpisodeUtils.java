@@ -5,7 +5,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Episode;
-import cz.vhromada.catalog.web.episodes.mo.EpisodeMO;
+import cz.vhromada.catalog.web.episode.mo.EpisodeMO;
 
 /**
  * A class represents utility class for episodes.

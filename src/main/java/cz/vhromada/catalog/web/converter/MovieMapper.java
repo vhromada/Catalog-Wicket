@@ -1,7 +1,7 @@
 package cz.vhromada.catalog.web.converter;
 
 import cz.vhromada.catalog.entity.Movie;
-import cz.vhromada.catalog.web.movies.mo.MovieMO;
+import cz.vhromada.catalog.web.movie.mo.MovieMO;
 import cz.vhromada.converters.orika.MapperConfig;
 
 import ma.glasnost.orika.MapperFactory;

@@ -1,10 +1,10 @@
 package cz.vhromada.catalog.web.common;
 
-import cz.vhromada.catalog.web.events.ControllerEvent;
+import cz.vhromada.catalog.web.event.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.result.Result;
 import cz.vhromada.result.Status;
-import cz.vhromada.web.wicket.controllers.Controller;
+import cz.vhromada.web.wicket.controller.Controller;
 
 /**
  * An abstract class represents controller for processing result.

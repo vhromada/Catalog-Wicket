@@ -1,6 +1,6 @@
 package cz.vhromada.catalog.web.flow;
 
-import cz.vhromada.web.wicket.controllers.Flow;
+import cz.vhromada.web.wicket.controller.Flow;
 
 /**
  * An enumeration represents flow.

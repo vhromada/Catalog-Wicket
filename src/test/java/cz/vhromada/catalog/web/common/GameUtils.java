@@ -5,7 +5,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import cz.vhromada.catalog.entity.Game;
-import cz.vhromada.catalog.web.games.mo.GameMO;
+import cz.vhromada.catalog.web.game.mo.GameMO;
 
 /**
  * A class represents utility class for games.

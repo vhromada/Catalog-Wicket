@@ -7,7 +7,7 @@ import static org.junit.Assert.assertThat;
 import cz.vhromada.catalog.entity.Medium;
 import cz.vhromada.catalog.entity.Show;
 import cz.vhromada.catalog.utils.CollectionUtils;
-import cz.vhromada.catalog.web.shows.mo.ShowMO;
+import cz.vhromada.catalog.web.show.mo.ShowMO;
 
 /**
  * A class represents utility class for shows.
