@@ -14,7 +14,7 @@ import cz.vhromada.catalog.web.show.mo.ShowMO;
 import cz.vhromada.catalog.web.show.panel.ShowFormPanel;
 import cz.vhromada.catalog.web.show.panel.ShowsMenuPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.converters.Converter;
+import cz.vhromada.converter.Converter;
 import cz.vhromada.result.Result;
 import cz.vhromada.web.wicket.controller.Flow;
 

@@ -9,7 +9,7 @@ import cz.vhromada.catalog.web.program.mo.ProgramMO;
 import cz.vhromada.catalog.web.program.panel.ProgramFormPanel;
 import cz.vhromada.catalog.web.program.panel.ProgramsMenuPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.converters.Converter;
+import cz.vhromada.converter.Converter;
 import cz.vhromada.web.wicket.controller.Controller;
 import cz.vhromada.web.wicket.controller.Flow;
 

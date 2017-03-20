@@ -9,7 +9,7 @@ import cz.vhromada.catalog.web.music.panel.MusicFormPanel;
 import cz.vhromada.catalog.web.music.panel.MusicMenuPanel;
 import cz.vhromada.catalog.web.panel.AbstractFormPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.converters.Converter;
+import cz.vhromada.converter.Converter;
 import cz.vhromada.web.wicket.controller.Controller;
 import cz.vhromada.web.wicket.controller.Flow;
 

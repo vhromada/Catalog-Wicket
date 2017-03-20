@@ -9,7 +9,7 @@ import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.music.controller.MusicSongsController;
 import cz.vhromada.catalog.web.song.mo.SongMO;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.converters.Converter;
+import cz.vhromada.converter.Converter;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.IModel;

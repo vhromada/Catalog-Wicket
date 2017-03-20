@@ -7,7 +7,7 @@ import static org.junit.Assert.assertThat;
 import cz.vhromada.catalog.entity.Show;
 import cz.vhromada.catalog.web.common.ShowUtils;
 import cz.vhromada.catalog.web.show.mo.ShowMO;
-import cz.vhromada.converters.Converter;
+import cz.vhromada.converter.Converter;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

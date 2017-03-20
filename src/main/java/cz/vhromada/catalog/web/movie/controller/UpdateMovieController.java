@@ -17,7 +17,7 @@ import cz.vhromada.catalog.web.movie.panel.MovieFormPanel;
 import cz.vhromada.catalog.web.movie.panel.MoviesMenuPanel;
 import cz.vhromada.catalog.web.panel.AbstractFormPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.converters.Converter;
+import cz.vhromada.converter.Converter;
 import cz.vhromada.result.Result;
 import cz.vhromada.web.wicket.controller.Flow;
 
