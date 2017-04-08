@@ -208,7 +208,7 @@ public class SeasonMO implements Serializable {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof SeasonMO) || id == null) {
+        if (!(obj instanceof SeasonMO) || id == null) {
             return false;
         }
 
