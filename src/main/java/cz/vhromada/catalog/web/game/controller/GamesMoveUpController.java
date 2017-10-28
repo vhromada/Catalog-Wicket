@@ -40,7 +40,7 @@ public class GamesMoveUpController extends AbstractResultController<IModel<Game>
 
     @Override
     public void handle(final IModel<Game> data) {
-        addResults(gameFacade.duplicate(data.getObject()));
+        addResults(gameFacade.moveUp(data.getObject()));
 
         if (processResult()) {
             getUi().fireEvent(new ControllerEvent(CatalogFlow.GAMES_LIST, null));

@@ -40,7 +40,7 @@ public class GenresMoveUpController extends AbstractResultController<IModel<Genr
 
     @Override
     public void handle(final IModel<Genre> data) {
-        addResults(genreFacade.duplicate(data.getObject()));
+        addResults(genreFacade.moveUp(data.getObject()));
 
         if (processResult()) {
             getUi().fireEvent(new ControllerEvent(CatalogFlow.GENRES_LIST, null));
