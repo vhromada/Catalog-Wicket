@@ -77,7 +77,7 @@ public abstract class MediaPanel extends Panel {
 
         };
 
-        final AjaxLink<Void> addMedium = new AjaxLink<Void>("addMedium") {
+        final AjaxLink<Void> addMedium = new AjaxLink<>("addMedium") {
 
             /**
              * SerialVersionUID
@@ -140,7 +140,7 @@ public abstract class MediaPanel extends Panel {
 
             final Label mediumLabel = new Label("mediumLabel", baseName);
 
-            final AjaxLink<Void> remove = new AjaxLink<Void>("remove") {
+            final AjaxLink<Void> remove = new AjaxLink<>("remove") {
 
                 /**
                  * SerialVersionUID
