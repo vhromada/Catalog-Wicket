@@ -10,12 +10,9 @@ import cz.vhromada.web.wicket.event.PageEvent;
 import cz.vhromada.web.wicket.page.WicketPage;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.markup.head.CssHeaderItem;
-import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.EmptyPanel;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.request.resource.CssResourceReference;
 
 /**
  * A class represents catalog page.
@@ -43,13 +40,6 @@ public class CatalogPage extends WicketPage {
      * Label for title
      */
     private Label title;
-
-    @Override
-    public void renderHead(final IHeaderResponse response) {
-        super.renderHead(response);
-
-        response.render(CssHeaderItem.forReference(new CssResourceReference(getClass(), "css/catalog.css")));
-    }
 
     @Override
     protected void onInitialize() {
