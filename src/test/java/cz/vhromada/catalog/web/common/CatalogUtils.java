@@ -10,7 +10,7 @@ public final class CatalogUtils {
     /**
      * ID
      */
-    public static final Integer ID = 1;
+    public static final int ID = 1;
 
     /**
      * English Wikipedia
@@ -25,12 +25,12 @@ public final class CatalogUtils {
     /**
      * Media
      */
-    public static final Integer MEDIA = 10;
+    public static final int MEDIA = 10;
 
     /**
      * Length
      */
-    public static final Integer LENGTH = 100;
+    public static final int LENGTH = 100;
 
     /**
      * Name
@@ -45,17 +45,17 @@ public final class CatalogUtils {
     /**
      * Number
      */
-    public static final Integer NUMBER = 2;
+    public static final int NUMBER = 2;
 
     /**
      * Year
      */
-    public static final Integer YEAR = 2000;
+    public static final int YEAR = 2000;
 
     /**
      * Position
      */
-    public static final Integer POSITION = 0;
+    public static final int POSITION = 0;
 
     /**
      * Creates a new instance of CatalogUtils.

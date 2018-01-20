@@ -9,7 +9,6 @@ import cz.vhromada.catalog.web.season.mo.SeasonMO;
 import cz.vhromada.catalog.web.season.validation.YearsValidator;
 import cz.vhromada.web.wicket.controller.Flow;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
@@ -28,7 +27,6 @@ import org.springframework.stereotype.Component;
  */
 @Component(SeasonFormPanel.ID)
 @Scope("prototype")
-@SuppressFBWarnings("CD_CIRCULAR_DEPENDENCY")
 public class SeasonFormPanel extends AbstractFormPanel<SeasonMO> {
 
     /**
@@ -63,27 +61,27 @@ public class SeasonFormPanel extends AbstractFormPanel<SeasonMO> {
 
         final NumberTextField<Integer> number = new NumberTextField<>("number");
         number.setMinimum(1)
-                .setMaximum(MAX_NUMBER)
-                .setLabel(Model.of("Number"))
-                .setRequired(true)
-                .add(RangeValidator.range(1, MAX_NUMBER))
-                .add(getValidationBehavior());
+            .setMaximum(MAX_NUMBER)
+            .setLabel(Model.of("Number"))
+            .setRequired(true)
+            .add(RangeValidator.range(1, MAX_NUMBER))
+            .add(getValidationBehavior());
 
         final NumberTextField<Integer> startYear = new NumberTextField<>("startYear");
         startYear.setMinimum(Constants.MIN_YEAR)
-                .setMaximum(Constants.CURRENT_YEAR)
-                .setLabel(Model.of("Starting year"))
-                .setRequired(true)
-                .add(RangeValidator.range(Constants.MIN_YEAR, Constants.CURRENT_YEAR))
-                .add(getValidationBehavior());
+            .setMaximum(Constants.CURRENT_YEAR)
+            .setLabel(Model.of("Starting year"))
+            .setRequired(true)
+            .add(RangeValidator.range(Constants.MIN_YEAR, Constants.CURRENT_YEAR))
+            .add(getValidationBehavior());
 
         final NumberTextField<Integer> endYear = new NumberTextField<>("endYear");
         endYear.setMinimum(Constants.MIN_YEAR)
-                .setMaximum(Constants.CURRENT_YEAR)
-                .setLabel(Model.of("Ending year"))
-                .setRequired(true)
-                .add(RangeValidator.range(Constants.MIN_YEAR, Constants.CURRENT_YEAR))
-                .add(getValidationBehavior());
+            .setMaximum(Constants.CURRENT_YEAR)
+            .setLabel(Model.of("Ending year"))
+            .setRequired(true)
+            .add(RangeValidator.range(Constants.MIN_YEAR, Constants.CURRENT_YEAR))
+            .add(getValidationBehavior());
 
         final SingleLanguagePanel language = new SingleLanguagePanel("language") {
 
@@ -100,7 +98,7 @@ public class SeasonFormPanel extends AbstractFormPanel<SeasonMO> {
         };
 
         final MultipleLanguagesPanel subtitles = new MultipleLanguagesPanel("subtitles", new PropertyModel<>(getModelObject(), "subtitles"), "Subtitles",
-                "subtitlesItem");
+            "subtitlesItem");
 
         final TextField<String> note = new TextField<>("note");
 

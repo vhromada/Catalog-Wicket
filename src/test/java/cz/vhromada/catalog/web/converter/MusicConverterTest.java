@@ -1,28 +1,26 @@
 package cz.vhromada.catalog.web.converter;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import cz.vhromada.catalog.entity.Music;
 import cz.vhromada.catalog.web.common.MusicUtils;
 import cz.vhromada.catalog.web.music.mo.MusicMO;
 import cz.vhromada.converter.Converter;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
  * A class represents test for converter from {@link MusicMO} to {@link Music}.
  *
  * @author Vladimir Hromada
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = ConverterTestConfiguration.class)
-public class MusicConverterTest {
+class MusicConverterTest {
 
     /**
      * Instance of {@link Converter}
@@ -34,7 +32,7 @@ public class MusicConverterTest {
      * Test method for {@link Converter#convert(Object, Class)} from MO to entity.
      */
     @Test
-    public void convertMusicMO() {
+    void convertMusicMO() {
         final MusicMO musicMO = MusicUtils.getMusicMO();
 
         final Music music = converter.convert(musicMO, Music.class);
@@ -46,15 +44,15 @@ public class MusicConverterTest {
      * Test method for {@link Converter#convert(Object, Class)} from MO to entity with null MO for music.
      */
     @Test
-    public void convertMusicMO_NullMusicMO() {
-        assertThat(converter.convert(null, Music.class), is(nullValue()));
+    void convertMusicMO_NullMusicMO() {
+        assertThat(converter.convert(null, Music.class)).isNull();
     }
 
     /**
      * Test method for {@link Converter#convert(Object, Class)} from entity to MO.
      */
     @Test
-    public void convertMusic() {
+    void convertMusic() {
         final Music music = MusicUtils.getMusic();
 
         final MusicMO musicMO = converter.convert(music, MusicMO.class);
@@ -66,8 +64,8 @@ public class MusicConverterTest {
      * Test method for {@link Converter#convert(Object, Class)} from entity to MO with null music.
      */
     @Test
-    public void convertMusic_NullMusic() {
-        assertThat(converter.convert(null, MusicMO.class), is(nullValue()));
+    void convertMusic_NullMusic() {
+        assertThat(converter.convert(null, MusicMO.class)).isNull();
     }
 
 }

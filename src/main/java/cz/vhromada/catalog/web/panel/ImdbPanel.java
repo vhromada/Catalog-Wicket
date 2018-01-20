@@ -2,7 +2,6 @@ package cz.vhromada.catalog.web.panel;
 
 import cz.vhromada.catalog.utils.Constants;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.form.AjaxCheckBox;
@@ -17,7 +16,6 @@ import org.apache.wicket.validation.validator.RangeValidator;
  *
  * @author Vladimir Hromada
  */
-@SuppressFBWarnings("CD_CIRCULAR_DEPENDENCY")
 public abstract class ImdbPanel extends Panel {
 
     /**
@@ -51,12 +49,12 @@ public abstract class ImdbPanel extends Panel {
 
         final NumberTextField<Integer> imdbCodeField = new NumberTextField<>("imdbCode");
         imdbCodeField.setMinimum(1)
-                .setMaximum(Constants.MAX_IMDB_CODE)
-                .setLabel(Model.of("IMDB code"))
-                .add(RangeValidator.range(1, Constants.MAX_IMDB_CODE))
-                .setVisible(imdbModel.getObject())
-                .setOutputMarkupPlaceholderTag(true)
-                .add(getValidationBehavior());
+            .setMaximum(Constants.MAX_IMDB_CODE)
+            .setLabel(Model.of("IMDB code"))
+            .add(RangeValidator.range(1, Constants.MAX_IMDB_CODE))
+            .setVisible(imdbModel.getObject())
+            .setOutputMarkupPlaceholderTag(true)
+            .add(getValidationBehavior());
 
         final AjaxCheckBox imdb = new AjaxCheckBox("imdb", imdbModel) {
 

@@ -1,8 +1,6 @@
 package cz.vhromada.catalog.web.common;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 import cz.vhromada.catalog.entity.Medium;
 import cz.vhromada.catalog.entity.Show;
@@ -83,18 +81,23 @@ public final class ShowUtils {
      * @param actual   actual show
      */
     public static void assertShowDeepEquals(final ShowMO expected, final Show actual) {
-        assertThat(actual, is(notNullValue()));
-        assertThat(actual.getId(), is(expected.getId()));
-        assertThat(actual.getCzechName(), is(expected.getCzechName()));
-        assertThat(actual.getOriginalName(), is(expected.getOriginalName()));
-        assertThat(actual.getCsfd(), is(expected.getCsfd()));
-        assertThat(actual.getImdbCode(), is(expected.getImdbCode()));
-        assertThat(actual.getWikiEn(), is(expected.getWikiEn()));
-        assertThat(actual.getWikiCz(), is(expected.getWikiCz()));
-        assertThat(actual.getPicture(), is(expected.getPicture()));
-        assertThat(actual.getNote(), is(expected.getNote()));
-        assertThat(actual.getPosition(), is(expected.getPosition()));
-        GenreUtils.assertGenresDeepEquals(expected.getGenres(), actual.getGenres());
+        assertSoftly(softly -> {
+            softly.assertThat(expected).isNotNull();
+            softly.assertThat(actual).isNotNull();
+        });
+        assertSoftly(softly -> {
+            softly.assertThat(actual.getId()).isEqualTo(expected.getId());
+            softly.assertThat(actual.getCzechName()).isEqualTo(expected.getCzechName());
+            softly.assertThat(actual.getOriginalName()).isEqualTo(expected.getOriginalName());
+            softly.assertThat(actual.getCsfd()).isEqualTo(expected.getCsfd());
+            softly.assertThat(actual.getImdbCode()).isEqualTo(expected.getImdbCode());
+            softly.assertThat(actual.getWikiEn()).isEqualTo(expected.getWikiEn());
+            softly.assertThat(actual.getWikiCz()).isEqualTo(expected.getWikiCz());
+            softly.assertThat(actual.getPicture()).isEqualTo(expected.getPicture());
+            softly.assertThat(actual.getNote()).isEqualTo(expected.getNote());
+            softly.assertThat(actual.getPosition()).isEqualTo(expected.getPosition());
+            GenreUtils.assertGenresDeepEquals(expected.getGenres(), actual.getGenres());
+        });
     }
 
 }

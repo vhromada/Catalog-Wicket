@@ -11,7 +11,6 @@ import cz.vhromada.catalog.web.panel.MultipleLanguagesPanel;
 import cz.vhromada.catalog.web.panel.SingleLanguagePanel;
 import cz.vhromada.web.wicket.controller.Flow;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
@@ -33,7 +32,6 @@ import org.springframework.stereotype.Component;
  */
 @Component(MovieFormPanel.ID)
 @Scope("prototype")
-@SuppressFBWarnings("CD_CIRCULAR_DEPENDENCY")
 public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
 
     /**
@@ -63,19 +61,19 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
 
         final RequiredTextField<String> czechName = new RequiredTextField<>("czechName");
         czechName.setLabel(Model.of("Czech name"))
-                .add(getValidationBehavior());
+            .add(getValidationBehavior());
 
         final RequiredTextField<String> originalName = new RequiredTextField<>("originalName");
         originalName.setLabel(Model.of("Original name"))
-                .add(getValidationBehavior());
+            .add(getValidationBehavior());
 
         final NumberTextField<Integer> year = new NumberTextField<>("year");
         year.setMinimum(Constants.MIN_YEAR)
-                .setMaximum(Constants.CURRENT_YEAR)
-                .setLabel(Model.of("Year"))
-                .setRequired(true)
-                .add(RangeValidator.range(Constants.MIN_YEAR, Constants.CURRENT_YEAR))
-                .add(getValidationBehavior());
+            .setMaximum(Constants.CURRENT_YEAR)
+            .setLabel(Model.of("Year"))
+            .setRequired(true)
+            .add(RangeValidator.range(Constants.MIN_YEAR, Constants.CURRENT_YEAR))
+            .add(getValidationBehavior());
 
         final SingleLanguagePanel language = new SingleLanguagePanel("language") {
 
@@ -92,7 +90,7 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
         };
 
         final MultipleLanguagesPanel subtitles = new MultipleLanguagesPanel("subtitles", new PropertyModel<>(getModelObject(), "subtitles"), "Subtitles",
-                "subtitlesItem");
+            "subtitlesItem");
 
         final MediaPanel media = new MediaPanel("media") {
 

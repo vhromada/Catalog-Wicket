@@ -1,8 +1,7 @@
 package cz.vhromada.catalog.web.common;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 import java.util.List;
 
@@ -89,22 +88,27 @@ public final class MovieUtils {
      * @param actual   actual movie
      */
     public static void assertMovieDeepEquals(final MovieMO expected, final Movie actual) {
-        assertThat(actual, is(notNullValue()));
-        assertThat(actual.getId(), is(expected.getId()));
-        assertThat(actual.getCzechName(), is(expected.getCzechName()));
-        assertThat(actual.getOriginalName(), is(expected.getOriginalName()));
-        assertThat(actual.getYear(), is(expected.getYear()));
-        assertThat(actual.getLanguage(), is(expected.getLanguage()));
-        assertThat(actual.getSubtitles(), is(expected.getSubtitles()));
-        assertThat(actual.getCsfd(), is(expected.getCsfd()));
-        assertThat(actual.getImdbCode(), is(expected.getImdbCode()));
-        assertThat(actual.getWikiEn(), is(expected.getWikiEn()));
-        assertThat(actual.getWikiCz(), is(expected.getWikiCz()));
-        assertThat(actual.getPicture(), is(expected.getPicture()));
-        assertThat(actual.getNote(), is(expected.getNote()));
-        assertThat(actual.getPosition(), is(expected.getPosition()));
-        assertMediaDeepEquals(expected.getMedia(), actual.getMedia());
-        GenreUtils.assertGenresDeepEquals(expected.getGenres(), actual.getGenres());
+        assertSoftly(softly -> {
+            softly.assertThat(expected).isNotNull();
+            softly.assertThat(actual).isNotNull();
+        });
+        assertSoftly(softly -> {
+            assertThat(actual.getId()).isEqualTo(expected.getId());
+            assertThat(actual.getCzechName()).isEqualTo(expected.getCzechName());
+            assertThat(actual.getOriginalName()).isEqualTo(expected.getOriginalName());
+            assertThat(actual.getYear()).isEqualTo(expected.getYear());
+            assertThat(actual.getLanguage()).isEqualTo(expected.getLanguage());
+            assertThat(actual.getSubtitles()).isEqualTo(expected.getSubtitles());
+            assertThat(actual.getCsfd()).isEqualTo(expected.getCsfd());
+            assertThat(actual.getImdbCode()).isEqualTo(expected.getImdbCode());
+            assertThat(actual.getWikiEn()).isEqualTo(expected.getWikiEn());
+            assertThat(actual.getWikiCz()).isEqualTo(expected.getWikiCz());
+            assertThat(actual.getPicture()).isEqualTo(expected.getPicture());
+            assertThat(actual.getNote()).isEqualTo(expected.getNote());
+            assertThat(actual.getPosition()).isEqualTo(expected.getPosition());
+            assertMediaDeepEquals(expected.getMedia(), actual.getMedia());
+            GenreUtils.assertGenresDeepEquals(expected.getGenres(), actual.getGenres());
+        });
     }
 
     /**
@@ -114,8 +118,11 @@ public final class MovieUtils {
      * @param actual   actual list of medium
      */
     public static void assertMediaDeepEquals(final List<TimeMO> expected, final List<Medium> actual) {
-        assertThat(actual, is(notNullValue()));
-        assertThat(actual.size(), is(expected.size()));
+        assertSoftly(softly -> {
+            softly.assertThat(expected).isNotNull();
+            softly.assertThat(actual).isNotNull();
+        });
+        assertThat(actual.size()).isEqualTo(expected.size());
         for (int i = 0; i < expected.size(); i++) {
             assertMediumDeepEquals(expected.get(i), actual.get(i), i);
         }
@@ -129,9 +136,15 @@ public final class MovieUtils {
      * @param index    index
      */
     public static void assertMediumDeepEquals(final TimeMO expected, final Medium actual, final int index) {
-        assertThat(actual, is(notNullValue()));
-        assertThat(actual.getNumber(), is(index + 1));
-        TimeUtils.assertTimeDeepEquals(expected, actual.getLength());
+        assertSoftly(softly -> {
+            softly.assertThat(expected).isNotNull();
+            softly.assertThat(actual).isNotNull();
+        });
+        assertSoftly(softly -> {
+            assertThat(actual.getId()).isNull();
+            assertThat(actual.getNumber()).isEqualTo(index + 1);
+            TimeUtils.assertTimeDeepEquals(expected, actual.getLength());
+        });
     }
 
 }

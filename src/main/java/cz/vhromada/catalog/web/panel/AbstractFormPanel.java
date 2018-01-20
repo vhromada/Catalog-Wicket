@@ -5,7 +5,6 @@ import cz.vhromada.catalog.web.system.CatalogApplication;
 import cz.vhromada.web.wicket.controller.Flow;
 import cz.vhromada.web.wicket.flow.AjaxFlowSubmitLink;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
@@ -21,7 +20,6 @@ import org.apache.wicket.model.CompoundPropertyModel;
  * @param <T> type of model data
  * @author Vladimir Hromada
  */
-@SuppressFBWarnings("CD_CIRCULAR_DEPENDENCY")
 public abstract class AbstractFormPanel<T> extends GenericPanel<T> {
 
     /**

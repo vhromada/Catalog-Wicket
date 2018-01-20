@@ -2,7 +2,6 @@ package cz.vhromada.catalog.web.movie.panel;
 
 import cz.vhromada.catalog.web.TimeMO;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -22,7 +21,6 @@ import org.apache.wicket.validation.validator.RangeValidator;
  *
  * @author Vladimir Hromada
  */
-@SuppressFBWarnings("CD_CIRCULAR_DEPENDENCY")
 public abstract class MediaPanel extends Panel {
 
     /**
@@ -163,42 +161,42 @@ public abstract class MediaPanel extends Panel {
 
             };
             remove.setMarkupId("remove" + mediumIndex)
-                    .setVisible(index > 0);
+                .setVisible(index > 0);
 
             final Label mediumHoursLabel = new Label("mediumHoursLabel", baseName + " hours");
 
             final NumberTextField<Integer> mediumHours = new NumberTextField<>("mediumHours", new PropertyModel<Integer>(item.getModelObject(), "hours"));
             mediumHours.setMinimum(0)
-                    .setMaximum(MAX_HOURS)
-                    .setLabel(Model.of(baseName + " hours"))
-                    .setRequired(true)
-                    .add(RangeValidator.range(0, MAX_HOURS))
-                    .setMarkupId(baseId + "Hours")
-                    .add(getValidationBehavior());
+                .setMaximum(MAX_HOURS)
+                .setLabel(Model.of(baseName + " hours"))
+                .setRequired(true)
+                .add(RangeValidator.range(0, MAX_HOURS))
+                .setMarkupId(baseId + "Hours")
+                .add(getValidationBehavior());
 
             final Label mediumMinutesLabel = new Label("mediumMinutesLabel", baseName + " minutes");
 
             final NumberTextField<Integer> mediumMinutes = new NumberTextField<>("mediumMinutes",
-                    new PropertyModel<Integer>(item.getModelObject(), "minutes"));
+                new PropertyModel<Integer>(item.getModelObject(), "minutes"));
             mediumMinutes.setMinimum(0)
-                    .setMaximum(MAX_MINUTES)
-                    .setLabel(Model.of(baseName + " minutes"))
-                    .setRequired(true)
-                    .add(RangeValidator.range(0, MAX_MINUTES))
-                    .setMarkupId(baseId + "Minutes")
-                    .add(getValidationBehavior());
+                .setMaximum(MAX_MINUTES)
+                .setLabel(Model.of(baseName + " minutes"))
+                .setRequired(true)
+                .add(RangeValidator.range(0, MAX_MINUTES))
+                .setMarkupId(baseId + "Minutes")
+                .add(getValidationBehavior());
 
             final Label mediumSecondsLabel = new Label("mediumSecondsLabel", baseName + " seconds");
 
             final NumberTextField<Integer> mediumSeconds = new NumberTextField<>("mediumSeconds",
-                    new PropertyModel<Integer>(item.getModelObject(), "seconds"));
+                new PropertyModel<Integer>(item.getModelObject(), "seconds"));
             mediumSeconds.setMinimum(0)
-                    .setMaximum(MAX_SECONDS)
-                    .setLabel(Model.of(baseName + " seconds"))
-                    .setRequired(true)
-                    .add(RangeValidator.range(0, MAX_SECONDS))
-                    .setMarkupId(baseId + "Seconds")
-                    .add(getValidationBehavior());
+                .setMaximum(MAX_SECONDS)
+                .setLabel(Model.of(baseName + " seconds"))
+                .setRequired(true)
+                .add(RangeValidator.range(0, MAX_SECONDS))
+                .setMarkupId(baseId + "Seconds")
+                .add(getValidationBehavior());
 
             item.add(mediumLabel, remove, mediumHoursLabel, mediumHours, mediumMinutesLabel, mediumMinutes, mediumSecondsLabel, mediumSeconds);
         }
