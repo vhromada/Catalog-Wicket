@@ -41,8 +41,8 @@ public abstract class SingleLanguagePanel extends Panel {
 
         final RadioGroup<Language> language = new RadioGroup<>("language");
         language.setLabel(Model.of("Language"))
-                .setRequired(true)
-                .add(getValidationBehavior());
+            .setRequired(true)
+            .add(getValidationBehavior());
 
         final ListView<Language> languages = new ListView<Language>("languages", Arrays.asList(Language.values())) {
 

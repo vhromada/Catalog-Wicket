@@ -141,7 +141,7 @@ public class MoviesListPanel extends GenericPanel<MoviesMO> {
             final AjaxFlowLink<Movie> remove = new AjaxFlowLink<>("remove", Model.of(movie), CatalogFlow.MOVIES_REMOVE);
 
             item.add(czechName, originalName, genres, year, language, subtitles, media, totalLength, picture, note, csfd, imdb, wikiCz, wikiEn, moveUp,
-                    moveDown, duplicate, edit, remove);
+                moveDown, duplicate, edit, remove);
         }
 
         /**

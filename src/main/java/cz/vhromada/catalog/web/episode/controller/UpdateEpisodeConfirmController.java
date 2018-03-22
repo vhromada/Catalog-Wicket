@@ -42,7 +42,7 @@ public class UpdateEpisodeConfirmController extends AbstractResultController<IMo
      */
     @Autowired
     public UpdateEpisodeConfirmController(final EpisodeFacade episodeFacade,
-            final Converter converter) {
+        final Converter converter) {
         Assert.notNull(episodeFacade, "Facade for episodes mustn't be null.");
         Assert.notNull(converter, "Converter mustn't be null.");
 

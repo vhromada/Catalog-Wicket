@@ -52,7 +52,7 @@ public class UpdateProgramController extends Controller<IModel<Program>> {
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.PROGRAMS_UPDATE_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
         final PanelData<ProgramMO> panelData = new PanelData<>(ProgramFormPanel.ID,
-                new CompoundPropertyModel<>(converter.convert(data.getObject(), ProgramMO.class)));
+            new CompoundPropertyModel<>(converter.convert(data.getObject(), ProgramMO.class)));
         final PanelData<Void> menuData = new PanelData<>(ProgramsMenuPanel.ID, null);
 
         getUi().fireEvent(new PanelEvent(panelData, "Edit program", menuData));

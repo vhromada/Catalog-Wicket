@@ -266,7 +266,7 @@ public class ProgramMO implements Serializable {
     @Override
     public String toString() {
         return String.format("ProgramMO [id=%d, name=%s, wikiEn=%s, wikiCz=%s, mediaCount=%d, crack=%b, serialKey=%b, otherData=%s, note=%s, position=%d]", id,
-                name, wikiEn, wikiCz, mediaCount, crack, serialKey, otherData, note, position);
+            name, wikiEn, wikiCz, mediaCount, crack, serialKey, otherData, note, position);
     }
 
 }

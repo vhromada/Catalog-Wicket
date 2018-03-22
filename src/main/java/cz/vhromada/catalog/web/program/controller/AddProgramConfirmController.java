@@ -42,7 +42,7 @@ public class AddProgramConfirmController extends AbstractResultController<IModel
      */
     @Autowired
     public AddProgramConfirmController(final ProgramFacade programFacade,
-            final Converter converter) {
+        final Converter converter) {
         Assert.notNull(programFacade, "Facade for programs mustn't be null.");
         Assert.notNull(converter, "Converter mustn't be null.");
 

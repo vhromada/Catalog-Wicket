@@ -52,7 +52,7 @@ public class UpdateGenreController extends Controller<IModel<Genre>> {
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.GENRES_UPDATE_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
         final PanelData<GenreMO> panelData = new PanelData<>(GenreFormPanel.ID,
-                new CompoundPropertyModel<>(converter.convert(data.getObject(), GenreMO.class)));
+            new CompoundPropertyModel<>(converter.convert(data.getObject(), GenreMO.class)));
         final PanelData<Void> menuData = new PanelData<>(GenresMenuPanel.ID, null);
 
         getUi().fireEvent(new PanelEvent(panelData, "Edit genre", menuData));

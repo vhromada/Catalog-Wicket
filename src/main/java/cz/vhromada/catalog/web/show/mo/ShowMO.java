@@ -314,7 +314,7 @@ public class ShowMO implements Serializable {
     @Override
     public String toString() {
         return String.format("ShowMO [id=%d, czechName=%s, originalName=%s, csfd=%s, imdbCode=%d, wikiEn=%s, wikiCz=%s, picture=%s, note=%s, position=%d, "
-                + "genres=%s, allGenres=%s]", id, czechName, originalName, csfd, imdbCode, wikiEn, wikiCz, picture, note, position, genres, allGenres);
+            + "genres=%s, allGenres=%s]", id, czechName, originalName, csfd, imdbCode, wikiEn, wikiCz, picture, note, position, genres, allGenres);
     }
 
 }

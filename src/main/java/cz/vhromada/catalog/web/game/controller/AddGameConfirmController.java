@@ -42,7 +42,7 @@ public class AddGameConfirmController extends AbstractResultController<IModel<Ga
      */
     @Autowired
     public AddGameConfirmController(final GameFacade gameFacade,
-            final Converter converter) {
+        final Converter converter) {
         Assert.notNull(gameFacade, "Facade for games mustn't be null.");
         Assert.notNull(converter, "Converter mustn't be null.");
 

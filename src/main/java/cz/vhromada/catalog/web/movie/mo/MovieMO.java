@@ -408,8 +408,8 @@ public class MovieMO implements Serializable {
     @Override
     public String toString() {
         return String.format("MovieMO [id=%d, czechName=%s, originalName=%s, year=%d, language=%s, subtitles=%s, media=%s, csfd=%s, imdbCode=%d, wikiEn=%s, "
-                        + "wikiCz=%s, picture=%s, note=%s, position=%d, genres=%s, allGenres=%s]", id, czechName, originalName, year, language, subtitles,
-                media, csfd, imdbCode, wikiEn, wikiCz, picture, note, position, genres, allGenres);
+                + "wikiCz=%s, picture=%s, note=%s, position=%d, genres=%s, allGenres=%s]", id, czechName, originalName, year, language, subtitles,
+            media, csfd, imdbCode, wikiEn, wikiCz, picture, note, position, genres, allGenres);
     }
 
 }

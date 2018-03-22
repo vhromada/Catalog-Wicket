@@ -56,7 +56,7 @@ public class UpdateMovieController extends AbstractResultController<IModel<Movie
      */
     @Autowired
     public UpdateMovieController(final GenreFacade genreFacade,
-            final Converter converter) {
+        final Converter converter) {
         Assert.notNull(genreFacade, "Facade for genres mustn't be null.");
         Assert.notNull(converter, "Converter mustn't be null.");
 

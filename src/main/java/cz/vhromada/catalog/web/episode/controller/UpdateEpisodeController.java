@@ -52,7 +52,7 @@ public class UpdateEpisodeController extends Controller<IModel<Episode>> {
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.EPISODES_UPDATE_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
         final PanelData<EpisodeMO> panelData = new PanelData<>(EpisodeFormPanel.ID,
-                new CompoundPropertyModel<>(converter.convert(data.getObject(), EpisodeMO.class)));
+            new CompoundPropertyModel<>(converter.convert(data.getObject(), EpisodeMO.class)));
         final PanelData<Void> menuData = new PanelData<>(EpisodesMenuPanel.ID, null);
 
         getUi().fireEvent(new PanelEvent(panelData, "Edit episode", menuData));

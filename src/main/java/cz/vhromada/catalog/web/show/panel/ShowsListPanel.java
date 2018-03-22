@@ -108,7 +108,7 @@ public class ShowsListPanel extends GenericPanel<ShowsMO> {
                 final AjaxFlowLink<Show> remove = new AjaxFlowLink<>("remove", Model.of(show), CatalogFlow.SHOWS_REMOVE);
 
                 item.add(czechName, originalName, genres, seasonsCount, episodesCount, totalLength, picture, note, csfd, imdb, wikiCz, wikiEn, seasons, moveUp,
-                        moveDown, duplicate, edit, remove);
+                    moveDown, duplicate, edit, remove);
             }
 
         };

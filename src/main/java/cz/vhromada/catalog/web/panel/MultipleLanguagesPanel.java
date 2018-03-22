@@ -74,7 +74,7 @@ public class MultipleLanguagesPanel extends Panel {
 
         final CheckGroup<Language> languages = new CheckGroup<>("languages", model);
         languages.setLabel(Model.of(label))
-                .setRequired(model == null);
+            .setRequired(model == null);
 
         final ListView<Language> languagesList = new LanguagesListView("languagesList", Arrays.asList(Language.CZ, Language.EN), itemId);
 

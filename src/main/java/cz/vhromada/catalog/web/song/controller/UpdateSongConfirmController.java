@@ -42,7 +42,7 @@ public class UpdateSongConfirmController extends AbstractResultController<IModel
      */
     @Autowired
     public UpdateSongConfirmController(final SongFacade songFacade,
-            final Converter converter) {
+        final Converter converter) {
         Assert.notNull(songFacade, "Facade for songs mustn't be null.");
         Assert.notNull(converter, "Converter mustn't be null.");
 

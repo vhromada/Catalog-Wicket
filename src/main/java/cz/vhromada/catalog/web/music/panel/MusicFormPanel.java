@@ -56,7 +56,7 @@ public class MusicFormPanel extends AbstractFormPanel<MusicMO> {
 
         final RequiredTextField<String> name = new RequiredTextField<>("name");
         name.setLabel(Model.of("Name"))
-                .add(getValidationBehavior());
+            .add(getValidationBehavior());
 
         final TextField<String> wikiCz = new TextField<>("wikiCz");
 
@@ -64,11 +64,11 @@ public class MusicFormPanel extends AbstractFormPanel<MusicMO> {
 
         final NumberTextField<Integer> mediaCount = new NumberTextField<>("mediaCount");
         mediaCount.setMinimum(1)
-                .setMaximum(MAX_MEDIA_COUNT)
-                .setLabel(Model.of("Count of media"))
-                .setRequired(true)
-                .add(RangeValidator.range(1, MAX_MEDIA_COUNT))
-                .add(getValidationBehavior());
+            .setMaximum(MAX_MEDIA_COUNT)
+            .setLabel(Model.of("Count of media"))
+            .setRequired(true)
+            .add(RangeValidator.range(1, MAX_MEDIA_COUNT))
+            .add(getValidationBehavior());
 
         final TextField<String> note = new TextField<>("note");
 

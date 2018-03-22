@@ -71,39 +71,39 @@ public class EpisodeFormPanel extends AbstractFormPanel<EpisodeMO> {
 
         final NumberTextField<Integer> number = new NumberTextField<>("number");
         number.setMinimum(1)
-                .setMaximum(MAX_NUMBER)
-                .setLabel(Model.of("Number"))
-                .setRequired(true)
-                .add(RangeValidator.range(1, MAX_NUMBER))
-                .add(getValidationBehavior());
+            .setMaximum(MAX_NUMBER)
+            .setLabel(Model.of("Number"))
+            .setRequired(true)
+            .add(RangeValidator.range(1, MAX_NUMBER))
+            .add(getValidationBehavior());
 
         final RequiredTextField<String> name = new RequiredTextField<>("name");
         name.setLabel(Model.of("Name"))
-                .add(getValidationBehavior());
+            .add(getValidationBehavior());
 
         final NumberTextField<Integer> hours = new NumberTextField<>("length.hours");
         hours.setMinimum(0)
-                .setMaximum(MAX_HOURS)
-                .setLabel(Model.of("Hours"))
-                .setRequired(true)
-                .add(RangeValidator.range(0, MAX_HOURS))
-                .add(getValidationBehavior());
+            .setMaximum(MAX_HOURS)
+            .setLabel(Model.of("Hours"))
+            .setRequired(true)
+            .add(RangeValidator.range(0, MAX_HOURS))
+            .add(getValidationBehavior());
 
         final NumberTextField<Integer> minutes = new NumberTextField<>("length.minutes");
         minutes.setMinimum(0)
-                .setMaximum(MAX_MINUTES)
-                .setLabel(Model.of("Minutes"))
-                .setRequired(true)
-                .add(RangeValidator.range(0, MAX_MINUTES))
-                .add(getValidationBehavior());
+            .setMaximum(MAX_MINUTES)
+            .setLabel(Model.of("Minutes"))
+            .setRequired(true)
+            .add(RangeValidator.range(0, MAX_MINUTES))
+            .add(getValidationBehavior());
 
         final NumberTextField<Integer> seconds = new NumberTextField<>("length.seconds");
         seconds.setMinimum(0)
-                .setMaximum(MAX_SECONDS)
-                .setLabel(Model.of("Seconds"))
-                .setRequired(true)
-                .add(RangeValidator.range(0, MAX_SECONDS))
-                .add(getValidationBehavior());
+            .setMaximum(MAX_SECONDS)
+            .setLabel(Model.of("Seconds"))
+            .setRequired(true)
+            .add(RangeValidator.range(0, MAX_SECONDS))
+            .add(getValidationBehavior());
 
         final TextField<String> note = new TextField<>("note");
 
