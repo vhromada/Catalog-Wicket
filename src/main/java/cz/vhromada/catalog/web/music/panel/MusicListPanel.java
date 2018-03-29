@@ -1,7 +1,6 @@
 package cz.vhromada.catalog.web.music.panel;
 
 import cz.vhromada.catalog.entity.Music;
-import cz.vhromada.catalog.web.component.WikipediaLink;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.music.mo.MusicDataMO;
 import cz.vhromada.catalog.web.music.mo.MusicInfoMO;
@@ -54,7 +53,7 @@ public class MusicListPanel extends GenericPanel<MusicInfoMO> {
         final WebMarkupContainer musicTable = new WebMarkupContainer("musicTable");
         musicTable.setVisible(!getModelObject().getMusicData().isEmpty());
 
-        final ListView<MusicDataMO> music = new ListView<MusicDataMO>("music", getModelObject().getMusicData()) {
+        final ListView<MusicDataMO> music = new ListView<>("music", getModelObject().getMusicData()) {
 
             /**
              * SerialVersionUID
@@ -63,38 +62,28 @@ public class MusicListPanel extends GenericPanel<MusicInfoMO> {
 
             @Override
             protected void populateItem(final ListItem<MusicDataMO> item) {
-                final MusicDataMO musicData = item.getModelObject();
-                final Music musicTO = musicData.getMusic();
+                final Music musicItem = item.getModelObject().getMusic();
 
-                final Label name = new Label("name", musicTO.getName());
+                final AjaxFlowLink<MusicDataMO> detail = new AjaxFlowLink<>("detail", item.getModel(), CatalogFlow.MUSIC_DETAIL);
 
-                final Label mediaCount = new Label("mediaCount", musicTO.getMediaCount());
+                final Label detailText = new Label("detailText", musicItem.getName());
 
-                final Label songsCount = new Label("songsCount", musicData.getSongsCount());
+                final AjaxFlowLink<Music> songs = new AjaxFlowLink<>("songs", Model.of(musicItem), CatalogFlow.MUSIC_SONGS);
 
-                final Label totalLength = new Label("totalLength", musicData.getTotalLength());
-
-                final Label note = new Label("note", musicTO.getNote());
-
-                final WikipediaLink wikiCz = new WikipediaLink("wikiCz", musicTO.getWikiCz(), WikipediaLink.Country.CZ);
-
-                final WikipediaLink wikiEn = new WikipediaLink("wikiEn", musicTO.getWikiEn(), WikipediaLink.Country.EN);
-
-                final AjaxFlowLink<Music> songs = new AjaxFlowLink<>("songs", Model.of(musicTO), CatalogFlow.MUSIC_SONGS);
-
-                final AjaxFlowLink<Music> moveUp = new AjaxFlowLink<>("moveUp", Model.of(musicTO), CatalogFlow.MUSIC_MOVE_UP);
+                final AjaxFlowLink<Music> moveUp = new AjaxFlowLink<>("moveUp", Model.of(musicItem), CatalogFlow.MUSIC_MOVE_UP);
                 moveUp.setVisible(item.getIndex() > 0);
 
-                final AjaxFlowLink<Music> moveDown = new AjaxFlowLink<>("moveDown", Model.of(musicTO), CatalogFlow.MUSIC_MOVE_DOWN);
+                final AjaxFlowLink<Music> moveDown = new AjaxFlowLink<>("moveDown", Model.of(musicItem), CatalogFlow.MUSIC_MOVE_DOWN);
                 moveDown.setVisible(item.getIndex() < getModelObject().size() - 1);
 
-                final AjaxFlowLink<Music> duplicate = new AjaxFlowLink<>("duplicate", Model.of(musicTO), CatalogFlow.MUSIC_DUPLICATE);
+                final AjaxFlowLink<Music> duplicate = new AjaxFlowLink<>("duplicate", Model.of(musicItem), CatalogFlow.MUSIC_DUPLICATE);
 
-                final AjaxFlowLink<Music> edit = new AjaxFlowLink<>("edit", Model.of(musicTO), CatalogFlow.MUSIC_UPDATE);
+                final AjaxFlowLink<Music> edit = new AjaxFlowLink<>("edit", Model.of(musicItem), CatalogFlow.MUSIC_UPDATE);
 
-                final AjaxFlowLink<Music> remove = new AjaxFlowLink<>("remove", Model.of(musicTO), CatalogFlow.MUSIC_REMOVE);
+                final AjaxFlowLink<Music> remove = new AjaxFlowLink<>("remove", Model.of(musicItem), CatalogFlow.MUSIC_REMOVE);
 
-                item.add(name, mediaCount, songsCount, totalLength, note, wikiCz, wikiEn, songs, moveUp, moveDown, duplicate, edit, remove);
+                detail.add(detailText);
+                item.add(detail, songs, moveUp, moveDown, duplicate, edit, remove);
             }
 
         };

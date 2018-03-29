@@ -42,7 +42,7 @@ public final class MovieUtils {
         movie.setImdbCode(1000);
         movie.setWikiEn(CatalogUtils.EN_WIKI);
         movie.setWikiCz(CatalogUtils.CZ_WIKI);
-        movie.setPicture("Picture");
+        movie.setPicture(1);
         movie.setNote(CatalogUtils.NOTE);
         movie.setPosition(CatalogUtils.POSITION);
         movie.setMedia(CollectionUtils.newList(TimeUtils.getTimeMO()));
@@ -72,7 +72,7 @@ public final class MovieUtils {
         movie.setImdbCode(1000);
         movie.setWikiEn(CatalogUtils.EN_WIKI);
         movie.setWikiCz(CatalogUtils.CZ_WIKI);
-        movie.setPicture("Picture");
+        movie.setPicture(1);
         movie.setNote(CatalogUtils.NOTE);
         movie.setPosition(CatalogUtils.POSITION);
         movie.setMedia(CollectionUtils.newList(medium));

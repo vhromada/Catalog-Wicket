@@ -41,8 +41,7 @@ public class AddShowConfirmController extends AbstractResultController<IModel<Sh
      *                                  or converter is null
      */
     @Autowired
-    public AddShowConfirmController(final ShowFacade showFacade,
-        final Converter converter) {
+    public AddShowConfirmController(final ShowFacade showFacade, final Converter converter) {
         Assert.notNull(showFacade, "Facade for shows mustn't be null.");
         Assert.notNull(converter, "Converter mustn't be null.");
 

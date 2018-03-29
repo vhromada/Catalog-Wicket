@@ -12,7 +12,7 @@ import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.GenericPanel;
-import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
 
 /**
  * An abstract class represents form.
@@ -54,7 +54,7 @@ public abstract class AbstractFormPanel<T> extends GenericPanel<T> {
      * @param model model
      * @throws org.apache.wicket.WicketRuntimeException if ID is null
      */
-    public AbstractFormPanel(final String id, final CompoundPropertyModel<T> model) {
+    public AbstractFormPanel(final String id, final IModel<T> model) {
         super(id, model);
     }
 

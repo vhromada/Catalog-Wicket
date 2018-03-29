@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" xmlns="http://www.w3.org/1999/xhtml">
+    <body>
+        <wicket:panel>
+            <wicket:container wicket:id="picture"/>
+            <table class="table table-hover detail">
+                <tbody>
+                    <tr>
+                        <td class="title">Czech name</td>
+                        <td wicket:id="czechName"></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Original name</td>
+                        <td wicket:id="originalName"></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Genres</td>
+                        <td wicket:id="genres"></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Year</td>
+                        <td wicket:id="year"></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Language</td>
+                        <td wicket:id="language"></td>
+                    </tr>
+                    <tr wicket:id="subtitlesContainer">
+                        <td class="title">Subtitles</td>
+                        <td wicket:id="subtitles"></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Media</td>
+                        <td wicket:id="media"></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Total length</td>
+                        <td wicket:id="totalLength"></td>
+                    </tr>
+                    <tr wicket:id="noteContainer">
+                        <td class="title">Note</td>
+                        <td wicket:id="note"></td>
+                    </tr>
+                    <tr wicket:id="csfdContainer">
+                        <td colspan="2">
+                            <wicket:container wicket:id="csfd">ČSFD</wicket:container>
+                        </td>
+                    </tr>
+                    <tr wicket:id="imdbContainer">
+                        <td colspan="2">
+                            <wicket:container wicket:id="imdb">IMDB</wicket:container>
+                        </td>
+                    </tr>
+                    <tr wicket:id="wikiCzContainer">
+                        <td colspan="2">
+                            <wicket:container wicket:id="wikiCz">Czech Wikipedia</wicket:container>
+                        </td>
+                    </tr>
+                    <tr wicket:id="wikiEnContainer">
+                        <td colspan="2">
+                            <wicket:container wicket:id="wikiEn">English Wikipedia</wicket:container>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </wicket:panel>
+    </body>
+</html>

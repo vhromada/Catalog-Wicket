@@ -2,7 +2,6 @@ package cz.vhromada.catalog.web.song.panel;
 
 import java.util.List;
 
-import cz.vhromada.catalog.common.Time;
 import cz.vhromada.catalog.entity.Song;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
@@ -53,7 +52,7 @@ public class SongsListPanel extends GenericPanel<List<Song>> {
         final WebMarkupContainer songsTable = new WebMarkupContainer("songsTable");
         songsTable.setVisible(!getModelObject().isEmpty());
 
-        final ListView<Song> songs = new ListView<Song>("songs", getModel()) {
+        final ListView<Song> songs = new ListView<>("songs", getModel()) {
 
             /**
              * SerialVersionUID
@@ -64,11 +63,9 @@ public class SongsListPanel extends GenericPanel<List<Song>> {
             protected void populateItem(final ListItem<Song> item) {
                 final Song song = item.getModelObject();
 
-                final Label name = new Label("name", song.getName());
+                final AjaxFlowLink<Song> detail = new AjaxFlowLink<>("detail", item.getModel(), CatalogFlow.SONGS_DETAIL);
 
-                final Label length = new Label("length", new Time(song.getLength()));
-
-                final Label note = new Label("note", song.getNote());
+                final Label detailText = new Label("detailText", song.getName());
 
                 final AjaxFlowLink<Song> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), CatalogFlow.SONGS_MOVE_UP);
                 moveUp.setVisible(item.getIndex() > 0);
@@ -82,7 +79,8 @@ public class SongsListPanel extends GenericPanel<List<Song>> {
 
                 final AjaxFlowLink<Song> remove = new AjaxFlowLink<>("remove", item.getModel(), CatalogFlow.SONGS_REMOVE);
 
-                item.add(name, length, note, moveUp, moveDown, duplicate, edit, remove);
+                detail.add(detailText);
+                item.add(detail, moveUp, moveDown, duplicate, edit, remove);
             }
 
         };

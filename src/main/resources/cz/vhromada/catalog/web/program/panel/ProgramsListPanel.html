@@ -1,55 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org" xmlns="http://www.w3.org/1999/xhtml">
-<body>
-<wicket:panel>
-    <table class="table table-hover" wicket:id="programsTable">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Count of media</th>
-            <th>Additional data</th>
-            <th>Note</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr wicket:id="programs">
-            <td wicket:id="name"></td>
-            <td wicket:id="mediaCount"></td>
-            <td wicket:id="additionalData"></td>
-            <td wicket:id="note"></td>
-            <td wicket:id="wikiCz"></td>
-            <td wicket:id="wikiEn"></td>
-            <td><a href="#" wicket:id="moveUp">Move up</a></td>
-            <td><a href="#" wicket:id="moveDown">Move down</a></td>
-            <td><a href="#" wicket:id="duplicate">Duplicate</a></td>
-            <td><a href="#" wicket:id="edit">Edit</a></td>
-            <td><a href="#" wicket:id="remove">Remove</a></td>
-        </tr>
-        </tbody>
-    </table>
-    <div wicket:id="noPrograms">No records.</div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Count of programs</th>
-            <th>Count of media</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td wicket:id="count"></td>
-            <td wicket:id="mediaCount"></td>
-        </tr>
-        </tbody>
-    </table>
-</wicket:panel>
-</body>
+    <body>
+        <wicket:panel>
+            <table class="table table-hover" wicket:id="programsTable">
+                <thead>
+                    <tr>
+                        <th>Program</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr wicket:id="programs">
+                        <td>
+                            <a href="#" wicket:id="detail">
+                                <wicket:container wicket:id="detailText"/>
+                            </a>
+                        </td>
+                        <td><a href="#" wicket:id="moveUp">Move up</a></td>
+                        <td><a href="#" wicket:id="moveDown">Move down</a></td>
+                        <td><a href="#" wicket:id="duplicate">Duplicate</a></td>
+                        <td><a href="#" wicket:id="edit">Edit</a></td>
+                        <td><a href="#" wicket:id="remove">Remove</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div wicket:id="noPrograms">No records.</div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Count of programs</th>
+                        <th>Count of media</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td wicket:id="count"></td>
+                        <td wicket:id="mediaCount"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </wicket:panel>
+    </body>
 </html>

@@ -11,7 +11,7 @@ import org.apache.wicket.protocol.http.WebSession;
 import org.springframework.stereotype.Component;
 
 /**
- * A class represents controller for showing show seasons.
+ * A class represents controller for showing show's seasons.
  *
  * @author Vladimir Hromada
  */

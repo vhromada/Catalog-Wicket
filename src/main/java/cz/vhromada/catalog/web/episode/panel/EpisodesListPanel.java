@@ -2,7 +2,6 @@ package cz.vhromada.catalog.web.episode.panel;
 
 import java.util.List;
 
-import cz.vhromada.catalog.common.Time;
 import cz.vhromada.catalog.entity.Episode;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.web.wicket.flow.AjaxFlowLink;
@@ -53,7 +52,7 @@ public class EpisodesListPanel extends GenericPanel<List<Episode>> {
         final WebMarkupContainer episodesTable = new WebMarkupContainer("episodesTable");
         episodesTable.setVisible(!getModelObject().isEmpty());
 
-        final ListView<Episode> episodes = new ListView<Episode>("episodes", getModel()) {
+        final ListView<Episode> episodes = new ListView<>("episodes", getModel()) {
 
             /**
              * SerialVersionUID
@@ -64,13 +63,9 @@ public class EpisodesListPanel extends GenericPanel<List<Episode>> {
             protected void populateItem(final ListItem<Episode> item) {
                 final Episode episode = item.getModelObject();
 
-                final Label number = new Label("number", episode.getNumber());
+                final AjaxFlowLink<Episode> detail = new AjaxFlowLink<>("detail", item.getModel(), CatalogFlow.EPISODES_DETAIL);
 
-                final Label name = new Label("name", episode.getName());
-
-                final Label length = new Label("length", new Time(episode.getLength()));
-
-                final Label note = new Label("note", episode.getNote());
+                final Label detailText = new Label("detailText", episode.getName());
 
                 final AjaxFlowLink<Episode> moveUp = new AjaxFlowLink<>("moveUp", item.getModel(), CatalogFlow.EPISODES_MOVE_UP);
                 moveUp.setVisible(item.getIndex() > 0);
@@ -84,7 +79,8 @@ public class EpisodesListPanel extends GenericPanel<List<Episode>> {
 
                 final AjaxFlowLink<Episode> remove = new AjaxFlowLink<>("remove", item.getModel(), CatalogFlow.EPISODES_REMOVE);
 
-                item.add(number, name, length, note, moveUp, moveDown, duplicate, edit, remove);
+                detail.add(detailText);
+                item.add(detail, moveUp, moveDown, duplicate, edit, remove);
             }
 
         };

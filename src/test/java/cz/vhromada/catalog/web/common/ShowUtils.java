@@ -39,7 +39,7 @@ public final class ShowUtils {
         show.setImdbCode(1000);
         show.setWikiEn(CatalogUtils.EN_WIKI);
         show.setWikiCz(CatalogUtils.CZ_WIKI);
-        show.setPicture("Picture");
+        show.setPicture(1);
         show.setNote(CatalogUtils.NOTE);
         show.setPosition(CatalogUtils.POSITION);
         show.setGenres(CollectionUtils.newList(GenreUtils.getGenreMO()));
@@ -66,7 +66,7 @@ public final class ShowUtils {
         show.setImdbCode(1000);
         show.setWikiEn(CatalogUtils.EN_WIKI);
         show.setWikiCz(CatalogUtils.CZ_WIKI);
-        show.setPicture("Picture");
+        show.setPicture(1);
         show.setNote(CatalogUtils.NOTE);
         show.setPosition(CatalogUtils.POSITION);
         show.setGenres(CollectionUtils.newList(GenreUtils.getGenre()));

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" xmlns="http://www.w3.org/1999/xhtml">
+    <body>
+        <wicket:panel>
+            <table class="table table-hover detail">
+                <tbody>
+                    <tr>
+                        <td class="title">Number</td>
+                        <td wicket:id="number"></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Year</td>
+                        <td wicket:id="year"></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Language</td>
+                        <td wicket:id="language"></td>
+                    </tr>
+                    <tr wicket:id="subtitlesContainer">
+                        <td class="title">Subtitles</td>
+                        <td wicket:id="subtitles"></td>
+                    </tr>
+                    <wicket:container wicket:id="episodesContainer">
+                        <tr>
+                            <td class="title">Episodes count</td>
+                            <td wicket:id="episodesCount"></td>
+                        </tr>
+                        <tr>
+                            <td class="title">Total length</td>
+                            <td wicket:id="totalLength"></td>
+                        </tr>
+                    </wicket:container>
+                    <tr wicket:id="noteContainer">
+                        <td class="title">Note</td>
+                        <td wicket:id="note"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </wicket:panel>
+    </body>
+</html>

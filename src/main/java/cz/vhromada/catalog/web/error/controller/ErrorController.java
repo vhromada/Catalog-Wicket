@@ -17,7 +17,7 @@ public class ErrorController extends Controller<Result<?>> {
 
     @Override
     public void handle(final Result<?> data) {
-
+        throw new IllegalArgumentException("Error" + data);
     }
 
     @Override

@@ -11,7 +11,7 @@ import org.apache.wicket.protocol.http.WebSession;
 import org.springframework.stereotype.Component;
 
 /**
- * A class represents controller for showing music songs.
+ * A class represents controller for showing music's songs.
  *
  * @author Vladimir Hromada
  */

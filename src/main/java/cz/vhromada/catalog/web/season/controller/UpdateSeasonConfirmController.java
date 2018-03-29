@@ -41,8 +41,7 @@ public class UpdateSeasonConfirmController extends AbstractResultController<IMod
      *                                  or converter is null
      */
     @Autowired
-    public UpdateSeasonConfirmController(final SeasonFacade seasonFacade,
-        final Converter converter) {
+    public UpdateSeasonConfirmController(final SeasonFacade seasonFacade, final Converter converter) {
         Assert.notNull(seasonFacade, "Facade for seasons mustn't be null.");
         Assert.notNull(converter, "Converter mustn't be null.");
 

@@ -41,8 +41,7 @@ public class AddGenreConfirmController extends AbstractResultController<IModel<G
      *                                  or converter is null
      */
     @Autowired
-    public AddGenreConfirmController(final GenreFacade genreFacade,
-        final Converter converter) {
+    public AddGenreConfirmController(final GenreFacade genreFacade, final Converter converter) {
         Assert.notNull(genreFacade, "Facade for genres mustn't be null.");
         Assert.notNull(converter, "Converter mustn't be null.");
 

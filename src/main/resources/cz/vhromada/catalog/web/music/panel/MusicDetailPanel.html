@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" xmlns="http://www.w3.org/1999/xhtml">
+    <body>
+        <wicket:panel>
+            <table class="table table-hover detail">
+                <tbody>
+                    <tr>
+                        <td class="title">Name</td>
+                        <td wicket:id="name"></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Count of media</td>
+                        <td wicket:id="mediaCount"></td>
+                    </tr>
+                    <wicket:container wicket:id="songsContainer">
+                        <tr>
+                            <td class="title">Count of songs</td>
+                            <td wicket:id="songsCount"></td>
+                        </tr>
+                        <tr>
+                            <td class="title">Total length</td>
+                            <td wicket:id="totalLength"></td>
+                        </tr>
+                    </wicket:container>
+                    <tr wicket:id="noteContainer">
+                        <td class="title">Note</td>
+                        <td wicket:id="note"></td>
+                    </tr>
+                    <tr wicket:id="wikiCzContainer">
+                        <td colspan="2">
+                            <wicket:container wicket:id="wikiCz">Czech Wikipedia</wicket:container>
+                        </td>
+                    </tr>
+                    <tr wicket:id="wikiEnContainer">
+                        <td colspan="2">
+                            <wicket:container wicket:id="wikiEn">English Wikipedia</wicket:container>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </wicket:panel>
+    </body>
+</html>

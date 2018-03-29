@@ -51,8 +51,7 @@ public class MusicListController extends AbstractResultController<Void> {
      *                                  or facade for songs is null
      */
     @Autowired
-    public MusicListController(final MusicFacade musicFacade,
-        final SongFacade songFacade) {
+    public MusicListController(final MusicFacade musicFacade, final SongFacade songFacade) {
         Assert.notNull(musicFacade, "Facade for music mustn't be null.");
         Assert.notNull(songFacade, "Facade for songs mustn't be null.");
 

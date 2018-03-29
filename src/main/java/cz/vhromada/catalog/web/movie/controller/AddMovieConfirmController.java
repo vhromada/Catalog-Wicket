@@ -41,8 +41,7 @@ public class AddMovieConfirmController extends AbstractResultController<IModel<M
      *                                  or converter is null
      */
     @Autowired
-    public AddMovieConfirmController(final MovieFacade movieFacade,
-        final Converter converter) {
+    public AddMovieConfirmController(final MovieFacade movieFacade, final Converter converter) {
         Assert.notNull(movieFacade, "Facade for movies mustn't be null.");
         Assert.notNull(converter, "Converter mustn't be null.");
 

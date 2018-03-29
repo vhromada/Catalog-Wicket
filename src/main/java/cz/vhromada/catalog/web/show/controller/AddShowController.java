@@ -1,9 +1,12 @@
 package cz.vhromada.catalog.web.show.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import cz.vhromada.catalog.entity.Genre;
+import cz.vhromada.catalog.entity.Picture;
 import cz.vhromada.catalog.facade.GenreFacade;
+import cz.vhromada.catalog.facade.PictureFacade;
 import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.event.PanelData;
 import cz.vhromada.catalog.web.event.PanelEvent;
@@ -33,6 +36,11 @@ import org.springframework.util.Assert;
 public class AddShowController extends AbstractResultController<Void> {
 
     /**
+     * Facade for pictures
+     */
+    private PictureFacade pictureFacade;
+
+    /**
      * Facade for genres
      */
     private GenreFacade genreFacade;
@@ -45,33 +53,38 @@ public class AddShowController extends AbstractResultController<Void> {
     /**
      * Creates a new instance of AddShowController.
      *
-     * @param genreFacade facade for genres
-     * @param converter   converter
-     * @throws IllegalArgumentException if facade for genres is null
+     * @param pictureFacade facade for pictures
+     * @param genreFacade   facade for genres
+     * @param converter     converter
+     * @throws IllegalArgumentException if facade for pictures is null
+     *                                  or facade for genres is null
      *                                  or converter is null
      */
     @Autowired
-    public AddShowController(final GenreFacade genreFacade,
-        final Converter converter) {
+    public AddShowController(final PictureFacade pictureFacade, final GenreFacade genreFacade, final Converter converter) {
+        Assert.notNull(pictureFacade, "Facade for pictures mustn't be null.");
         Assert.notNull(genreFacade, "Facade for genres mustn't be null.");
         Assert.notNull(converter, "Converter mustn't be null.");
 
+        this.pictureFacade = pictureFacade;
         this.genreFacade = genreFacade;
         this.converter = converter;
     }
 
     @Override
     public void handle(final Void data) {
-        final Result<List<Genre>> result = genreFacade.getAll();
+        final Result<List<Genre>> genres = genreFacade.getAll();
+        final Result<List<Picture>> pictures = pictureFacade.getAll();
 
-        addResults(result);
+        addResults(pictures, genres);
 
         if (processResult()) {
             final WebSession session = CatalogApplication.getSession();
             session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.SHOWS_ADD_CONFIRM);
             session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Create");
             final ShowMO show = new ShowMO();
-            show.setAllGenres(converter.convertCollection(result.getData(), GenreMO.class));
+            show.setAllGenres(converter.convertCollection(genres.getData(), GenreMO.class));
+            show.setAllPictures(pictures.getData().stream().map(Picture::getId).collect(Collectors.toList()));
             final PanelData<ShowMO> panelData = new PanelData<>(ShowFormPanel.ID, new CompoundPropertyModel<>(show));
             final PanelData<Void> menuData = new PanelData<>(ShowsMenuPanel.ID, null);
 

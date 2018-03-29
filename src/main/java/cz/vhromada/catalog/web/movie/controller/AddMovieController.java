@@ -2,9 +2,12 @@ package cz.vhromada.catalog.web.movie.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import cz.vhromada.catalog.entity.Genre;
+import cz.vhromada.catalog.entity.Picture;
 import cz.vhromada.catalog.facade.GenreFacade;
+import cz.vhromada.catalog.facade.PictureFacade;
 import cz.vhromada.catalog.web.TimeMO;
 import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.event.PanelData;
@@ -35,6 +38,11 @@ import org.springframework.util.Assert;
 public class AddMovieController extends AbstractResultController<Void> {
 
     /**
+     * Facade for pictures
+     */
+    private PictureFacade pictureFacade;
+
+    /**
      * Facade for genres
      */
     private GenreFacade genreFacade;
@@ -47,26 +55,30 @@ public class AddMovieController extends AbstractResultController<Void> {
     /**
      * Creates a new instance of AddMovieController.
      *
-     * @param genreFacade facade for genres
-     * @param converter   converter
-     * @throws IllegalArgumentException if facade for genres is null
+     * @param pictureFacade facade for pictures
+     * @param genreFacade   facade for genres
+     * @param converter     converter
+     * @throws IllegalArgumentException if facade for pictures is null
+     *                                  or facade for genres is null
      *                                  or converter is null
      */
     @Autowired
-    public AddMovieController(final GenreFacade genreFacade,
-        final Converter converter) {
+    public AddMovieController(final PictureFacade pictureFacade, final GenreFacade genreFacade, final Converter converter) {
+        Assert.notNull(pictureFacade, "Facade for pictures mustn't be null.");
         Assert.notNull(genreFacade, "Facade for genres mustn't be null.");
         Assert.notNull(converter, "Converter mustn't be null.");
 
+        this.pictureFacade = pictureFacade;
         this.genreFacade = genreFacade;
         this.converter = converter;
     }
 
     @Override
     public void handle(final Void data) {
-        final Result<List<Genre>> result = genreFacade.getAll();
+        final Result<List<Genre>> genres = genreFacade.getAll();
+        final Result<List<Picture>> pictures = pictureFacade.getAll();
 
-        addResults(result);
+        addResults(pictures, genres);
 
         if (processResult()) {
             final WebSession session = CatalogApplication.getSession();
@@ -78,7 +90,8 @@ public class AddMovieController extends AbstractResultController<Void> {
             final MovieMO movie = new MovieMO();
             movie.setSubtitles(new ArrayList<>());
             movie.setMedia(media);
-            movie.setAllGenres(converter.convertCollection(result.getData(), GenreMO.class));
+            movie.setAllGenres(converter.convertCollection(genres.getData(), GenreMO.class));
+            movie.setAllPictures(pictures.getData().stream().map(Picture::getId).collect(Collectors.toList()));
             final PanelData<MovieMO> panelData = new PanelData<>(MovieFormPanel.ID, new CompoundPropertyModel<>(movie));
             final PanelData<Void> menuData = new PanelData<>(MoviesMenuPanel.ID, null);
 

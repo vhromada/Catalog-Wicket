@@ -25,6 +25,11 @@ public enum CatalogFlow implements Flow {
     MOVIES_LIST,
 
     /**
+     * Flow for detail of movie
+     */
+    MOVIES_DETAIL,
+
+    /**
      * Flow for form for add movie
      */
     MOVIES_ADD,
@@ -83,6 +88,11 @@ public enum CatalogFlow implements Flow {
      * Flow for list of shows
      */
     SHOWS_LIST,
+
+    /**
+     * Flow for detail of show
+     */
+    SHOWS_DETAIL,
 
     /**
      * Flow for form for add show
@@ -145,6 +155,11 @@ public enum CatalogFlow implements Flow {
     SEASONS_LIST,
 
     /**
+     * Flow for detail of season
+     */
+    SEASONS_DETAIL,
+
+    /**
      * Flow for form for add season
      */
     SEASONS_ADD,
@@ -200,6 +215,11 @@ public enum CatalogFlow implements Flow {
     EPISODES_LIST,
 
     /**
+     * Flow for detail of episode
+     */
+    EPISODES_DETAIL,
+
+    /**
      * Flow for form for add episode
      */
     EPISODES_ADD,
@@ -253,6 +273,11 @@ public enum CatalogFlow implements Flow {
      * Flow for list of games
      */
     GAMES_LIST,
+
+    /**
+     * Flow for detail of game
+     */
+    GAMES_DETAIL,
 
     /**
      * Flow for form for add game
@@ -315,6 +340,11 @@ public enum CatalogFlow implements Flow {
     MUSIC_LIST,
 
     /**
+     * Flow for detail of music
+     */
+    MUSIC_DETAIL,
+
+    /**
      * Flow for form for add music
      */
     MUSIC_ADD,
@@ -375,6 +405,11 @@ public enum CatalogFlow implements Flow {
     SONGS_LIST,
 
     /**
+     * Flow for detail of songs
+     */
+    SONGS_DETAIL,
+
+    /**
      * Flow for form for add song
      */
     SONGS_ADD,
@@ -428,6 +463,11 @@ public enum CatalogFlow implements Flow {
      * Flow for list of programs
      */
     PROGRAMS_LIST,
+
+    /**
+     * Flow for detail of programs
+     */
+    PROGRAMS_DETAIL,
 
     /**
      * Flow for form for add program
@@ -538,6 +578,51 @@ public enum CatalogFlow implements Flow {
      * Flow for cancel updating genre
      */
     GENRES_CANCEL,
+
+    /**
+     * Flow for new pictures
+     */
+    PICTURES_NEW_DATA,
+
+    /**
+     * Flow for list of pictures
+     */
+    PICTURES_LIST,
+
+    /**
+     * Flow for form for add picture
+     */
+    PICTURES_ADD,
+
+    /**
+     * Flow for adding picture
+     */
+    PICTURES_ADD_CONFIRM,
+
+    /**
+     * Flow for removing picture
+     */
+    PICTURES_REMOVE,
+
+    /**
+     * Flow for moving picture up
+     */
+    PICTURES_MOVE_UP,
+
+    /**
+     * Flow for moving picture down
+     */
+    PICTURES_MOVE_DOWN,
+
+    /**
+     * Flow for updating position for pictures
+     */
+    PICTURES_UPDATE_POSITION,
+
+    /**
+     * Flow for cancel updating picture
+     */
+    PICTURES_CANCEL,
 
     /**
      * Flow for errors

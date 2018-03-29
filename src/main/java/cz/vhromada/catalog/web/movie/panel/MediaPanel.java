@@ -12,6 +12,7 @@ import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.RangeValidator;
@@ -165,7 +166,8 @@ public abstract class MediaPanel extends Panel {
 
             final Label mediumHoursLabel = new Label("mediumHoursLabel", baseName + " hours");
 
-            final NumberTextField<Integer> mediumHours = new NumberTextField<>("mediumHours", new PropertyModel<Integer>(item.getModelObject(), "hours"));
+            final IModel<Integer> mediumHoursModel = new PropertyModel<>(item.getModelObject(), "hours");
+            final NumberTextField<Integer> mediumHours = new NumberTextField<>("mediumHours", mediumHoursModel);
             mediumHours.setMinimum(0)
                 .setMaximum(MAX_HOURS)
                 .setLabel(Model.of(baseName + " hours"))
@@ -176,8 +178,8 @@ public abstract class MediaPanel extends Panel {
 
             final Label mediumMinutesLabel = new Label("mediumMinutesLabel", baseName + " minutes");
 
-            final NumberTextField<Integer> mediumMinutes = new NumberTextField<>("mediumMinutes",
-                new PropertyModel<Integer>(item.getModelObject(), "minutes"));
+            final IModel<Integer> mediumMinutesModel = new PropertyModel<>(item.getModelObject(), "minutes");
+            final NumberTextField<Integer> mediumMinutes = new NumberTextField<>("mediumMinutes", mediumMinutesModel);
             mediumMinutes.setMinimum(0)
                 .setMaximum(MAX_MINUTES)
                 .setLabel(Model.of(baseName + " minutes"))
@@ -188,8 +190,8 @@ public abstract class MediaPanel extends Panel {
 
             final Label mediumSecondsLabel = new Label("mediumSecondsLabel", baseName + " seconds");
 
-            final NumberTextField<Integer> mediumSeconds = new NumberTextField<>("mediumSeconds",
-                new PropertyModel<Integer>(item.getModelObject(), "seconds"));
+            final IModel<Integer> mediumSecondsModel = new PropertyModel<>(item.getModelObject(), "seconds");
+            final NumberTextField<Integer> mediumSeconds = new NumberTextField<>("mediumSeconds", mediumSecondsModel);
             mediumSeconds.setMinimum(0)
                 .setMaximum(MAX_SECONDS)
                 .setLabel(Model.of(baseName + " seconds"))

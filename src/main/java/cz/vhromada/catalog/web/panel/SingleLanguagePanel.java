@@ -44,7 +44,7 @@ public abstract class SingleLanguagePanel extends Panel {
             .setRequired(true)
             .add(getValidationBehavior());
 
-        final ListView<Language> languages = new ListView<Language>("languages", Arrays.asList(Language.values())) {
+        final ListView<Language> languages = new ListView<>("languages", Arrays.asList(Language.values())) {
 
             /**
              * SerialVersionUID

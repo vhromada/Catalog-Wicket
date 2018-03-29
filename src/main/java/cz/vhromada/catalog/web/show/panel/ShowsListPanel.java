@@ -1,10 +1,6 @@
 package cz.vhromada.catalog.web.show.panel;
 
 import cz.vhromada.catalog.entity.Show;
-import cz.vhromada.catalog.web.common.FormatUtils;
-import cz.vhromada.catalog.web.component.CsfdLink;
-import cz.vhromada.catalog.web.component.ImdbLink;
-import cz.vhromada.catalog.web.component.WikipediaLink;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.show.mo.ShowDataMO;
 import cz.vhromada.catalog.web.show.mo.ShowsMO;
@@ -66,32 +62,11 @@ public class ShowsListPanel extends GenericPanel<ShowsMO> {
 
             @Override
             protected void populateItem(final ListItem<ShowDataMO> item) {
-                final ShowDataMO showData = item.getModelObject();
-                final Show show = showData.getShow();
+                final Show show = item.getModelObject().getShow();
 
-                final Label czechName = new Label("czechName", show.getCzechName());
+                final AjaxFlowLink<ShowDataMO> detail = new AjaxFlowLink<>("detail", item.getModel(), CatalogFlow.SHOWS_DETAIL);
 
-                final Label originalName = new Label("originalName", show.getOriginalName());
-
-                final Label genres = new Label("genres", FormatUtils.getGenres(show.getGenres()));
-
-                final Label seasonsCount = new Label("seasonsCount", showData.getSeasonsCount());
-
-                final Label episodesCount = new Label("episodesCount", showData.getEpisodesCount());
-
-                final Label totalLength = new Label("totalLength", showData.getTotalLength());
-
-                final Label picture = new Label("picture", show.getPicture());
-
-                final Label note = new Label("note", show.getNote());
-
-                final CsfdLink csfd = new CsfdLink("csfd", show.getCsfd());
-
-                final ImdbLink imdb = new ImdbLink("imdb", show.getImdbCode());
-
-                final WikipediaLink wikiCz = new WikipediaLink("wikiCz", show.getWikiCz(), WikipediaLink.Country.CZ);
-
-                final WikipediaLink wikiEn = new WikipediaLink("wikiEn", show.getWikiEn(), WikipediaLink.Country.EN);
+                final Label detailText = new Label("detailText", show.getCzechName());
 
                 final AjaxFlowLink<Show> seasons = new AjaxFlowLink<>("seasons", Model.of(show), CatalogFlow.SHOWS_SEASONS);
 
@@ -107,8 +82,8 @@ public class ShowsListPanel extends GenericPanel<ShowsMO> {
 
                 final AjaxFlowLink<Show> remove = new AjaxFlowLink<>("remove", Model.of(show), CatalogFlow.SHOWS_REMOVE);
 
-                item.add(czechName, originalName, genres, seasonsCount, episodesCount, totalLength, picture, note, csfd, imdb, wikiCz, wikiEn, seasons, moveUp,
-                    moveDown, duplicate, edit, remove);
+                detail.add(detailText);
+                item.add(detail, seasons, moveUp, moveDown, duplicate, edit, remove);
             }
 
         };

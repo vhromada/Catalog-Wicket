@@ -1,13 +1,18 @@
 package cz.vhromada.catalog.web.show.panel;
 
 import cz.vhromada.catalog.web.component.GenresChoice;
+import cz.vhromada.catalog.web.component.Image;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.panel.AbstractFormPanel;
 import cz.vhromada.catalog.web.panel.ImdbPanel;
+import cz.vhromada.catalog.web.panel.PicturesModalPanel;
 import cz.vhromada.catalog.web.show.mo.ShowMO;
 import cz.vhromada.web.wicket.controller.Flow;
 
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
@@ -83,7 +88,29 @@ public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
 
         final TextField<String> wikiEn = new TextField<>("wikiEn");
 
-        final TextField<String> picture = new TextField<>("picture");
+        final Image pictureImage = new Image("pictureImage", getModelObject().getPicture());
+        pictureImage.setVisible(getModelObject().getPicture() != null)
+            .setOutputMarkupPlaceholderTag(true);
+
+        final AjaxLink<Void> removePicture = new AjaxLink<>("removePicture") {
+
+            /**
+             * SerialVersionUID
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void onClick(final AjaxRequestTarget target) {
+                ShowFormPanel.this.getModelObject().setPicture(null);
+                ShowFormPanel.this.getForm().modelChanged();
+                setVisible(false);
+                pictureImage.setVisible(false);
+                target.add(this, pictureImage);
+            }
+
+        };
+        removePicture.setVisible(getModelObject().getPicture() != null)
+            .setOutputMarkupPlaceholderTag(true);
 
         final TextField<String> note = new TextField<>("note");
 
@@ -101,7 +128,21 @@ public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
 
         };
 
-        getForm().add(czechName, originalName, csfd, imdb, wikiEn, wikiCz, picture, note, genres);
+        final PicturesModalPanel pictures = new PicturesModalPanel("pictures", getModelObject().getAllPictures()) {
+
+            /**
+             * SerialVersionUID
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected AjaxFormChoiceComponentUpdatingBehavior getValidationBehavior() {
+                return getPictureChoiceBehavior(pictureImage, removePicture);
+            }
+
+        };
+
+        getForm().add(czechName, originalName, csfd, imdb, wikiEn, wikiCz, pictureImage, removePicture, note, genres, pictures);
     }
 
     @Override
@@ -124,12 +165,54 @@ public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
         if (show.getWikiEn() == null) {
             show.setWikiEn("");
         }
-        if (show.getPicture() == null) {
-            show.setPicture("");
-        }
         if (show.getNote() == null) {
             show.setNote("");
         }
+    }
+
+
+    /**
+     * Returns behavior for picture choice.
+     *
+     * @param picture       picture
+     * @param removePicture link for removing picture
+     * @return behavior for picture choice
+     */
+    @SuppressWarnings("Duplicates")
+    private AjaxFormChoiceComponentUpdatingBehavior getPictureChoiceBehavior(final Image picture, final AjaxLink<Void> removePicture) {
+        return new AjaxFormChoiceComponentUpdatingBehavior() {
+
+            /**
+             * SerialVersionUID
+             */
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected void onUpdate(final AjaxRequestTarget target) {
+                update(target);
+            }
+
+            @Override
+            protected void onError(final AjaxRequestTarget target, final RuntimeException e) {
+                super.onError(target, e);
+
+                update(target);
+            }
+
+            /**
+             * Update components.
+             *
+             * @param target AJAX request target
+             */
+            private void update(final AjaxRequestTarget target) {
+                picture.update(getModelObject().getPicture());
+                picture.setVisible(true);
+                removePicture.setVisible(true);
+                target.add(picture, removePicture);
+            }
+
+        };
+
     }
 
 }

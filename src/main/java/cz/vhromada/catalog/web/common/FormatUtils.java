@@ -5,6 +5,8 @@ import java.util.List;
 import cz.vhromada.catalog.common.Language;
 import cz.vhromada.catalog.entity.Genre;
 
+import org.springframework.util.CollectionUtils;
+
 /**
  * A class represents utility class for formatting.
  *
@@ -44,7 +46,7 @@ public final class FormatUtils {
      * @return subtitles
      */
     public static String getSubtitles(final List<Language> subtitles) {
-        if (subtitles == null || subtitles.isEmpty()) {
+        if (CollectionUtils.isEmpty(subtitles)) {
             return "";
         }
 
@@ -64,7 +66,7 @@ public final class FormatUtils {
      * @return genres
      */
     public static String getGenres(final List<Genre> genres) {
-        if (genres == null || genres.isEmpty()) {
+        if (CollectionUtils.isEmpty(genres)) {
             return "";
         }
 

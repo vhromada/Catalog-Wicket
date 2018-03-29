@@ -41,8 +41,7 @@ public class UpdateProgramConfirmController extends AbstractResultController<IMo
      *                                  or converter is null
      */
     @Autowired
-    public UpdateProgramConfirmController(final ProgramFacade programFacade,
-        final Converter converter) {
+    public UpdateProgramConfirmController(final ProgramFacade programFacade, final Converter converter) {
         Assert.notNull(programFacade, "Facade for programs mustn't be null.");
         Assert.notNull(converter, "Converter mustn't be null.");
 

@@ -52,7 +52,7 @@ public class GenresListPanel extends GenericPanel<List<Genre>> {
         final WebMarkupContainer genresTable = new WebMarkupContainer("genresTable");
         genresTable.setVisible(!getModelObject().isEmpty());
 
-        final ListView<Genre> genres = new ListView<Genre>("genres", getModel()) {
+        final ListView<Genre> genres = new ListView<>("genres", getModel()) {
 
             /**
              * SerialVersionUID

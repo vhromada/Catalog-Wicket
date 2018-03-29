@@ -60,9 +60,7 @@ public class ShowsListController extends AbstractResultController<Void> {
      *                                  or facade for episodes is null
      */
     @Autowired
-    public ShowsListController(final ShowFacade showFacade,
-        final SeasonFacade seasonFacade,
-        final EpisodeFacade episodeFacade) {
+    public ShowsListController(final ShowFacade showFacade, final SeasonFacade seasonFacade, final EpisodeFacade episodeFacade) {
         Assert.notNull(showFacade, "Facade for shows mustn't be null.");
         Assert.notNull(seasonFacade, "Facade for seasons mustn't be null.");
         Assert.notNull(episodeFacade, "Facade for episodes mustn't be null.");

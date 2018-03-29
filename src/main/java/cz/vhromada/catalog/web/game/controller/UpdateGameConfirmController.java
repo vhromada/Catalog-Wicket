@@ -41,8 +41,7 @@ public class UpdateGameConfirmController extends AbstractResultController<IModel
      *                                  or converter is null
      */
     @Autowired
-    public UpdateGameConfirmController(final GameFacade gameFacade,
-        final Converter converter) {
+    public UpdateGameConfirmController(final GameFacade gameFacade, final Converter converter) {
         Assert.notNull(gameFacade, "Facade for games mustn't be null.");
         Assert.notNull(converter, "Converter mustn't be null.");
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org" xmlns="http://www.w3.org/1999/xhtml">
+    <body>
+        <wicket:panel>
+            <div class="modal fade" id="picturesModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" id="closeModal" name="closeModal" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" wicket:id="picture">
+                            <label class="radio custom" wicket:id="pictures">
+                                <input type="radio" name="picture" wicket:id="pictureItem"/>
+                                <wicket:container wicket:id="pictureItemContent"/>
+                            </label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="choosePicture" name="choosePicture" class="btn btn-primary" data-dismiss="modal">Choose</button>
+                            <button type="button" id="close" name="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </wicket:panel>
+    </body>
+</html>

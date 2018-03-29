@@ -56,7 +56,7 @@ public class ShowMO implements Serializable {
     /**
      * Path to file with show picture
      */
-    private String picture;
+    private Integer picture;
 
     /**
      * Note
@@ -77,6 +77,11 @@ public class ShowMO implements Serializable {
      * All genres
      */
     private List<GenreMO> allGenres;
+
+    /**
+     * All pictures
+     */
+    private List<Integer> allPictures;
 
     /**
      * Returns ID.
@@ -209,7 +214,7 @@ public class ShowMO implements Serializable {
      *
      * @return path to file with show picture
      */
-    public String getPicture() {
+    public Integer getPicture() {
         return picture;
     }
 
@@ -218,7 +223,7 @@ public class ShowMO implements Serializable {
      *
      * @param picture new value
      */
-    public void setPicture(final String picture) {
+    public void setPicture(final Integer picture) {
         this.picture = picture;
     }
 
@@ -294,6 +299,24 @@ public class ShowMO implements Serializable {
         this.allGenres = allGenres;
     }
 
+    /**
+     * Returns all pictures.
+     *
+     * @return all pictures
+     */
+    public List<Integer> getAllPictures() {
+        return allPictures;
+    }
+
+    /**
+     * Sets a new value to all pictures.
+     *
+     * @param allPictures new value
+     */
+    public void setAllPictures(final List<Integer> allPictures) {
+        this.allPictures = allPictures;
+    }
+
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -313,8 +336,9 @@ public class ShowMO implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("ShowMO [id=%d, czechName=%s, originalName=%s, csfd=%s, imdbCode=%d, wikiEn=%s, wikiCz=%s, picture=%s, note=%s, position=%d, "
-            + "genres=%s, allGenres=%s]", id, czechName, originalName, csfd, imdbCode, wikiEn, wikiCz, picture, note, position, genres, allGenres);
+        return String.format("ShowMO [id=%d, czechName=%s, originalName=%s, csfd=%s, imdbCode=%d, wikiEn=%s, wikiCz=%s, picture=%d, note=%s, position=%d, "
+                + "genres=%s, allGenres=%s, allPictures=%s]", id, czechName, originalName, csfd, imdbCode, wikiEn, wikiCz, picture, note, position, genres,
+            allGenres, allPictures);
     }
 
 }
