@@ -3,7 +3,6 @@ package cz.vhromada.catalog.web.show.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.vhromada.catalog.common.Time;
 import cz.vhromada.catalog.entity.Episode;
 import cz.vhromada.catalog.entity.Season;
 import cz.vhromada.catalog.entity.Show;
@@ -18,6 +17,7 @@ import cz.vhromada.catalog.web.show.mo.ShowDataMO;
 import cz.vhromada.catalog.web.show.mo.ShowsMO;
 import cz.vhromada.catalog.web.show.panel.ShowsListPanel;
 import cz.vhromada.catalog.web.show.panel.ShowsMenuPanel;
+import cz.vhromada.common.Time;
 import cz.vhromada.result.Result;
 import cz.vhromada.web.wicket.controller.Flow;
 

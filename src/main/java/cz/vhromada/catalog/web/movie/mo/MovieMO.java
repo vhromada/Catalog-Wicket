@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import cz.vhromada.catalog.common.Language;
 import cz.vhromada.catalog.web.TimeMO;
 import cz.vhromada.catalog.web.genre.mo.GenreMO;
+import cz.vhromada.common.Language;
 
 /**
  * A class represents MO for movie.
@@ -88,7 +88,7 @@ public class MovieMO implements Serializable {
     /**
      * Position
      */
-    private int position;
+    private Integer position;
 
     /**
      * Genres
@@ -344,7 +344,7 @@ public class MovieMO implements Serializable {
      *
      * @return position
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -353,7 +353,7 @@ public class MovieMO implements Serializable {
      *
      * @param position new value
      */
-    public void setPosition(final int position) {
+    public void setPosition(final Integer position) {
         this.position = position;
     }
 

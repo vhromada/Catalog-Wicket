@@ -3,8 +3,8 @@ package cz.vhromada.catalog.web.show.mo;
 import java.io.Serializable;
 import java.util.Objects;
 
-import cz.vhromada.catalog.common.Time;
 import cz.vhromada.catalog.entity.Show;
+import cz.vhromada.common.Time;
 
 /**
  * A class represents MO for show data.

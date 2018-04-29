@@ -1,7 +1,7 @@
 package cz.vhromada.catalog.web.episode.panel;
 
-import cz.vhromada.catalog.common.Time;
 import cz.vhromada.catalog.entity.Episode;
+import cz.vhromada.common.Time;
 
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;

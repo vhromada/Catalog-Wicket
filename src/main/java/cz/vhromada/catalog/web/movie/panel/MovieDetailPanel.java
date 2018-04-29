@@ -2,7 +2,6 @@ package cz.vhromada.catalog.web.movie.panel;
 
 import java.util.List;
 
-import cz.vhromada.catalog.common.Time;
 import cz.vhromada.catalog.entity.Medium;
 import cz.vhromada.catalog.entity.Movie;
 import cz.vhromada.catalog.web.common.FormatUtils;
@@ -10,6 +9,7 @@ import cz.vhromada.catalog.web.component.CsfdLink;
 import cz.vhromada.catalog.web.component.Image;
 import cz.vhromada.catalog.web.component.ImdbLink;
 import cz.vhromada.catalog.web.component.WikipediaLink;
+import cz.vhromada.common.Time;
 
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;

@@ -1,12 +1,12 @@
 package cz.vhromada.catalog.web.season.panel;
 
-import cz.vhromada.catalog.utils.Constants;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.panel.AbstractFormPanel;
 import cz.vhromada.catalog.web.panel.MultipleLanguagesPanel;
 import cz.vhromada.catalog.web.panel.SingleLanguagePanel;
 import cz.vhromada.catalog.web.season.mo.SeasonMO;
 import cz.vhromada.catalog.web.season.validation.YearsValidator;
+import cz.vhromada.common.utils.Constants;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;

@@ -1,6 +1,6 @@
 package cz.vhromada.catalog.web.panel;
 
-import cz.vhromada.catalog.utils.Constants;
+import cz.vhromada.common.utils.Constants;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;

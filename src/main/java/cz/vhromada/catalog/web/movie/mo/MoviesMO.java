@@ -3,8 +3,8 @@ package cz.vhromada.catalog.web.movie.mo;
 import java.io.Serializable;
 import java.util.List;
 
-import cz.vhromada.catalog.common.Time;
 import cz.vhromada.catalog.entity.Movie;
+import cz.vhromada.common.Time;
 
 /**
  * A class represents MO for movies.

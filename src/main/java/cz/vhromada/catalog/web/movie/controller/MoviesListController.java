@@ -2,7 +2,6 @@ package cz.vhromada.catalog.web.movie.controller;
 
 import java.util.List;
 
-import cz.vhromada.catalog.common.Time;
 import cz.vhromada.catalog.entity.Movie;
 import cz.vhromada.catalog.facade.MovieFacade;
 import cz.vhromada.catalog.web.common.AbstractResultController;
@@ -12,6 +11,7 @@ import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.movie.mo.MoviesMO;
 import cz.vhromada.catalog.web.movie.panel.MoviesListPanel;
 import cz.vhromada.catalog.web.movie.panel.MoviesMenuPanel;
+import cz.vhromada.common.Time;
 import cz.vhromada.result.Result;
 import cz.vhromada.web.wicket.controller.Flow;
 

@@ -28,7 +28,7 @@ public class GenreMO implements Serializable {
     /**
      * Position
      */
-    private int position;
+    private Integer position;
 
     /**
      * Returns ID.
@@ -72,7 +72,7 @@ public class GenreMO implements Serializable {
      *
      * @return position
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -81,7 +81,7 @@ public class GenreMO implements Serializable {
      *
      * @param position new value
      */
-    public void setPosition(final int position) {
+    public void setPosition(final Integer position) {
         this.position = position;
     }
 

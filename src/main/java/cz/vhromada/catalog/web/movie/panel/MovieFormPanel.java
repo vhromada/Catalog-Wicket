@@ -1,6 +1,5 @@
 package cz.vhromada.catalog.web.movie.panel;
 
-import cz.vhromada.catalog.utils.Constants;
 import cz.vhromada.catalog.web.TimeMO;
 import cz.vhromada.catalog.web.component.GenresChoice;
 import cz.vhromada.catalog.web.component.Image;
@@ -11,6 +10,7 @@ import cz.vhromada.catalog.web.panel.ImdbPanel;
 import cz.vhromada.catalog.web.panel.MultipleLanguagesPanel;
 import cz.vhromada.catalog.web.panel.PicturesModalPanel;
 import cz.vhromada.catalog.web.panel.SingleLanguagePanel;
+import cz.vhromada.common.utils.Constants;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;

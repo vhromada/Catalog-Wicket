@@ -3,7 +3,7 @@ package cz.vhromada.catalog.web.panel;
 import java.util.Arrays;
 import java.util.List;
 
-import cz.vhromada.catalog.common.Language;
+import cz.vhromada.common.Language;
 
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Check;

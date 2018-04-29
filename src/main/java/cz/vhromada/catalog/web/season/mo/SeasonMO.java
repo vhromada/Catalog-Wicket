@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import cz.vhromada.catalog.common.Language;
+import cz.vhromada.common.Language;
 
 /**
  * A class represents MO for season.
@@ -56,7 +56,7 @@ public class SeasonMO implements Serializable {
     /**
      * Position
      */
-    private int position;
+    private Integer position;
 
     /**
      * Returns ID.
@@ -190,7 +190,7 @@ public class SeasonMO implements Serializable {
      *
      * @return position
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -199,7 +199,7 @@ public class SeasonMO implements Serializable {
      *
      * @param position new value
      */
-    public void setPosition(final int position) {
+    public void setPosition(final Integer position) {
         this.position = position;
     }
 

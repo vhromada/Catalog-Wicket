@@ -40,6 +40,7 @@ public abstract class PicturesModalPanel extends GenericPanel<List<Integer>> {
         super.onInitialize();
 
         final RadioGroup<Integer> picture = new RadioGroup<>("picture");
+        picture.add(getValidationBehavior());
 
         final ListView<Integer> pictures = new ListView<>("pictures", getModel()) {
 

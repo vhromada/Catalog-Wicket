@@ -3,7 +3,6 @@ package cz.vhromada.catalog.web.music.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.vhromada.catalog.common.Time;
 import cz.vhromada.catalog.entity.Music;
 import cz.vhromada.catalog.entity.Song;
 import cz.vhromada.catalog.facade.MusicFacade;
@@ -16,6 +15,7 @@ import cz.vhromada.catalog.web.music.mo.MusicDataMO;
 import cz.vhromada.catalog.web.music.mo.MusicInfoMO;
 import cz.vhromada.catalog.web.music.panel.MusicListPanel;
 import cz.vhromada.catalog.web.music.panel.MusicMenuPanel;
+import cz.vhromada.common.Time;
 import cz.vhromada.result.Result;
 import cz.vhromada.web.wicket.controller.Flow;
 

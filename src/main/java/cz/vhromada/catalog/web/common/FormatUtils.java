@@ -2,8 +2,8 @@ package cz.vhromada.catalog.web.common;
 
 import java.util.List;
 
-import cz.vhromada.catalog.common.Language;
 import cz.vhromada.catalog.entity.Genre;
+import cz.vhromada.common.Language;
 
 import org.springframework.util.CollectionUtils;
 
