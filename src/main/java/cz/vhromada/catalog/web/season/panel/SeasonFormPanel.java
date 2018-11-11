@@ -10,7 +10,6 @@ import cz.vhromada.common.utils.Constants;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -113,8 +112,8 @@ public class SeasonFormPanel extends AbstractFormPanel<SeasonMO> {
     }
 
     @Override
-    protected void onFormSubmit(final Form<SeasonMO> panelForm) {
-        final SeasonMO season = panelForm.getModelObject();
+    protected void onFormSubmit() {
+        final SeasonMO season = getForm().getModelObject();
         if (season.getNote() == null) {
             season.setNote("");
         }

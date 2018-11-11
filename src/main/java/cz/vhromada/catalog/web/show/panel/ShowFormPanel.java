@@ -13,7 +13,6 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -151,8 +150,8 @@ public class ShowFormPanel extends AbstractFormPanel<ShowMO> {
     }
 
     @Override
-    protected void onFormSubmit(final Form<ShowMO> panelForm) {
-        final ShowMO show = panelForm.getModelObject();
+    protected void onFormSubmit() {
+        final ShowMO show = getForm().getModelObject();
         if (show.getCsfd() == null) {
             show.setCsfd("");
         }

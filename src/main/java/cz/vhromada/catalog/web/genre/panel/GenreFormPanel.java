@@ -5,7 +5,6 @@ import cz.vhromada.catalog.web.genre.mo.GenreMO;
 import cz.vhromada.catalog.web.panel.AbstractFormPanel;
 import cz.vhromada.web.wicket.controller.Flow;
 
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
@@ -59,7 +58,7 @@ public class GenreFormPanel extends AbstractFormPanel<GenreMO> {
     }
 
     @Override
-    protected void onFormSubmit(final Form<GenreMO> panelForm) {
+    protected void onFormSubmit() {
     }
 
 }

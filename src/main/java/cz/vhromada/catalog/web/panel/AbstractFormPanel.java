@@ -75,11 +75,10 @@ public abstract class AbstractFormPanel<T> extends GenericPanel<T> {
             private static final long serialVersionUID = 1L;
 
             @Override
-            @SuppressWarnings("unchecked")
-            public void onSubmit(final AjaxRequestTarget target, final Form<?> linkForm) {
-                onFormSubmit((Form<T>) linkForm);
+            public void onSubmit(final AjaxRequestTarget target) {
+                onFormSubmit();
 
-                super.onSubmit(target, linkForm);
+                super.onSubmit(target);
             }
 
             @Override
@@ -90,8 +89,8 @@ public abstract class AbstractFormPanel<T> extends GenericPanel<T> {
             }
 
             @Override
-            protected void onError(final AjaxRequestTarget target, final Form<?> linkForm) {
-                super.onError(target, linkForm);
+            protected void onError(final AjaxRequestTarget target) {
+                super.onError(target);
 
                 target.add(feedbackPanel);
             }
@@ -137,10 +136,8 @@ public abstract class AbstractFormPanel<T> extends GenericPanel<T> {
 
     /**
      * Callback for form submit.
-     *
-     * @param panelForm form
      */
-    protected abstract void onFormSubmit(Form<T> panelForm);
+    protected abstract void onFormSubmit();
 
     /**
      * Returns validation behavior.

@@ -5,7 +5,6 @@ import cz.vhromada.catalog.web.music.mo.MusicMO;
 import cz.vhromada.catalog.web.panel.AbstractFormPanel;
 import cz.vhromada.web.wicket.controller.Flow;
 
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
@@ -81,8 +80,8 @@ public class MusicFormPanel extends AbstractFormPanel<MusicMO> {
     }
 
     @Override
-    protected void onFormSubmit(final Form<MusicMO> panelForm) {
-        final MusicMO music = panelForm.getModelObject();
+    protected void onFormSubmit() {
+        final MusicMO music = getForm().getModelObject();
         if (music.getWikiCz() == null) {
             music.setWikiCz("");
         }

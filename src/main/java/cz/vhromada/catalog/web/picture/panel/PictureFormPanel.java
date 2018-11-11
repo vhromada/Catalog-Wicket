@@ -7,7 +7,6 @@ import cz.vhromada.catalog.web.panel.AbstractFormPanel;
 import cz.vhromada.catalog.web.picture.mo.PictureMO;
 import cz.vhromada.web.wicket.controller.Flow;
 
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.model.Model;
@@ -69,10 +68,10 @@ public class PictureFormPanel extends AbstractFormPanel<PictureMO> {
     }
 
     @Override
-    protected void onFormSubmit(final Form<PictureMO> panelForm) {
+    protected void onFormSubmit() {
         final List<FileUpload> files = fileUpload.getFileUploads();
         if (!CollectionUtils.isEmpty(files)) {
-            panelForm.getModelObject().setContent(files.get(0).getBytes());
+            getForm().getModelObject().setContent(files.get(0).getBytes());
         }
     }
 

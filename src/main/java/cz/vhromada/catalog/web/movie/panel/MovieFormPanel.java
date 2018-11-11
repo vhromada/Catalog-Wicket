@@ -17,7 +17,6 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormChoiceComponentUpdatingBehavior;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
@@ -203,8 +202,8 @@ public class MovieFormPanel extends AbstractFormPanel<MovieMO> {
     }
 
     @Override
-    protected void onFormSubmit(final Form<MovieMO> panelForm) {
-        final MovieMO movie = panelForm.getModelObject();
+    protected void onFormSubmit() {
+        final MovieMO movie = getForm().getModelObject();
         if (movie.getCsfd() == null) {
             movie.setCsfd("");
         }

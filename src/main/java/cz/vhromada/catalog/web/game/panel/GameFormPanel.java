@@ -6,7 +6,6 @@ import cz.vhromada.catalog.web.panel.AbstractFormPanel;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.markup.html.form.CheckBox;
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
@@ -105,8 +104,8 @@ public class GameFormPanel extends AbstractFormPanel<GameMO> {
     }
 
     @Override
-    protected void onFormSubmit(final Form<GameMO> panelForm) {
-        final GameMO game = panelForm.getModelObject();
+    protected void onFormSubmit() {
+        final GameMO game = getForm().getModelObject();
         if (game.getWikiCz() == null) {
             game.setWikiCz("");
         }

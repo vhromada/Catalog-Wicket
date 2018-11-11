@@ -5,7 +5,6 @@ import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.panel.AbstractFormPanel;
 import cz.vhromada.web.wicket.controller.Flow;
 
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
@@ -116,8 +115,8 @@ public class EpisodeFormPanel extends AbstractFormPanel<EpisodeMO> {
     }
 
     @Override
-    protected void onFormSubmit(final Form<EpisodeMO> panelForm) {
-        final EpisodeMO episode = panelForm.getModelObject();
+    protected void onFormSubmit() {
+        final EpisodeMO episode = getForm().getModelObject();
         if (episode.getNote() == null) {
             episode.setNote("");
         }

@@ -6,7 +6,6 @@ import cz.vhromada.catalog.web.program.mo.ProgramMO;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.markup.html.form.CheckBox;
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.NumberTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextField;
@@ -90,8 +89,8 @@ public class ProgramFormPanel extends AbstractFormPanel<ProgramMO> {
     }
 
     @Override
-    protected void onFormSubmit(final Form<ProgramMO> panelForm) {
-        final ProgramMO program = panelForm.getModelObject();
+    protected void onFormSubmit() {
+        final ProgramMO program = getForm().getModelObject();
         if (program.getWikiCz() == null) {
             program.setWikiCz("");
         }
