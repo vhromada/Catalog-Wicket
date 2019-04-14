@@ -1,7 +1,7 @@
 package cz.vhromada.catalog.web.error.controller;
 
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.result.Result;
+import cz.vhromada.validation.result.Result;
 import cz.vhromada.web.wicket.controller.Controller;
 import cz.vhromada.web.wicket.controller.Flow;
 

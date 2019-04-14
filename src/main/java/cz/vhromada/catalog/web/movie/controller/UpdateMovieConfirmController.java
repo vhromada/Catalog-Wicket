@@ -1,15 +1,15 @@
 package cz.vhromada.catalog.web.movie.controller;
 
-import cz.vhromada.catalog.entity.Movie;
 import cz.vhromada.catalog.facade.MovieFacade;
 import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.event.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
+import cz.vhromada.catalog.web.mapper.MovieMapper;
 import cz.vhromada.catalog.web.movie.mo.MovieMO;
-import cz.vhromada.converter.Converter;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.IModel;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -28,30 +28,27 @@ public class UpdateMovieConfirmController extends AbstractResultController<IMode
     private MovieFacade movieFacade;
 
     /**
-     * Converter
+     * Mapper for movies
      */
-    private Converter converter;
+    private final MovieMapper movieMapper;
 
     /**
      * Creates a new instance of UpdateMovieConfirmController.
      *
      * @param movieFacade facade for movies
-     * @param converter   converter
      * @throws IllegalArgumentException if facade for movies is null
-     *                                  or converter is null
      */
     @Autowired
-    public UpdateMovieConfirmController(final MovieFacade movieFacade, final Converter converter) {
+    public UpdateMovieConfirmController(final MovieFacade movieFacade) {
         Assert.notNull(movieFacade, "Facade for movies mustn't be null.");
-        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.movieFacade = movieFacade;
-        this.converter = converter;
+        this.movieMapper = Mappers.getMapper(MovieMapper.class);
     }
 
     @Override
     public void handle(final IModel<MovieMO> data) {
-        addResults(movieFacade.update(converter.convert(data.getObject(), Movie.class)));
+        addResults(movieFacade.update(movieMapper.mapBack(data.getObject())));
 
         if (processResult()) {
             getUi().fireEvent(new ControllerEvent(CatalogFlow.MOVIES_LIST, null));

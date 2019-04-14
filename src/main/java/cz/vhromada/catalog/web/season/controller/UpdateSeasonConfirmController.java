@@ -1,15 +1,15 @@
 package cz.vhromada.catalog.web.season.controller;
 
-import cz.vhromada.catalog.entity.Season;
 import cz.vhromada.catalog.facade.SeasonFacade;
 import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.event.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
+import cz.vhromada.catalog.web.mapper.SeasonMapper;
 import cz.vhromada.catalog.web.season.mo.SeasonMO;
-import cz.vhromada.converter.Converter;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.IModel;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -28,30 +28,27 @@ public class UpdateSeasonConfirmController extends AbstractResultController<IMod
     private SeasonFacade seasonFacade;
 
     /**
-     * Converter
+     * Mapper for seasons
      */
-    private Converter converter;
+    private final SeasonMapper seasonMapper;
 
     /**
      * Creates a new instance of UpdateSeasonConfirmController.
      *
      * @param seasonFacade facade for seasons
-     * @param converter    converter
      * @throws IllegalArgumentException if facade for seasons is null
-     *                                  or converter is null
      */
     @Autowired
-    public UpdateSeasonConfirmController(final SeasonFacade seasonFacade, final Converter converter) {
+    public UpdateSeasonConfirmController(final SeasonFacade seasonFacade) {
         Assert.notNull(seasonFacade, "Facade for seasons mustn't be null.");
-        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.seasonFacade = seasonFacade;
-        this.converter = converter;
+        this.seasonMapper = Mappers.getMapper(SeasonMapper.class);
     }
 
     @Override
     public void handle(final IModel<SeasonMO> data) {
-        addResults(seasonFacade.update(converter.convert(data.getObject(), Season.class)));
+        addResults(seasonFacade.update(seasonMapper.mapBack(data.getObject())));
 
         if (processResult()) {
             getUi().fireEvent(new ControllerEvent(CatalogFlow.SEASONS_LIST, null));

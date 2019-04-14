@@ -1,15 +1,15 @@
 package cz.vhromada.catalog.web.program.controller;
 
-import cz.vhromada.catalog.entity.Program;
 import cz.vhromada.catalog.facade.ProgramFacade;
 import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.event.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
+import cz.vhromada.catalog.web.mapper.ProgramMapper;
 import cz.vhromada.catalog.web.program.mo.ProgramMO;
-import cz.vhromada.converter.Converter;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.IModel;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -28,30 +28,27 @@ public class UpdateProgramConfirmController extends AbstractResultController<IMo
     private ProgramFacade programFacade;
 
     /**
-     * Converter
+     * Mapper for programs
      */
-    private Converter converter;
+    private final ProgramMapper programMapper;
 
     /**
      * Creates a new instance of UpdateProgramConfirmController.
      *
      * @param programFacade facade for programs
-     * @param converter     converter
      * @throws IllegalArgumentException if facade for programs is null
-     *                                  or converter is null
      */
     @Autowired
-    public UpdateProgramConfirmController(final ProgramFacade programFacade, final Converter converter) {
+    public UpdateProgramConfirmController(final ProgramFacade programFacade) {
         Assert.notNull(programFacade, "Facade for programs mustn't be null.");
-        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.programFacade = programFacade;
-        this.converter = converter;
+        this.programMapper = Mappers.getMapper(ProgramMapper.class);
     }
 
     @Override
     public void handle(final IModel<ProgramMO> data) {
-        addResults(programFacade.update(converter.convert(data.getObject(), Program.class)));
+        addResults(programFacade.update(programMapper.mapBack(data.getObject())));
 
         if (processResult()) {
             getUi().fireEvent(new ControllerEvent(CatalogFlow.PROGRAMS_LIST, null));

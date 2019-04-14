@@ -14,19 +14,20 @@ import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.event.PanelData;
 import cz.vhromada.catalog.web.event.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.catalog.web.genre.mo.GenreMO;
+import cz.vhromada.catalog.web.mapper.GenreMapper;
+import cz.vhromada.catalog.web.mapper.MovieMapper;
 import cz.vhromada.catalog.web.movie.mo.MovieMO;
 import cz.vhromada.catalog.web.movie.panel.MovieFormPanel;
 import cz.vhromada.catalog.web.movie.panel.MoviesMenuPanel;
 import cz.vhromada.catalog.web.panel.AbstractFormPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.converter.Converter;
-import cz.vhromada.result.Result;
+import cz.vhromada.validation.result.Result;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.protocol.http.WebSession;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -50,29 +51,32 @@ public class UpdateMovieController extends AbstractResultController<IModel<Movie
     private GenreFacade genreFacade;
 
     /**
-     * Converter
+     * Mapper for movies
      */
-    private Converter converter;
+    private final MovieMapper movieMapper;
+
+    /**
+     * Mapper for genres
+     */
+    private final GenreMapper genreMapper;
 
     /**
      * Creates a new instance of UpdateMovieController.
      *
      * @param pictureFacade facade for pictures
      * @param genreFacade   facade for genres
-     * @param converter     converter
      * @throws IllegalArgumentException if facade for pictures is null
      *                                  or facade for genres is null
-     *                                  or converter is null
      */
     @Autowired
-    public UpdateMovieController(final PictureFacade pictureFacade, final GenreFacade genreFacade, final Converter converter) {
+    public UpdateMovieController(final PictureFacade pictureFacade, final GenreFacade genreFacade) {
         Assert.notNull(pictureFacade, "Facade for pictures mustn't be null.");
         Assert.notNull(genreFacade, "Facade for genres mustn't be null.");
-        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.pictureFacade = pictureFacade;
         this.genreFacade = genreFacade;
-        this.converter = converter;
+        this.movieMapper = Mappers.getMapper(MovieMapper.class);
+        this.genreMapper = Mappers.getMapper(GenreMapper.class);
     }
 
     @Override
@@ -86,7 +90,7 @@ public class UpdateMovieController extends AbstractResultController<IModel<Movie
             final WebSession session = CatalogApplication.getSession();
             session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.MOVIES_UPDATE_CONFIRM);
             session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
-            final MovieMO movie = converter.convert(data.getObject(), MovieMO.class);
+            final MovieMO movie = movieMapper.map(data.getObject());
             if (movie.getSubtitles() == null) {
                 movie.setSubtitles(new ArrayList<>());
             }
@@ -96,7 +100,7 @@ public class UpdateMovieController extends AbstractResultController<IModel<Movie
                 media.add(time);
                 movie.setMedia(media);
             }
-            movie.setAllGenres(converter.convertCollection(genres.getData(), GenreMO.class));
+            movie.setAllGenres(genres.getData().stream().map(genreMapper::map).collect(Collectors.toList()));
             movie.setAllPictures(pictures.getData().stream().map(Picture::getId).collect(Collectors.toList()));
             final PanelData<MovieMO> panelData = new PanelData<>(MovieFormPanel.ID, new CompoundPropertyModel<>(movie));
             final PanelData<Void> menuData = new PanelData<>(MoviesMenuPanel.ID, null);

@@ -1,15 +1,15 @@
 package cz.vhromada.catalog.web.genre.controller;
 
-import cz.vhromada.catalog.entity.Genre;
 import cz.vhromada.catalog.facade.GenreFacade;
 import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.event.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.genre.mo.GenreMO;
-import cz.vhromada.converter.Converter;
+import cz.vhromada.catalog.web.mapper.GenreMapper;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.IModel;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -28,30 +28,27 @@ public class UpdateGenreConfirmController extends AbstractResultController<IMode
     private GenreFacade genreFacade;
 
     /**
-     * Converter
+     * Mapper for genres
      */
-    private Converter converter;
+    private final GenreMapper genreMapper;
 
     /**
      * Creates a new instance of UpdateGenreConfirmController.
      *
      * @param genreFacade facade for genres
-     * @param converter   converter
      * @throws IllegalArgumentException if facade for genres is null
-     *                                  or converter is null
      */
     @Autowired
-    public UpdateGenreConfirmController(final GenreFacade genreFacade, final Converter converter) {
+    public UpdateGenreConfirmController(final GenreFacade genreFacade) {
         Assert.notNull(genreFacade, "Facade for genres mustn't be null.");
-        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.genreFacade = genreFacade;
-        this.converter = converter;
+        this.genreMapper = Mappers.getMapper(GenreMapper.class);
     }
 
     @Override
     public void handle(final IModel<GenreMO> data) {
-        addResults(genreFacade.update(converter.convert(data.getObject(), Genre.class)));
+        addResults(genreFacade.update(genreMapper.mapBack(data.getObject())));
 
         if (processResult()) {
             getUi().fireEvent(new ControllerEvent(CatalogFlow.GENRES_LIST, null));

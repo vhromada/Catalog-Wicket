@@ -12,7 +12,7 @@ import cz.vhromada.catalog.web.movie.mo.MoviesMO;
 import cz.vhromada.catalog.web.movie.panel.MoviesListPanel;
 import cz.vhromada.catalog.web.movie.panel.MoviesMenuPanel;
 import cz.vhromada.common.Time;
-import cz.vhromada.result.Result;
+import cz.vhromada.validation.result.Result;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.Model;

@@ -16,7 +16,7 @@ import cz.vhromada.catalog.web.music.mo.MusicInfoMO;
 import cz.vhromada.catalog.web.music.panel.MusicListPanel;
 import cz.vhromada.catalog.web.music.panel.MusicMenuPanel;
 import cz.vhromada.common.Time;
-import cz.vhromada.result.Result;
+import cz.vhromada.validation.result.Result;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.Model;

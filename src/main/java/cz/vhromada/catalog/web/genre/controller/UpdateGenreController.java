@@ -7,18 +7,18 @@ import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.genre.mo.GenreMO;
 import cz.vhromada.catalog.web.genre.panel.GenreFormPanel;
 import cz.vhromada.catalog.web.genre.panel.GenresMenuPanel;
+import cz.vhromada.catalog.web.mapper.GenreMapper;
 import cz.vhromada.catalog.web.panel.AbstractFormPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.converter.Converter;
 import cz.vhromada.web.wicket.controller.Controller;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.protocol.http.WebSession;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 /**
  * A class represents controller for showing form for updating genre.
@@ -29,21 +29,16 @@ import org.springframework.util.Assert;
 public class UpdateGenreController extends Controller<IModel<Genre>> {
 
     /**
-     * Converter
+     * Mapper for genres
      */
-    private Converter converter;
+    private final GenreMapper genreMapper;
 
     /**
      * Creates a new instance of UpdateGenreController.
-     *
-     * @param converter converter
-     * @throws IllegalArgumentException if converter is null
      */
     @Autowired
-    public UpdateGenreController(final Converter converter) {
-        Assert.notNull(converter, "Converter mustn't be null.");
-
-        this.converter = converter;
+    public UpdateGenreController() {
+        this.genreMapper = Mappers.getMapper(GenreMapper.class);
     }
 
     @Override
@@ -51,8 +46,7 @@ public class UpdateGenreController extends Controller<IModel<Genre>> {
         final WebSession session = CatalogApplication.getSession();
         session.setAttribute(AbstractFormPanel.SUBMIT_FLOW, CatalogFlow.GENRES_UPDATE_CONFIRM);
         session.setAttribute(AbstractFormPanel.SUBMIT_MESSAGE, "Update");
-        final PanelData<GenreMO> panelData = new PanelData<>(GenreFormPanel.ID,
-            new CompoundPropertyModel<>(converter.convert(data.getObject(), GenreMO.class)));
+        final PanelData<GenreMO> panelData = new PanelData<>(GenreFormPanel.ID, new CompoundPropertyModel<>(genreMapper.map(data.getObject())));
         final PanelData<Void> menuData = new PanelData<>(GenresMenuPanel.ID, null);
 
         getUi().fireEvent(new PanelEvent(panelData, "Edit genre", menuData));

@@ -1,15 +1,15 @@
 package cz.vhromada.catalog.web.music.controller;
 
-import cz.vhromada.catalog.entity.Music;
 import cz.vhromada.catalog.facade.MusicFacade;
 import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.event.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
+import cz.vhromada.catalog.web.mapper.MusicMapper;
 import cz.vhromada.catalog.web.music.mo.MusicMO;
-import cz.vhromada.converter.Converter;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.IModel;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -28,30 +28,27 @@ public class AddMusicConfirmController extends AbstractResultController<IModel<M
     private MusicFacade musicFacade;
 
     /**
-     * Converter
+     * Mapper for music
      */
-    private Converter converter;
+    private final MusicMapper musicMapper;
 
     /**
      * Creates a new instance of AddMusicConfirmController.
      *
      * @param musicFacade facade for music
-     * @param converter   converter
      * @throws IllegalArgumentException if facade for music is null
-     *                                  or converter is null
      */
     @Autowired
-    public AddMusicConfirmController(final MusicFacade musicFacade, final Converter converter) {
+    public AddMusicConfirmController(final MusicFacade musicFacade) {
         Assert.notNull(musicFacade, "Facade for music mustn't be null.");
-        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.musicFacade = musicFacade;
-        this.converter = converter;
+        this.musicMapper = Mappers.getMapper(MusicMapper.class);
     }
 
     @Override
     public void handle(final IModel<MusicMO> data) {
-        addResults(musicFacade.add(converter.convert(data.getObject(), Music.class)));
+        addResults(musicFacade.add(musicMapper.mapBack(data.getObject())));
 
         if (processResult()) {
             getUi().fireEvent(new ControllerEvent(CatalogFlow.MUSIC_LIST, null));

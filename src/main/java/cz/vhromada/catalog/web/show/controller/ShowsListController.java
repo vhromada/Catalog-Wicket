@@ -18,7 +18,7 @@ import cz.vhromada.catalog.web.show.mo.ShowsMO;
 import cz.vhromada.catalog.web.show.panel.ShowsListPanel;
 import cz.vhromada.catalog.web.show.panel.ShowsMenuPanel;
 import cz.vhromada.common.Time;
-import cz.vhromada.result.Result;
+import cz.vhromada.validation.result.Result;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.Model;

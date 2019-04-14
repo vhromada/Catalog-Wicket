@@ -2,10 +2,11 @@ package cz.vhromada.catalog.web.common;
 
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
+import java.util.Collections;
+
 import cz.vhromada.catalog.entity.Medium;
 import cz.vhromada.catalog.entity.Show;
 import cz.vhromada.catalog.web.show.mo.ShowMO;
-import cz.vhromada.common.utils.CollectionUtils;
 
 /**
  * A class represents utility class for shows.
@@ -42,7 +43,7 @@ public final class ShowUtils {
         show.setPicture(1);
         show.setNote(CatalogUtils.NOTE);
         show.setPosition(CatalogUtils.POSITION);
-        show.setGenres(CollectionUtils.newList(GenreUtils.getGenreMO()));
+        show.setGenres(Collections.singletonList(GenreUtils.getGenreMO()));
 
         return show;
     }
@@ -69,7 +70,7 @@ public final class ShowUtils {
         show.setPicture(1);
         show.setNote(CatalogUtils.NOTE);
         show.setPosition(CatalogUtils.POSITION);
-        show.setGenres(CollectionUtils.newList(GenreUtils.getGenre()));
+        show.setGenres(Collections.singletonList(GenreUtils.getGenre()));
 
         return show;
     }

@@ -10,7 +10,7 @@ import cz.vhromada.catalog.web.event.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.picture.panel.PicturesListPanel;
 import cz.vhromada.catalog.web.picture.panel.PicturesMenuPanel;
-import cz.vhromada.result.Result;
+import cz.vhromada.validation.result.Result;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.Model;

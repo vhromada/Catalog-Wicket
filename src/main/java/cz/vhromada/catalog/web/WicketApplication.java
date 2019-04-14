@@ -1,7 +1,7 @@
 package cz.vhromada.catalog.web;
 
 import cz.vhromada.catalog.CatalogConfiguration;
-import cz.vhromada.web.wicket.UtilsConfiguration;
+import cz.vhromada.web.wicket.WicketUtilsConfiguration;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Import;
  * @author Vladimir Hromada
  */
 @SpringBootApplication
-@Import({ CatalogConfiguration.class, UtilsConfiguration.class })
+@Import({ CatalogConfiguration.class, WicketUtilsConfiguration.class })
 public class WicketApplication extends SpringBootServletInitializer {
 
     /**

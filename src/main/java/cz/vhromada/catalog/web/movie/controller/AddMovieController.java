@@ -13,18 +13,18 @@ import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.event.PanelData;
 import cz.vhromada.catalog.web.event.PanelEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.catalog.web.genre.mo.GenreMO;
+import cz.vhromada.catalog.web.mapper.GenreMapper;
 import cz.vhromada.catalog.web.movie.mo.MovieMO;
 import cz.vhromada.catalog.web.movie.panel.MovieFormPanel;
 import cz.vhromada.catalog.web.movie.panel.MoviesMenuPanel;
 import cz.vhromada.catalog.web.panel.AbstractFormPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.converter.Converter;
-import cz.vhromada.result.Result;
+import cz.vhromada.validation.result.Result;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.protocol.http.WebSession;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -48,29 +48,27 @@ public class AddMovieController extends AbstractResultController<Void> {
     private GenreFacade genreFacade;
 
     /**
-     * Converter
+     * Mapper for genres
      */
-    private Converter converter;
+    private final GenreMapper genreMapper;
 
     /**
      * Creates a new instance of AddMovieController.
      *
      * @param pictureFacade facade for pictures
      * @param genreFacade   facade for genres
-     * @param converter     converter
      * @throws IllegalArgumentException if facade for pictures is null
      *                                  or facade for genres is null
      *                                  or converter is null
      */
     @Autowired
-    public AddMovieController(final PictureFacade pictureFacade, final GenreFacade genreFacade, final Converter converter) {
+    public AddMovieController(final PictureFacade pictureFacade, final GenreFacade genreFacade) {
         Assert.notNull(pictureFacade, "Facade for pictures mustn't be null.");
         Assert.notNull(genreFacade, "Facade for genres mustn't be null.");
-        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.pictureFacade = pictureFacade;
         this.genreFacade = genreFacade;
-        this.converter = converter;
+        this.genreMapper = Mappers.getMapper(GenreMapper.class);
     }
 
     @Override
@@ -90,7 +88,7 @@ public class AddMovieController extends AbstractResultController<Void> {
             final MovieMO movie = new MovieMO();
             movie.setSubtitles(new ArrayList<>());
             movie.setMedia(media);
-            movie.setAllGenres(converter.convertCollection(genres.getData(), GenreMO.class));
+            movie.setAllGenres(genres.getData().stream().map(genreMapper::map).collect(Collectors.toList()));
             movie.setAllPictures(pictures.getData().stream().map(Picture::getId).collect(Collectors.toList()));
             final PanelData<MovieMO> panelData = new PanelData<>(MovieFormPanel.ID, new CompoundPropertyModel<>(movie));
             final PanelData<Void> menuData = new PanelData<>(MoviesMenuPanel.ID, null);

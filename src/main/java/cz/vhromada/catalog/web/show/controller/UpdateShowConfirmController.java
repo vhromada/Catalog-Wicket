@@ -1,15 +1,15 @@
 package cz.vhromada.catalog.web.show.controller;
 
-import cz.vhromada.catalog.entity.Show;
 import cz.vhromada.catalog.facade.ShowFacade;
 import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.event.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
+import cz.vhromada.catalog.web.mapper.ShowMapper;
 import cz.vhromada.catalog.web.show.mo.ShowMO;
-import cz.vhromada.converter.Converter;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.IModel;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -28,30 +28,27 @@ public class UpdateShowConfirmController extends AbstractResultController<IModel
     private ShowFacade showFacade;
 
     /**
-     * Converter
+     * Mapper for shows
      */
-    private Converter converter;
+    private final ShowMapper showMapper;
 
     /**
      * Creates a new instance of UpdateShowConfirmController.
      *
      * @param showFacade facade for shows
-     * @param converter  converter
      * @throws IllegalArgumentException if facade for shows is null
-     *                                  or converter is null
      */
     @Autowired
-    public UpdateShowConfirmController(final ShowFacade showFacade, final Converter converter) {
+    public UpdateShowConfirmController(final ShowFacade showFacade) {
         Assert.notNull(showFacade, "Facade for shows mustn't be null.");
-        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.showFacade = showFacade;
-        this.converter = converter;
+        this.showMapper = Mappers.getMapper(ShowMapper.class);
     }
 
     @Override
     public void handle(final IModel<ShowMO> data) {
-        addResults(showFacade.update(converter.convert(data.getObject(), Show.class)));
+        addResults(showFacade.update(showMapper.mapBack(data.getObject())));
 
         if (processResult()) {
             getUi().fireEvent(new ControllerEvent(CatalogFlow.SHOWS_LIST, null));

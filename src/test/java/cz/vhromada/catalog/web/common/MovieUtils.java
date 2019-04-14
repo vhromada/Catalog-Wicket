@@ -3,6 +3,7 @@ package cz.vhromada.catalog.web.common;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
+import java.util.Collections;
 import java.util.List;
 
 import cz.vhromada.catalog.entity.Medium;
@@ -10,7 +11,6 @@ import cz.vhromada.catalog.entity.Movie;
 import cz.vhromada.catalog.web.TimeMO;
 import cz.vhromada.catalog.web.movie.mo.MovieMO;
 import cz.vhromada.common.Language;
-import cz.vhromada.common.utils.CollectionUtils;
 
 /**
  * A class represents utility class for movies.
@@ -37,7 +37,7 @@ public final class MovieUtils {
         movie.setOriginalName("origName");
         movie.setYear(CatalogUtils.YEAR);
         movie.setLanguage(Language.EN);
-        movie.setSubtitles(CollectionUtils.newList(Language.CZ));
+        movie.setSubtitles(Collections.singletonList(Language.CZ));
         movie.setCsfd("Csfd");
         movie.setImdbCode(1000);
         movie.setWikiEn(CatalogUtils.EN_WIKI);
@@ -45,8 +45,8 @@ public final class MovieUtils {
         movie.setPicture(1);
         movie.setNote(CatalogUtils.NOTE);
         movie.setPosition(CatalogUtils.POSITION);
-        movie.setMedia(CollectionUtils.newList(TimeUtils.getTimeMO()));
-        movie.setGenres(CollectionUtils.newList(GenreUtils.getGenreMO()));
+        movie.setMedia(Collections.singletonList(TimeUtils.getTimeMO()));
+        movie.setGenres(Collections.singletonList(GenreUtils.getGenreMO()));
 
         return movie;
     }
@@ -67,7 +67,7 @@ public final class MovieUtils {
         movie.setOriginalName("origName");
         movie.setYear(CatalogUtils.YEAR);
         movie.setLanguage(Language.EN);
-        movie.setSubtitles(CollectionUtils.newList(Language.CZ));
+        movie.setSubtitles(Collections.singletonList(Language.CZ));
         movie.setCsfd("Csfd");
         movie.setImdbCode(1000);
         movie.setWikiEn(CatalogUtils.EN_WIKI);
@@ -75,8 +75,8 @@ public final class MovieUtils {
         movie.setPicture(1);
         movie.setNote(CatalogUtils.NOTE);
         movie.setPosition(CatalogUtils.POSITION);
-        movie.setMedia(CollectionUtils.newList(medium));
-        movie.setGenres(CollectionUtils.newList(GenreUtils.getGenre()));
+        movie.setMedia(Collections.singletonList(medium));
+        movie.setGenres(Collections.singletonList(GenreUtils.getGenre()));
 
         return movie;
     }

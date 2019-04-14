@@ -6,13 +6,14 @@ import cz.vhromada.catalog.facade.SongFacade;
 import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.event.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
+import cz.vhromada.catalog.web.mapper.SongMapper;
 import cz.vhromada.catalog.web.music.controller.MusicSongsController;
 import cz.vhromada.catalog.web.song.mo.SongMO;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.converter.Converter;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.IModel;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -31,31 +32,28 @@ public class AddSongConfirmController extends AbstractResultController<IModel<So
     private SongFacade songFacade;
 
     /**
-     * Converter
+     * Mapper for songs
      */
-    private Converter converter;
+    private final SongMapper songMapper;
 
     /**
      * Creates a new instance of AddSongConfirmController.
      *
      * @param songFacade facade for songs
-     * @param converter  converter
      * @throws IllegalArgumentException if facade for songs is null
-     *                                  or converter is null
      */
     @Autowired
-    public AddSongConfirmController(final SongFacade songFacade, final Converter converter) {
+    public AddSongConfirmController(final SongFacade songFacade) {
         Assert.notNull(songFacade, "Facade for songs mustn't be null.");
-        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.songFacade = songFacade;
-        this.converter = converter;
+        this.songMapper = Mappers.getMapper(SongMapper.class);
     }
 
     @Override
     public void handle(final IModel<SongMO> data) {
         final Music music = CatalogApplication.getSessionAttribute(MusicSongsController.MUSIC_ATTRIBUTE);
-        final Song song = converter.convert(data.getObject(), Song.class);
+        final Song song = songMapper.mapBack(data.getObject());
 
         addResults(songFacade.add(music, song));
 

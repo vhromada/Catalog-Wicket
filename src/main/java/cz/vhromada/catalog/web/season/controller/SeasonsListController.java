@@ -18,7 +18,7 @@ import cz.vhromada.catalog.web.season.panel.SeasonsMenuPanel;
 import cz.vhromada.catalog.web.show.controller.ShowSeasonsController;
 import cz.vhromada.catalog.web.system.CatalogApplication;
 import cz.vhromada.common.Time;
-import cz.vhromada.result.Result;
+import cz.vhromada.validation.result.Result;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.Model;

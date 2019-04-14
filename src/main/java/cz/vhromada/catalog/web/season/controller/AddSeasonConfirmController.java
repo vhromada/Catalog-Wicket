@@ -6,13 +6,14 @@ import cz.vhromada.catalog.facade.SeasonFacade;
 import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.event.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
+import cz.vhromada.catalog.web.mapper.SeasonMapper;
 import cz.vhromada.catalog.web.season.mo.SeasonMO;
 import cz.vhromada.catalog.web.show.controller.ShowSeasonsController;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.converter.Converter;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.IModel;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -31,31 +32,28 @@ public class AddSeasonConfirmController extends AbstractResultController<IModel<
     private SeasonFacade seasonFacade;
 
     /**
-     * Converter
+     * Mapper for seasons
      */
-    private Converter converter;
+    private final SeasonMapper seasonMapper;
 
     /**
      * Creates a new instance of AddSeasonConfirmController.
      *
      * @param seasonFacade facade for seasons
-     * @param converter    converter
      * @throws IllegalArgumentException if facade for seasons is null
-     *                                  or converter is null
      */
     @Autowired
-    public AddSeasonConfirmController(final SeasonFacade seasonFacade, final Converter converter) {
+    public AddSeasonConfirmController(final SeasonFacade seasonFacade) {
         Assert.notNull(seasonFacade, "Facade for seasons mustn't be null.");
-        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.seasonFacade = seasonFacade;
-        this.converter = converter;
+        this.seasonMapper = Mappers.getMapper(SeasonMapper.class);
     }
 
     @Override
     public void handle(final IModel<SeasonMO> data) {
         final Show show = CatalogApplication.getSessionAttribute(ShowSeasonsController.SHOW_ATTRIBUTE);
-        final Season season = converter.convert(data.getObject(), Season.class);
+        final Season season = seasonMapper.mapBack(data.getObject());
 
         addResults(seasonFacade.add(show, season));
 

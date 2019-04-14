@@ -2,8 +2,8 @@ package cz.vhromada.catalog.web.common;
 
 import cz.vhromada.catalog.web.event.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
-import cz.vhromada.result.Result;
-import cz.vhromada.result.Status;
+import cz.vhromada.validation.result.Result;
+import cz.vhromada.validation.result.Status;
 import cz.vhromada.web.wicket.controller.Controller;
 
 /**

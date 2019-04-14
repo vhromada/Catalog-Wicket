@@ -11,7 +11,7 @@ import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.program.mo.ProgramsMO;
 import cz.vhromada.catalog.web.program.panel.ProgramsListPanel;
 import cz.vhromada.catalog.web.program.panel.ProgramsMenuPanel;
-import cz.vhromada.result.Result;
+import cz.vhromada.validation.result.Result;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.Model;

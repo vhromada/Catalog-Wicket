@@ -13,7 +13,7 @@ import cz.vhromada.catalog.web.music.controller.MusicSongsController;
 import cz.vhromada.catalog.web.song.panel.SongsListPanel;
 import cz.vhromada.catalog.web.song.panel.SongsMenuPanel;
 import cz.vhromada.catalog.web.system.CatalogApplication;
-import cz.vhromada.result.Result;
+import cz.vhromada.validation.result.Result;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.Model;

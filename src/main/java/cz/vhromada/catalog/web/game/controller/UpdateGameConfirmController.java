@@ -1,15 +1,15 @@
 package cz.vhromada.catalog.web.game.controller;
 
-import cz.vhromada.catalog.entity.Game;
 import cz.vhromada.catalog.facade.GameFacade;
 import cz.vhromada.catalog.web.common.AbstractResultController;
 import cz.vhromada.catalog.web.event.ControllerEvent;
 import cz.vhromada.catalog.web.flow.CatalogFlow;
 import cz.vhromada.catalog.web.game.mo.GameMO;
-import cz.vhromada.converter.Converter;
+import cz.vhromada.catalog.web.mapper.GameMapper;
 import cz.vhromada.web.wicket.controller.Flow;
 
 import org.apache.wicket.model.IModel;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
@@ -28,30 +28,27 @@ public class UpdateGameConfirmController extends AbstractResultController<IModel
     private GameFacade gameFacade;
 
     /**
-     * Converter
+     * Mapper for games
      */
-    private Converter converter;
+    private final GameMapper gameMapper;
 
     /**
      * Creates a new instance of UpdateGameConfirmController.
      *
      * @param gameFacade facade for games
-     * @param converter  converter
      * @throws IllegalArgumentException if facade for games is null
-     *                                  or converter is null
      */
     @Autowired
-    public UpdateGameConfirmController(final GameFacade gameFacade, final Converter converter) {
+    public UpdateGameConfirmController(final GameFacade gameFacade) {
         Assert.notNull(gameFacade, "Facade for games mustn't be null.");
-        Assert.notNull(converter, "Converter mustn't be null.");
 
         this.gameFacade = gameFacade;
-        this.converter = converter;
+        this.gameMapper = Mappers.getMapper(GameMapper.class);
     }
 
     @Override
     public void handle(final IModel<GameMO> data) {
-        addResults(gameFacade.update(converter.convert(data.getObject(), Game.class)));
+        addResults(gameFacade.update(gameMapper.mapBack(data.getObject())));
 
         if (processResult()) {
             getUi().fireEvent(new ControllerEvent(CatalogFlow.GAMES_LIST, null));
