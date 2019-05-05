@@ -1,16 +1,23 @@
 package cz.vhromada.catalog.web.component;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * A class represents link for IMDB.
  *
  * @author Vladimir Hromada
  */
-public class ImdbLink extends WebLink<Integer> {
+public class ImdbLink extends WebLink<String> {
 
     /**
      * SerialVersionUID
      */
     private static final long serialVersionUID = 1L;
+
+    /**
+     * IMDB code value
+     */
+    private Integer value;
 
     /**
      * Creates a new instance of ImdbLink.
@@ -20,7 +27,9 @@ public class ImdbLink extends WebLink<Integer> {
      * @throws org.apache.wicket.WicketRuntimeException if ID is null
      */
     public ImdbLink(final String id, final Integer value) {
-        super(id, value);
+        super(id, StringUtils.leftPad(Integer.toString(value), 7, "0"));
+
+        this.value = value;
     }
 
     @Override
@@ -35,7 +44,7 @@ public class ImdbLink extends WebLink<Integer> {
 
     @Override
     protected boolean isLinkVisible() {
-        return getModelObject() > 0;
+        return value > 0;
     }
 
 }
